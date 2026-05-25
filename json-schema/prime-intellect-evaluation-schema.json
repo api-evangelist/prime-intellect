@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/prime-intellect/main/json-schema/prime-intellect-evaluation-schema.json",
+  "title": "Prime Intellect Evaluation",
+  "description": "An evaluation run against a Prime Intellect Environments Hub environment, either client-driven or hosted.",
+  "type": "object",
+  "required": ["id", "status"],
+  "properties": {
+    "id": {"type": "string"},
+    "name": {"type": "string"},
+    "model": {"type": "string"},
+    "environment": {"type": "string"},
+    "kind": {"type": "string", "enum": ["client", "hosted"]},
+    "status": {"type": "string", "enum": ["pending", "running", "finalized", "failed", "cancelled"]},
+    "samples_count": {"type": "integer"},
+    "score": {"type": "number"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "team_id": {"type": "string"}
+  }
+}

@@ -1,0 +1,289 @@
+aid: prime-intellect
+url: https://raw.githubusercontent.com/api-evangelist/prime-intellect/refs/heads/main/apis.yml
+apis:
+- aid: prime-intellect:prime-intellect-compute-api
+  name: Prime Intellect Compute API
+  tags:
+  - GPU Compute
+  - Marketplace
+  - Pods
+  - Disks
+  - SSH Keys
+  - Availability
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  properties:
+  - url: https://docs.primeintellect.ai/api-reference/introduction
+    type: Documentation
+  - url: https://docs.primeintellect.ai/api-reference/managing-pods
+    type: Documentation
+  - url: https://docs.primeintellect.ai/api-reference/managing-disks
+    type: Documentation
+  - url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+    type: Documentation
+  - url: openapi/prime-intellect-compute-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/prime-intellect-pod-schema.json
+    type: JSONSchema
+  - url: json-ld/prime-intellect-context.jsonld
+    type: JSONLD
+  - type: NaftikoCapability
+    url: capabilities/compute-pods.yaml
+  - type: NaftikoCapability
+    url: capabilities/compute-availability.yaml
+  - type: NaftikoCapability
+    url: capabilities/compute-disks.yaml
+  description: Programmatic access to the Prime Intellect compute marketplace. Query GPU availability across 50+
+    providers, provision and manage on-demand or multi-node GPU pods (1-256 GPUs across H100, H200, B200, B300,
+    A100), attach persistent network disks, and manage SSH keys for pod access. Backs the `prime pods`,
+    `prime availability`, and `prime disks` CLI commands.
+- aid: prime-intellect:prime-intellect-sandbox-api
+  name: Prime Intellect Sandbox API
+  tags:
+  - Sandbox
+  - Code Execution
+  - Agents
+  - Tunnels
+  humanURL: https://docs.primeintellect.ai/sandboxes/overview
+  baseURL: https://api.primeintellect.ai
+  properties:
+  - url: https://docs.primeintellect.ai/sandboxes/overview
+    type: Documentation
+  - url: https://docs.primeintellect.ai/sandboxes/sdk
+    type: Documentation
+  - url: https://docs.primeintellect.ai/sandboxes/cli
+    type: Documentation
+  - url: https://docs.primeintellect.ai/sandboxes/tunnel
+    type: Documentation
+  - url: openapi/prime-intellect-sandbox-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/prime-intellect-sandbox-schema.json
+    type: JSONSchema
+  - type: NaftikoCapability
+    url: capabilities/sandbox-sandboxes.yaml
+  - type: NaftikoCapability
+    url: capabilities/sandbox-tunnels.yaml
+  description: Secure remote code-execution sandboxes for AI agents. Create and manage Python-3.11-slim-based
+    sandboxes, expose ports for HTTP services running inside the sandbox, open SSH sessions, pull rich error
+    context for failures, and provision reverse tunnels back into a sandbox from an external network. Available
+    as a lightweight `prime-sandboxes` Python package (~50KB) in addition to the full `prime` CLI/SDK.
+- aid: prime-intellect:prime-intellect-training-api
+  name: Prime Intellect Training API
+  tags:
+  - Reinforcement Learning
+  - Training
+  - Fine-Tuning
+  - Foundation Models
+  - Billing
+  humanURL: https://docs.primeintellect.ai/hosted-training/what-is-lab
+  baseURL: https://api.primeintellect.ai
+  properties:
+  - url: https://docs.primeintellect.ai/hosted-training/what-is-lab
+    type: Documentation
+  - url: https://docs.primeintellect.ai/hosted-training/getting-started
+    type: Documentation
+  - url: https://docs.primeintellect.ai/hosted-training/end-to-end-run
+    type: Documentation
+  - url: https://docs.primeintellect.ai/hosted-training/models-and-pricing
+    type: Pricing
+  - url: openapi/prime-intellect-training-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/prime-intellect-training-run-schema.json
+    type: JSONSchema
+  - type: NaftikoCapability
+    url: capabilities/training-runs.yaml
+  - type: NaftikoCapability
+    url: capabilities/training-billing.yaml
+  description: Hosted reinforcement-learning post-training service ("Lab"). Launch dedicated training runs against
+    a catalog of base models — Qwen3.5 (0.8B through 397B-A17B), Llama 1B/3B Instruct, NVIDIA Nemotron 30B/120B,
+    OpenAI gpt-oss 20B/120B — drive them with environments from the Environments Hub, and retrieve token-level
+    usage + USD cost per run from the billing endpoints. Pricing is per-million-token across separate input,
+    output, and training meters.
+- aid: prime-intellect:prime-intellect-evaluations-api
+  name: Prime Intellect Evaluations API
+  tags:
+  - Evaluations
+  - Benchmarks
+  - Reinforcement Learning
+  - Environments
+  humanURL: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  baseURL: https://api.primeintellect.ai
+  properties:
+  - url: https://docs.primeintellect.ai/tutorials-environments/environments
+    type: Documentation
+  - url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+    type: Documentation
+  - url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+    type: Documentation
+  - url: openapi/prime-intellect-evaluations-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/prime-intellect-evaluation-schema.json
+    type: JSONSchema
+  - type: NaftikoCapability
+    url: capabilities/evals-evaluations.yaml
+  - type: NaftikoCapability
+    url: capabilities/evals-hosted.yaml
+  description: Create, manage, and submit samples to evaluations against the Prime Intellect Environments Hub
+    (2,500+ RL environments). Supports both client-driven evaluations (push samples, finalize, retrieve) and
+    fully hosted evaluations executed by Prime Intellect with logs, cancellation, and selectable inference
+    models. Backs `prime eval` CLI commands.
+- aid: prime-intellect:prime-intellect-inference-api
+  name: Prime Intellect Inference API
+  tags:
+  - Inference
+  - OpenAI Compatible
+  - Foundation Models
+  - LLM
+  humanURL: https://docs.primeintellect.ai/inference/overview
+  baseURL: https://api.pinference.ai/api/v1
+  properties:
+  - url: https://docs.primeintellect.ai/inference/overview
+    type: Documentation
+  - url: https://docs.primeintellect.ai/inference/usage
+    type: Documentation
+  - url: https://docs.primeintellect.ai/inference/adapter-deployments
+    type: Documentation
+  - url: openapi/prime-intellect-inference-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/inference-chat.yaml
+  description: OpenAI-compatible inference API for hosted frontier and open models served at api.pinference.ai.
+    Supports streaming chat completions, the full set of OpenAI parameters (temperature, top_p, max_tokens,
+    logprobs), and returns a `usage` object with input/output token counts and USD cost on every response. LoRA
+    adapters can be served alongside base models via 1-click deployments.
+- aid: prime-intellect:prime-intellect-platform-api
+  name: Prime Intellect Platform API
+  tags:
+  - Account
+  - Teams
+  - Secrets
+  - Images
+  - Administration
+  humanURL: https://docs.primeintellect.ai/api-reference/teams
+  baseURL: https://api.primeintellect.ai
+  properties:
+  - url: https://docs.primeintellect.ai/api-reference/teams
+    type: Documentation
+  - url: https://docs.primeintellect.ai/api-reference/api-keys
+    type: Authentication
+  - url: openapi/prime-intellect-platform-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/platform-user.yaml
+  - type: NaftikoCapability
+    url: capabilities/platform-secrets.yaml
+  - type: NaftikoCapability
+    url: capabilities/platform-images.yaml
+  description: Account, team, secrets, image, and cluster administration. Whoami and team membership, secret CRUD
+    for use inside pods and sandboxes, Docker image builds with public/private visibility, registry credential
+    checks, FRP plugin validation, and admin-only cluster + node-log endpoints.
+name: Prime Intellect
+description: >-
+  Prime Intellect is a San Francisco–based startup building an open and
+  decentralized stack for developing and improving AI agents through
+  reinforcement learning. The company combines a 50+ provider GPU compute
+  marketplace (single-node and 1–256 GPU multi-node clusters across H100,
+  H200, B200, and B300), a managed RL post-training service ("Lab") that
+  fine-tunes Qwen3.5, Llama, NVIDIA Nemotron, and OpenAI gpt-oss base models
+  against a 2,500+ environment library (the Environments Hub), secure remote
+  Python sandboxes for agent code execution, OpenAI-compatible inference at
+  api.pinference.ai with LoRA adapter deployments, and an evaluations service
+  that runs against the same environments. Prime Intellect is also the
+  publisher of INTELLECT-3 (100B+ MoE trained with RL), INTELLECT-2 (32B
+  trained via distributed RL), and the SYNTHETIC-2 dataset of four million
+  reasoning traces, and develops the open-source `verifiers` RL library and
+  the `prime-rl` async RL training framework. Everything is exposed via a
+  single bearer-token REST API at api.primeintellect.ai, a `prime` Python
+  CLI/SDK (PyPI: `prime`, lightweight `prime-sandboxes`), and the OpenAI
+  protocol on the inference plane.
+tags:
+- AI
+- Artificial Intelligence
+- Reinforcement Learning
+- GPU Compute
+- Decentralized Compute
+- Foundation Models
+- Inference
+- Sandboxes
+- Training
+- Environments
+- Evaluations
+- LoRA
+- Open Source
+- Agents
+kind: contract
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+type: Index
+position: Provider
+specificationVersion: '0.20'
+created: '2026-05-25'
+modified: '2026-05-25'
+common:
+- type: Website
+  url: https://www.primeintellect.ai
+- type: Documentation
+  url: https://docs.primeintellect.ai
+- type: Portal
+  url: https://app.primeintellect.ai
+- type: APIReference
+  url: https://docs.primeintellect.ai/api-reference/introduction
+- type: OpenAPI
+  url: https://api.primeintellect.ai/openapi.json
+- type: Authentication
+  url: https://docs.primeintellect.ai/api-reference/api-keys
+- type: CLI
+  url: https://docs.primeintellect.ai/cli-reference/introduction
+- type: SDK
+  url: https://github.com/PrimeIntellect-ai/prime
+  name: Prime CLI & Python SDK
+- type: SDK
+  url: https://pypi.org/project/prime/
+  name: prime (PyPI)
+- type: SDK
+  url: https://pypi.org/project/prime-sandboxes/
+  name: prime-sandboxes (PyPI)
+- type: OpenSource
+  url: https://github.com/PrimeIntellect-ai/verifiers
+  name: verifiers — RL environments + evals library
+- type: OpenSource
+  url: https://github.com/PrimeIntellect-ai/prime-rl
+  name: prime-rl — async RL training framework
+- type: OpenSource
+  url: https://github.com/PrimeIntellect-ai/renderers
+  name: renderers — programmable chat templates
+- type: OpenSource
+  url: https://github.com/PrimeIntellect-ai/research-environments
+  name: research-environments
+- type: OpenSource
+  url: https://github.com/PrimeIntellect-ai/community-environments
+  name: community-environments
+- type: GitHub
+  url: https://github.com/PrimeIntellect-ai
+- type: HuggingFace
+  url: https://huggingface.co/PrimeIntellect
+- type: Blog
+  url: https://www.primeintellect.ai/blog
+- type: Pricing
+  url: https://docs.primeintellect.ai/hosted-training/models-and-pricing
+- type: Plans
+  url: plans/prime-intellect-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/prime-intellect-rate-limits.yml
+- type: FinOps
+  url: finops/prime-intellect-finops.yml
+- type: Discord
+  url: https://discord.gg/primeintellect
+- type: Twitter
+  url: https://x.com/PrimeIntellect
+- type: LinkedIn
+  url: https://www.linkedin.com/company/primeintellect-ai
+- type: Events
+  url: https://luma.com/primeintellect
+- type: Careers
+  url: https://jobs.ashbyhq.com/PrimeIntellect
+- type: Contact
+  url: https://www.primeintellect.ai/contact
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

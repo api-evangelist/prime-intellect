@@ -1,0 +1,102 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Prime Intellect
+providerId: prime-intellect
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - AI
+  - GPU
+  - Tokens
+description: FOCUS-aligned FinOps definition for Prime Intellect. Combined GPU-hour metering (compute marketplace,
+  sandboxes) and token metering (hosted training, inference). Wallet-based credit ledger billed in USD with
+  per-run, per-pod, and per-request usage records.
+sources:
+  - https://www.primeintellect.ai/
+  - https://docs.primeintellect.ai/hosted-training/models-and-pricing
+  - https://docs.primeintellect.ai/inference/overview
+  - https://docs.primeintellect.ai/api-reference/billing/wallet-balance-+-most-recent-billing-rows
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Prime Intellect
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Continuous (wallet credit)
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Credit
+    - Adjustment
+  primaryUnit: token
+  secondaryUnits:
+    - gpu_hour
+    - sandbox_hour
+    - disk_gb_month
+focusColumns:
+  ServiceName: Prime Intellect API
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Prime Intellect
+  PublisherName: Prime Intellect
+  InvoiceIssuerName: Prime Intellect
+  PricingCategory: Usage-Based
+  PricingUnit: Mixed (MTok and GPU-hour)
+  BillingCurrency: USD
+meters:
+  - name: gpu_hours
+    unit: gpu_hour
+    aggregation: sum
+    dimensions:
+      - gpu_type
+      - provider
+      - region
+      - pod_id
+      - team
+  - name: input_tokens
+    unit: token
+    aggregation: sum
+    dimensions:
+      - model
+      - run_id
+      - team
+  - name: output_tokens
+    unit: token
+    aggregation: sum
+    dimensions:
+      - model
+      - run_id
+      - team
+  - name: training_tokens
+    unit: token
+    aggregation: sum
+    dimensions:
+      - model
+      - run_id
+      - team
+  - name: sandbox_hours
+    unit: hour
+    aggregation: sum
+    dimensions:
+      - sandbox_id
+      - image
+      - team
+  - name: disk_storage
+    unit: gb_month
+    aggregation: average
+    dimensions:
+      - disk_id
+      - region
+      - team
+endpoints:
+  wallet: /api/v1/billing/wallet
+  runUsage: /api/v1/billing/runs/{run_id}/usage

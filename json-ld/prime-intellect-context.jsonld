@@ -1,0 +1,100 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "prime": "https://api.primeintellect.ai/api/v1/",
+    "pinference": "https://api.pinference.ai/api/v1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Pod": {
+      "@id": "prime:Pod",
+      "@context": {
+        "id": {"@id": "prime:Pod/id", "@type": "xsd:string"},
+        "name": {"@id": "schema:name", "@type": "xsd:string"},
+        "gpu_type": {"@id": "prime:Pod/gpuType", "@type": "xsd:string"},
+        "gpu_count": {"@id": "prime:Pod/gpuCount", "@type": "xsd:integer"},
+        "provider": {"@id": "prime:Pod/provider", "@type": "xsd:string"},
+        "status": {"@id": "prime:Pod/status", "@type": "xsd:string"},
+        "created_at": {"@id": "dcterms:created", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "Sandbox": {
+      "@id": "prime:Sandbox",
+      "@context": {
+        "id": {"@id": "prime:Sandbox/id", "@type": "xsd:string"},
+        "image": {"@id": "prime:Sandbox/image", "@type": "xsd:string"},
+        "status": {"@id": "prime:Sandbox/status", "@type": "xsd:string"},
+        "exposed_ports": {"@id": "prime:Sandbox/exposedPorts", "@container": "@list"},
+        "created_at": {"@id": "dcterms:created", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "TrainingRun": {
+      "@id": "prime:TrainingRun",
+      "@context": {
+        "id": {"@id": "prime:TrainingRun/id", "@type": "xsd:string"},
+        "base_model": {"@id": "prime:TrainingRun/baseModel", "@type": "xsd:string"},
+        "environment": {"@id": "prime:TrainingRun/environment", "@type": "xsd:string"},
+        "status": {"@id": "prime:TrainingRun/status", "@type": "xsd:string"},
+        "input_tokens": {"@id": "prime:TrainingRun/inputTokens", "@type": "xsd:integer"},
+        "output_tokens": {"@id": "prime:TrainingRun/outputTokens", "@type": "xsd:integer"},
+        "training_tokens": {"@id": "prime:TrainingRun/trainingTokens", "@type": "xsd:integer"},
+        "cost": {"@id": "prime:TrainingRun/cost", "@type": "xsd:decimal"}
+      }
+    },
+
+    "Evaluation": {
+      "@id": "prime:Evaluation",
+      "@context": {
+        "id": {"@id": "prime:Evaluation/id", "@type": "xsd:string"},
+        "model": {"@id": "prime:Evaluation/model", "@type": "xsd:string"},
+        "environment": {"@id": "prime:Evaluation/environment", "@type": "xsd:string"},
+        "status": {"@id": "prime:Evaluation/status", "@type": "xsd:string"},
+        "samples_count": {"@id": "prime:Evaluation/samplesCount", "@type": "xsd:integer"}
+      }
+    },
+
+    "Disk": {
+      "@id": "prime:Disk",
+      "@context": {
+        "id": {"@id": "prime:Disk/id", "@type": "xsd:string"},
+        "name": {"@id": "schema:name", "@type": "xsd:string"},
+        "size_gb": {"@id": "prime:Disk/sizeGb", "@type": "xsd:integer"},
+        "region": {"@id": "prime:Disk/region", "@type": "xsd:string"}
+      }
+    },
+
+    "Wallet": {
+      "@id": "prime:Wallet",
+      "@context": {
+        "balance": {"@id": "prime:Wallet/balance", "@type": "xsd:decimal"},
+        "currency": {"@id": "prime:Wallet/currency", "@type": "xsd:string"},
+        "rows": {"@id": "prime:Wallet/rows", "@container": "@list"}
+      }
+    },
+
+    "InferenceRequest": {
+      "@id": "pinference:ChatCompletionRequest",
+      "@context": {
+        "model": {"@id": "pinference:ChatCompletionRequest/model", "@type": "xsd:string"},
+        "messages": {"@id": "pinference:ChatCompletionRequest/messages", "@container": "@list"},
+        "stream": {"@id": "pinference:ChatCompletionRequest/stream", "@type": "xsd:boolean"},
+        "temperature": {"@id": "pinference:ChatCompletionRequest/temperature", "@type": "xsd:decimal"},
+        "max_tokens": {"@id": "pinference:ChatCompletionRequest/maxTokens", "@type": "xsd:integer"}
+      }
+    },
+
+    "Usage": {
+      "@id": "prime:Usage",
+      "@context": {
+        "prompt_tokens": {"@id": "prime:Usage/promptTokens", "@type": "xsd:integer"},
+        "completion_tokens": {"@id": "prime:Usage/completionTokens", "@type": "xsd:integer"},
+        "total_tokens": {"@id": "prime:Usage/totalTokens", "@type": "xsd:integer"},
+        "cost": {"@id": "prime:Usage/cost", "@type": "xsd:decimal"}
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/prime-intellect/main/json-schema/prime-intellect-sandbox-schema.json",
+  "title": "Prime Intellect Sandbox",
+  "description": "A secure remote code-execution sandbox for AI agents.",
+  "type": "object",
+  "required": ["id", "image", "status"],
+  "properties": {
+    "id": {"type": "string"},
+    "name": {"type": "string"},
+    "image": {"type": "string", "description": "Container image used to build the sandbox (default: python:3.11-slim based)."},
+    "status": {"type": "string", "enum": ["creating", "running", "paused", "deleting", "deleted", "errored"]},
+    "exposed_ports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "exposure_id": {"type": "string"},
+          "port": {"type": "integer"},
+          "public_url": {"type": "string", "format": "uri"}
+        }
+      }
+    },
+    "ssh_sessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "session_id": {"type": "string"},
+          "endpoint": {"type": "string"},
+          "opened_at": {"type": "string", "format": "date-time"}
+        }
+      }
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "team_id": {"type": "string"}
+  }
+}

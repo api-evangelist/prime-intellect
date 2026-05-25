@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Inference API
+  version: 1.0.0
+  description: OpenAI-compatible inference API for hosted frontier and open models, served at api.pinference.ai. Supports
+    streaming chat completions and model listing. Billed per million input/output tokens with usage metadata returned on each
+    response.
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.pinference.ai/api/v1
+  description: Production Inference Server
+security:
+- HTTPBearer: []
+tags:
+- name: Inference
+paths:
+  /models:
+    get:
+      tags:
+      - Inference
+      summary: Prime Intellect List Inference Models
+      description: List models available through the Prime Intellect inference API.
+      operationId: listInferenceModels
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelList'
+  /chat/completions:
+    post:
+      tags:
+      - Inference
+      summary: Prime Intellect Create Chat Completion
+      description: OpenAI-compatible chat completions endpoint. Supports streaming, temperature, token limits, and logprobs.
+        Responses include a usage object with input/output tokens and cost.
+      operationId: createChatCompletion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatCompletionRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatCompletionResponse'
+components:
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+  schemas:
+    ModelList:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: model
+        created:
+          type: integer
+        owned_by:
+          type: string
+    ChatMessage:
+      type: object
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
+          type: string
+    ChatCompletionRequest:
+      type: object
+      required:
+      - model
+      - messages
+      properties:
+        model:
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        stream:
+          type: boolean
+          default: false
+        temperature:
+          type: number
+        top_p:
+          type: number
+        max_tokens:
+          type: integer
+        logprobs:
+          type: boolean
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+        cost:
+          type: number
+    ChatCompletionChoice:
+      type: object
+      properties:
+        index:
+          type: integer
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+        finish_reason:
+          type: string
+    ChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: chat.completion
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatCompletionChoice'
+        usage:
+          $ref: '#/components/schemas/Usage'

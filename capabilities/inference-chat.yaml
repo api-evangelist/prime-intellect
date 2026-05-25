@@ -1,0 +1,114 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Prime Intellect Inference API — Chat
+  description: Prime Intellect Inference API — Chat. 2 operations. Self-contained Naftiko capability covering one Prime Intellect
+    business surface.
+  tags:
+  - Prime Intellect
+  - Inference
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    PRIME_API_KEY: PRIME_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: inference-chat
+    baseUri: https://api.pinference.ai/api/v1
+    description: Prime Intellect Inference API — Chat business capability. Self-contained, no shared references.
+    resources:
+    - name: chat-completions
+      path: /chat/completions
+      operations:
+      - name: createchatcompletion
+        method: POST
+        description: OpenAI-compatible chat completion with streaming and usage metadata.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: models
+      path: /models
+      operations:
+      - name: listmodels
+        method: GET
+        description: List inference models available on api.pinference.ai.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      value: '{{env.PRIME_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: inference-chat-rest
+    port: 8080
+    description: REST adapter for Prime Intellect Inference API — Chat.
+    resources:
+    - path: /v1/chat/completions
+      name: chat-completions
+      description: REST surface for chat-completions.
+      operations:
+      - method: POST
+        name: createchatcompletion
+        description: OpenAI-compatible chat completion with streaming and usage metadata.
+        call: inference-chat.createchatcompletion
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/models
+      name: models
+      description: REST surface for models.
+      operations:
+      - method: GET
+        name: listmodels
+        description: List inference models available on api.pinference.ai.
+        call: inference-chat.listmodels
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: inference-chat-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Prime Intellect Inference API — Chat. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: prime-intellect-createchatcompletion
+      description: OpenAI-compatible chat completion with streaming and usage metadata.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: inference-chat.createchatcompletion
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-listmodels
+      description: List inference models available on api.pinference.ai.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: inference-chat.listmodels
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

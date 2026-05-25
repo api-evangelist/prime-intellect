@@ -1,0 +1,182 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Prime Intellect Sandbox API — Tunnels
+  description: Prime Intellect Sandbox API — Tunnels. 4 operations. Self-contained Naftiko capability covering one Prime Intellect
+    business surface.
+  tags:
+  - Prime Intellect
+  - Sandbox
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    PRIME_API_KEY: PRIME_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sandbox-tunnels
+    baseUri: https://api.primeintellect.ai
+    description: Prime Intellect Sandbox API — Tunnels business capability. Self-contained, no shared references.
+    resources:
+    - name: tunnel
+      path: /api/v1/tunnel
+      operations:
+      - name: createtunnel
+        method: POST
+        description: Open a reverse tunnel to a sandbox.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listtunnels
+        method: GET
+        description: List tunnels.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tunnel-tunnel_id
+      path: /api/v1/tunnel/{tunnel_id}
+      operations:
+      - name: gettunnelstatus
+        method: GET
+        description: Get tunnel status.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tunnel_id
+          in: path
+          type: string
+          required: true
+      - name: deletetunnel
+        method: DELETE
+        description: Close a tunnel.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tunnel_id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      value: '{{env.PRIME_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: sandbox-tunnels-rest
+    port: 8080
+    description: REST adapter for Prime Intellect Sandbox API — Tunnels.
+    resources:
+    - path: /v1/api/v1/tunnel
+      name: tunnel
+      description: REST surface for tunnel.
+      operations:
+      - method: POST
+        name: createtunnel
+        description: Open a reverse tunnel to a sandbox.
+        call: sandbox-tunnels.createtunnel
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listtunnels
+        description: List tunnels.
+        call: sandbox-tunnels.listtunnels
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/tunnel/{tunnel_id}
+      name: tunnel-tunnel_id
+      description: REST surface for tunnel-tunnel_id.
+      operations:
+      - method: GET
+        name: gettunnelstatus
+        description: Get tunnel status.
+        call: sandbox-tunnels.gettunnelstatus
+        with:
+          tunnel_id: rest.path.tunnel_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetunnel
+        description: Close a tunnel.
+        call: sandbox-tunnels.deletetunnel
+        with:
+          tunnel_id: rest.path.tunnel_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sandbox-tunnels-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Prime Intellect Sandbox API — Tunnels. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: prime-intellect-createtunnel
+      description: Open a reverse tunnel to a sandbox.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sandbox-tunnels.createtunnel
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-listtunnels
+      description: List tunnels.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sandbox-tunnels.listtunnels
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-gettunnelstatus
+      description: Get tunnel status.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sandbox-tunnels.gettunnelstatus
+      with:
+        tunnel_id: tools.tunnel_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-deletetunnel
+      description: Close a tunnel.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sandbox-tunnels.deletetunnel
+      with:
+        tunnel_id: tools.tunnel_id
+      outputParameters:
+      - type: object
+        mapping: $.

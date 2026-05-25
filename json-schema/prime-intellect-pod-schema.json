@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/prime-intellect/main/json-schema/prime-intellect-pod-schema.json",
+  "title": "Prime Intellect Pod",
+  "description": "A GPU pod provisioned on the Prime Intellect compute marketplace.",
+  "type": "object",
+  "required": ["id", "gpu_type", "gpu_count", "status"],
+  "properties": {
+    "id": {"type": "string", "description": "Unique pod identifier."},
+    "name": {"type": "string", "description": "Human-readable pod name."},
+    "gpu_type": {"type": "string", "description": "GPU model (e.g., H100, H200, B200, B300, A100)."},
+    "gpu_count": {"type": "integer", "minimum": 1, "maximum": 256, "description": "Number of GPUs allocated."},
+    "provider": {"type": "string", "description": "Underlying compute provider that fulfilled the request."},
+    "region": {"type": "string"},
+    "status": {"type": "string", "enum": ["pending", "provisioning", "active", "stopping", "stopped", "errored", "deleted"]},
+    "image": {"type": "string", "description": "Container/Docker image running on the pod."},
+    "ssh_endpoint": {"type": "string", "description": "SSH endpoint for the pod (when active)."},
+    "price_per_hour": {"type": "number", "description": "Hourly USD price for the pod."},
+    "created_at": {"type": "string", "format": "date-time"},
+    "team_id": {"type": "string"}
+  }
+}

@@ -1,0 +1,242 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Prime Intellect Compute API — Availability
+  description: Prime Intellect Compute API — Availability. 6 operations. Self-contained Naftiko capability covering one Prime
+    Intellect business surface.
+  tags:
+  - Prime Intellect
+  - Compute
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    PRIME_API_KEY: PRIME_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: compute-availability
+    baseUri: https://api.primeintellect.ai
+    description: Prime Intellect Compute API — Availability business capability. Self-contained, no shared references.
+    resources:
+    - name: availability-gpus
+      path: /api/v1/availability/gpus
+      operations:
+      - name: getgpuavailability
+        method: GET
+        description: Query GPU availability across providers.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: availability-gpu-summary
+      path: /api/v1/availability/gpu-summary
+      operations:
+      - name: getgpusummary
+        method: GET
+        description: Aggregate GPU availability summary.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: availability-multi-node
+      path: /api/v1/availability/multi-node
+      operations:
+      - name: getmultinodeavailability
+        method: GET
+        description: Multi-node cluster availability.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: availability-multi-node-summary
+      path: /api/v1/availability/multi-node-summary
+      operations:
+      - name: getmultinodesummary
+        method: GET
+        description: Multi-node availability summary.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: availability-clusters
+      path: /api/v1/availability/clusters
+      operations:
+      - name: getlegacyclusters
+        method: GET
+        description: Legacy reserved cluster availability.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: availability-disks
+      path: /api/v1/availability/disks
+      operations:
+      - name: getdisksavailability
+        method: GET
+        description: Persistent disk availability.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      value: '{{env.PRIME_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: compute-availability-rest
+    port: 8080
+    description: REST adapter for Prime Intellect Compute API — Availability.
+    resources:
+    - path: /v1/api/v1/availability/gpus
+      name: availability-gpus
+      description: REST surface for availability-gpus.
+      operations:
+      - method: GET
+        name: getgpuavailability
+        description: Query GPU availability across providers.
+        call: compute-availability.getgpuavailability
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/availability/gpu-summary
+      name: availability-gpu-summary
+      description: REST surface for availability-gpu-summary.
+      operations:
+      - method: GET
+        name: getgpusummary
+        description: Aggregate GPU availability summary.
+        call: compute-availability.getgpusummary
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/availability/multi-node
+      name: availability-multi-node
+      description: REST surface for availability-multi-node.
+      operations:
+      - method: GET
+        name: getmultinodeavailability
+        description: Multi-node cluster availability.
+        call: compute-availability.getmultinodeavailability
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/availability/multi-node-summary
+      name: availability-multi-node-summary
+      description: REST surface for availability-multi-node-summary.
+      operations:
+      - method: GET
+        name: getmultinodesummary
+        description: Multi-node availability summary.
+        call: compute-availability.getmultinodesummary
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/availability/clusters
+      name: availability-clusters
+      description: REST surface for availability-clusters.
+      operations:
+      - method: GET
+        name: getlegacyclusters
+        description: Legacy reserved cluster availability.
+        call: compute-availability.getlegacyclusters
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/availability/disks
+      name: availability-disks
+      description: REST surface for availability-disks.
+      operations:
+      - method: GET
+        name: getdisksavailability
+        description: Persistent disk availability.
+        call: compute-availability.getdisksavailability
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: compute-availability-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Prime Intellect Compute API — Availability. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: prime-intellect-getgpuavailability
+      description: Query GPU availability across providers.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: compute-availability.getgpuavailability
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getgpusummary
+      description: Aggregate GPU availability summary.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: compute-availability.getgpusummary
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getmultinodeavailability
+      description: Multi-node cluster availability.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: compute-availability.getmultinodeavailability
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getmultinodesummary
+      description: Multi-node availability summary.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: compute-availability.getmultinodesummary
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getlegacyclusters
+      description: Legacy reserved cluster availability.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: compute-availability.getlegacyclusters
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getdisksavailability
+      description: Persistent disk availability.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: compute-availability.getdisksavailability
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,203 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Prime Intellect Evaluations API — Hosted Evaluations
+  description: Prime Intellect Evaluations API — Hosted Evaluations. 4 operations. Self-contained Naftiko capability covering
+    one Prime Intellect business surface.
+  tags:
+  - Prime Intellect
+  - Evaluations
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    PRIME_API_KEY: PRIME_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: evals-hosted
+    baseUri: https://api.primeintellect.ai
+    description: Prime Intellect Evaluations API — Hosted Evaluations business capability. Self-contained, no shared references.
+    resources:
+    - name: hosted-evaluations
+      path: /api/v1/hosted-evaluations
+      operations:
+      - name: createhostedeval
+        method: POST
+        description: Submit a hosted evaluation request.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: hosted-evaluations-evaluation_id-cancel
+      path: /api/v1/hosted-evaluations/{evaluation_id}/cancel
+      operations:
+      - name: cancelhostedeval
+        method: POST
+        description: Cancel a hosted evaluation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+        - name: evaluation_id
+          in: path
+          type: string
+          required: true
+    - name: hosted-evaluations-evaluation_id-logs
+      path: /api/v1/hosted-evaluations/{evaluation_id}/logs
+      operations:
+      - name: gethostedevallogs
+        method: GET
+        description: Retrieve logs from a hosted evaluation run.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: evaluation_id
+          in: path
+          type: string
+          required: true
+    - name: hosted-evaluations-models
+      path: /api/v1/hosted-evaluations/models
+      operations:
+      - name: getinferencemodels
+        method: GET
+        description: List inference models available for hosted evaluations.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      value: '{{env.PRIME_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: evals-hosted-rest
+    port: 8080
+    description: REST adapter for Prime Intellect Evaluations API — Hosted Evaluations.
+    resources:
+    - path: /v1/api/v1/hosted-evaluations
+      name: hosted-evaluations
+      description: REST surface for hosted-evaluations.
+      operations:
+      - method: POST
+        name: createhostedeval
+        description: Submit a hosted evaluation request.
+        call: evals-hosted.createhostedeval
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/hosted-evaluations/{evaluation_id}/cancel
+      name: hosted-evaluations-evaluation_id-cancel
+      description: REST surface for hosted-evaluations-evaluation_id-cancel.
+      operations:
+      - method: POST
+        name: cancelhostedeval
+        description: Cancel a hosted evaluation.
+        call: evals-hosted.cancelhostedeval
+        with:
+          body: rest.body
+          evaluation_id: rest.path.evaluation_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/hosted-evaluations/{evaluation_id}/logs
+      name: hosted-evaluations-evaluation_id-logs
+      description: REST surface for hosted-evaluations-evaluation_id-logs.
+      operations:
+      - method: GET
+        name: gethostedevallogs
+        description: Retrieve logs from a hosted evaluation run.
+        call: evals-hosted.gethostedevallogs
+        with:
+          evaluation_id: rest.path.evaluation_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/hosted-evaluations/models
+      name: hosted-evaluations-models
+      description: REST surface for hosted-evaluations-models.
+      operations:
+      - method: GET
+        name: getinferencemodels
+        description: List inference models available for hosted evaluations.
+        call: evals-hosted.getinferencemodels
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: evals-hosted-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Prime Intellect Evaluations API — Hosted Evaluations. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: prime-intellect-createhostedeval
+      description: Submit a hosted evaluation request.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: evals-hosted.createhostedeval
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-cancelhostedeval
+      description: Cancel a hosted evaluation.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: evals-hosted.cancelhostedeval
+      with:
+        body: tools.body
+        evaluation_id: tools.evaluation_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-gethostedevallogs
+      description: Retrieve logs from a hosted evaluation run.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: evals-hosted.gethostedevallogs
+      with:
+        evaluation_id: tools.evaluation_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getinferencemodels
+      description: List inference models available for hosted evaluations.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: evals-hosted.getinferencemodels
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

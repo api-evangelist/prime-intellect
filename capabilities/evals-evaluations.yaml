@@ -1,0 +1,312 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Prime Intellect Evaluations API — Evaluations
+  description: Prime Intellect Evaluations API — Evaluations. 7 operations. Self-contained Naftiko capability covering one
+    Prime Intellect business surface.
+  tags:
+  - Prime Intellect
+  - Evaluations
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    PRIME_API_KEY: PRIME_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: evals-evaluations
+    baseUri: https://api.primeintellect.ai
+    description: Prime Intellect Evaluations API — Evaluations business capability. Self-contained, no shared references.
+    resources:
+    - name: evaluations
+      path: /api/v1/evaluations/
+      operations:
+      - name: createeval
+        method: POST
+        description: Create a new evaluation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listevals
+        method: GET
+        description: List evaluations.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: evaluations-evaluation_id
+      path: /api/v1/evaluations/{evaluation_id}
+      operations:
+      - name: geteval
+        method: GET
+        description: Get a single evaluation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: evaluation_id
+          in: path
+          type: string
+          required: true
+      - name: deleteeval
+        method: DELETE
+        description: Delete an evaluation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: evaluation_id
+          in: path
+          type: string
+          required: true
+    - name: evaluations-evaluation_id-finalize
+      path: /api/v1/evaluations/{evaluation_id}/finalize
+      operations:
+      - name: finalizeeval
+        method: POST
+        description: Finalize an evaluation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+        - name: evaluation_id
+          in: path
+          type: string
+          required: true
+    - name: evaluations-evaluation_id-samples
+      path: /api/v1/evaluations/{evaluation_id}/samples
+      operations:
+      - name: pushsamples
+        method: POST
+        description: Push samples to an evaluation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+        - name: evaluation_id
+          in: path
+          type: string
+          required: true
+      - name: getsamples
+        method: GET
+        description: Retrieve evaluation samples.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: evaluation_id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      value: '{{env.PRIME_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: evals-evaluations-rest
+    port: 8080
+    description: REST adapter for Prime Intellect Evaluations API — Evaluations.
+    resources:
+    - path: /v1/api/v1/evaluations/
+      name: evaluations
+      description: REST surface for evaluations.
+      operations:
+      - method: POST
+        name: createeval
+        description: Create a new evaluation.
+        call: evals-evaluations.createeval
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listevals
+        description: List evaluations.
+        call: evals-evaluations.listevals
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/evaluations/{evaluation_id}
+      name: evaluations-evaluation_id
+      description: REST surface for evaluations-evaluation_id.
+      operations:
+      - method: GET
+        name: geteval
+        description: Get a single evaluation.
+        call: evals-evaluations.geteval
+        with:
+          evaluation_id: rest.path.evaluation_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteeval
+        description: Delete an evaluation.
+        call: evals-evaluations.deleteeval
+        with:
+          evaluation_id: rest.path.evaluation_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/evaluations/{evaluation_id}/finalize
+      name: evaluations-evaluation_id-finalize
+      description: REST surface for evaluations-evaluation_id-finalize.
+      operations:
+      - method: POST
+        name: finalizeeval
+        description: Finalize an evaluation.
+        call: evals-evaluations.finalizeeval
+        with:
+          body: rest.body
+          evaluation_id: rest.path.evaluation_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/evaluations/{evaluation_id}/samples
+      name: evaluations-evaluation_id-samples
+      description: REST surface for evaluations-evaluation_id-samples.
+      operations:
+      - method: POST
+        name: pushsamples
+        description: Push samples to an evaluation.
+        call: evals-evaluations.pushsamples
+        with:
+          body: rest.body
+          evaluation_id: rest.path.evaluation_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getsamples
+        description: Retrieve evaluation samples.
+        call: evals-evaluations.getsamples
+        with:
+          evaluation_id: rest.path.evaluation_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: evals-evaluations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Prime Intellect Evaluations API — Evaluations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: prime-intellect-createeval
+      description: Create a new evaluation.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: evals-evaluations.createeval
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-listevals
+      description: List evaluations.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: evals-evaluations.listevals
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-geteval
+      description: Get a single evaluation.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: evals-evaluations.geteval
+      with:
+        evaluation_id: tools.evaluation_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-deleteeval
+      description: Delete an evaluation.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: evals-evaluations.deleteeval
+      with:
+        evaluation_id: tools.evaluation_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-finalizeeval
+      description: Finalize an evaluation.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: evals-evaluations.finalizeeval
+      with:
+        body: tools.body
+        evaluation_id: tools.evaluation_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-pushsamples
+      description: Push samples to an evaluation.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: evals-evaluations.pushsamples
+      with:
+        body: tools.body
+        evaluation_id: tools.evaluation_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getsamples
+      description: Retrieve evaluation samples.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: evals-evaluations.getsamples
+      with:
+        evaluation_id: tools.evaluation_id
+      outputParameters:
+      - type: object
+        mapping: $.

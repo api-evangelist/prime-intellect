@@ -1,0 +1,44 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Prime Intellect
+providerId: prime-intellect
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: false
+tags:
+  - Rate Limiting
+  - Quotas
+  - GPU Compute
+  - Inference
+description: 'Best-effort summary of Prime Intellect API rate-limiting and quota behavior. The public documentation
+  does not publish a comprehensive table of per-tier RPM/TPM values; control-plane and inference APIs use bearer
+  tokens with per-key quotas managed in the Prime dashboard. Reserved quotas for GPU pods are governed by the
+  marketplace availability service rather than HTTP throttling.'
+sources:
+  - https://docs.primeintellect.ai/api-reference/introduction
+  - https://docs.primeintellect.ai/inference/overview
+  - https://docs.primeintellect.ai/sandboxes/overview
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+  unauthorized: 401
+algorithm: token-bucket
+notes:
+  - Authentication is HTTP Bearer (Authorization header) using API keys created in the Prime Intellect dashboard.
+  - GPU pod provisioning is bounded by marketplace availability, account credit/wallet, and team quota — not by
+    classical RPM/TPM rate limits.
+  - The inference API at api.pinference.ai follows OpenAI-style usage metering with per-request cost reported.
+  - Sandbox creation is governed by per-team concurrency limits visible in the Prime dashboard.
+limits:
+  - surface: Control plane (api.primeintellect.ai)
+    rpm: not-published
+    tpm: not-applicable
+    notes: Per-key quotas managed in dashboard.
+  - surface: Inference plane (api.pinference.ai)
+    rpm: not-published
+    tpm: not-published
+    notes: Usage metering returned in response body; cost computed per request.
+  - surface: Sandboxes
+    concurrency: per-team
+    notes: Concurrent sandbox count is per-team and visible in the dashboard.

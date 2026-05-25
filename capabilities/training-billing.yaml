@@ -1,0 +1,113 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Prime Intellect Training API — Billing
+  description: Prime Intellect Training API — Billing. 2 operations. Self-contained Naftiko capability covering one Prime
+    Intellect business surface.
+  tags:
+  - Prime Intellect
+  - Training
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    PRIME_API_KEY: PRIME_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: training-billing
+    baseUri: https://api.primeintellect.ai
+    description: Prime Intellect Training API — Billing business capability. Self-contained, no shared references.
+    resources:
+    - name: billing-runs-run_id-usage
+      path: /api/v1/billing/runs/{run_id}/usage
+      operations:
+      - name: getrunusage
+        method: GET
+        description: Retrieve token usage and cost for a single RFT run.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+    - name: billing-wallet
+      path: /api/v1/billing/wallet
+      operations:
+      - name: getwallet
+        method: GET
+        description: Get wallet balance and recent billing rows.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      value: '{{env.PRIME_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: training-billing-rest
+    port: 8080
+    description: REST adapter for Prime Intellect Training API — Billing.
+    resources:
+    - path: /v1/api/v1/billing/runs/{run_id}/usage
+      name: billing-runs-run_id-usage
+      description: REST surface for billing-runs-run_id-usage.
+      operations:
+      - method: GET
+        name: getrunusage
+        description: Retrieve token usage and cost for a single RFT run.
+        call: training-billing.getrunusage
+        with:
+          run_id: rest.path.run_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/billing/wallet
+      name: billing-wallet
+      description: REST surface for billing-wallet.
+      operations:
+      - method: GET
+        name: getwallet
+        description: Get wallet balance and recent billing rows.
+        call: training-billing.getwallet
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: training-billing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Prime Intellect Training API — Billing. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: prime-intellect-getrunusage
+      description: Retrieve token usage and cost for a single RFT run.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: training-billing.getrunusage
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getwallet
+      description: Get wallet balance and recent billing rows.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: training-billing.getwallet
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

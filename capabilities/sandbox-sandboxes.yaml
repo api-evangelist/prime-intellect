@@ -1,0 +1,495 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Prime Intellect Sandbox API — Sandboxes
+  description: Prime Intellect Sandbox API — Sandboxes. 11 operations. Self-contained Naftiko capability covering one Prime
+    Intellect business surface.
+  tags:
+  - Prime Intellect
+  - Sandbox
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    PRIME_API_KEY: PRIME_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sandbox-sandboxes
+    baseUri: https://api.primeintellect.ai
+    description: Prime Intellect Sandbox API — Sandboxes business capability. Self-contained, no shared references.
+    resources:
+    - name: sandbox
+      path: /api/v1/sandbox
+      operations:
+      - name: createsandbox
+        method: POST
+        description: Create a new sandbox.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listsandboxes
+        method: GET
+        description: List sandboxes.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sandbox-sandbox_id
+      path: /api/v1/sandbox/{sandbox_id}
+      operations:
+      - name: getsandbox
+        method: GET
+        description: Get sandbox details.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+      - name: deletesandbox
+        method: DELETE
+        description: Delete a sandbox.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+    - name: sandbox-sandbox_id-logs
+      path: /api/v1/sandbox/{sandbox_id}/logs
+      operations:
+      - name: getsandboxlogs
+        method: GET
+        description: Retrieve sandbox logs.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+    - name: sandbox-sandbox_id-auth
+      path: /api/v1/sandbox/{sandbox_id}/auth
+      operations:
+      - name: getsandboxauth
+        method: GET
+        description: Get sandbox auth token.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+    - name: sandbox-sandbox_id-expose
+      path: /api/v1/sandbox/{sandbox_id}/expose
+      operations:
+      - name: exposeport
+        method: POST
+        description: Expose a port on a sandbox.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+    - name: sandbox-sandbox_id-expose-exposure_id
+      path: /api/v1/sandbox/{sandbox_id}/expose/{exposure_id}
+      operations:
+      - name: unexposeport
+        method: DELETE
+        description: Unexpose a port.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+        - name: exposure_id
+          in: path
+          type: string
+          required: true
+    - name: sandbox-sandbox_id-ssh-session
+      path: /api/v1/sandbox/{sandbox_id}/ssh-session
+      operations:
+      - name: opensshsession
+        method: POST
+        description: Open an SSH session into the sandbox.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+    - name: sandbox-sandbox_id-ssh-session-session_id
+      path: /api/v1/sandbox/{sandbox_id}/ssh-session/{session_id}
+      operations:
+      - name: closesshsession
+        method: DELETE
+        description: Close an SSH session.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+        - name: session_id
+          in: path
+          type: string
+          required: true
+    - name: sandbox-sandbox_id-error-context
+      path: /api/v1/sandbox/{sandbox_id}/error-context
+      operations:
+      - name: geterrorcontext
+        method: GET
+        description: Get rich error context from sandbox execution.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      value: '{{env.PRIME_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: sandbox-sandboxes-rest
+    port: 8080
+    description: REST adapter for Prime Intellect Sandbox API — Sandboxes.
+    resources:
+    - path: /v1/api/v1/sandbox
+      name: sandbox
+      description: REST surface for sandbox.
+      operations:
+      - method: POST
+        name: createsandbox
+        description: Create a new sandbox.
+        call: sandbox-sandboxes.createsandbox
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listsandboxes
+        description: List sandboxes.
+        call: sandbox-sandboxes.listsandboxes
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/sandbox/{sandbox_id}
+      name: sandbox-sandbox_id
+      description: REST surface for sandbox-sandbox_id.
+      operations:
+      - method: GET
+        name: getsandbox
+        description: Get sandbox details.
+        call: sandbox-sandboxes.getsandbox
+        with:
+          sandbox_id: rest.path.sandbox_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletesandbox
+        description: Delete a sandbox.
+        call: sandbox-sandboxes.deletesandbox
+        with:
+          sandbox_id: rest.path.sandbox_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/sandbox/{sandbox_id}/logs
+      name: sandbox-sandbox_id-logs
+      description: REST surface for sandbox-sandbox_id-logs.
+      operations:
+      - method: GET
+        name: getsandboxlogs
+        description: Retrieve sandbox logs.
+        call: sandbox-sandboxes.getsandboxlogs
+        with:
+          sandbox_id: rest.path.sandbox_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/sandbox/{sandbox_id}/auth
+      name: sandbox-sandbox_id-auth
+      description: REST surface for sandbox-sandbox_id-auth.
+      operations:
+      - method: GET
+        name: getsandboxauth
+        description: Get sandbox auth token.
+        call: sandbox-sandboxes.getsandboxauth
+        with:
+          sandbox_id: rest.path.sandbox_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/sandbox/{sandbox_id}/expose
+      name: sandbox-sandbox_id-expose
+      description: REST surface for sandbox-sandbox_id-expose.
+      operations:
+      - method: POST
+        name: exposeport
+        description: Expose a port on a sandbox.
+        call: sandbox-sandboxes.exposeport
+        with:
+          body: rest.body
+          sandbox_id: rest.path.sandbox_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/sandbox/{sandbox_id}/expose/{exposure_id}
+      name: sandbox-sandbox_id-expose-exposure_id
+      description: REST surface for sandbox-sandbox_id-expose-exposure_id.
+      operations:
+      - method: DELETE
+        name: unexposeport
+        description: Unexpose a port.
+        call: sandbox-sandboxes.unexposeport
+        with:
+          sandbox_id: rest.path.sandbox_id
+          exposure_id: rest.path.exposure_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/sandbox/{sandbox_id}/ssh-session
+      name: sandbox-sandbox_id-ssh-session
+      description: REST surface for sandbox-sandbox_id-ssh-session.
+      operations:
+      - method: POST
+        name: opensshsession
+        description: Open an SSH session into the sandbox.
+        call: sandbox-sandboxes.opensshsession
+        with:
+          body: rest.body
+          sandbox_id: rest.path.sandbox_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/sandbox/{sandbox_id}/ssh-session/{session_id}
+      name: sandbox-sandbox_id-ssh-session-session_id
+      description: REST surface for sandbox-sandbox_id-ssh-session-session_id.
+      operations:
+      - method: DELETE
+        name: closesshsession
+        description: Close an SSH session.
+        call: sandbox-sandboxes.closesshsession
+        with:
+          sandbox_id: rest.path.sandbox_id
+          session_id: rest.path.session_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/sandbox/{sandbox_id}/error-context
+      name: sandbox-sandbox_id-error-context
+      description: REST surface for sandbox-sandbox_id-error-context.
+      operations:
+      - method: GET
+        name: geterrorcontext
+        description: Get rich error context from sandbox execution.
+        call: sandbox-sandboxes.geterrorcontext
+        with:
+          sandbox_id: rest.path.sandbox_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sandbox-sandboxes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Prime Intellect Sandbox API — Sandboxes. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: prime-intellect-createsandbox
+      description: Create a new sandbox.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sandbox-sandboxes.createsandbox
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-listsandboxes
+      description: List sandboxes.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sandbox-sandboxes.listsandboxes
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getsandbox
+      description: Get sandbox details.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sandbox-sandboxes.getsandbox
+      with:
+        sandbox_id: tools.sandbox_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-deletesandbox
+      description: Delete a sandbox.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sandbox-sandboxes.deletesandbox
+      with:
+        sandbox_id: tools.sandbox_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getsandboxlogs
+      description: Retrieve sandbox logs.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sandbox-sandboxes.getsandboxlogs
+      with:
+        sandbox_id: tools.sandbox_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-getsandboxauth
+      description: Get sandbox auth token.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sandbox-sandboxes.getsandboxauth
+      with:
+        sandbox_id: tools.sandbox_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-exposeport
+      description: Expose a port on a sandbox.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sandbox-sandboxes.exposeport
+      with:
+        body: tools.body
+        sandbox_id: tools.sandbox_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-unexposeport
+      description: Unexpose a port.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sandbox-sandboxes.unexposeport
+      with:
+        sandbox_id: tools.sandbox_id
+        exposure_id: tools.exposure_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-opensshsession
+      description: Open an SSH session into the sandbox.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sandbox-sandboxes.opensshsession
+      with:
+        body: tools.body
+        sandbox_id: tools.sandbox_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-closesshsession
+      description: Close an SSH session.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sandbox-sandboxes.closesshsession
+      with:
+        sandbox_id: tools.sandbox_id
+        session_id: tools.session_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prime-intellect-geterrorcontext
+      description: Get rich error context from sandbox execution.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sandbox-sandboxes.geterrorcontext
+      with:
+        sandbox_id: tools.sandbox_id
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,2824 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Platform API
+  version: 0.1.0
+  description: Account, team, secrets, image, and cluster administration. Whoami, team listing, secret CRUD, Docker image
+    builds and visibility, registry credential checks, FRP plugin validation, and admin-only cluster + node-log operations.
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: user
+- name: teams
+- name: Secrets
+- name: Images
+- name: Template
+- name: FRP Plugin
+- name: admin-clusters
+- name: admin-users
+paths:
+  /api/admin/clusters:
+    get:
+      tags:
+      - admin-clusters
+      summary: List Clusters
+      description: List non-terminated clusters.
+      operationId: list_clusters_api_admin_clusters_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: vaultEnabled
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: If true, return only vault-enabled clusters; if false, only non-vault-enabled. Omit to include both.
+          title: Vaultenabled
+        description: If true, return only vault-enabled clusters; if false, only non-vault-enabled. Omit to include both.
+      - name: search
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Case-insensitive substring match against cluster name or id.
+          title: Search
+        description: Case-insensitive substring match against cluster name or id.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Number of items to skip.
+          default: 0
+          title: Offset
+        description: Number of items to skip.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Max items to return (1-100).
+          default: 20
+          title: Limit
+        description: Max items to return (1-100).
+      - name: detailed
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: If true, populate `nodes` for each cluster (one entry per pod). Otherwise only the `controller` connection
+            is returned.
+          default: false
+          title: Detailed
+        description: If true, populate `nodes` for each cluster (one entry per pod). Otherwise only the `controller` connection
+          is returned.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_list_AdminClusterSummary__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Insufficient permissions
+  /api/admin/clusters/{cluster_id}:
+    get:
+      tags:
+      - admin-clusters
+      summary: Get Cluster
+      description: Return full DB details for one cluster (columns + nodes + SSH keys).
+      operationId: get_cluster_api_admin_clusters__cluster_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Cluster Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse_ClusterDetailResponse_'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Insufficient permissions
+  /api/admin/clusters/{cluster_id}/authorizations/certificate:
+    post:
+      tags:
+      - admin-clusters
+      summary: Request Certificate
+      description: 'Sign the requesting admin''s SSH public key via Vault.
+
+
+        If a ``publicKey`` is provided in the body, it is signed directly.
+
+        Otherwise the admin''s DB-stored SSH public key is used.'
+      operationId: request_certificate_api_admin_clusters__cluster_id__authorizations_certificate_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Cluster Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/CertificateRequest'
+              - type: 'null'
+              title: Request
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse_CertificateResponse_'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Insufficient permissions
+  /api/admin/clusters/{cluster_id}/node-logs:
+    get:
+      tags:
+      - admin-clusters
+      summary: List Cluster Node Logs
+      description: Return paginated ClusterNodeLog entries for one cluster, newest first.
+      operationId: list_cluster_node_logs_api_admin_clusters__cluster_id__node_logs_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: cluster_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Cluster Id
+      - name: podId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter logs to a single pod.
+          title: Podid
+        description: Filter logs to a single pod.
+      - name: eventType
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/ClusterNodeLogEventTypeEnum'
+          - type: 'null'
+          description: Filter logs to a single event type.
+          title: Eventtype
+        description: Filter logs to a single event type.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Number of items to skip.
+          default: 0
+          title: Offset
+        description: Number of items to skip.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Max items to return (1-100, default 20).
+          default: 20
+          title: Limit
+        description: Max items to return (1-100, default 20).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_list_ClusterNodeLogEntry__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Insufficient permissions
+  /api/admin/users/whoami:
+    get:
+      tags:
+      - admin-users
+      summary: Get Current User
+      description: 'Identity + envelope for the calling admin API key.
+
+
+        Intentionally bypasses ``require_admin_permission``: any valid, non-
+
+        expired, non-disabled admin API key whose owner is still ADMIN/MANAGER
+
+        can call this. Returning the resolved permission envelope is what makes
+
+        a freshly-minted scoped key able to discover what it can do.'
+      operationId: get_current_user_api_admin_users_whoami_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse_AdminWhoamiResponse_'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Insufficient permissions
+      security:
+      - HTTPBearer: []
+  /api/v1/frp/validate:
+    post:
+      tags:
+      - FRP Plugin
+      summary: Validate Frp Plugin
+      description: 'Validate frpc client connections.
+
+
+        This endpoint is called by frps server plugin for:
+
+        - Login: Validates tunnel token when client connects
+
+        - NewProxy: Validates proxy creation requests
+
+
+        This endpoint is public but security is enforced via per-tunnel
+
+        token validation. An attacker would need both a valid tunnel_id AND
+
+        the corresponding frp_token to get a successful response.'
+      operationId: validate_frp_plugin_api_v1_frp_validate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FrpPluginRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FrpPluginResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/images:
+    get:
+      tags:
+      - Images
+      summary: List User Images
+      description: 'List images and builds for the current user, scoped by team context. Returns personal images by default,
+        or team images if teamId is provided.
+
+
+        Pagination note: `limit`, `offset`, and `totalCount` count logical images
+
+        (unique `owner/imageName:imageTag`). A single image may produce multiple
+
+        `data[]` rows (one per artifact type plus any active builds), so
+
+        `len(data)` can exceed `limit` and `totalCount` reflects images, not rows.'
+      operationId: list_user_images_api_v1_images_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: teamId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by team ID. If provided, returns only that team's images. If not provided, returns only personal
+            images.
+          title: Teamid
+        description: Filter by team ID. If provided, returns only that team's images. If not provided, returns only personal
+          images.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_List_ImageResponse__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          300 requests per 60 seconds per IP and token.'
+  /api/v1/images/build:
+    post:
+      tags:
+      - Images
+      summary: Initiate Image Build
+      description: 'Initiate an image build process.
+
+
+        Returns a presigned URL to upload the build context (tar.gz file).
+
+        After uploading, call /images/build/{build_id}/start to begin the build.'
+      operationId: initiate_image_build_api_v1_images_build_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildImageRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildImageResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+      x-mint:
+        content: '## Rate Limit
+
+
+          150 requests per 60 seconds per IP and token.'
+  /api/v1/images/build/{build_id}:
+    get:
+      tags:
+      - Images
+      summary: Get Build Status
+      description: Get the status of an image build.
+      operationId: get_build_status_api_v1_images_build__build_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: build_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Build Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildStatusResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/images/build/{build_id}/start:
+    post:
+      tags:
+      - Images
+      summary: Start Image Build
+      description: 'Start the image build process after uploading the build context.
+
+
+        This creates a sandbox with Docker-in-Docker to build and push the image.'
+      operationId: start_image_build_api_v1_images_build__build_id__start_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: build_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Build Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartBuildRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildStatusResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/images/builds:
+    get:
+      tags:
+      - Images
+      summary: List Image Builds
+      description: List all image builds for the current user.
+      operationId: list_image_builds_api_v1_images_builds_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_List_BuildStatusResponse__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/images/{image_name}/{image_tag}:
+    delete:
+      tags:
+      - Images
+      summary: Delete User Image
+      description: 'Delete a user image from the database and Google Artifact Registry.
+
+
+        For team images, only the image creator or team admins can delete.'
+      operationId: delete_user_image_api_v1_images__image_name___image_tag__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: image_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Image Name
+      - name: image_tag
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Image Tag
+      - name: teamId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Team ID if deleting a team image
+          title: Teamid
+        description: Team ID if deleting a team image
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteImageResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          100 requests per 60 seconds per IP and token.'
+  /api/v1/images/{image_name}/{image_tag}/visibility:
+    patch:
+      tags:
+      - Images
+      summary: Update Image Visibility
+      description: Publish or unpublish an image in the current personal or team context.
+      operationId: update_image_visibility_api_v1_images__image_name___image_tag__visibility_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: image_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Image Name
+      - name: image_tag
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Image Tag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateImageVisibilityRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateImageVisibilityResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          100 requests per 60 seconds per IP and token.'
+  /api/v1/secrets/:
+    get:
+      tags:
+      - Secrets
+      summary: List Secrets
+      description: 'List global secrets for the authenticated user or a team.
+
+
+        If teamId is provided, returns secrets for that team (requires team membership).
+
+        Otherwise, returns the user''s personal secrets.'
+      operationId: list_secrets_api_v1_secrets__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: teamId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by team ID
+          title: Teamid
+        description: Filter by team ID
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_List_SecretResponse__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - Secrets
+      summary: Create Secret
+      description: 'Create a new global secret.
+
+
+        The secret will be encrypted and stored securely. If teamId is provided,
+
+        the secret will be associated with that team (requires team membership).'
+      operationId: create_secret_api_v1_secrets__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecretCreateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse_SecretResponse_'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/secrets/{secret_id}:
+    get:
+      tags:
+      - Secrets
+      summary: Get Secret
+      description: 'Get a specific secret by ID.
+
+
+        Note: The secret value is not returned, only metadata.'
+      operationId: get_secret_api_v1_secrets__secret_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: secret_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Secret Id
+      - name: teamId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Team ID for team secrets
+          title: Teamid
+        description: Team ID for team secrets
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse_SecretResponse_'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      tags:
+      - Secrets
+      summary: Update Secret
+      description: 'Update an existing secret.
+
+
+        You can update the name, value, and/or description.'
+      operationId: update_secret_api_v1_secrets__secret_id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: secret_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Secret Id
+      - name: teamId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Team ID for team secrets
+          title: Teamid
+        description: Team ID for team secrets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecretUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse_SecretResponse_'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - Secrets
+      summary: Delete Secret
+      description: 'Delete a secret.
+
+
+        This operation cannot be undone. Secrets that are linked to environments
+
+        will be automatically unlinked.'
+      operationId: delete_secret_api_v1_secrets__secret_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: secret_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Secret Id
+      - name: teamId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Team ID for team secrets
+          title: Teamid
+        description: Team ID for team secrets
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/teams/{team_id}/members:
+    get:
+      tags:
+      - teams
+      summary: List Team Members
+      operationId: list_team_members_api_v1_teams__team_id__members_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Team Id
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_List_TeamMemberDetail__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/template/check-docker-image:
+    post:
+      tags:
+      - Template
+      summary: Check Docker Image
+      description: Check whether a docker image is accessible (optionally with registry credentials).
+      operationId: check_docker_image_api_v1_template_check_docker_image_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DockerImageCheckRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+  /api/v1/template/registry-credentials:
+    get:
+      tags:
+      - Template
+      summary: List Registry Credentials
+      description: List registry credentials owned by the requesting user or their teams.
+      operationId: list_registry_credentials_api_v1_template_registry_credentials_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistryCredentialsListResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+  /api/v1/user/slug:
+    patch:
+      tags:
+      - user
+      summary: Set Username Slug
+      operationId: set_username_slug_api_v1_user_slug_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSlugUpdateRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse_User_'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+  /api/v1/user/teams:
+    get:
+      tags:
+      - user
+      summary: List My Teams
+      operationId: list_my_teams_api_v1_user_teams_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_List_TeamSummary__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/user/whoami:
+    get:
+      tags:
+      - user
+      summary: Get Whoami
+      operationId: get_whoami_api_v1_user_whoami_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse_WhoamiResponse_'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+components:
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+  schemas:
+    GenericResponse_AdminWhoamiResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/AdminWhoamiResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[AdminWhoamiResponse]
+    AdminWhoamiResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        role:
+          $ref: '#/components/schemas/UserRoleEnum'
+          default: USER
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        name:
+          type: string
+          title: Name
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        email:
+          type: string
+          title: Email
+        image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image
+        emailVerified:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Emailverified
+        hasBetaAccess:
+          type: boolean
+          title: Hasbetaaccess
+          default: false
+        isBanned:
+          type: boolean
+          title: Isbanned
+          default: false
+        skipPrepay:
+          type: boolean
+          title: Skipprepay
+          default: false
+        blacklist:
+          items:
+            type: string
+          type: array
+          title: Blacklist
+          default: []
+        permissions:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+          title: Permissions
+          description: 'Resolved UserPermission envelope: each section maps to the list of actions this admin user can perform
+            across the admin API surface.'
+        admin_role:
+          $ref: '#/components/schemas/UserRoleEnum'
+          description: Admin role assigned to this user
+      type: object
+      required:
+      - name
+      - email
+      - admin_role
+      title: AdminWhoamiResponse
+      description: Extended User response that includes admin permissions.
+    UserRoleEnum:
+      type: string
+      enum:
+      - ADMIN
+      - MANAGER
+      - USER
+      title: UserRoleEnum
+    GenericResponse_CertificateResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/CertificateResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[CertificateResponse]
+    CertificateResponse:
+      properties:
+        signedKey:
+          type: string
+          title: Signedkey
+        validPrincipals:
+          items:
+            type: string
+          type: array
+          title: Validprincipals
+        ttl:
+          type: string
+          title: Ttl
+        nodes:
+          items:
+            $ref: '#/components/schemas/ClusterNodeConnection'
+          type: array
+          title: Nodes
+          description: All connectable SSH endpoints for the cluster.
+      type: object
+      required:
+      - signedKey
+      - validPrincipals
+      - ttl
+      title: CertificateResponse
+    ClusterNodeConnection:
+      properties:
+        podId:
+          type: string
+          title: Podid
+        podName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Podname
+        host:
+          type: string
+          title: Host
+        port:
+          type: integer
+          title: Port
+          default: 22
+        user:
+          type: string
+          title: User
+        role:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Role
+        isControlNode:
+          type: boolean
+          title: Iscontrolnode
+          default: false
+      type: object
+      required:
+      - podId
+      - host
+      - user
+      title: ClusterNodeConnection
+      description: Connection details for a single cluster pod/node.
+    GenericPaginationResponse_List_BuildStatusResponse__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/BuildStatusResponse'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[BuildStatusResponse]]
+    FrpPluginRequest:
+      properties:
+        version:
+          type: string
+          title: Version
+          description: frp protocol version
+        op:
+          type: string
+          title: Op
+          description: 'Operation: Login, NewProxy, NewWorkConn, etc.'
+        content:
+          type: object
+          title: Content
+          description: Operation-specific content
+      type: object
+      required:
+      - version
+      - op
+      - content
+      title: FrpPluginRequest
+      description: Request from frps server plugin.
+    DeleteImageResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Whether the deletion was successful
+        message:
+          type: string
+          title: Message
+          description: Status message describing the result
+      type: object
+      required:
+      - success
+      - message
+      title: DeleteImageResponse
+      description: Response model for deleting an image.
+    FrpPluginResponse:
+      properties:
+        reject:
+          type: boolean
+          title: Reject
+          description: Whether to reject the operation
+          default: false
+        reject_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reject Reason
+          description: Reason for rejection if rejected
+        unchange:
+          type: boolean
+          title: Unchange
+          description: Whether to leave request unchanged
+          default: true
+        content:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Content
+          description: Modified content if unchange=False
+      type: object
+      title: FrpPluginResponse
+      description: Response to frps server plugin.
+    BuildImageRequest:
+      properties:
+        image_name:
+          type: string
+          title: Image Name
+          description: Image name (e.g., 'myapp')
+        image_tag:
+          type: string
+          title: Image Tag
+          description: Image tag (e.g., 'v1.0.0')
+        dockerfile_path:
+          type: string
+          title: Dockerfile Path
+          description: Path to Dockerfile within build context
+          default: Dockerfile
+        platform:
+          type: string
+          enum:
+          - linux/amd64
+          - linux/arm64
+          title: Platform
+          description: Target platform (linux/amd64 or linux/arm64)
+          default: linux/amd64
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Team ID if building image in team context
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityOverrideEnum'
+          description: Visibility override to apply when the build completes. INHERIT preserves existing tag visibility or
+            defaults new tags to PRIVATE.
+          default: INHERIT
+      type: object
+      required:
+      - image_name
+      - image_tag
+      title: BuildImageRequest
+      description: Request model for building an image.
+    ImageVisibilityOverrideEnum:
+      type: string
+      enum:
+      - INHERIT
+      - PRIVATE
+      - PUBLIC
+      title: ImageVisibilityOverrideEnum
+    GenericPaginationResponse_List_SecretResponse__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/SecretResponse'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[SecretResponse]]
+    SecretResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier of the secret
+        name:
+          type: string
+          title: Name
+          description: Name of the secret
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the secret
+        isFile:
+          type: boolean
+          title: Isfile
+          description: Whether this secret is a file
+          default: false
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+          description: ID of the owning user
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: ID of the owning team
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: When the secret was created
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+          description: When the secret was last updated
+      type: object
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      title: SecretResponse
+    GenericResponse_SecretResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/SecretResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[SecretResponse]
+    UpdateImageVisibilityResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Whether the update succeeded
+        message:
+          type: string
+          title: Message
+          description: Status message describing the result
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityEnum'
+          description: Updated visibility
+        images:
+          items:
+            $ref: '#/components/schemas/ImageResponse'
+          type: array
+          title: Images
+          description: Updated artifact rows for the logical image
+      type: object
+      required:
+      - success
+      - message
+      - visibility
+      title: UpdateImageVisibilityResponse
+      description: Response model for an image visibility update.
+    ImageResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier for the image
+        artifactType:
+          $ref: '#/components/schemas/ImageBuildArtifactTypeEnum'
+          description: Artifact produced by this image record
+          default: CONTAINER_IMAGE
+        imageName:
+          type: string
+          title: Imagename
+          description: Name of the image
+        imageTag:
+          type: string
+          title: Imagetag
+          description: Tag of the image
+        status:
+          $ref: '#/components/schemas/ImageBuildStatusEnum'
+          description: Current build status
+        fullImagePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fullimagepath
+          description: Stored output reference for the image artifact
+        errorMessage:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Errormessage
+          description: Error message if build failed
+        sizeBytes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sizebytes
+          description: Size of the image in bytes
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityEnum'
+          description: Whether this image can be used by other Prime users
+          default: PRIVATE
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the build was created
+        startedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Startedat
+          description: Timestamp when the build started
+        completedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Completedat
+          description: Timestamp when the build completed
+        pushedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Pushedat
+          description: Timestamp when the image artifact was registered
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Team ID if this is a team image
+        ownerType:
+          type: string
+          enum:
+          - personal
+          - team
+          title: Ownertype
+          description: Whether this is a personal or team image
+          default: personal
+        displayRef:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Displayref
+          description: User-friendly reference (team-{teamId}/name:tag or {userId}/name:tag)
+      type: object
+      required:
+      - id
+      - imageName
+      - imageTag
+      - status
+      - createdAt
+      title: ImageResponse
+      description: Response model for an image or build with status.
+    ImageBuildArtifactTypeEnum:
+      type: string
+      enum:
+      - CONTAINER_IMAGE
+      - VM_SANDBOX
+      title: ImageBuildArtifactTypeEnum
+    ImageBuildStatusEnum:
+      type: string
+      enum:
+      - PENDING
+      - UPLOADING
+      - BUILDING
+      - COMPLETED
+      - FAILED
+      - CANCELLED
+      title: ImageBuildStatusEnum
+    ImageVisibilityEnum:
+      type: string
+      enum:
+      - PRIVATE
+      - PUBLIC
+      title: ImageVisibilityEnum
+    GenericPaginationResponse_list_AdminClusterSummary__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/AdminClusterSummary'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[list[AdminClusterSummary]]
+    AdminClusterSummary:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        providerType:
+          type: string
+          title: Providertype
+        status:
+          type: string
+          title: Status
+        vaultEnabled:
+          type: boolean
+          title: Vaultenabled
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        controller:
+          anyOf:
+          - $ref: '#/components/schemas/ClusterNodeConnection'
+          - type: 'null'
+          description: Control-node connection details (always populated when a control node exists).
+        nodes:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ClusterNodeConnection'
+            type: array
+          - type: 'null'
+          title: Nodes
+          description: All node connection details. Only populated when ?detailed=true.
+      type: object
+      required:
+      - id
+      - name
+      - providerType
+      - status
+      - vaultEnabled
+      - createdAt
+      title: AdminClusterSummary
+      description: Lightweight cluster summary returned by the admin list endpoint.
+    CertificateRequest:
+      properties:
+        publicKey:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Publickey
+        ttl:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ttl
+          description: Requested certificate TTL as a Vault-style duration (e.g. '30m', '2h'). Capped at 8h; omit to use the
+            server default.
+      type: object
+      title: CertificateRequest
+      description: 'Optional request body for the admin certificate endpoint.
+
+
+        If ``public_key`` is provided the backend will sign it directly; otherwise
+
+        it falls back to the admin''s DB-stored SSH public key.'
+    BuildImageResponse:
+      properties:
+        build_id:
+          type: string
+          title: Build Id
+          description: Build ID for tracking
+        upload_url:
+          type: string
+          title: Upload Url
+          description: Presigned URL to upload build context (tar.gz)
+        expires_in:
+          type: integer
+          title: Expires In
+          description: URL validity in seconds
+        fullImagePath:
+          type: string
+          title: Fullimagepath
+          description: Full image path with user ID
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityEnum'
+          description: Effective visibility for the image when the build completes
+          default: PRIVATE
+      type: object
+      required:
+      - build_id
+      - upload_url
+      - expires_in
+      - fullImagePath
+      title: BuildImageResponse
+      description: Response model for initiating image build.
+    GenericPaginationResponse_List_TeamSummary__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/TeamSummary'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[TeamSummary]]
+    TeamSummary:
+      properties:
+        teamId:
+          type: string
+          title: Teamid
+        name:
+          type: string
+          title: Name
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        role:
+          $ref: '#/components/schemas/TeamRoleEnum'
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+      type: object
+      required:
+      - teamId
+      - name
+      - role
+      - createdAt
+      title: TeamSummary
+    TeamRoleEnum:
+      type: string
+      enum:
+      - ADMIN
+      - MEMBER
+      title: TeamRoleEnum
+    SecretCreateRequest:
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          minLength: 1
+          pattern: ^[A-Z][A-Z0-9_]*$
+          title: Name
+          description: Name of the secret (must start with uppercase, only uppercase, numbers, underscores)
+        description:
+          anyOf:
+          - type: string
+            maxLength: 500
+          - type: 'null'
+          title: Description
+          description: Optional description of the secret
+        value:
+          type: string
+          minLength: 1
+          title: Value
+          description: The secret value to store (will be encrypted)
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Optional team ID for team-level secrets
+        isFile:
+          type: boolean
+          title: Isfile
+          description: Whether this secret represents a file (max 64KB base64 encoded)
+          default: false
+      type: object
+      required:
+      - name
+      - value
+      title: SecretCreateRequest
+    UpdateImageVisibilityRequest:
+      properties:
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityEnum'
+          description: New image visibility (PUBLIC or PRIVATE)
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Team ID if updating a team image
+      type: object
+      required:
+      - visibility
+      title: UpdateImageVisibilityRequest
+      description: Request model for publishing or unpublishing an image.
+    RegistryCredentialsListResponse:
+      properties:
+        credentials:
+          items:
+            $ref: '#/components/schemas/RegistryCredentialsSummary'
+          type: array
+          title: Credentials
+      type: object
+      required:
+      - credentials
+      title: RegistryCredentialsListResponse
+    RegistryCredentialsSummary:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        server:
+          type: string
+          title: Server
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+      type: object
+      required:
+      - id
+      - name
+      - server
+      - createdAt
+      - updatedAt
+      - userId
+      - teamId
+      title: RegistryCredentialsSummary
+    GenericPaginationResponse_list_ClusterNodeLogEntry__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/ClusterNodeLogEntry'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[list[ClusterNodeLogEntry]]
+    ClusterNodeLogEntry:
+      properties:
+        id:
+          type: string
+          title: Id
+        eventType:
+          type: string
+          title: Eventtype
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        podId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Podid
+        podName:
+          type: string
+          title: Podname
+        podStatus:
+          type: string
+          title: Podstatus
+        gpuName:
+          type: string
+          title: Gpuname
+        gpuCount:
+          type: integer
+          title: Gpucount
+        host:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Host
+        role:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Role
+        changeSummary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Changesummary
+      type: object
+      required:
+      - id
+      - eventType
+      - createdAt
+      - podName
+      - podStatus
+      - gpuName
+      - gpuCount
+      title: ClusterNodeLogEntry
+      description: One ClusterNodeLog row (matches the frontend Node History dialog).
+    BuildStatusResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Public identifier for the logical build group
+        imageName:
+          type: string
+          title: Imagename
+          description: Name of the image being built
+        imageTag:
+          type: string
+          title: Imagetag
+          description: Tag of the image being built
+        status:
+          $ref: '#/components/schemas/ImageBuildStatusEnum'
+          description: Aggregated build-group status
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the build was created
+        startedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Startedat
+          description: Timestamp when the build started
+        completedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Completedat
+          description: Timestamp when the build completed
+        artifacts:
+          items:
+            $ref: '#/components/schemas/BuildArtifactStatusResponse'
+          type: array
+          title: Artifacts
+          description: Artifact rows associated with this build group
+      type: object
+      required:
+      - id
+      - imageName
+      - imageTag
+      - status
+      - createdAt
+      title: BuildStatusResponse
+      description: Response model for a logical build group.
+    BuildArtifactStatusResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Internal identifier for this artifact build row
+        artifactType:
+          $ref: '#/components/schemas/ImageBuildArtifactTypeEnum'
+          description: Artifact produced by this build row
+          default: CONTAINER_IMAGE
+        status:
+          $ref: '#/components/schemas/ImageBuildStatusEnum'
+          description: Current artifact status
+        fullImagePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fullimagepath
+          description: Output reference for this built artifact
+        errorMessage:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Errormessage
+          description: Error message if build failed
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the artifact row was created
+        startedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Startedat
+          description: Timestamp when the artifact row started
+        completedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Completedat
+          description: Timestamp when the artifact row completed
+      type: object
+      required:
+      - id
+      - status
+      - createdAt
+      title: BuildArtifactStatusResponse
+      description: Status for one artifact row within a build group.
+    GenericResponse_WhoamiResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/WhoamiResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[WhoamiResponse]
+    WhoamiResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        role:
+          $ref: '#/components/schemas/UserRoleEnum'
+          default: USER
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        name:
+          type: string
+          title: Name
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        email:
+          type: string
+          title: Email
+        image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image
+        emailVerified:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Emailverified
+        hasBetaAccess:
+          type: boolean
+          title: Hasbetaaccess
+          default: false
+        isBanned:
+          type: boolean
+          title: Isbanned
+          default: false
+        skipPrepay:
+          type: boolean
+          title: Skipprepay
+          default: false
+        blacklist:
+          items:
+            type: string
+          type: array
+          title: Blacklist
+          default: []
+        scope:
+          additionalProperties:
+            anyOf:
+            - $ref: '#/components/schemas/PermissionType'
+            - type: 'null'
+          type: object
+          title: Scope
+          default: {}
+      type: object
+      required:
+      - name
+      - email
+      title: WhoamiResponse
+      description: Extended User response that includes token scope permissions.
+    PermissionType:
+      properties:
+        read:
+          type: boolean
+          title: Read
+        write:
+          type: boolean
+          title: Write
+      type: object
+      required:
+      - read
+      - write
+      title: PermissionType
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    UserSlugUpdateRequest:
+      properties:
+        slug:
+          type: string
+          maxLength: 30
+          minLength: 3
+          pattern: ^[a-z0-9-]+$
+          title: Slug
+          description: Desired unique username/slug (lowercase, 3-30 chars, a-z, 0-9, -)
+      type: object
+      required:
+      - slug
+      title: UserSlugUpdateRequest
+    ClusterNodeLogEventTypeEnum:
+      type: string
+      enum:
+      - ATTACHED
+      - UPDATED
+      - DETACHED
+      - CLUSTER_UPDATED
+      - CLUSTER_TERMINATED
+      - AUTHORIZATION
+      title: ClusterNodeLogEventTypeEnum
+    GenericResponse_User_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/User'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[User]
+    User:
+      properties:
+        id:
+          type: string
+          title: Id
+        role:
+          $ref: '#/components/schemas/UserRoleEnum'
+          default: USER
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        name:
+          type: string
+          title: Name
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        email:
+          type: string
+          title: Email
+        image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image
+        emailVerified:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Emailverified
+        hasBetaAccess:
+          type: boolean
+          title: Hasbetaaccess
+          default: false
+        isBanned:
+          type: boolean
+          title: Isbanned
+          default: false
+        skipPrepay:
+          type: boolean
+          title: Skipprepay
+          default: false
+        blacklist:
+          items:
+            type: string
+          type: array
+          title: Blacklist
+          default: []
+      type: object
+      required:
+      - name
+      - email
+      title: User
+    SecretUpdateRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+            pattern: ^[A-Z][A-Z0-9_]*$
+          - type: 'null'
+          title: Name
+          description: New name for the secret (must start with uppercase, only uppercase, numbers, underscores)
+        value:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Value
+          description: New value for the secret
+        description:
+          anyOf:
+          - type: string
+            maxLength: 500
+          - type: 'null'
+          title: Description
+          description: New description for the secret
+      type: object
+      title: SecretUpdateRequest
+    GenericPaginationResponse_List_ImageResponse__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/ImageResponse'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[ImageResponse]]
+    GenericPaginationResponse_List_TeamMemberDetail__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/TeamMemberDetail'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[TeamMemberDetail]]
+    TeamMemberDetail:
+      properties:
+        userId:
+          type: string
+          title: Userid
+        userName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+        userEmail:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Useremail
+        role:
+          type: string
+          title: Role
+        joinedAt:
+          type: string
+          format: date-time
+          title: Joinedat
+      type: object
+      required:
+      - userId
+      - userName
+      - userEmail
+      - role
+      - joinedAt
+      title: TeamMemberDetail
+    StartBuildRequest:
+      properties:
+        context_uploaded:
+          type: boolean
+          title: Context Uploaded
+          description: Confirmation that context was uploaded
+          default: true
+      type: object
+      title: StartBuildRequest
+      description: Request model to start the build after upload.
+    GenericResponse_ClusterDetailResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClusterDetailResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[ClusterDetailResponse]
+    ClusterDetailResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        remoteId:
+          type: string
+          title: Remoteid
+        name:
+          type: string
+          title: Name
+        providerType:
+          type: string
+          title: Providertype
+        status:
+          type: string
+          title: Status
+        vaultEnabled:
+          type: boolean
+          title: Vaultenabled
+        gpuName:
+          type: string
+          title: Gpuname
+        gpuCount:
+          type: integer
+          title: Gpucount
+        socket:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Socket
+        priceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Pricehr
+        stoppedPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Stoppedpricehr
+        provisioningPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Provisioningpricehr
+        basePriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Basepricehr
+        baseCurrency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Basecurrency
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+        walletId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Walletid
+        orchestratorType:
+          type: string
+          title: Orchestratortype
+        orchestratorVersion:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratorversion
+        orchestratorEndpoint:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratorendpoint
+        orchestratorConfig:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Orchestratorconfig
+        orchestratorDeploymentJobId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratordeploymentjobid
+        orchestratorDeploymentStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratordeploymentstatus
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        terminatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Terminatedat
+        info:
+          title: Info
+        nodes:
+          items:
+            $ref: '#/components/schemas/ClusterNodeDetail'
+          type: array
+          title: Nodes
+        sshKeys:
+          items:
+            $ref: '#/components/schemas/ClusterSSHKeyDetail'
+          type: array
+          title: Sshkeys
+      type: object
+      required:
+      - id
+      - remoteId
+      - name
+      - providerType
+      - status
+      - vaultEnabled
+      - gpuName
+      - gpuCount
+      - orchestratorType
+      - createdAt
+      - updatedAt
+      title: ClusterDetailResponse
+      description: All DB details for a single cluster (columns + nodes + SSH keys).
+    ClusterNodeDetail:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        remoteId:
+          type: string
+          title: Remoteid
+        providerType:
+          type: string
+          title: Providertype
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+        status:
+          type: string
+          title: Status
+        installationStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Installationstatus
+        testStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teststatus
+        finalizerStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Finalizerstatus
+        installationProgress:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Installationprogress
+        installationFailure:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Installationfailure
+        gpuName:
+          type: string
+          title: Gpuname
+        gpuCount:
+          type: integer
+          title: Gpucount
+        socket:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Socket
+        priceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Pricehr
+        stoppedPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Stoppedpricehr
+        provisioningPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Provisioningpricehr
+        basePriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Basepricehr
+        baseCurrency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Basecurrency
+        environmentType:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Environmenttype
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+        walletId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Walletid
+        isDetached:
+          type: boolean
+          title: Isdetached
+          default: false
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        terminatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Terminatedat
+        providerReadyAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Providerreadyat
+        piReadyAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Pireadyat
+        info:
+          title: Info
+        connections:
+          items:
+            $ref: '#/components/schemas/ClusterNodeConnection'
+          type: array
+          title: Connections
+      type: object
+      required:
+      - id
+      - name
+      - remoteId
+      - providerType
+      - status
+      - gpuName
+      - gpuCount
+      - createdAt
+      - updatedAt
+      title: ClusterNodeDetail
+      description: Full DB details for a single cluster pod/node.
+    ClusterSSHKeyDetail:
+      properties:
+        id:
+          type: string
+          title: Id
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+        sshKeyId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sshkeyid
+        role:
+          type: string
+          title: Role
+        publicKey:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Publickey
+      type: object
+      required:
+      - id
+      - role
+      title: ClusterSSHKeyDetail
+      description: Authorized SSH key entry for a cluster.
+    DockerImageCheckRequest:
+      properties:
+        image:
+          type: string
+          title: Image
+        registry_credentials_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Registry Credentials Id
+      type: object
+      required:
+      - image
+      title: DockerImageCheckRequest
