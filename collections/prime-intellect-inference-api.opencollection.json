@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Inference API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Prime Intellect List Inference Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pinference.ai/api/v1/models"
+          },
+          "docs": "List models available through the Prime Intellect inference API."
+        },
+        {
+          "info": {
+            "name": "Prime Intellect Create Chat Completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pinference.ai/api/v1/chat/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "OpenAI-compatible chat completions endpoint. Supports streaming, temperature, token limits, and logprobs. Responses include a usage object with input/output tokens and cost."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

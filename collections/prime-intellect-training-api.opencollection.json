@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Training API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Token usage and cost for a single RFT run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/billing/runs/:run_id/usage",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return the running token + cost totals for one RFT run.\n\nMirrors the per-row training data shown on the billing page (Training\ntokens, Inference input/output tokens, price per million tokens, and\ntotal cost) so an agent can poll this endpoint to monitor a live run."
+        },
+        {
+          "info": {
+            "name": "Wallet balance + most recent billing rows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/billing/wallet",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of recent billing rows to include (max 100)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip this many rows before returning. Lets callers page."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "If provided, return the team's wallet (requires membership)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return the wallet's current balance and most recent billing rows.\n\nAll resource types are included (compute, training, inference, disks,\nsandboxes, images) — same source-of-truth `Billing` table the\ndashboard's Billing History tab reads. Sorted by `lastBilledAt` desc."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "training",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Dedicated Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/training/runs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Dispatch a dedicated full-FT prime-rl run on a registered PrimeCluster."
+        },
+        {
+          "info": {
+            "name": "Delete Dedicated Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/training/runs/:run_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a dedicated run: helm uninstall + namespace delete + DB cleanup.\n\nIdempotent. Safe to call repeatedly. Cleans up the linked Job row too\n(which uninstalls the helm release on the customer cluster). Soft-\ndeletes the RFTRun row (matches the existing run-delete UX — Billing\nrefs are preserved)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

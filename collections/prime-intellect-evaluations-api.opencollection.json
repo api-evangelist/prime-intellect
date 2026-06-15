@@ -1,0 +1,380 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Evaluations API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "evals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Evaluations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/evaluations/",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific team ID"
+              },
+              {
+                "name": "environment_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by environment ID"
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by environment name"
+              },
+              {
+                "name": "suite_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by suite ID"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a list of evaluations owned by the authenticated user or their teams\n\nBy default, returns all evaluations the user has access to (personal + all teams)."
+        },
+        {
+          "info": {
+            "name": "Create Evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/evaluations/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new evaluation\n\nThis endpoint supports:\n- Environment evaluations: Provide environments\n- Prime RL evaluations: Provide run_id\n- Suite evaluations: Provide suite_id\n\nOwnership:\n- If team_id is provided in request, the evaluation will be owned by the team\n- Otherwise, the evaluation will be owned by the authenticated user"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Evaluations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/evaluations/bulk-delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Bulk Delete Evaluations"
+        },
+        {
+          "info": {
+            "name": "Get Evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/evaluations/:evaluation_id",
+            "params": [
+              {
+                "name": "evaluation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get detailed information about a specific evaluation."
+        },
+        {
+          "info": {
+            "name": "Update Evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.primeintellect.ai/api/v1/evaluations/:evaluation_id",
+            "params": [
+              {
+                "name": "evaluation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing evaluation"
+        },
+        {
+          "info": {
+            "name": "Delete Evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/evaluations/:evaluation_id",
+            "params": [
+              {
+                "name": "evaluation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Evaluation"
+        },
+        {
+          "info": {
+            "name": "Finalize Evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/evaluations/:evaluation_id/finalize",
+            "params": [
+              {
+                "name": "evaluation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Mark an evaluation as complete and compute final statistics."
+        },
+        {
+          "info": {
+            "name": "Get Samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/evaluations/:evaluation_id/samples",
+            "params": [
+              {
+                "name": "evaluation_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get samples for a specific evaluation"
+        },
+        {
+          "info": {
+            "name": "Push Samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/evaluations/:evaluation_id/samples",
+            "params": [
+              {
+                "name": "evaluation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Push evaluation samples\n\nThis endpoint can be called multiple times to stream samples as they're generated."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/feedback",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submit Feedback"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "hosted-evaluations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Hosted Evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/hosted-evaluations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create and start a hosted evaluation."
+        },
+        {
+          "info": {
+            "name": "Get Inference Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/hosted-evaluations/models",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get available models from Prime Inference API for hosted evaluations"
+        },
+        {
+          "info": {
+            "name": "Cancel Hosted Evaluation Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.primeintellect.ai/api/v1/hosted-evaluations/:evaluation_id/cancel",
+            "params": [
+              {
+                "name": "evaluation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cancel a running hosted evaluation."
+        },
+        {
+          "info": {
+            "name": "Get Hosted Evaluation Logs Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/hosted-evaluations/:evaluation_id/logs",
+            "params": [
+              {
+                "name": "evaluation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get real-time logs from the sandbox running a hosted evaluation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,820 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Compute API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Legacygpu Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "List of regions to filter"
+              },
+              {
+                "name": "gpu_count",
+                "value": "",
+                "type": "query",
+                "description": "Desired number of GPUs"
+              },
+              {
+                "name": "gpu_type",
+                "value": "",
+                "type": "query",
+                "description": "GPU model"
+              },
+              {
+                "name": "socket",
+                "value": "",
+                "type": "query",
+                "description": "Socket for selected gpu model"
+              },
+              {
+                "name": "security",
+                "value": "",
+                "type": "query",
+                "description": "Security type"
+              },
+              {
+                "name": "data_center_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by data center ID"
+              },
+              {
+                "name": "cloud_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cloud ID"
+              },
+              {
+                "name": "disks",
+                "value": "",
+                "type": "query",
+                "description": "List of disk IDs to filter instances by location"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Legacygpu Availability"
+        },
+        {
+          "info": {
+            "name": "Get Legacy Cluster Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/clusters",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "List of regions to filter"
+              },
+              {
+                "name": "gpu_count",
+                "value": "",
+                "type": "query",
+                "description": "Desired number of GPUs"
+              },
+              {
+                "name": "gpu_type",
+                "value": "",
+                "type": "query",
+                "description": "GPU model"
+              },
+              {
+                "name": "socket",
+                "value": "",
+                "type": "query",
+                "description": "Socket for selected gpu model"
+              },
+              {
+                "name": "security",
+                "value": "",
+                "type": "query",
+                "description": "Security type"
+              },
+              {
+                "name": "data_center_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by data center ID"
+              },
+              {
+                "name": "cloud_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cloud ID"
+              },
+              {
+                "name": "disks",
+                "value": "",
+                "type": "query",
+                "description": "List of disk IDs to filter instances by location"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Legacy Cluster Availability"
+        },
+        {
+          "info": {
+            "name": "Get Disks Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/disks",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "List of regions to filter"
+              },
+              {
+                "name": "data_center_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by data center ID"
+              },
+              {
+                "name": "cloud_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cloud ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Disks Availability"
+        },
+        {
+          "info": {
+            "name": "Get Gpu Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/gpu-summary",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get GPU pricing summary data grouped by GPU type and instance count."
+        },
+        {
+          "info": {
+            "name": "Get Gpu Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/gpus",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "List of regions to filter"
+              },
+              {
+                "name": "gpu_count",
+                "value": "",
+                "type": "query",
+                "description": "Desired number of GPUs"
+              },
+              {
+                "name": "gpu_type",
+                "value": "",
+                "type": "query",
+                "description": "GPU model"
+              },
+              {
+                "name": "socket",
+                "value": "",
+                "type": "query",
+                "description": "Socket for selected gpu model"
+              },
+              {
+                "name": "security",
+                "value": "",
+                "type": "query",
+                "description": "Security type"
+              },
+              {
+                "name": "data_center_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by data center ID"
+              },
+              {
+                "name": "cloud_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cloud ID"
+              },
+              {
+                "name": "disks",
+                "value": "",
+                "type": "query",
+                "description": "List of disk IDs to filter instances by location"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Gpu Availability"
+        },
+        {
+          "info": {
+            "name": "Get Multinode Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/multi-node",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "List of regions to filter"
+              },
+              {
+                "name": "gpu_count",
+                "value": "",
+                "type": "query",
+                "description": "Desired number of GPUs"
+              },
+              {
+                "name": "gpu_type",
+                "value": "",
+                "type": "query",
+                "description": "GPU model"
+              },
+              {
+                "name": "socket",
+                "value": "",
+                "type": "query",
+                "description": "Socket for selected gpu model"
+              },
+              {
+                "name": "security",
+                "value": "",
+                "type": "query",
+                "description": "Security type"
+              },
+              {
+                "name": "data_center_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by data center ID"
+              },
+              {
+                "name": "cloud_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cloud ID"
+              },
+              {
+                "name": "disks",
+                "value": "",
+                "type": "query",
+                "description": "List of disk IDs to filter instances by location"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Multinode Availability"
+        },
+        {
+          "info": {
+            "name": "Get Multinode Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/multi-node-summary",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get multi-node (cluster) pricing summary data grouped by GPU type and instance count."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Disks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Disks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/disks/",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Disks"
+        },
+        {
+          "info": {
+            "name": "Create Disk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/disks/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Disk"
+        },
+        {
+          "info": {
+            "name": "Get Disk",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/disks/:disk_id",
+            "params": [
+              {
+                "name": "disk_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Disk"
+        },
+        {
+          "info": {
+            "name": "Update Disk",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.primeintellect.ai/api/v1/disks/:disk_id",
+            "params": [
+              {
+                "name": "disk_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Disk"
+        },
+        {
+          "info": {
+            "name": "Delete Disk",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/disks/:disk_id",
+            "params": [
+              {
+                "name": "disk_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Disk"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Pods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/pods/",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Pods"
+        },
+        {
+          "info": {
+            "name": "Create Pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/pods/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Pod"
+        },
+        {
+          "info": {
+            "name": "Get Pods History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/pods/history",
+            "params": [
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Pods History"
+        },
+        {
+          "info": {
+            "name": "Get Pods Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/pods/status",
+            "params": [
+              {
+                "name": "pod_ids",
+                "value": "",
+                "type": "query",
+                "description": "List of pod ids"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Pods Status"
+        },
+        {
+          "info": {
+            "name": "Get Pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/pods/:pod_id",
+            "params": [
+              {
+                "name": "pod_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Pod"
+        },
+        {
+          "info": {
+            "name": "Delete Pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/pods/:pod_id",
+            "params": [
+              {
+                "name": "pod_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Pod"
+        },
+        {
+          "info": {
+            "name": "Get Pod Logs Api",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/pods/:pod_id/log",
+            "params": [
+              {
+                "name": "pod_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tail",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get logs for a pod.\n\nArgs:\n    tail: Number of most recent logs to return (default: 100)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SSH Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Ssh Keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/ssh_keys/",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Ssh Keys"
+        },
+        {
+          "info": {
+            "name": "Upload Ssh Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/ssh_keys/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload Ssh Key"
+        },
+        {
+          "info": {
+            "name": "Set Primary Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.primeintellect.ai/api/v1/ssh_keys/:key_id",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set Primary Key"
+        },
+        {
+          "info": {
+            "name": "Delete Ssh Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/ssh_keys/:key_id",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Ssh Key"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

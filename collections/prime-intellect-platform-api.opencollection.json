@@ -1,0 +1,709 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Platform API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "admin-clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/admin/clusters",
+            "params": [
+              {
+                "name": "vaultEnabled",
+                "value": "",
+                "type": "query",
+                "description": "If true, return only vault-enabled clusters; if false, only non-vault-enabled. Omit to include both."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Case-insensitive substring match against cluster name or id."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max items to return (1-100)."
+              },
+              {
+                "name": "detailed",
+                "value": "",
+                "type": "query",
+                "description": "If true, populate `nodes` for each cluster (one entry per pod). Otherwise only the `controller` connection is returned."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List non-terminated clusters."
+        },
+        {
+          "info": {
+            "name": "Get Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/admin/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return full DB details for one cluster (columns + nodes + SSH keys)."
+        },
+        {
+          "info": {
+            "name": "Request Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/admin/clusters/:cluster_id/authorizations/certificate",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Sign the requesting admin's SSH public key via Vault.\n\nIf a ``publicKey`` is provided in the body, it is signed directly.\nOtherwise the admin's DB-stored SSH public key is used."
+        },
+        {
+          "info": {
+            "name": "List Cluster Node Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/admin/clusters/:cluster_id/node-logs",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "podId",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs to a single pod."
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs to a single event type."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max items to return (1-100, default 20)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return paginated ClusterNodeLog entries for one cluster, newest first."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "admin-users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Current User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/admin/users/whoami",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Identity + envelope for the calling admin API key.\n\nIntentionally bypasses ``require_admin_permission``: any valid, non-\nexpired, non-disabled admin API key whose owner is still ADMIN/MANAGER\ncan call this. Returning the resolved permission envelope is what makes\na freshly-minted scoped key able to discover what it can do."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "FRP Plugin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate Frp Plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/frp/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate frpc client connections.\n\nThis endpoint is called by frps server plugin for:\n- Login: Validates tunnel token when client connects\n- NewProxy: Validates proxy creation requests\n\nThis endpoint is public but security is enforced via per-tunnel\ntoken validation. An attacker would need both a valid tunnel_id AND\nthe corresponding frp_token to get a successful response."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List User Images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/images",
+            "params": [
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by team ID. If provided, returns only that team's images. If not provided, returns only personal images."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List images and builds for the current user, scoped by team context. Returns personal images by default, or team images if teamId is provided.\n\nPagination note: `limit`, `offset`, and `totalCount` count logical images\n(unique `owner/imageName:imageTag`). A single image may produce multiple\n`data[]` rows (one per artifact type plus any active builds), so\n`len(data)` can exceed `limit` and `totalCount` reflects images, not rows."
+        },
+        {
+          "info": {
+            "name": "Initiate Image Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/images/build",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initiate an image build process.\n\nReturns a presigned URL to upload the build context (tar.gz file).\nAfter uploading, call /images/build/{build_id}/start to begin the build."
+        },
+        {
+          "info": {
+            "name": "Get Build Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/images/build/:build_id",
+            "params": [
+              {
+                "name": "build_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the status of an image build."
+        },
+        {
+          "info": {
+            "name": "Start Image Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/images/build/:build_id/start",
+            "params": [
+              {
+                "name": "build_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Start the image build process after uploading the build context.\n\nThis creates a sandbox with Docker-in-Docker to build and push the image."
+        },
+        {
+          "info": {
+            "name": "List Image Builds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/images/builds",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all image builds for the current user."
+        },
+        {
+          "info": {
+            "name": "Delete User Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/images/:image_name/:image_tag",
+            "params": [
+              {
+                "name": "image_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "image_tag",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Team ID if deleting a team image"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a user image from the database and Google Artifact Registry.\n\nFor team images, only the image creator or team admins can delete."
+        },
+        {
+          "info": {
+            "name": "Update Image Visibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.primeintellect.ai/api/v1/images/:image_name/:image_tag/visibility",
+            "params": [
+              {
+                "name": "image_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "image_tag",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Publish or unpublish an image in the current personal or team context."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Secrets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Secrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/secrets/",
+            "params": [
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by team ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List global secrets for the authenticated user or a team.\n\nIf teamId is provided, returns secrets for that team (requires team membership).\nOtherwise, returns the user's personal secrets."
+        },
+        {
+          "info": {
+            "name": "Create Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/secrets/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new global secret.\n\nThe secret will be encrypted and stored securely. If teamId is provided,\nthe secret will be associated with that team (requires team membership)."
+        },
+        {
+          "info": {
+            "name": "Get Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/secrets/:secret_id",
+            "params": [
+              {
+                "name": "secret_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Team ID for team secrets"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a specific secret by ID.\n\nNote: The secret value is not returned, only metadata."
+        },
+        {
+          "info": {
+            "name": "Update Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.primeintellect.ai/api/v1/secrets/:secret_id",
+            "params": [
+              {
+                "name": "secret_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Team ID for team secrets"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing secret.\n\nYou can update the name, value, and/or description."
+        },
+        {
+          "info": {
+            "name": "Delete Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/secrets/:secret_id",
+            "params": [
+              {
+                "name": "secret_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Team ID for team secrets"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a secret.\n\nThis operation cannot be undone. Secrets that are linked to environments\nwill be automatically unlinked."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Team Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/teams/:team_id/members",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Team Members"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Template",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check Docker Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/template/check-docker-image",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Check whether a docker image is accessible (optionally with registry credentials)."
+        },
+        {
+          "info": {
+            "name": "List Registry Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/template/registry-credentials",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List registry credentials owned by the requesting user or their teams."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "user",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set Username Slug",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.primeintellect.ai/api/v1/user/slug",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set Username Slug"
+        },
+        {
+          "info": {
+            "name": "List My Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/user/teams",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List My Teams"
+        },
+        {
+          "info": {
+            "name": "Get Whoami",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/user/whoami",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Whoami"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

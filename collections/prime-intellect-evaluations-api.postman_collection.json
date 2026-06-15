@@ -1,0 +1,3249 @@
+{
+  "item": [
+    {
+      "id": "9e045b6a-aa96-4881-87aa-9fd5e4c380e0",
+      "name": "evals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a8565954-a65d-4c10-8587-e92c204023eb",
+          "name": "Create Evaluation",
+          "request": {
+            "name": "Create Evaluation",
+            "description": {
+              "content": "Create a new evaluation\n\nThis endpoint supports:\n- Environment evaluations: Provide environments\n- Prime RL evaluations: Provide run_id\n- Suite evaluations: Provide suite_id\n\nOwnership:\n- If team_id is provided in request, the evaluation will be owned by the team\n- Otherwise, the evaluation will be owned by the authenticated user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "evaluations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"team_id\": \"<string>\",\n  \"environments\": [\n    {\n      \"id\": \"<string>\",\n      \"version_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"version_id\": \"<string>\"\n    }\n  ],\n  \"suite_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"is_hosted\": false,\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": \"<integer>\",\n    \"rollouts_per_example\": \"<integer>\",\n    \"env_args\": \"<object>\",\n    \"allow_sandbox_access\": \"<boolean>\",\n    \"allow_instances_access\": \"<boolean>\",\n    \"allow_tunnel_access\": \"<boolean>\",\n    \"timeout_minutes\": \"<integer>\",\n    \"custom_secrets\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"sampling_args\": \"<object>\",\n    \"max_concurrent\": \"<integer>\",\n    \"max_retries\": \"<integer>\",\n    \"state_columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"independent_scoring\": \"<boolean>\",\n    \"verbose\": \"<boolean>\",\n    \"headers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_env_kwargs\": \"<object>\",\n    \"api_client_type\": \"<string>\",\n    \"api_base_url\": \"<string>\",\n    \"api_key_var\": \"<string>\"\n  },\n  \"model_name\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"framework\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": \"<object>\",\n  \"metrics\": \"<object>\",\n  \"is_public\": false,\n  \"show_on_leaderboard\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8b7e338-ef6c-45e1-831a-014f2af05868",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"team_id\": \"<string>\",\n  \"environments\": [\n    {\n      \"id\": \"string\",\n      \"version_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"version_id\": \"string\"\n    }\n  ],\n  \"suite_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"is_hosted\": false,\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": 340284181900156,\n    \"rollouts_per_example\": 688,\n    \"env_args\": {},\n    \"allow_sandbox_access\": true,\n    \"allow_instances_access\": false,\n    \"allow_tunnel_access\": false,\n    \"timeout_minutes\": 1156,\n    \"custom_secrets\": {\n      \"key_0\": \"string\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": 6346475183323108,\n    \"max_retries\": 6983910937409801,\n    \"state_columns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"independent_scoring\": true,\n    \"verbose\": true,\n    \"headers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"string\",\n    \"api_base_url\": \"string\",\n    \"api_key_var\": \"string\"\n  },\n  \"model_name\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"framework\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": \"<object>\",\n  \"metrics\": \"<object>\",\n  \"is_public\": false,\n  \"show_on_leaderboard\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evaluation_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"RUNNING\",\n  \"eval_type\": \"suite\",\n  \"created_at\": \"1982-03-04T22:34:53.176Z\",\n  \"environment_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"suite_id\": \"string\",\n  \"run_id\": \"string\",\n  \"version_id\": \"string\",\n  \"viewer_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89e64405-fb1c-4744-aadc-2b0b64485f03",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"team_id\": \"<string>\",\n  \"environments\": [\n    {\n      \"id\": \"string\",\n      \"version_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"version_id\": \"string\"\n    }\n  ],\n  \"suite_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"is_hosted\": false,\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": 340284181900156,\n    \"rollouts_per_example\": 688,\n    \"env_args\": {},\n    \"allow_sandbox_access\": true,\n    \"allow_instances_access\": false,\n    \"allow_tunnel_access\": false,\n    \"timeout_minutes\": 1156,\n    \"custom_secrets\": {\n      \"key_0\": \"string\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": 6346475183323108,\n    \"max_retries\": 6983910937409801,\n    \"state_columns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"independent_scoring\": true,\n    \"verbose\": true,\n    \"headers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"string\",\n    \"api_base_url\": \"string\",\n    \"api_key_var\": \"string\"\n  },\n  \"model_name\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"framework\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": \"<object>\",\n  \"metrics\": \"<object>\",\n  \"is_public\": false,\n  \"show_on_leaderboard\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c38d7cca-b1f1-49a2-a6c5-3fde0b547740",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"team_id\": \"<string>\",\n  \"environments\": [\n    {\n      \"id\": \"string\",\n      \"version_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"version_id\": \"string\"\n    }\n  ],\n  \"suite_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"is_hosted\": false,\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": 340284181900156,\n    \"rollouts_per_example\": 688,\n    \"env_args\": {},\n    \"allow_sandbox_access\": true,\n    \"allow_instances_access\": false,\n    \"allow_tunnel_access\": false,\n    \"timeout_minutes\": 1156,\n    \"custom_secrets\": {\n      \"key_0\": \"string\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": 6346475183323108,\n    \"max_retries\": 6983910937409801,\n    \"state_columns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"independent_scoring\": true,\n    \"verbose\": true,\n    \"headers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"string\",\n    \"api_base_url\": \"string\",\n    \"api_key_var\": \"string\"\n  },\n  \"model_name\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"framework\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": \"<object>\",\n  \"metrics\": \"<object>\",\n  \"is_public\": false,\n  \"show_on_leaderboard\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0739961-dc4e-4ccc-b156-133180279868",
+          "name": "List Evaluations",
+          "request": {
+            "name": "List Evaluations",
+            "description": {
+              "content": "Get a list of evaluations owned by the authenticated user or their teams\n\nBy default, returns all evaluations the user has access to (personal + all teams).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "evaluations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<string>",
+                  "description": "Filter by specific team ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "environment_id",
+                  "value": "<string>",
+                  "description": "Filter by environment ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "environment_name",
+                  "value": "<string>",
+                  "description": "Filter by environment name"
+                },
+                {
+                  "disabled": false,
+                  "key": "suite_id",
+                  "value": "<string>",
+                  "description": "Filter by suite ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eb854c16-13d8-4500-b1ce-845676a76172",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "team_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "suite_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evaluations\": [\n    {\n      \"evaluation_id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"FAILED\",\n      \"eval_type\": \"environment\",\n      \"total_samples\": 898,\n      \"created_at\": \"2018-04-15T23:49:19.743Z\",\n      \"updated_at\": \"1955-04-29T01:30:57.263Z\",\n      \"user_id\": \"string\",\n      \"team_id\": \"string\",\n      \"environment_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"environment_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"suite_id\": \"string\",\n      \"run_id\": \"string\",\n      \"version_id\": \"string\",\n      \"is_hosted\": false,\n      \"sandbox_id\": \"string\",\n      \"inference_model\": \"string\",\n      \"eval_config\": {},\n      \"error_message\": \"string\",\n      \"logs\": \"string\",\n      \"model_name\": \"string\",\n      \"dataset\": \"string\",\n      \"framework\": \"string\",\n      \"task_type\": \"string\",\n      \"description\": \"string\",\n      \"avg_score\": 4976.0239943576435,\n      \"min_score\": 8965.108474380804,\n      \"max_score\": 6828.295771847095,\n      \"started_at\": \"2022-04-13T04:14:22.606Z\",\n      \"completed_at\": \"1994-12-05T07:25:38.430Z\",\n      \"metadata\": {},\n      \"metrics\": {},\n      \"viewer_url\": \"string\",\n      \"is_public\": false,\n      \"show_on_leaderboard\": false,\n      \"statistics\": {},\n      \"chartData\": {},\n      \"rubricInfo\": {},\n      \"detailedMetrics\": {},\n      \"rewardStats\": {}\n    },\n    {\n      \"evaluation_id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"TIMEOUT\",\n      \"eval_type\": \"training\",\n      \"total_samples\": 6526,\n      \"created_at\": \"1957-06-08T15:35:17.054Z\",\n      \"updated_at\": \"1977-11-03T03:45:15.942Z\",\n      \"user_id\": \"string\",\n      \"team_id\": \"string\",\n      \"environment_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"environment_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"suite_id\": \"string\",\n      \"run_id\": \"string\",\n      \"version_id\": \"string\",\n      \"is_hosted\": false,\n      \"sandbox_id\": \"string\",\n      \"inference_model\": \"string\",\n      \"eval_config\": {},\n      \"error_message\": \"string\",\n      \"logs\": \"string\",\n      \"model_name\": \"string\",\n      \"dataset\": \"string\",\n      \"framework\": \"string\",\n      \"task_type\": \"string\",\n      \"description\": \"string\",\n      \"avg_score\": 5056.995366453702,\n      \"min_score\": 4780.033845864295,\n      \"max_score\": 5589.900177776605,\n      \"started_at\": \"1988-07-27T17:34:02.902Z\",\n      \"completed_at\": \"2003-02-23T10:50:18.206Z\",\n      \"metadata\": {},\n      \"metrics\": {},\n      \"viewer_url\": \"string\",\n      \"is_public\": false,\n      \"show_on_leaderboard\": false,\n      \"statistics\": {},\n      \"chartData\": {},\n      \"rubricInfo\": {},\n      \"detailedMetrics\": {},\n      \"rewardStats\": {}\n    }\n  ],\n  \"total\": 9657,\n  \"skip\": 9254,\n  \"limit\": 5023\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbfecbb9-c673-4539-a5b8-09943ee6923c",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "team_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "suite_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58f6264c-edfe-428e-aeca-6352011a58cd",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "team_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "suite_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f4af291-0b12-4e55-b5dc-cb63642d50dd",
+          "name": "Bulk Delete Evaluations",
+          "request": {
+            "name": "Bulk Delete Evaluations",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "evaluations",
+                "bulk-delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"evaluation_ids\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "70abdafe-2fce-4f3f-8b6c-f7f3d57b64e3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluation_ids\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success_count\": 3416,\n  \"failure_count\": 3377,\n  \"successful_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"failed_ids\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a2bfcb4-e267-49e5-a863-db0a70cb7861",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluation_ids\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8599a6d9-6f31-4408-b98f-ea5febc3132a",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluation_ids\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "febc0e1b-93ed-4391-aa64-943e9ee4a0d0",
+          "name": "Update Evaluation",
+          "request": {
+            "name": "Update Evaluation",
+            "description": {
+              "content": "Update an existing evaluation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "evaluations",
+                ":evaluation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "evaluation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": \"<object>\",\n  \"metrics\": \"<object>\",\n  \"model_name\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"framework\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": \"<integer>\",\n    \"rollouts_per_example\": \"<integer>\",\n    \"env_args\": \"<object>\",\n    \"allow_sandbox_access\": \"<boolean>\",\n    \"allow_instances_access\": \"<boolean>\",\n    \"allow_tunnel_access\": \"<boolean>\",\n    \"timeout_minutes\": \"<integer>\",\n    \"custom_secrets\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"sampling_args\": \"<object>\",\n    \"max_concurrent\": \"<integer>\",\n    \"max_retries\": \"<integer>\",\n    \"state_columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"independent_scoring\": \"<boolean>\",\n    \"verbose\": \"<boolean>\",\n    \"headers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_env_kwargs\": \"<object>\",\n    \"api_client_type\": \"<string>\",\n    \"api_base_url\": \"<string>\",\n    \"api_key_var\": \"<string>\"\n  },\n  \"is_public\": \"<boolean>\",\n  \"show_on_leaderboard\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "57a8cb1c-b259-4d85-8914-9066a60ea0c6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": \"<object>\",\n  \"metrics\": \"<object>\",\n  \"model_name\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"framework\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": 8529270051618301,\n    \"rollouts_per_example\": 2047,\n    \"env_args\": {},\n    \"allow_sandbox_access\": true,\n    \"allow_instances_access\": true,\n    \"allow_tunnel_access\": false,\n    \"timeout_minutes\": 693,\n    \"custom_secrets\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": 7882569275699650,\n    \"max_retries\": 6297897120178427,\n    \"state_columns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"independent_scoring\": false,\n    \"verbose\": true,\n    \"headers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"string\",\n    \"api_base_url\": \"string\",\n    \"api_key_var\": \"string\"\n  },\n  \"is_public\": \"<boolean>\",\n  \"show_on_leaderboard\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evaluation_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"PROCESSING\",\n  \"updated_at\": \"1960-02-16T05:28:16.066Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "740760b1-484e-48b4-af5e-e8d18c0da150",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": \"<object>\",\n  \"metrics\": \"<object>\",\n  \"model_name\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"framework\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": 8529270051618301,\n    \"rollouts_per_example\": 2047,\n    \"env_args\": {},\n    \"allow_sandbox_access\": true,\n    \"allow_instances_access\": true,\n    \"allow_tunnel_access\": false,\n    \"timeout_minutes\": 693,\n    \"custom_secrets\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": 7882569275699650,\n    \"max_retries\": 6297897120178427,\n    \"state_columns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"independent_scoring\": false,\n    \"verbose\": true,\n    \"headers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"string\",\n    \"api_base_url\": \"string\",\n    \"api_key_var\": \"string\"\n  },\n  \"is_public\": \"<boolean>\",\n  \"show_on_leaderboard\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "918debfb-a967-4956-9a81-8fa2ad500588",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": \"<object>\",\n  \"metrics\": \"<object>\",\n  \"model_name\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"framework\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": 8529270051618301,\n    \"rollouts_per_example\": 2047,\n    \"env_args\": {},\n    \"allow_sandbox_access\": true,\n    \"allow_instances_access\": true,\n    \"allow_tunnel_access\": false,\n    \"timeout_minutes\": 693,\n    \"custom_secrets\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": 7882569275699650,\n    \"max_retries\": 6297897120178427,\n    \"state_columns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"independent_scoring\": false,\n    \"verbose\": true,\n    \"headers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"string\",\n    \"api_base_url\": \"string\",\n    \"api_key_var\": \"string\"\n  },\n  \"is_public\": \"<boolean>\",\n  \"show_on_leaderboard\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7bce76b6-3552-4cb0-87e5-3d2466c3cd94",
+          "name": "Get Evaluation",
+          "request": {
+            "name": "Get Evaluation",
+            "description": {
+              "content": "Get detailed information about a specific evaluation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "evaluations",
+                ":evaluation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "evaluation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "44a546c0-021f-407b-b4f1-6bdcaf5b074a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evaluation_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"PENDING\",\n  \"eval_type\": \"environment\",\n  \"total_samples\": 3957,\n  \"created_at\": \"2011-05-27T08:39:40.390Z\",\n  \"updated_at\": \"2026-03-22T21:51:11.124Z\",\n  \"user_id\": \"string\",\n  \"team_id\": \"string\",\n  \"environment_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"environment_names\": [\n    \"string\",\n    \"string\"\n  ],\n  \"suite_id\": \"string\",\n  \"run_id\": \"string\",\n  \"version_id\": \"string\",\n  \"is_hosted\": false,\n  \"sandbox_id\": \"string\",\n  \"inference_model\": \"string\",\n  \"eval_config\": {},\n  \"error_message\": \"string\",\n  \"logs\": \"string\",\n  \"model_name\": \"string\",\n  \"dataset\": \"string\",\n  \"framework\": \"string\",\n  \"task_type\": \"string\",\n  \"description\": \"string\",\n  \"avg_score\": 2640.5443548348594,\n  \"min_score\": 7091.510599712777,\n  \"max_score\": 4790.0822450635,\n  \"started_at\": \"2014-05-09T12:00:42.206Z\",\n  \"completed_at\": \"1974-05-21T07:14:01.392Z\",\n  \"metadata\": {},\n  \"metrics\": {},\n  \"viewer_url\": \"string\",\n  \"is_public\": false,\n  \"show_on_leaderboard\": false,\n  \"statistics\": {},\n  \"chartData\": {},\n  \"rubricInfo\": {},\n  \"detailedMetrics\": {},\n  \"rewardStats\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c11dfb2-971e-4fb1-8c36-06c6e3470b49",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "48e16f66-8bbc-42bd-bb49-7ab3a9e8d6b1",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c962bb40-0fea-4b6a-84ed-cbce00b356ab",
+          "name": "Delete Evaluation",
+          "request": {
+            "name": "Delete Evaluation",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "evaluations",
+                ":evaluation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "evaluation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9ce4cdfe-bd46-48e0-a196-dbe850bbd81b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "192cd2af-0d4f-4644-b5e5-a08f42c3cca4",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d74e9ea3-4907-4796-b965-7190aeab48a4",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1850452-2e1f-4f16-b622-80da7c775e47",
+          "name": "Finalize Evaluation",
+          "request": {
+            "name": "Finalize Evaluation",
+            "description": {
+              "content": "Mark an evaluation as complete and compute final statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "evaluations",
+                ":evaluation_id",
+                "finalize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "evaluation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metrics\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a53cb794-5531-437b-ac7f-4cdfdc6fed41",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id",
+                    "finalize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metrics\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evaluation_id\": \"string\",\n  \"status\": \"RUNNING\",\n  \"message\": \"string\",\n  \"total_samples\": 765,\n  \"avg_score\": 7693.569678774811,\n  \"min_score\": 9448.140740734747,\n  \"max_score\": 303.71111925977965,\n  \"viewer_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87f25cce-5af8-4afb-a995-fc591b20b73a",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id",
+                    "finalize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metrics\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05718e3c-e8ac-447a-a272-c688b0ce44ee",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id",
+                    "finalize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metrics\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50302e6c-7297-4936-8f85-8d27482367d2",
+          "name": "Push Samples",
+          "request": {
+            "name": "Push Samples",
+            "description": {
+              "content": "Push evaluation samples\n\nThis endpoint can be called multiple times to stream samples as they're generated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "evaluations",
+                ":evaluation_id",
+                "samples"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "evaluation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"samples\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2f099bfa-9a2f-4d99-984a-c69b24293cbd",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id",
+                    "samples"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"samples\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evaluation_id\": \"string\",\n  \"samples_pushed\": 3571,\n  \"status\": \"COMPLETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8eebc979-3d30-4277-8672-bb7b6f7061ac",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id",
+                    "samples"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"samples\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ea71d242-4c07-40ad-b3fc-d36757be25ee",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id",
+                    "samples"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"samples\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5030decc-b8e3-4b5d-ba06-3b95e45d65e9",
+          "name": "Get Samples",
+          "request": {
+            "name": "Get Samples",
+            "description": {
+              "content": "Get samples for a specific evaluation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "evaluations",
+                ":evaluation_id",
+                "samples"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "evaluation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "03f6b326-c264-4df5-b98f-13d9148e5b7a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id",
+                    "samples"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evaluation_id\": \"string\",\n  \"samples\": [],\n  \"total\": 8720,\n  \"page\": 7270,\n  \"limit\": 7722,\n  \"total_pages\": 8253\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "464021a4-b66d-4607-a069-bf02a064d2fe",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id",
+                    "samples"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e594532e-8188-48aa-b7ef-4bd2aba3ad9c",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "evaluations",
+                    ":evaluation_id",
+                    "samples"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "41607468-b9d7-4df9-8afa-50c2db9462f8",
+      "name": "hosted-evaluations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b4a95331-8cc3-4796-b68d-3bef15497e90",
+          "name": "Create Hosted Evaluation",
+          "request": {
+            "name": "Create Hosted Evaluation",
+            "description": {
+              "content": "Create and start a hosted evaluation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "hosted-evaluations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"environment_ids\": [\n    \"<string>\"\n  ],\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": \"<integer>\",\n    \"rollouts_per_example\": \"<integer>\",\n    \"env_args\": \"<object>\",\n    \"allow_sandbox_access\": \"<boolean>\",\n    \"allow_instances_access\": \"<boolean>\",\n    \"allow_tunnel_access\": \"<boolean>\",\n    \"timeout_minutes\": \"<integer>\",\n    \"custom_secrets\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"sampling_args\": \"<object>\",\n    \"max_concurrent\": \"<integer>\",\n    \"max_retries\": \"<integer>\",\n    \"state_columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"independent_scoring\": \"<boolean>\",\n    \"verbose\": \"<boolean>\",\n    \"headers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_env_kwargs\": \"<object>\",\n    \"api_client_type\": \"<string>\",\n    \"api_base_url\": \"<string>\",\n    \"api_key_var\": \"<string>\"\n  },\n  \"team_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa33a181-d64c-4370-911c-b5acb02389fa",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environment_ids\": [\n    \"<string>\"\n  ],\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": 3836156373986030,\n    \"rollouts_per_example\": 1356,\n    \"env_args\": {},\n    \"allow_sandbox_access\": true,\n    \"allow_instances_access\": true,\n    \"allow_tunnel_access\": false,\n    \"timeout_minutes\": 905,\n    \"custom_secrets\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": 4388590506519708,\n    \"max_retries\": 5862957167684963,\n    \"state_columns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"independent_scoring\": true,\n    \"verbose\": false,\n    \"headers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"string\",\n    \"api_base_url\": \"string\",\n    \"api_key_var\": \"string\"\n  },\n  \"team_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evaluation_id\": \"string\",\n  \"status\": \"string\",\n  \"sandbox_id\": \"string\",\n  \"evaluation_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43df975e-4b2d-4ff2-807e-bb14489abb59",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environment_ids\": [\n    \"<string>\"\n  ],\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": 3836156373986030,\n    \"rollouts_per_example\": 1356,\n    \"env_args\": {},\n    \"allow_sandbox_access\": true,\n    \"allow_instances_access\": true,\n    \"allow_tunnel_access\": false,\n    \"timeout_minutes\": 905,\n    \"custom_secrets\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": 4388590506519708,\n    \"max_retries\": 5862957167684963,\n    \"state_columns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"independent_scoring\": true,\n    \"verbose\": false,\n    \"headers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"string\",\n    \"api_base_url\": \"string\",\n    \"api_key_var\": \"string\"\n  },\n  \"team_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1049b4bd-4d7b-43ef-981b-9f5a59e8ed67",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environment_ids\": [\n    \"<string>\"\n  ],\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": 3836156373986030,\n    \"rollouts_per_example\": 1356,\n    \"env_args\": {},\n    \"allow_sandbox_access\": true,\n    \"allow_instances_access\": true,\n    \"allow_tunnel_access\": false,\n    \"timeout_minutes\": 905,\n    \"custom_secrets\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": 4388590506519708,\n    \"max_retries\": 5862957167684963,\n    \"state_columns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"independent_scoring\": true,\n    \"verbose\": false,\n    \"headers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"string\",\n    \"api_base_url\": \"string\",\n    \"api_key_var\": \"string\"\n  },\n  \"team_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b0718bc-3c85-4639-9f09-3e2daa870a26",
+          "name": "Get Inference Models",
+          "request": {
+            "name": "Get Inference Models",
+            "description": {
+              "content": "Get available models from Prime Inference API for hosted evaluations",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "hosted-evaluations",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ff8eba12-1b00-46e6-8319-8392d80d699d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"models\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63b33b90-48ba-4441-a037-d462e204a961",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9364b0e5-49ec-4337-bc58-8db7f8347cba",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0bc9e49-ba09-4a8e-97a7-b9acd23b2303",
+          "name": "Cancel Hosted Evaluation Route",
+          "request": {
+            "name": "Cancel Hosted Evaluation Route",
+            "description": {
+              "content": "Cancel a running hosted evaluation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "hosted-evaluations",
+                ":evaluation_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "evaluation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a416928b-be79-41e3-a17d-79bb20fbde00",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations",
+                    ":evaluation_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"evaluation_id\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3085c70-45db-42c0-a79c-8b9c283ae1cc",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations",
+                    ":evaluation_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0120fd79-0b58-4cd5-8f53-442cda9ff672",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations",
+                    ":evaluation_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e96c14f2-8de9-4054-a437-0fb4a5f1cb8b",
+          "name": "Get Hosted Evaluation Logs Route",
+          "request": {
+            "name": "Get Hosted Evaluation Logs Route",
+            "description": {
+              "content": "Get real-time logs from the sandbox running a hosted evaluation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "hosted-evaluations",
+                ":evaluation_id",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "evaluation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3bf6a9b3-0165-4178-9baf-1d63febd16ae",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations",
+                    ":evaluation_id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logs\": \"string\",\n  \"evaluation_id\": \"string\",\n  \"sandbox_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b574a29-7a56-4a8c-aad7-b80ee97d577c",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations",
+                    ":evaluation_id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de03955e-ece3-487e-9180-a5a6105baf27",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "hosted-evaluations",
+                    ":evaluation_id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "evaluation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b76a09df-b9e1-49d7-bb79-1f37df16e3a2",
+      "name": "Feedback",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6140544a-4549-4a6c-897d-bb28498b8a05",
+          "name": "Submit Feedback",
+          "request": {
+            "name": "Submit Feedback",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "feedback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"<string>\",\n  \"category\": \"<string>\",\n  \"cli_version\": \"<string>\",\n  \"run_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8edf0197-a963-4445-ac66-9d922aeb5b54",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"category\": \"general\",\n  \"cli_version\": \"<string>\",\n  \"run_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "424c1b3e-e7a0-4dc3-b762-4a83a73b56db",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"category\": \"general\",\n  \"cli_version\": \"<string>\",\n  \"run_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3f390f9-72af-48d0-a7c5-84e2553e1dfd",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"category\": \"general\",\n  \"cli_version\": \"<string>\",\n  \"run_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.primeintellect.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3c0e576b-58ab-441e-ab6e-3f3aa7809b3c",
+    "name": "Prime Intellect Evaluations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Run and manage model evaluations against the Environments Hub. Includes both client-driven evaluations (push samples, finalize, retrieve) and hosted evaluations executed by Prime Intellect with logs, cancellation, and selectable inference models.\n\nContact Support:\n Name: Prime Intellect",
+      "type": "text/plain"
+    }
+  }
+}

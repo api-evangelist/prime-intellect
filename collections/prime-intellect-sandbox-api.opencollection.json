@@ -1,0 +1,486 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Sandbox API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sandbox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Sandboxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by team ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user ID. When set to another user's ID, the caller must be a team admin of the provided team_id."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status"
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Filter to exclude terminated sandboxes when True"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by labels (sandboxes must have ALL specified labels)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List sandboxes for user or team"
+        },
+        {
+          "info": {
+            "name": "Create Sandbox Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new code sandbox"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Sandboxes Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Bulk delete multiple sandboxes by IDs or labels"
+        },
+        {
+          "info": {
+            "name": "List All Exposed Ports Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/expose/all",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all exposed ports across all sandboxes for the current user"
+        },
+        {
+          "info": {
+            "name": "Get Sandbox Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/:sandbox_id",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a specific sandbox by ID"
+        },
+        {
+          "info": {
+            "name": "Delete Sandbox Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/:sandbox_id",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a sandbox"
+        },
+        {
+          "info": {
+            "name": "Get Sandbox Auth Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/:sandbox_id/auth",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a token for direct sandbox access."
+        },
+        {
+          "info": {
+            "name": "Get Sandbox Error Context Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/:sandbox_id/error-context",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get error context for a sandbox (optimized for SDK error handling flows)"
+        },
+        {
+          "info": {
+            "name": "List Exposed Ports Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/:sandbox_id/expose",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all exposed ports for a sandbox"
+        },
+        {
+          "info": {
+            "name": "Expose Port Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/:sandbox_id/expose",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Expose a port from a sandbox"
+        },
+        {
+          "info": {
+            "name": "Unexpose Port Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/:sandbox_id/expose/:exposure_id",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "exposure_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unexpose a previously exposed port"
+        },
+        {
+          "info": {
+            "name": "Get Sandbox Logs Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/:sandbox_id/logs",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get sandbox logs"
+        },
+        {
+          "info": {
+            "name": "Create Ssh Session Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/:sandbox_id/ssh-session",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create an SSH session using the SSH sidecar (no sshd required in the sandbox image)."
+        },
+        {
+          "info": {
+            "name": "Close Ssh Session Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/sandbox/:sandbox_id/ssh-session/:session_id",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Close an SSH session (removes the TCP exposure)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tunnel",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tunnels Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/tunnel",
+            "params": [
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all active tunnels for the current user."
+        },
+        {
+          "info": {
+            "name": "Create Tunnel Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/tunnel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new tunnel for exposing a local service."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Tunnels Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/tunnel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Bulk delete multiple tunnels by IDs."
+        },
+        {
+          "info": {
+            "name": "Get Tunnel Status Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/tunnel/:tunnel_id",
+            "params": [
+              {
+                "name": "tunnel_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get status of a specific tunnel."
+        },
+        {
+          "info": {
+            "name": "Delete Tunnel Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/tunnel/:tunnel_id",
+            "params": [
+              {
+                "name": "tunnel_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a tunnel and disconnect any active clients."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
