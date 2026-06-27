@@ -207,13 +207,13 @@ common:
     url: https://docs.primeintellect.ai/api-reference/api-keys
   - type: CLI
     url: https://docs.primeintellect.ai/cli-reference/introduction
-  - type: SDK
+  - type: SDKs
     url: https://github.com/PrimeIntellect-ai/prime
     name: Prime CLI & Python SDK
-  - type: SDK
+  - type: SDKs
     url: https://pypi.org/project/prime/
     name: prime (PyPI)
-  - type: SDK
+  - type: SDKs
     url: https://pypi.org/project/prime-sandboxes/
     name: prime-sandboxes (PyPI)
   - type: OpenSource
