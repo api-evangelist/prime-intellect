@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/prime-intellect-compute-api-openapi.yml, openapi/prime-intellect-evaluations-api-openapi.yml,
+  openapi/prime-intellect-inference-api-openapi.yml, openapi/prime-intellect-platform-api-openapi.yml,
+  openapi/prime-intellect-sandbox-api-openapi.yml, openapi/prime-intellect-training-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: HTTPBearer
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/prime-intellect-compute-api-openapi.yml
+  - openapi/prime-intellect-evaluations-api-openapi.yml
+  - openapi/prime-intellect-inference-api-openapi.yml
+  - openapi/prime-intellect-platform-api-openapi.yml
+  - openapi/prime-intellect-sandbox-api-openapi.yml
+  - openapi/prime-intellect-training-api-openapi.yml

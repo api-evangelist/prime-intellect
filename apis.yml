@@ -193,6 +193,12 @@ specificationVersion: '0.20'
 created: '2026-05-25'
 modified: '2026-05-25'
 common:
+  - type: VulnerabilityDisclosure
+    url: security/prime-intellect-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/prime-intellect-domain-security.yml
+  - type: Authentication
+    url: authentication/prime-intellect-authentication.yml
   - type: Website
     url: https://www.primeintellect.ai
   - type: Documentation
