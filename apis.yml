@@ -193,6 +193,8 @@ specificationVersion: '0.20'
 created: '2026-05-25'
 modified: '2026-05-25'
 common:
+  - type: AgenticAccess
+    url: agentic-access/prime-intellect-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/prime-intellect-vulnerability-disclosure.yml
   - type: DomainSecurity
