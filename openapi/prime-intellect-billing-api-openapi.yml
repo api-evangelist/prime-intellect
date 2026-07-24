@@ -1,0 +1,331 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Compute admin-clusters Billing API
+  version: 0.1.0
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: Billing
+paths:
+  /api/v1/billing/runs/{run_id}/usage:
+    get:
+      tags:
+      - Billing
+      summary: Token usage and cost for a single RFT run
+      description: 'Return the running token + cost totals for one RFT run.
+
+
+        Mirrors the per-row training data shown on the billing page (Training
+
+        tokens, Inference input/output tokens, price per million tokens, and
+
+        total cost) so an agent can poll this endpoint to monitor a live run.'
+      operationId: get_run_usage_api_v1_billing_runs__run_id__usage_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunUsageResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/billing/wallet:
+    get:
+      tags:
+      - Billing
+      summary: Wallet balance + most recent billing rows
+      description: 'Return the wallet''s current balance and most recent billing rows.
+
+
+        All resource types are included (compute, training, inference, disks,
+
+        sandboxes, images) — same source-of-truth `Billing` table the
+
+        dashboard''s Billing History tab reads. Sorted by `lastBilledAt` desc.'
+      operationId: get_wallet_api_v1_billing_wallet_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Number of recent billing rows to include (max 100).
+          default: 20
+          title: Limit
+        description: Number of recent billing rows to include (max 100).
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Skip this many rows before returning. Lets callers page.
+          default: 0
+          title: Offset
+        description: Skip this many rows before returning. Lets callers page.
+      - name: teamId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If provided, return the team's wallet (requires membership).
+          title: Teamid
+        description: If provided, return the team's wallet (requires membership).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    WalletResponse:
+      properties:
+        wallet_id:
+          type: string
+          title: Wallet Id
+        team_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Team Id
+        balance_usd:
+          type: number
+          title: Balance Usd
+          description: Current balance in USD
+        currency:
+          type: string
+          title: Currency
+        total_billings:
+          type: integer
+          title: Total Billings
+          description: Total billing rows on the wallet (across all pages)
+        recent_billings:
+          items:
+            $ref: '#/components/schemas/BillingEntry'
+          type: array
+          title: Recent Billings
+      type: object
+      required:
+      - wallet_id
+      - balance_usd
+      - currency
+      - total_billings
+      - recent_billings
+      title: WalletResponse
+      description: 'Snapshot of a wallet''s balance + most recent billing rows.
+
+
+        Drives `prime wallet`. One call returns everything an agent needs to
+
+        audit the billing flow against a known training run.'
+    RunUsageResponse:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        run_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Name
+        base_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Base Model
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+        training:
+          $ref: '#/components/schemas/RunUsageBreakdown'
+        inference:
+          $ref: '#/components/schemas/RunUsageBreakdown'
+        total_tokens:
+          type: integer
+          title: Total Tokens
+        total_cost_usd:
+          type: number
+          title: Total Cost Usd
+        pricing:
+          $ref: '#/components/schemas/RunPricing'
+        record_count:
+          type: integer
+          title: Record Count
+          default: 0
+      type: object
+      required:
+      - run_id
+      - training
+      - inference
+      - total_tokens
+      - total_cost_usd
+      - pricing
+      title: RunUsageResponse
+      description: Per-run usage totals — drives `prime train usage <run_id>`.
+    RunPricing:
+      properties:
+        training_per_mtok:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Training Per Mtok
+        inference_input_per_mtok:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Inference Input Per Mtok
+        inference_output_per_mtok:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Inference Output Per Mtok
+      type: object
+      title: RunPricing
+      description: Snapshotted per-million-token pricing used to bill the run.
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    RunUsageBreakdown:
+      properties:
+        tokens:
+          type: integer
+          title: Tokens
+          description: Total tokens recorded for this usage type
+          default: 0
+        input_tokens:
+          type: integer
+          title: Input Tokens
+          description: Total input tokens (only populated for INFERENCE)
+          default: 0
+        output_tokens:
+          type: integer
+          title: Output Tokens
+          description: Total output tokens (only populated for INFERENCE)
+          default: 0
+        cost_usd:
+          type: number
+          title: Cost Usd
+          description: Total cost charged for this usage type
+          default: 0.0
+      type: object
+      title: RunUsageBreakdown
+      description: Token + cost totals for a single usage type within a run.
+    BillingEntry:
+      properties:
+        id:
+          type: string
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        last_billed_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Billed At
+        amount_usd:
+          type: number
+          title: Amount Usd
+        currency:
+          type: string
+          title: Currency
+        resource_type:
+          type: string
+          title: Resource Type
+        resource_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Resource Id
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      - amount_usd
+      - currency
+      - resource_type
+      title: BillingEntry
+      description: 'A single row from the Billing table, with the resource derived from
+
+        whichever foreign-key column is non-null.
+
+
+        `resource_type` mirrors the strings the dashboard''s billing page filters
+
+        by (`compute`, `training`, `inference`, `disks`, `sandboxes`, `images`).
+
+        `resource_id` is the matching FK value, so callers can drill back into
+
+        the run / pod / disk / etc. that produced the charge.'
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

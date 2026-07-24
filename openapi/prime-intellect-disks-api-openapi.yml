@@ -1,0 +1,457 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Compute admin-clusters Disks API
+  version: 0.1.0
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: Disks
+paths:
+  /api/v1/disks/:
+    get:
+      tags:
+      - Disks
+      summary: List Disks
+      operationId: list_disks_api_v1_disks__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_List_APIDiskConfig__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - Disks
+      summary: Create Disk
+      operationId: create_disk_api_v1_disks__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_create_disk_api_v1_disks__post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIDiskConfig'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/disks/{disk_id}:
+    get:
+      tags:
+      - Disks
+      summary: Get Disk
+      operationId: get_disk_api_v1_disks__disk_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: disk_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Disk Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIDiskConfig'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      tags:
+      - Disks
+      summary: Update Disk
+      operationId: update_disk_api_v1_disks__disk_id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: disk_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Disk Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIDiskUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - Disks
+      summary: Delete Disk
+      operationId: delete_disk_api_v1_disks__disk_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: disk_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Disk Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    APIDiskConfig:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier for the disk, generated as a UUID.
+        name:
+          type: string
+          maxLength: 255
+          title: Name
+          description: Name of the disk.
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the disk was created.
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+          description: Timestamp when the disk was last updated.
+        terminatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Terminatedat
+          description: Timestamp when the disk was terminated.
+        status:
+          $ref: '#/components/schemas/DiskStatusEnum'
+          description: Current status of the disk.
+          default: PROVISIONING
+        providerType:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+          description: Type of provider associated with the disk.
+        size:
+          type: integer
+          title: Size
+          description: Size of the disk in GB.
+          default: 0
+        info:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Info
+          description: JSON field for additional information about the disk.
+        priceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Pricehr
+          description: Hourly price for using the disk.
+        stoppedPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Stoppedpricehr
+          description: Hourly price when the disk is stopped.
+        provisioningPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Provisioningpricehr
+          description: Hourly price during provisioning.
+          default: 0.0
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+          description: ID of the user associated with this disk.
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: ID of the team owning this disk.
+        walletId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Walletid
+          description: ID of the wallet associated with this disk.
+        pods:
+          items:
+            type: string
+          type: array
+          title: Pods
+          description: Pods attached to the disk.
+          default: []
+        clusters:
+          items:
+            type: string
+          type: array
+          title: Clusters
+          description: Clusters attached to the disk.
+          default: []
+      type: object
+      required:
+      - name
+      - providerType
+      - userId
+      title: APIDiskConfig
+    DiskStatusEnum:
+      type: string
+      enum:
+      - PROVISIONING
+      - PENDING
+      - ACTIVE
+      - STOPPED
+      - ERROR
+      - DELETING
+      - UNKNOWN
+      - TERMINATED
+      title: DiskStatusEnum
+    GenericPaginationResponse_List_APIDiskConfig__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/APIDiskConfig'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[APIDiskConfig]]
+    TeamConfig:
+      properties:
+        teamId:
+          type: string
+          title: Teamid
+      type: object
+      required:
+      - teamId
+      title: TeamConfig
+    APIDiskUpdateRequest:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: New human-friendly name for the disk.
+      type: object
+      required:
+      - name
+      title: APIDiskUpdateRequest
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    Body_create_disk_api_v1_disks__post:
+      properties:
+        disk:
+          $ref: '#/components/schemas/APIDiskCreateRequest'
+        provider:
+          $ref: '#/components/schemas/ProviderConfig'
+        team:
+          anyOf:
+          - $ref: '#/components/schemas/TeamConfig'
+          - type: 'null'
+      type: object
+      required:
+      - disk
+      - provider
+      title: Body_create_disk_api_v1_disks__post
+    APIDiskCreateRequest:
+      properties:
+        size:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Size
+          description: Size of the disk in GB.
+        name:
+          type: string
+          maxLength: 255
+          title: Name
+          description: Optional name for the disk.
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+          description: Location country.
+        cloudId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cloudid
+          description: Cloud ID.
+        dataCenterId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Datacenterid
+          description: Data center ID.
+      additionalProperties: false
+      type: object
+      required:
+      - size
+      title: APIDiskCreateRequest
+    ProviderTypeEnum:
+      type: string
+      enum:
+      - runpod
+      - fluidstack
+      - lambdalabs
+      - hyperstack
+      - oblivus
+      - cudocompute
+      - scaleway
+      - tensordock
+      - datacrunch
+      - latitude
+      - crusoecloud
+      - massedcompute
+      - akash
+      - primeintellect
+      - primecompute
+      - dc_impala
+      - dc_kudu
+      - dc_roan
+      - nebius
+      - dc_eland
+      - dc_wildebeest
+      - vultr
+      - dc_gnu
+      - denvr
+      title: ProviderTypeEnum
+    ProviderConfig:
+      properties:
+        type:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+      type: object
+      required:
+      - type
+      title: ProviderConfig
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

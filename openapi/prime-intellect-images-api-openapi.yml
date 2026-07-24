@@ -1,0 +1,795 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Compute admin-clusters Images API
+  version: 0.1.0
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: Images
+paths:
+  /api/v1/images:
+    get:
+      tags:
+      - Images
+      summary: List User Images
+      description: 'List images and builds for the current user, scoped by team context. Returns personal images by default, or team images if teamId is provided.
+
+
+        Pagination note: `limit`, `offset`, and `totalCount` count logical images
+
+        (unique `owner/imageName:imageTag`). A single image may produce multiple
+
+        `data[]` rows (one per artifact type plus any active builds), so
+
+        `len(data)` can exceed `limit` and `totalCount` reflects images, not rows.'
+      operationId: list_user_images_api_v1_images_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: teamId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by team ID. If provided, returns only that team's images. If not provided, returns only personal images.
+          title: Teamid
+        description: Filter by team ID. If provided, returns only that team's images. If not provided, returns only personal images.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_List_ImageResponse__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          300 requests per 60 seconds per IP and token.'
+  /api/v1/images/build:
+    post:
+      tags:
+      - Images
+      summary: Initiate Image Build
+      description: 'Initiate an image build process.
+
+
+        Returns a presigned URL to upload the build context (tar.gz file).
+
+        After uploading, call /images/build/{build_id}/start to begin the build.'
+      operationId: initiate_image_build_api_v1_images_build_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildImageRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildImageResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+      x-mint:
+        content: '## Rate Limit
+
+
+          150 requests per 60 seconds per IP and token.'
+  /api/v1/images/build/{build_id}:
+    get:
+      tags:
+      - Images
+      summary: Get Build Status
+      description: Get the status of an image build.
+      operationId: get_build_status_api_v1_images_build__build_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: build_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Build Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildStatusResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/images/build/{build_id}/start:
+    post:
+      tags:
+      - Images
+      summary: Start Image Build
+      description: 'Start the image build process after uploading the build context.
+
+
+        This creates a sandbox with Docker-in-Docker to build and push the image.'
+      operationId: start_image_build_api_v1_images_build__build_id__start_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: build_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Build Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartBuildRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildStatusResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/images/builds:
+    get:
+      tags:
+      - Images
+      summary: List Image Builds
+      description: List all image builds for the current user.
+      operationId: list_image_builds_api_v1_images_builds_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_List_BuildStatusResponse__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/images/{image_name}/{image_tag}:
+    delete:
+      tags:
+      - Images
+      summary: Delete User Image
+      description: 'Delete a user image from the database and Google Artifact Registry.
+
+
+        For team images, only the image creator or team admins can delete.'
+      operationId: delete_user_image_api_v1_images__image_name___image_tag__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: image_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Image Name
+      - name: image_tag
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Image Tag
+      - name: teamId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Team ID if deleting a team image
+          title: Teamid
+        description: Team ID if deleting a team image
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteImageResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          100 requests per 60 seconds per IP and token.'
+  /api/v1/images/{image_name}/{image_tag}/visibility:
+    patch:
+      tags:
+      - Images
+      summary: Update Image Visibility
+      description: Publish or unpublish an image in the current personal or team context.
+      operationId: update_image_visibility_api_v1_images__image_name___image_tag__visibility_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: image_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Image Name
+      - name: image_tag
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Image Tag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateImageVisibilityRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateImageVisibilityResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          100 requests per 60 seconds per IP and token.'
+components:
+  schemas:
+    BuildImageRequest:
+      properties:
+        image_name:
+          type: string
+          title: Image Name
+          description: Image name (e.g., 'myapp')
+        image_tag:
+          type: string
+          title: Image Tag
+          description: Image tag (e.g., 'v1.0.0')
+        dockerfile_path:
+          type: string
+          title: Dockerfile Path
+          description: Path to Dockerfile within build context
+          default: Dockerfile
+        platform:
+          type: string
+          enum:
+          - linux/amd64
+          - linux/arm64
+          title: Platform
+          description: Target platform (linux/amd64 or linux/arm64)
+          default: linux/amd64
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Team ID if building image in team context
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityOverrideEnum'
+          description: Visibility override to apply when the build completes. INHERIT preserves existing tag visibility or defaults new tags to PRIVATE.
+          default: INHERIT
+      type: object
+      required:
+      - image_name
+      - image_tag
+      title: BuildImageRequest
+      description: Request model for building an image.
+    ImageVisibilityEnum:
+      type: string
+      enum:
+      - PRIVATE
+      - PUBLIC
+      title: ImageVisibilityEnum
+    BuildArtifactStatusResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Internal identifier for this artifact build row
+        artifactType:
+          $ref: '#/components/schemas/ImageBuildArtifactTypeEnum'
+          description: Artifact produced by this build row
+          default: CONTAINER_IMAGE
+        status:
+          $ref: '#/components/schemas/ImageBuildStatusEnum'
+          description: Current artifact status
+        fullImagePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fullimagepath
+          description: Output reference for this built artifact
+        errorMessage:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Errormessage
+          description: Error message if build failed
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the artifact row was created
+        startedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Startedat
+          description: Timestamp when the artifact row started
+        completedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Completedat
+          description: Timestamp when the artifact row completed
+      type: object
+      required:
+      - id
+      - status
+      - createdAt
+      title: BuildArtifactStatusResponse
+      description: Status for one artifact row within a build group.
+    BuildImageResponse:
+      properties:
+        build_id:
+          type: string
+          title: Build Id
+          description: Build ID for tracking
+        upload_url:
+          type: string
+          title: Upload Url
+          description: Presigned URL to upload build context (tar.gz)
+        expires_in:
+          type: integer
+          title: Expires In
+          description: URL validity in seconds
+        fullImagePath:
+          type: string
+          title: Fullimagepath
+          description: Full image path with user ID
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityEnum'
+          description: Effective visibility for the image when the build completes
+          default: PRIVATE
+      type: object
+      required:
+      - build_id
+      - upload_url
+      - expires_in
+      - fullImagePath
+      title: BuildImageResponse
+      description: Response model for initiating image build.
+    StartBuildRequest:
+      properties:
+        context_uploaded:
+          type: boolean
+          title: Context Uploaded
+          description: Confirmation that context was uploaded
+          default: true
+      type: object
+      title: StartBuildRequest
+      description: Request model to start the build after upload.
+    UpdateImageVisibilityResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Whether the update succeeded
+        message:
+          type: string
+          title: Message
+          description: Status message describing the result
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityEnum'
+          description: Updated visibility
+        images:
+          items:
+            $ref: '#/components/schemas/ImageResponse'
+          type: array
+          title: Images
+          description: Updated artifact rows for the logical image
+      type: object
+      required:
+      - success
+      - message
+      - visibility
+      title: UpdateImageVisibilityResponse
+      description: Response model for an image visibility update.
+    GenericPaginationResponse_List_ImageResponse__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/ImageResponse'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[ImageResponse]]
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    ImageVisibilityOverrideEnum:
+      type: string
+      enum:
+      - INHERIT
+      - PRIVATE
+      - PUBLIC
+      title: ImageVisibilityOverrideEnum
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    GenericPaginationResponse_List_BuildStatusResponse__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/BuildStatusResponse'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[BuildStatusResponse]]
+    ImageResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier for the image
+        artifactType:
+          $ref: '#/components/schemas/ImageBuildArtifactTypeEnum'
+          description: Artifact produced by this image record
+          default: CONTAINER_IMAGE
+        imageName:
+          type: string
+          title: Imagename
+          description: Name of the image
+        imageTag:
+          type: string
+          title: Imagetag
+          description: Tag of the image
+        status:
+          $ref: '#/components/schemas/ImageBuildStatusEnum'
+          description: Current build status
+        fullImagePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fullimagepath
+          description: Stored output reference for the image artifact
+        errorMessage:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Errormessage
+          description: Error message if build failed
+        sizeBytes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sizebytes
+          description: Size of the image in bytes
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityEnum'
+          description: Whether this image can be used by other Prime users
+          default: PRIVATE
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the build was created
+        startedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Startedat
+          description: Timestamp when the build started
+        completedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Completedat
+          description: Timestamp when the build completed
+        pushedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Pushedat
+          description: Timestamp when the image artifact was registered
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Team ID if this is a team image
+        ownerType:
+          type: string
+          enum:
+          - personal
+          - team
+          title: Ownertype
+          description: Whether this is a personal or team image
+          default: personal
+        displayRef:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Displayref
+          description: User-friendly reference (team-{teamId}/name:tag or {userId}/name:tag)
+      type: object
+      required:
+      - id
+      - imageName
+      - imageTag
+      - status
+      - createdAt
+      title: ImageResponse
+      description: Response model for an image or build with status.
+    BuildStatusResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Public identifier for the logical build group
+        imageName:
+          type: string
+          title: Imagename
+          description: Name of the image being built
+        imageTag:
+          type: string
+          title: Imagetag
+          description: Tag of the image being built
+        status:
+          $ref: '#/components/schemas/ImageBuildStatusEnum'
+          description: Aggregated build-group status
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the build was created
+        startedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Startedat
+          description: Timestamp when the build started
+        completedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Completedat
+          description: Timestamp when the build completed
+        artifacts:
+          items:
+            $ref: '#/components/schemas/BuildArtifactStatusResponse'
+          type: array
+          title: Artifacts
+          description: Artifact rows associated with this build group
+      type: object
+      required:
+      - id
+      - imageName
+      - imageTag
+      - status
+      - createdAt
+      title: BuildStatusResponse
+      description: Response model for a logical build group.
+    UpdateImageVisibilityRequest:
+      properties:
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityEnum'
+          description: New image visibility (PUBLIC or PRIVATE)
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Team ID if updating a team image
+      type: object
+      required:
+      - visibility
+      title: UpdateImageVisibilityRequest
+      description: Request model for publishing or unpublishing an image.
+    ImageBuildStatusEnum:
+      type: string
+      enum:
+      - PENDING
+      - UPLOADING
+      - BUILDING
+      - COMPLETED
+      - FAILED
+      - CANCELLED
+      title: ImageBuildStatusEnum
+    DeleteImageResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Whether the deletion was successful
+        message:
+          type: string
+          title: Message
+          description: Status message describing the result
+      type: object
+      required:
+      - success
+      - message
+      title: DeleteImageResponse
+      description: Response model for deleting an image.
+    ImageBuildArtifactTypeEnum:
+      type: string
+      enum:
+      - CONTAINER_IMAGE
+      - VM_SANDBOX
+      title: ImageBuildArtifactTypeEnum
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

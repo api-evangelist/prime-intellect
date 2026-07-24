@@ -1,0 +1,171 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Compute admin-clusters admin-users API
+  version: 0.1.0
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: admin-users
+paths:
+  /api/admin/users/whoami:
+    get:
+      tags:
+      - admin-users
+      summary: Get Current User
+      description: 'Identity + envelope for the calling admin API key.
+
+
+        Intentionally bypasses ``require_admin_permission``: any valid, non-
+
+        expired, non-disabled admin API key whose owner is still ADMIN/MANAGER
+
+        can call this. Returning the resolved permission envelope is what makes
+
+        a freshly-minted scoped key able to discover what it can do.'
+      operationId: get_current_user_api_admin_users_whoami_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse_AdminWhoamiResponse_'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Insufficient permissions
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    AdminWhoamiResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        role:
+          $ref: '#/components/schemas/UserRoleEnum'
+          default: USER
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        name:
+          type: string
+          title: Name
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        email:
+          type: string
+          title: Email
+        image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image
+        emailVerified:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Emailverified
+        hasBetaAccess:
+          type: boolean
+          title: Hasbetaaccess
+          default: false
+        isBanned:
+          type: boolean
+          title: Isbanned
+          default: false
+        skipPrepay:
+          type: boolean
+          title: Skipprepay
+          default: false
+        blacklist:
+          items:
+            type: string
+          type: array
+          title: Blacklist
+          default: []
+        permissions:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+          title: Permissions
+          description: 'Resolved UserPermission envelope: each section maps to the list of actions this admin user can perform across the admin API surface.'
+        admin_role:
+          $ref: '#/components/schemas/UserRoleEnum'
+          description: Admin role assigned to this user
+      type: object
+      required:
+      - name
+      - email
+      - admin_role
+      title: AdminWhoamiResponse
+      description: Extended User response that includes admin permissions.
+    UserRoleEnum:
+      type: string
+      enum:
+      - ADMIN
+      - MANAGER
+      - USER
+      title: UserRoleEnum
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    GenericResponse_AdminWhoamiResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/AdminWhoamiResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[AdminWhoamiResponse]
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

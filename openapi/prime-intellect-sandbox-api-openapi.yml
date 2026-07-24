@@ -1,10 +1,8 @@
 openapi: 3.1.0
 info:
-  title: Prime Intellect Sandbox API
+  title: Prime Intellect Compute admin-clusters Sandbox API
   version: 0.1.0
-  description: Secure remote code execution environments for AI agents. Create and manage sandboxes, expose ports, open SSH
-    sessions, gather error context, and provision tunnels back to sandboxes. Targets agentic workflows requiring isolated
-    Python execution and tool sandboxing.
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
   contact:
     name: Prime Intellect
     url: https://www.primeintellect.ai
@@ -14,7 +12,6 @@ security:
 - HTTPBearer: []
 tags:
 - name: Sandbox
-- name: Tunnel
 paths:
   /api/v1/sandbox:
     post:
@@ -598,462 +595,59 @@ paths:
 
 
           20 requests per 60 seconds per IP and token per sandbox.'
-  /api/v1/tunnel:
-    post:
-      tags:
-      - Tunnel
-      summary: Create Tunnel Endpoint
-      description: Create a new tunnel for exposing a local service.
-      operationId: create_tunnel_endpoint_api_v1_tunnel_post
-      security:
-      - HTTPBearer: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateTunnelRequest'
-      responses:
-        '201':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TunnelResponse'
-        '401':
-          description: Authorization failed
-        '422':
-          description: Invalid request data
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-      x-mint:
-        content: '## Rate Limit
-
-
-          100 requests per 60 seconds per user.'
-    get:
-      tags:
-      - Tunnel
-      summary: List Tunnels Endpoint
-      description: List all active tunnels for the current user.
-      operationId: list_tunnels_endpoint_api_v1_tunnel_get
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: teamId
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Teamid
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TunnelListResponse'
-        '401':
-          description: Authorization failed
-        '422':
-          description: Invalid request data
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-      x-mint:
-        content: '## Rate Limit
-
-
-          300 requests per 60 seconds per user.'
-    delete:
-      tags:
-      - Tunnel
-      summary: Bulk Delete Tunnels Endpoint
-      description: Bulk delete multiple tunnels by IDs.
-      operationId: bulk_delete_tunnels_endpoint_api_v1_tunnel_delete
-      security:
-      - HTTPBearer: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BulkDeleteTunnelRequest'
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BulkDeleteTunnelResponse'
-        '401':
-          description: Authorization failed
-        '422':
-          description: Invalid request data
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-      x-mint:
-        content: '## Rate Limit
-
-
-          100 requests per 60 seconds per user.'
-  /api/v1/tunnel/{tunnel_id}:
-    get:
-      tags:
-      - Tunnel
-      summary: Get Tunnel Status Endpoint
-      description: Get status of a specific tunnel.
-      operationId: get_tunnel_status_endpoint_api_v1_tunnel__tunnel_id__get
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: tunnel_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Tunnel Id
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TunnelStatusResponse'
-        '401':
-          description: Authorization failed
-        '422':
-          description: Invalid request data
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-      x-mint:
-        content: '## Rate Limit
-
-
-          300 requests per 60 seconds per tunnel.'
-    delete:
-      tags:
-      - Tunnel
-      summary: Delete Tunnel Endpoint
-      description: Delete a tunnel and disconnect any active clients.
-      operationId: delete_tunnel_endpoint_api_v1_tunnel__tunnel_id__delete
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: tunnel_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Tunnel Id
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeleteTunnelResponse'
-        '401':
-          description: Authorization failed
-        '422':
-          description: Invalid request data
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-      x-mint:
-        content: '## Rate Limit
-
-
-          100 requests per 60 seconds per user.'
 components:
-  securitySchemes:
-    HTTPBearer:
-      type: http
-      scheme: bearer
   schemas:
-    SandboxLogsResponse:
+    SandboxStatus:
+      type: string
+      enum:
+      - PENDING
+      - PROVISIONING
+      - RUNNING
+      - PAUSED
+      - ERROR
+      - TERMINATED
+      title: SandboxStatus
+    BulkDeleteSandboxRequest:
       properties:
-        logs:
-          type: string
-          title: Logs
-      type: object
-      required:
-      - logs
-      title: SandboxLogsResponse
-    SSHSessionResponse:
-      properties:
-        session_id:
-          type: string
-          title: Session Id
-        exposure_id:
-          type: string
-          title: Exposure Id
-        sandbox_id:
-          type: string
-          title: Sandbox Id
-        host:
-          type: string
-          title: Host
-        port:
-          type: integer
-          title: Port
-        external_endpoint:
-          type: string
-          title: External Endpoint
-        expires_at:
-          type: string
-          format: date-time
-          title: Expires At
-        ttl_seconds:
-          type: integer
-          title: Ttl Seconds
-        gateway_url:
-          type: string
-          title: Gateway Url
-        user_ns:
-          type: string
-          title: User Ns
-        job_id:
-          type: string
-          title: Job Id
-        token:
-          type: string
-          title: Token
-      type: object
-      required:
-      - session_id
-      - exposure_id
-      - sandbox_id
-      - host
-      - port
-      - external_endpoint
-      - expires_at
-      - ttl_seconds
-      - gateway_url
-      - user_ns
-      - job_id
-      - token
-      title: SSHSessionResponse
-    CreateTunnelRequest:
-      properties:
-        name:
+        sandbox_ids:
           anyOf:
-          - type: string
-            maxLength: 64
-            minLength: 1
+          - items:
+              type: string
+            type: array
+            maxItems: 500
+            minItems: 1
           - type: 'null'
-          title: Name
-          description: Optional friendly name for the tunnel
-        local_port:
-          type: integer
-          maximum: 65535.0
-          minimum: 1.0
-          title: Local Port
-          description: Local port the tunnel will forward traffic to
-          default: 8765
-        teamId:
+          title: Sandbox Ids
+          description: List of sandbox IDs to delete
+        labels:
           anyOf:
-          - type: string
+          - items:
+              type: string
+            type: array
+            maxItems: 50
+            minItems: 1
           - type: 'null'
-          title: Teamid
-          description: Team ID for team tunnels
-      type: object
-      title: CreateTunnelRequest
-      description: Request to create a new tunnel.
-    TunnelStatusResponse:
-      properties:
-        tunnel_id:
-          type: string
-          title: Tunnel Id
-          description: Unique tunnel identifier
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-          description: Friendly name if set
-        status:
-          $ref: '#/components/schemas/TunnelStatus'
-          description: Current tunnel status
-        hostname:
-          type: string
-          title: Hostname
-          description: Tunnel hostname
-        url:
-          type: string
-          title: Url
-          description: Full HTTPS URL
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: Tunnel creation time
-        connected_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Connected At
-          description: When the client connected
-        expires_at:
-          type: string
-          format: date-time
-          title: Expires At
-          description: Token expiration time
-        user_id:
-          type: string
-          title: User Id
-          description: Owner user ID
+          title: Labels
+          description: List of labels - delete all sandboxes with ALL these labels
         team_id:
           anyOf:
           - type: string
           - type: 'null'
           title: Team Id
-          description: Team ID if applicable
-      type: object
-      required:
-      - tunnel_id
-      - status
-      - hostname
-      - url
-      - created_at
-      - expires_at
-      - user_id
-      title: TunnelStatusResponse
-      description: Response containing tunnel status information.
-    TunnelStatus:
-      type: string
-      enum:
-      - pending
-      - connected
-      - disconnected
-      - expired
-      title: TunnelStatus
-    ExposePortRequest:
-      properties:
-        port:
-          type: integer
-          maximum: 9000.0
-          minimum: 22.0
-          title: Port
-          description: Port number to expose (22-9000)
-        name:
+          description: Scope deletion to sandboxes in this team. Required when all_users is true or when targeting another user's sandboxes.
+        user_id:
           anyOf:
           - type: string
-            maxLength: 50
           - type: 'null'
-          title: Name
-          description: Optional human-readable name for the exposure
-        protocol:
-          type: string
-          title: Protocol
-          description: Protocol (HTTP or TCP)
-          default: HTTP
-      type: object
-      required:
-      - port
-      title: ExposePortRequest
-    UnexposePortResponse:
-      properties:
-        success:
+          title: User Id
+          description: Scope deletion to sandboxes owned by this user. Defaults to the authenticated caller unless all_users is true. Targeting another user's ID requires team admin role on team_id.
+        all_users:
           type: boolean
-          title: Success
-        message:
-          type: string
-          title: Message
+          title: All Users
+          description: Delete sandboxes across all users in the given team_id. Requires team admin role on team_id.
+          default: false
       type: object
-      required:
-      - success
-      - message
-      title: UnexposePortResponse
-    BulkDeleteTunnelRequest:
-      properties:
-        tunnel_ids:
-          items:
-            type: string
-          type: array
-          maxItems: 500
-          minItems: 1
-          title: Tunnel Ids
-          description: List of tunnel IDs to delete
-      type: object
-      required:
-      - tunnel_ids
-      title: BulkDeleteTunnelRequest
-      description: Request to bulk delete tunnels.
-    BulkDeleteTunnelResponse:
-      properties:
-        succeeded:
-          items:
-            type: string
-          type: array
-          title: Succeeded
-          description: Successfully deleted tunnel IDs
-        failed:
-          items:
-            additionalProperties:
-              type: string
-            type: object
-          type: array
-          title: Failed
-          description: Failed deletions with error messages
-        message:
-          type: string
-          title: Message
-          description: Summary message
-      type: object
-      required:
-      - message
-      title: BulkDeleteTunnelResponse
-      description: Response for bulk tunnel deletion.
-    SandboxListResponse:
-      properties:
-        sandboxes:
-          items:
-            $ref: '#/components/schemas/SandboxResponse'
-          type: array
-          title: Sandboxes
-        total:
-          type: integer
-          title: Total
-        page:
-          type: integer
-          title: Page
-        per_page:
-          type: integer
-          title: Per Page
-        has_next:
-          type: boolean
-          title: Has Next
-      type: object
-      required:
-      - sandboxes
-      - total
-      - page
-      - per_page
-      - has_next
-      title: SandboxListResponse
-    ListExposedPortsResponse:
-      properties:
-        exposures:
-          items:
-            $ref: '#/components/schemas/ExposedPortInfo'
-          type: array
-          title: Exposures
-      type: object
-      required:
-      - exposures
-      title: ListExposedPortsResponse
+      title: BulkDeleteSandboxRequest
     ExposedPortInfo:
       properties:
         exposure_id:
@@ -1108,16 +702,117 @@ components:
       - url
       - tls_socket
       title: ExposedPortInfo
-    SandboxStatus:
+    CreateSSHSessionRequest:
+      properties:
+        ttl_seconds:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Ttl Seconds
+          description: Optional TTL for the SSH session in seconds (max 3600). Defaults to 900.
+      type: object
+      title: CreateSSHSessionRequest
+    GPUType:
       type: string
       enum:
-      - PENDING
-      - PROVISIONING
-      - RUNNING
-      - PAUSED
-      - ERROR
-      - TERMINATED
-      title: SandboxStatus
+      - CPU_NODE
+      - A10_24GB
+      - A100_80GB
+      - A100_40GB
+      - A30_24GB
+      - A40_48GB
+      - B200_180GB
+      - B300_262GB
+      - GB200
+      - GB300
+      - RTX3070_8GB
+      - RTX3070_8GB
+      - RTX3080_10GB
+      - RTX3080Ti_12GB
+      - RTX3090_24GB
+      - RTX3090Ti_24GB
+      - RTX4070Ti_12GB
+      - RTX4080_16GB
+      - RTX4080Ti_16GB
+      - RTX4090_24GB
+      - RTX5090_32GB
+      - H100_80GB
+      - H200_96GB
+      - GH200_96GB
+      - H200_141GB
+      - GH200_480GB
+      - GH200_624GB
+      - L4_24GB
+      - L40_48GB
+      - L40S_48GB
+      - RTX4000_8GB
+      - RTX5000_16GB
+      - RTX6000_24GB
+      - RTX8000_48GB
+      - RTX2000Ada_16GB
+      - RTX4000Ada_20GB
+      - RTX5000Ada_32GB
+      - RTX6000Ada_48GB
+      - A2000_6GB
+      - A4000_16GB
+      - A4500_20GB
+      - A5000_24GB
+      - A6000_48GB
+      - V100_16GB
+      - V100_32GB
+      - P100_16GB
+      - T4_16GB
+      - P4_8GB
+      - P40_24GB
+      - RTX_PRO_6000B_96GB
+      title: GPUType
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    BulkDeleteSandboxResponse:
+      properties:
+        succeeded:
+          items:
+            type: string
+          type: array
+          title: Succeeded
+          description: List of successfully deleted sandbox IDs
+        failed:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          type: array
+          title: Failed
+          description: List of failed deletions with error messages
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: BulkDeleteSandboxResponse
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
     ExposePortResponse:
       properties:
         exposure_id:
@@ -1165,53 +860,296 @@ components:
       - url
       - tls_socket
       title: ExposePortResponse
-    BulkDeleteSandboxResponse:
+    SandboxAuthResponse:
       properties:
-        succeeded:
+        token:
+          type: string
+          title: Token
+          description: JWT token for direct sandbox access
+        gateway_url:
+          type: string
+          title: Gateway Url
+          description: Gateway URL for direct sandbox operations
+        user_ns:
+          type: string
+          title: User Ns
+          description: User namespace for sandbox access
+        job_id:
+          type: string
+          title: Job Id
+          description: Job ID for sandbox access
+        expires_at:
+          type: string
+          format: date-time
+          title: Expires At
+          description: Token expiration time
+      type: object
+      required:
+      - token
+      - gateway_url
+      - user_ns
+      - job_id
+      - expires_at
+      title: SandboxAuthResponse
+    ExposePortRequest:
+      properties:
+        port:
+          type: integer
+          maximum: 9000.0
+          minimum: 22.0
+          title: Port
+          description: Port number to expose (22-9000)
+        name:
+          anyOf:
+          - type: string
+            maxLength: 50
+          - type: 'null'
+          title: Name
+          description: Optional human-readable name for the exposure
+        protocol:
+          type: string
+          title: Protocol
+          description: Protocol (HTTP or TCP)
+          default: HTTP
+      type: object
+      required:
+      - port
+      title: ExposePortRequest
+    CreateSandboxRequest:
+      properties:
+        name:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Name
+          description: Sandbox name
+        docker_image:
+          type: string
+          minLength: 1
+          title: Docker Image
+          description: Docker image to run
+        start_command:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Start Command
+          description: Command to run in container
+        cpu_cores:
+          type: number
+          maximum: 16.0
+          minimum: 0.1
+          title: Cpu Cores
+          description: CPU cores required
+          default: 1.0
+        memory_gb:
+          type: number
+          maximum: 64.0
+          minimum: 0.1
+          title: Memory Gb
+          description: Memory in GB
+          default: 2.0
+        disk_size_gb:
+          type: number
+          maximum: 1000.0
+          minimum: 0.1
+          title: Disk Size Gb
+          description: Disk size in GB
+          default: 10.0
+        gpu_count:
+          type: integer
+          maximum: 8.0
+          minimum: 0.0
+          title: Gpu Count
+          description: Number of GPUs
+          default: 0
+        gpu_type:
+          anyOf:
+          - $ref: '#/components/schemas/GPUType'
+          - type: 'null'
+          description: GPU type (e.g. H100, A100). Required when gpu_count > 0
+        vm:
+          type: boolean
+          title: Vm
+          description: Create a VM sandbox on the VM sandbox infra. Required when requesting GPUs.
+          default: false
+        network_access:
+          type: boolean
+          title: Network Access
+          description: Allow outbound internet access (enabled by default)
+          default: true
+        timeout_minutes:
+          type: integer
+          maximum: 1440.0
+          minimum: 1.0
+          title: Timeout Minutes
+          description: Max execution time in minutes
+          default: 60
+        environment_vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Environment Vars
+          description: Environment variables
+        secrets:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Secrets
+          description: Sensitive environment variables. Currently supported for CPU sandboxes only; VM sandboxes reject this field.
+        labels:
           items:
             type: string
           type: array
-          title: Succeeded
-          description: List of successfully deleted sandbox IDs
-        failed:
-          items:
-            additionalProperties:
-              type: string
-            type: object
-          type: array
-          title: Failed
-          description: List of failed deletions with error messages
+          title: Labels
+          description: Tags/labels for the sandbox
+        team_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Team Id
+          description: Team ID for team sandboxes
+        advanced_configs:
+          anyOf:
+          - $ref: '#/components/schemas/AdvancedConfigs'
+          - type: 'null'
+          description: Advanced configuration options
+        registry_credentials_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Registry Credentials Id
+          description: Registry credentials ID for pulling private images
+        region:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Region
+          description: Cluster region for the sandbox (e.g. us, india). Omit to allow automatic placement.
+        guaranteed:
+          type: boolean
+          title: Guaranteed
+          description: Admin/manager only. When true, schedule the sandbox with CPU/memory requests equal to its limits (Guaranteed QoS), bypassing the default oversubscription multiplier. Not applicable to VM sandboxes.
+          default: false
+        idempotency_key:
+          anyOf:
+          - type: string
+            maxLength: 128
+            minLength: 1
+          - type: 'null'
+          title: Idempotency Key
+          description: Client-generated key used to deduplicate retried create requests.
+      type: object
+      required:
+      - name
+      - docker_image
+      title: CreateSandboxRequest
+    SSHSessionResponse:
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+        exposure_id:
+          type: string
+          title: Exposure Id
+        sandbox_id:
+          type: string
+          title: Sandbox Id
+        host:
+          type: string
+          title: Host
+        port:
+          type: integer
+          title: Port
+        external_endpoint:
+          type: string
+          title: External Endpoint
+        expires_at:
+          type: string
+          format: date-time
+          title: Expires At
+        ttl_seconds:
+          type: integer
+          title: Ttl Seconds
+        gateway_url:
+          type: string
+          title: Gateway Url
+        user_ns:
+          type: string
+          title: User Ns
+        job_id:
+          type: string
+          title: Job Id
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+      - session_id
+      - exposure_id
+      - sandbox_id
+      - host
+      - port
+      - external_endpoint
+      - expires_at
+      - ttl_seconds
+      - gateway_url
+      - user_ns
+      - job_id
+      - token
+      title: SSHSessionResponse
+    DeleteSandboxResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
         message:
           type: string
           title: Message
       type: object
       required:
+      - success
       - message
-      title: BulkDeleteSandboxResponse
-    ErrorResponse:
+      title: DeleteSandboxResponse
+    SandboxLogsResponse:
       properties:
-        errors:
+        logs:
+          type: string
+          title: Logs
+      type: object
+      required:
+      - logs
+      title: SandboxLogsResponse
+    SandboxListResponse:
+      properties:
+        sandboxes:
           items:
-            $ref: '#/components/schemas/ErrorDetail'
+            $ref: '#/components/schemas/SandboxResponse'
           type: array
-          title: Errors
+          title: Sandboxes
+        total:
+          type: integer
+          title: Total
+        page:
+          type: integer
+          title: Page
+        per_page:
+          type: integer
+          title: Per Page
+        has_next:
+          type: boolean
+          title: Has Next
       type: object
       required:
-      - errors
-      title: ErrorResponse
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
+      - sandboxes
+      - total
+      - page
+      - per_page
+      - has_next
+      title: SandboxListResponse
     SandboxResponse:
       properties:
         id:
@@ -1358,345 +1296,35 @@ components:
       - teamId
       - kubernetesJobId
       title: SandboxResponse
-    GPUType:
-      type: string
-      enum:
-      - CPU_NODE
-      - A10_24GB
-      - A100_80GB
-      - A100_40GB
-      - A30_24GB
-      - A40_48GB
-      - B200_180GB
-      - B300_262GB
-      - GB200
-      - GB300
-      - RTX3070_8GB
-      - RTX3070_8GB
-      - RTX3080_10GB
-      - RTX3080Ti_12GB
-      - RTX3090_24GB
-      - RTX3090Ti_24GB
-      - RTX4070Ti_12GB
-      - RTX4080_16GB
-      - RTX4080Ti_16GB
-      - RTX4090_24GB
-      - RTX5090_32GB
-      - H100_80GB
-      - H200_96GB
-      - GH200_96GB
-      - H200_141GB
-      - GH200_480GB
-      - GH200_624GB
-      - L4_24GB
-      - L40_48GB
-      - L40S_48GB
-      - RTX4000_8GB
-      - RTX5000_16GB
-      - RTX6000_24GB
-      - RTX8000_48GB
-      - RTX2000Ada_16GB
-      - RTX4000Ada_20GB
-      - RTX5000Ada_32GB
-      - RTX6000Ada_48GB
-      - A2000_6GB
-      - A4000_16GB
-      - A4500_20GB
-      - A5000_24GB
-      - A6000_48GB
-      - V100_16GB
-      - V100_32GB
-      - P100_16GB
-      - T4_16GB
-      - P4_8GB
-      - P40_24GB
-      - RTX_PRO_6000B_96GB
-      title: GPUType
-    CreateSSHSessionRequest:
-      properties:
-        ttl_seconds:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Ttl Seconds
-          description: Optional TTL for the SSH session in seconds (max 3600). Defaults to 900.
-      type: object
-      title: CreateSSHSessionRequest
-    TunnelResponse:
-      properties:
-        tunnel_id:
-          type: string
-          title: Tunnel Id
-          description: Unique tunnel identifier
-        hostname:
-          type: string
-          title: Hostname
-          description: Full hostname for the tunnel
-        url:
-          type: string
-          title: Url
-          description: Full HTTPS URL for accessing the tunnel
-        frp_token:
-          type: string
-          title: Frp Token
-          description: Authentication token for frpc client
-        binding_secret:
-          type: string
-          title: Binding Secret
-          description: Per-tunnel secret for additional authentication via frpc metadata
-        server_host:
-          type: string
-          title: Server Host
-          description: frps server hostname
-        server_port:
-          type: integer
-          title: Server Port
-          description: frps server port
-          default: 7000
-        expires_at:
-          type: string
-          format: date-time
-          title: Expires At
-          description: Token expiration timestamp
-      type: object
-      required:
-      - tunnel_id
-      - hostname
-      - url
-      - frp_token
-      - binding_secret
-      - server_host
-      - expires_at
-      title: TunnelResponse
-      description: Response containing tunnel connection details.
-    TunnelListResponse:
-      properties:
-        tunnels:
-          items:
-            $ref: '#/components/schemas/TunnelStatusResponse'
-          type: array
-          title: Tunnels
-          description: List of active tunnels
-        total:
-          type: integer
-          title: Total
-          description: Total number of tunnels
-      type: object
-      required:
-      - total
-      title: TunnelListResponse
-      description: Response containing list of tunnels.
-    BulkDeleteSandboxRequest:
-      properties:
-        sandbox_ids:
-          anyOf:
-          - items:
-              type: string
-            type: array
-            maxItems: 500
-            minItems: 1
-          - type: 'null'
-          title: Sandbox Ids
-          description: List of sandbox IDs to delete
-        labels:
-          anyOf:
-          - items:
-              type: string
-            type: array
-            maxItems: 50
-            minItems: 1
-          - type: 'null'
-          title: Labels
-          description: List of labels - delete all sandboxes with ALL these labels
-        team_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Team Id
-          description: Scope deletion to sandboxes in this team. Required when all_users is true or when targeting another
-            user's sandboxes.
-        user_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: User Id
-          description: Scope deletion to sandboxes owned by this user. Defaults to the authenticated caller unless all_users
-            is true. Targeting another user's ID requires team admin role on team_id.
-        all_users:
-          type: boolean
-          title: All Users
-          description: Delete sandboxes across all users in the given team_id. Requires team admin role on team_id.
-          default: false
-      type: object
-      title: BulkDeleteSandboxRequest
-    DeleteTunnelResponse:
+    UnexposePortResponse:
       properties:
         success:
           type: boolean
           title: Success
-          description: Whether deletion succeeded
         message:
           type: string
           title: Message
-          description: Status message
       type: object
       required:
       - success
       - message
-      title: DeleteTunnelResponse
-      description: Response for tunnel deletion.
-    CreateSandboxRequest:
-      properties:
-        name:
-          type: string
-          maxLength: 100
-          minLength: 1
-          title: Name
-          description: Sandbox name
-        docker_image:
-          type: string
-          minLength: 1
-          title: Docker Image
-          description: Docker image to run
-        start_command:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Start Command
-          description: Command to run in container
-        cpu_cores:
-          type: number
-          maximum: 16.0
-          minimum: 0.1
-          title: Cpu Cores
-          description: CPU cores required
-          default: 1.0
-        memory_gb:
-          type: number
-          maximum: 64.0
-          minimum: 0.1
-          title: Memory Gb
-          description: Memory in GB
-          default: 2.0
-        disk_size_gb:
-          type: number
-          maximum: 1000.0
-          minimum: 0.1
-          title: Disk Size Gb
-          description: Disk size in GB
-          default: 10.0
-        gpu_count:
-          type: integer
-          maximum: 8.0
-          minimum: 0.0
-          title: Gpu Count
-          description: Number of GPUs
-          default: 0
-        gpu_type:
-          anyOf:
-          - $ref: '#/components/schemas/GPUType'
-          - type: 'null'
-          description: GPU type (e.g. H100, A100). Required when gpu_count > 0
-        vm:
-          type: boolean
-          title: Vm
-          description: Create a VM sandbox on the VM sandbox infra. Required when requesting GPUs.
-          default: false
-        network_access:
-          type: boolean
-          title: Network Access
-          description: Allow outbound internet access (enabled by default)
-          default: true
-        timeout_minutes:
-          type: integer
-          maximum: 1440.0
-          minimum: 1.0
-          title: Timeout Minutes
-          description: Max execution time in minutes
-          default: 60
-        environment_vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Environment Vars
-          description: Environment variables
-        secrets:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Secrets
-          description: Sensitive environment variables. Currently supported for CPU sandboxes only; VM sandboxes reject this
-            field.
-        labels:
-          items:
-            type: string
-          type: array
-          title: Labels
-          description: Tags/labels for the sandbox
-        team_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Team Id
-          description: Team ID for team sandboxes
-        advanced_configs:
-          anyOf:
-          - $ref: '#/components/schemas/AdvancedConfigs'
-          - type: 'null'
-          description: Advanced configuration options
-        registry_credentials_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Registry Credentials Id
-          description: Registry credentials ID for pulling private images
-        region:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Region
-          description: Cluster region for the sandbox (e.g. us, india). Omit to allow automatic placement.
-        guaranteed:
-          type: boolean
-          title: Guaranteed
-          description: Admin/manager only. When true, schedule the sandbox with CPU/memory requests equal to its limits (Guaranteed
-            QoS), bypassing the default oversubscription multiplier. Not applicable to VM sandboxes.
-          default: false
-        idempotency_key:
-          anyOf:
-          - type: string
-            maxLength: 128
-            minLength: 1
-          - type: 'null'
-          title: Idempotency Key
-          description: Client-generated key used to deduplicate retried create requests.
-      type: object
-      required:
-      - name
-      - docker_image
-      title: CreateSandboxRequest
+      title: UnexposePortResponse
     AdvancedConfigs:
       properties: {}
       additionalProperties: true
       type: object
       title: AdvancedConfigs
-    DeleteSandboxResponse:
+    ListExposedPortsResponse:
       properties:
-        success:
-          type: boolean
-          title: Success
-        message:
-          type: string
-          title: Message
+        exposures:
+          items:
+            $ref: '#/components/schemas/ExposedPortInfo'
+          type: array
+          title: Exposures
       type: object
       required:
-      - success
-      - message
-      title: DeleteSandboxResponse
+      - exposures
+      title: ListExposedPortsResponse
     SandboxErrorContextResponse:
       properties:
         status:
@@ -1717,34 +1345,7 @@ components:
       type: object
       title: SandboxErrorContextResponse
       description: Response for error context lookups
-    SandboxAuthResponse:
-      properties:
-        token:
-          type: string
-          title: Token
-          description: JWT token for direct sandbox access
-        gateway_url:
-          type: string
-          title: Gateway Url
-          description: Gateway URL for direct sandbox operations
-        user_ns:
-          type: string
-          title: User Ns
-          description: User namespace for sandbox access
-        job_id:
-          type: string
-          title: Job Id
-          description: Job ID for sandbox access
-        expires_at:
-          type: string
-          format: date-time
-          title: Expires At
-          description: Token expiration time
-      type: object
-      required:
-      - token
-      - gateway_url
-      - user_ns
-      - job_id
-      - expires_at
-      title: SandboxAuthResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

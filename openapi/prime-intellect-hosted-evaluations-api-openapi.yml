@@ -1,0 +1,426 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Compute admin-clusters hosted-evaluations API
+  version: 0.1.0
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: hosted-evaluations
+paths:
+  /api/v1/hosted-evaluations:
+    post:
+      tags:
+      - hosted-evaluations
+      summary: Create Hosted Evaluation
+      description: Create and start a hosted evaluation.
+      operationId: create_hosted_evaluation_api_v1_hosted_evaluations_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHostedEvaluationRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateHostedEvaluationResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+  /api/v1/hosted-evaluations/models:
+    get:
+      tags:
+      - hosted-evaluations
+      summary: Get Inference Models
+      description: Get available models from Prime Inference API for hosted evaluations
+      operationId: get_inference_models_api_v1_hosted_evaluations_models_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInferenceModelsResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+  /api/v1/hosted-evaluations/{evaluation_id}/cancel:
+    patch:
+      tags:
+      - hosted-evaluations
+      summary: Cancel Hosted Evaluation Route
+      description: Cancel a running hosted evaluation.
+      operationId: cancel_hosted_evaluation_route_api_v1_hosted_evaluations__evaluation_id__cancel_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: evaluation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Evaluation Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelHostedEvaluationResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/hosted-evaluations/{evaluation_id}/logs:
+    get:
+      tags:
+      - hosted-evaluations
+      summary: Get Hosted Evaluation Logs Route
+      description: Get real-time logs from the sandbox running a hosted evaluation.
+      operationId: get_hosted_evaluation_logs_route_api_v1_hosted_evaluations__evaluation_id__logs_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: evaluation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Evaluation Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHostedEvaluationLogsResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CreateHostedEvaluationRequest:
+      properties:
+        environment_ids:
+          items:
+            type: string
+          type: array
+          minItems: 1
+          title: Environment Ids
+          description: List of environment IDs to evaluate
+        inference_model:
+          type: string
+          title: Inference Model
+          description: Model ID for inference
+        eval_config:
+          $ref: '#/components/schemas/HostedEvalConfig'
+          description: Evaluation configuration
+        team_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Team Id
+          description: Optional team ID to own the hosted evaluation
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Optional custom evaluation name
+      type: object
+      required:
+      - environment_ids
+      - inference_model
+      - eval_config
+      title: CreateHostedEvaluationRequest
+      description: Request to create and start a hosted evaluation
+    CreateHostedEvaluationResponse:
+      properties:
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+          description: ID of the created evaluation
+        sandbox_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sandbox Id
+          description: ID of the sandbox running the evaluation
+        status:
+          type: string
+          title: Status
+          description: Current status of the evaluation
+        evaluation_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Evaluation Ids
+          description: List of evaluation IDs if multiple environments were provided
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+          description: Error message if creation failed
+      type: object
+      required:
+      - evaluation_id
+      - status
+      title: CreateHostedEvaluationResponse
+      description: Response after creating a hosted evaluation
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    ListInferenceModelsResponse:
+      properties:
+        models:
+          items:
+            type: object
+          type: array
+          title: Models
+          description: List of available models
+      type: object
+      required:
+      - models
+      title: ListInferenceModelsResponse
+      description: Response for listing available inference models
+    CancelHostedEvaluationResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        message:
+          type: string
+          title: Message
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - success
+      - message
+      - evaluation_id
+      - status
+      title: CancelHostedEvaluationResponse
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    HostedEvalConfig:
+      properties:
+        num_examples:
+          type: integer
+          maximum: 9007199254740991.0
+          minimum: -1.0
+          title: Num Examples
+          description: Number of examples to evaluate (-1 for all)
+        rollouts_per_example:
+          type: integer
+          maximum: 2048.0
+          minimum: 1.0
+          title: Rollouts Per Example
+          description: Rollouts per example
+        env_args:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Env Args
+          description: Optional environment arguments to pass to the evaluation
+        allow_sandbox_access:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Allow Sandbox Access
+          description: Allow sandbox read/write access
+          default: false
+        allow_instances_access:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Allow Instances Access
+          description: Allow instance creation and management access
+          default: false
+        allow_tunnel_access:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Allow Tunnel Access
+          description: Allow tunnel creation and management access
+          default: false
+        timeout_minutes:
+          anyOf:
+          - type: integer
+            maximum: 1440.0
+            minimum: 120.0
+          - type: 'null'
+          title: Timeout Minutes
+          description: 'Custom timeout in minutes for the hosted eval run (default: 1440 = 24 hours, min: 120, max: 1440)'
+        custom_secrets:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Custom Secrets
+          description: Custom secrets to set in the evaluation sandbox (e.g., API keys, tokens)
+        sampling_args:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Sampling Args
+          description: Optional sampling arguments forwarded to `prime eval run --sampling-args`
+        max_concurrent:
+          anyOf:
+          - type: integer
+            maximum: 9007199254740991.0
+            minimum: 1.0
+          - type: 'null'
+          title: Max Concurrent
+          description: Optional max concurrency forwarded to `prime eval run --max-concurrent`
+        max_retries:
+          anyOf:
+          - type: integer
+            maximum: 9007199254740991.0
+            minimum: 0.0
+          - type: 'null'
+          title: Max Retries
+          description: Optional max retries forwarded to `prime eval run --max-retries`
+        state_columns:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: State Columns
+          description: Optional state columns forwarded to `prime eval run --state-columns`
+        independent_scoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Independent Scoring
+          description: Forward `--independent-scoring` to the hosted eval runner
+          default: false
+        verbose:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Verbose
+          description: Forward `--verbose` to the hosted eval runner
+          default: false
+        headers:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Headers
+          description: Optional repeated headers forwarded to `prime eval run --header`
+        extra_env_kwargs:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Extra Env Kwargs
+          description: Optional environment constructor kwargs forwarded to `prime eval run --extra-env-kwargs`
+        api_client_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Client Type
+          description: Optional API client type forwarded to `prime eval run --api-client-type`
+        api_base_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Base Url
+          description: Optional inference base URL forwarded to `prime eval run --api-base-url`
+        api_key_var:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key Var
+          description: Optional API key env var forwarded to `prime eval run --api-key-var`
+      type: object
+      required:
+      - num_examples
+      - rollouts_per_example
+      title: HostedEvalConfig
+      description: Hosted evaluation configuration
+    GetHostedEvaluationLogsResponse:
+      properties:
+        logs:
+          type: string
+          title: Logs
+          description: Sandbox logs
+        sandbox_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sandbox Id
+          description: Sandbox ID
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+          description: Evaluation ID
+      type: object
+      required:
+      - logs
+      - evaluation_id
+      title: GetHostedEvaluationLogsResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

@@ -1,0 +1,1192 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Compute admin-clusters Availability API
+  version: 0.1.0
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: Availability
+paths:
+  /api/v1/availability/:
+    get:
+      tags:
+      - Availability
+      summary: Get Legacygpu Availability
+      operationId: get_legacygpu_availability_api_v1_availability__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          description: Page number (1-indexed)
+          default: 1
+          title: Page
+        description: Page number (1-indexed)
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of results per page
+          default: 500
+          title: Page Size
+        description: Number of results per page
+      - name: regions
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/Regions'
+          - type: 'null'
+          description: List of regions to filter
+          title: Regions
+        description: List of regions to filter
+      - name: gpu_count
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Desired number of GPUs
+          title: Gpu Count
+        description: Desired number of GPUs
+      - name: gpu_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/GPUType'
+          - type: 'null'
+          description: GPU model
+          title: Gpu Type
+        description: GPU model
+      - name: socket
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/GPUSocket'
+          - type: 'null'
+          description: Socket for selected gpu model
+          title: Socket
+        description: Socket for selected gpu model
+      - name: security
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/SecurityType'
+          - type: 'null'
+          description: Security type
+          title: Security
+        description: Security type
+      - name: data_center_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by data center ID
+          title: Data Center Id
+        description: Filter by data center ID
+      - name: cloud_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by cloud ID
+          title: Cloud Id
+        description: Filter by cloud ID
+      - name: disks
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of disk IDs to filter instances by location
+          title: Disks
+        description: List of disk IDs to filter instances by location
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegacyAvailabilityResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/availability/clusters:
+    get:
+      tags:
+      - Availability
+      summary: Get Legacy Cluster Availability
+      operationId: get_legacy_cluster_availability_api_v1_availability_clusters_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          description: Page number (1-indexed)
+          default: 1
+          title: Page
+        description: Page number (1-indexed)
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of results per page
+          default: 500
+          title: Page Size
+        description: Number of results per page
+      - name: regions
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/Regions'
+          - type: 'null'
+          description: List of regions to filter
+          title: Regions
+        description: List of regions to filter
+      - name: gpu_count
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Desired number of GPUs
+          title: Gpu Count
+        description: Desired number of GPUs
+      - name: gpu_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/GPUType'
+          - type: 'null'
+          description: GPU model
+          title: Gpu Type
+        description: GPU model
+      - name: socket
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/GPUSocket'
+          - type: 'null'
+          description: Socket for selected gpu model
+          title: Socket
+        description: Socket for selected gpu model
+      - name: security
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/SecurityType'
+          - type: 'null'
+          description: Security type
+          title: Security
+        description: Security type
+      - name: data_center_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by data center ID
+          title: Data Center Id
+        description: Filter by data center ID
+      - name: cloud_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by cloud ID
+          title: Cloud Id
+        description: Filter by cloud ID
+      - name: disks
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of disk IDs to filter instances by location
+          title: Disks
+        description: List of disk IDs to filter instances by location
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegacyAvailabilityResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/availability/disks:
+    get:
+      tags:
+      - Availability
+      summary: Get Disks Availability
+      operationId: get_disks_availability_api_v1_availability_disks_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          description: Page number (1-indexed)
+          default: 1
+          title: Page
+        description: Page number (1-indexed)
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Number of results per page
+          default: 100
+          title: Page Size
+        description: Number of results per page
+      - name: regions
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/Regions'
+          - type: 'null'
+          description: List of regions to filter
+          title: Regions
+        description: List of regions to filter
+      - name: data_center_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by data center ID
+          title: Data Center Id
+        description: Filter by data center ID
+      - name: cloud_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by cloud ID
+          title: Cloud Id
+        description: Filter by cloud ID
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiskAvailabilityResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/availability/gpu-summary:
+    get:
+      tags:
+      - Availability
+      summary: Get Gpu Summary
+      description: Get GPU pricing summary data grouped by GPU type and instance count.
+      operationId: get_gpu_summary_api_v1_availability_gpu_summary_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  additionalProperties:
+                    $ref: '#/components/schemas/InstanceCountPricing'
+                  type: object
+                type: object
+                title: Response Get Gpu Summary Api V1 Availability Gpu Summary Get
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+  /api/v1/availability/gpus:
+    get:
+      tags:
+      - Availability
+      summary: Get Gpu Availability
+      operationId: get_gpu_availability_api_v1_availability_gpus_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          description: Page number (1-indexed)
+          default: 1
+          title: Page
+        description: Page number (1-indexed)
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Number of results per page
+          default: 100
+          title: Page Size
+        description: Number of results per page
+      - name: regions
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/Regions'
+          - type: 'null'
+          description: List of regions to filter
+          title: Regions
+        description: List of regions to filter
+      - name: gpu_count
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Desired number of GPUs
+          title: Gpu Count
+        description: Desired number of GPUs
+      - name: gpu_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/GPUType'
+          - type: 'null'
+          description: GPU model
+          title: Gpu Type
+        description: GPU model
+      - name: socket
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/GPUSocket'
+          - type: 'null'
+          description: Socket for selected gpu model
+          title: Socket
+        description: Socket for selected gpu model
+      - name: security
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/SecurityType'
+          - type: 'null'
+          description: Security type
+          title: Security
+        description: Security type
+      - name: data_center_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by data center ID
+          title: Data Center Id
+        description: Filter by data center ID
+      - name: cloud_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by cloud ID
+          title: Cloud Id
+        description: Filter by cloud ID
+      - name: disks
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of disk IDs to filter instances by location
+          title: Disks
+        description: List of disk IDs to filter instances by location
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/availability/multi-node:
+    get:
+      tags:
+      - Availability
+      summary: Get Multinode Availability
+      operationId: get_multinode_availability_api_v1_availability_multi_node_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          description: Page number (1-indexed)
+          default: 1
+          title: Page
+        description: Page number (1-indexed)
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Number of results per page
+          default: 100
+          title: Page Size
+        description: Number of results per page
+      - name: regions
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/Regions'
+          - type: 'null'
+          description: List of regions to filter
+          title: Regions
+        description: List of regions to filter
+      - name: gpu_count
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Desired number of GPUs
+          title: Gpu Count
+        description: Desired number of GPUs
+      - name: gpu_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/GPUType'
+          - type: 'null'
+          description: GPU model
+          title: Gpu Type
+        description: GPU model
+      - name: socket
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/GPUSocket'
+          - type: 'null'
+          description: Socket for selected gpu model
+          title: Socket
+        description: Socket for selected gpu model
+      - name: security
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/SecurityType'
+          - type: 'null'
+          description: Security type
+          title: Security
+        description: Security type
+      - name: data_center_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by data center ID
+          title: Data Center Id
+        description: Filter by data center ID
+      - name: cloud_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by cloud ID
+          title: Cloud Id
+        description: Filter by cloud ID
+      - name: disks
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of disk IDs to filter instances by location
+          title: Disks
+        description: List of disk IDs to filter instances by location
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/availability/multi-node-summary:
+    get:
+      tags:
+      - Availability
+      summary: Get Multinode Summary
+      description: Get multi-node (cluster) pricing summary data grouped by GPU type and instance count.
+      operationId: get_multinode_summary_api_v1_availability_multi_node_summary_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  additionalProperties:
+                    $ref: '#/components/schemas/InstanceCountPricing'
+                  type: object
+                type: object
+                title: Response Get Multinode Summary Api V1 Availability Multi Node Summary Get
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    EnvironmentTypeEnum:
+      type: string
+      enum:
+      - ubuntu_22_cuda_12
+      - cuda_12_1_pytorch_2_2
+      - cuda_11_8_pytorch_2_1
+      - cuda_12_1_pytorch_2_3
+      - cuda_12_1_pytorch_2_4
+      - cuda_12_4_pytorch_2_4
+      - cuda_12_4_pytorch_2_5
+      - cuda_12_4_pytorch_2_6
+      - cuda_12_6_pytorch_2_7
+      - stable_diffusion
+      - axolotl
+      - bittensor
+      - hivemind
+      - petals_llama
+      - vllm_llama_8b
+      - vllm_llama_70b
+      - vllm_llama_405b
+      - custom_template
+      - flux
+      - prime_rl
+      title: EnvironmentTypeEnum
+    AvailabilityResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/GpuAvailability'
+          type: array
+          title: Items
+          description: List of available GPU configurations
+        totalCount:
+          type: integer
+          title: Totalcount
+          description: Total number of matching GPU configurations
+      type: object
+      required:
+      - items
+      - totalCount
+      title: AvailabilityResponse
+    InstanceCountPricing:
+      properties:
+        cheapest:
+          anyOf:
+          - $ref: '#/components/schemas/PricingInfo'
+          - type: 'null'
+          description: Cheapest pricing across all regions
+      additionalProperties: true
+      type: object
+      title: InstanceCountPricing
+    DiskAvailabilityResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DiskAvailability'
+          type: array
+          title: Items
+          description: List of available disk configurations
+        totalCount:
+          type: integer
+          title: Totalcount
+          description: Total number of matching disk configurations
+      type: object
+      required:
+      - items
+      - totalCount
+      title: DiskAvailabilityResponse
+    Regions:
+      type: string
+      enum:
+      - africa
+      - asia_south
+      - asia_northeast
+      - australia
+      - canada
+      - eu_east
+      - eu_north
+      - eu_west
+      - middle_east
+      - south_america
+      - united_states
+      title: Regions
+    Prices:
+      properties:
+        onDemand:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Ondemand
+          description: Price for on-demand usage, specified for secure_cloud security type.
+          examples:
+          - 1.15
+        communityPrice:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Communityprice
+          description: Price for community cloud instances, specified for community_cloud security type.
+          examples:
+          - null
+        isVariable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Isvariable
+          description: Indicates whether the price is variable and subject to change based on market conditions.
+          examples:
+          - false
+        currency:
+          $ref: '#/components/schemas/Currency'
+          description: The currency in which the prices are denominated (e.g., USD, EUR).
+      type: object
+      required:
+      - currency
+      title: Prices
+    DiskAvailability:
+      properties:
+        cloudId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cloudid
+          description: Cloud ID, used for provisioning
+        provider:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+          description: Provider's ID
+        dataCenter:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Datacenter
+          description: Location of the data center housing the disk.
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+          description: Country where the data center is located.
+        region:
+          anyOf:
+          - $ref: '#/components/schemas/Regions'
+          - type: 'null'
+          description: Region where the disk is located.
+        spec:
+          $ref: '#/components/schemas/CustomSpecValue'
+          description: Configurable shared disk size in GB and price per GB per hour.
+          default: {}
+        stockStatus:
+          type: string
+          enum:
+          - Available
+          - Low
+          - Medium
+          - High
+          - Unavailable
+          title: Stockstatus
+          description: Current stock availability status of disks.
+          default: Available
+        security:
+          $ref: '#/components/schemas/SecurityType'
+          description: Disk security classification (e.g., secure_cloud or community_cloud).
+        isMultinode:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Ismultinode
+          description: Indicates if the disk can be used with multiple instances.
+          default: true
+      type: object
+      required:
+      - provider
+      - security
+      title: DiskAvailability
+    GPUSocket:
+      type: string
+      enum:
+      - PCIe
+      - SXM2
+      - SXM3
+      - SXM4
+      - SXM5
+      - SXM6
+      title: GPUSocket
+    CustomSpecValue:
+      properties:
+        minCount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Mincount
+          description: Minimum count for this specification.
+          examples:
+          - 2
+        defaultCount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Defaultcount
+          description: Default count for the specification.
+          examples:
+          - 8
+        maxCount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Maxcount
+          description: Maximum allowable count for this specification.
+          examples:
+          - 24
+        pricePerUnit:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Priceperunit
+          description: Price per unit per hr.
+          examples:
+          - 0.005
+        step:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Step
+          description: Increment step for adjusting the count (e.g., increments by 1 or 10).
+          examples:
+          - 2
+        defaultIncludedInPrice:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Defaultincludedinprice
+          description: Indicates if the default count is included in the base price.
+          examples:
+          - false
+        additionalInfo:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Additionalinfo
+          description: Any additional information or notes regarding this specification.
+          examples:
+          - null
+          - This price is charged even for stopped instance
+      type: object
+      title: CustomSpecValue
+    GpuAvailability:
+      properties:
+        cloudId:
+          type: string
+          title: Cloudid
+          description: Cloud ID, used for provisioning
+        gpuType:
+          $ref: '#/components/schemas/GPUType'
+          description: GPU model
+        socket:
+          $ref: '#/components/schemas/GPUSocket'
+          description: GPU socket
+        provider:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+          description: Provider's ID
+        region:
+          anyOf:
+          - $ref: '#/components/schemas/Regions'
+          - type: 'null'
+          description: Region where the GPU is located.
+        dataCenter:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Datacenter
+          description: Location of the data center housing the GPU.
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+          description: Country where the data center is located.
+        gpuCount:
+          type: integer
+          title: Gpucount
+          description: Total number of GPUs available in this configuration.
+        gpuMemory:
+          type: integer
+          title: Gpumemory
+          description: Amount of memory available per GPU in GB.
+        disk:
+          $ref: '#/components/schemas/CustomSpecValue'
+          description: Disk capacity in GB.
+          default: {}
+        sharedDisk:
+          $ref: '#/components/schemas/CustomSpecValue'
+          description: Shared disk capacity in GB.
+          default: {}
+        vcpu:
+          $ref: '#/components/schemas/CustomSpecValue'
+          description: Number of virtual CPUs allocated.
+          default: {}
+        memory:
+          $ref: '#/components/schemas/CustomSpecValue'
+          description: RAM size available in GB.
+          default: {}
+        internetSpeed:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Internetspeed
+          description: Internet speed available in Mbps.
+        interconnect:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Interconnect
+          description: Interconnect speed between GPUs or nodes in Gbps.
+        interconnectType:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Interconnecttype
+          description: Type of interconnect technology (e.g. Infiniband).
+        provisioningTime:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Provisioningtime
+          description: Estimated time in minutes required for GPU provisioning.
+        stockStatus:
+          type: string
+          enum:
+          - Available
+          - Low
+          - Medium
+          - High
+          - Unavailable
+          title: Stockstatus
+          description: Current stock availability status of GPUs.
+          default: Available
+        security:
+          $ref: '#/components/schemas/SecurityType'
+          description: GPU is either from community cloud or secure cloud
+        prices:
+          $ref: '#/components/schemas/Prices'
+          description: Hourly pricing details.
+        images:
+          items:
+            $ref: '#/components/schemas/EnvironmentTypeEnum'
+          type: array
+          title: Images
+          description: List of available images for this GPU.
+        isSpot:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Isspot
+          description: Indicates if the GPU can be provisioned on a spot pricing model.
+        prepaidTime:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Prepaidtime
+          description: If set, you will be pre-charged for the total number of hours specified in this field at the time of ordering, regardless of actual usage. After the prepaid time expires, the standard hourly rate will apply.
+      type: object
+      required:
+      - cloudId
+      - gpuType
+      - socket
+      - provider
+      - gpuCount
+      - gpuMemory
+      - security
+      - prices
+      - images
+      title: GpuAvailability
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    ProviderTypeEnum:
+      type: string
+      enum:
+      - runpod
+      - fluidstack
+      - lambdalabs
+      - hyperstack
+      - oblivus
+      - cudocompute
+      - scaleway
+      - tensordock
+      - datacrunch
+      - latitude
+      - crusoecloud
+      - massedcompute
+      - akash
+      - primeintellect
+      - primecompute
+      - dc_impala
+      - dc_kudu
+      - dc_roan
+      - nebius
+      - dc_eland
+      - dc_wildebeest
+      - vultr
+      - dc_gnu
+      - denvr
+      title: ProviderTypeEnum
+    SecurityType:
+      type: string
+      enum:
+      - secure_cloud
+      - community_cloud
+      title: SecurityType
+    GPUType:
+      type: string
+      enum:
+      - CPU_NODE
+      - A10_24GB
+      - A100_80GB
+      - A100_40GB
+      - A30_24GB
+      - A40_48GB
+      - B200_180GB
+      - B300_262GB
+      - GB200
+      - GB300
+      - RTX3070_8GB
+      - RTX3070_8GB
+      - RTX3080_10GB
+      - RTX3080Ti_12GB
+      - RTX3090_24GB
+      - RTX3090Ti_24GB
+      - RTX4070Ti_12GB
+      - RTX4080_16GB
+      - RTX4080Ti_16GB
+      - RTX4090_24GB
+      - RTX5090_32GB
+      - H100_80GB
+      - H200_96GB
+      - GH200_96GB
+      - H200_141GB
+      - GH200_480GB
+      - GH200_624GB
+      - L4_24GB
+      - L40_48GB
+      - L40S_48GB
+      - RTX4000_8GB
+      - RTX5000_16GB
+      - RTX6000_24GB
+      - RTX8000_48GB
+      - RTX2000Ada_16GB
+      - RTX4000Ada_20GB
+      - RTX5000Ada_32GB
+      - RTX6000Ada_48GB
+      - A2000_6GB
+      - A4000_16GB
+      - A4500_20GB
+      - A5000_24GB
+      - A6000_48GB
+      - V100_16GB
+      - V100_32GB
+      - P100_16GB
+      - T4_16GB
+      - P4_8GB
+      - P40_24GB
+      - RTX_PRO_6000B_96GB
+      title: GPUType
+    Currency:
+      type: string
+      enum:
+      - USD
+      - EUR
+      title: Currency
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    PricingInfo:
+      properties:
+        onDemand:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Ondemand
+          description: On-demand pricing
+        communityPrice:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Communityprice
+          description: Community cloud pricing
+        spotPrice:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Spotprice
+          description: Spot instance pricing
+      type: object
+      title: PricingInfo
+    LegacyAvailabilityResponse:
+      properties:
+        '{GPUType}':
+          items:
+            $ref: '#/components/schemas/GpuAvailability'
+          type: array
+      type: object
+      title: LegacyAvailabilityResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

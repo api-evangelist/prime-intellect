@@ -1,0 +1,135 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Compute admin-clusters FRP Plugin API
+  version: 0.1.0
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: FRP Plugin
+paths:
+  /api/v1/frp/validate:
+    post:
+      tags:
+      - FRP Plugin
+      summary: Validate Frp Plugin
+      description: 'Validate frpc client connections.
+
+
+        This endpoint is called by frps server plugin for:
+
+        - Login: Validates tunnel token when client connects
+
+        - NewProxy: Validates proxy creation requests
+
+
+        This endpoint is public but security is enforced via per-tunnel
+
+        token validation. An attacker would need both a valid tunnel_id AND
+
+        the corresponding frp_token to get a successful response.'
+      operationId: validate_frp_plugin_api_v1_frp_validate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FrpPluginRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FrpPluginResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    FrpPluginResponse:
+      properties:
+        reject:
+          type: boolean
+          title: Reject
+          description: Whether to reject the operation
+          default: false
+        reject_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reject Reason
+          description: Reason for rejection if rejected
+        unchange:
+          type: boolean
+          title: Unchange
+          description: Whether to leave request unchanged
+          default: true
+        content:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Content
+          description: Modified content if unchange=False
+      type: object
+      title: FrpPluginResponse
+      description: Response to frps server plugin.
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    FrpPluginRequest:
+      properties:
+        version:
+          type: string
+          title: Version
+          description: frp protocol version
+        op:
+          type: string
+          title: Op
+          description: 'Operation: Login, NewProxy, NewWorkConn, etc.'
+        content:
+          type: object
+          title: Content
+          description: Operation-specific content
+      type: object
+      required:
+      - version
+      - op
+      - content
+      title: FrpPluginRequest
+      description: Request from frps server plugin.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

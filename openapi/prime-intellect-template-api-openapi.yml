@@ -1,0 +1,162 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Compute admin-clusters Template API
+  version: 0.1.0
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: Template
+paths:
+  /api/v1/template/check-docker-image:
+    post:
+      tags:
+      - Template
+      summary: Check Docker Image
+      description: Check whether a docker image is accessible (optionally with registry credentials).
+      operationId: check_docker_image_api_v1_template_check_docker_image_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DockerImageCheckRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+  /api/v1/template/registry-credentials:
+    get:
+      tags:
+      - Template
+      summary: List Registry Credentials
+      description: List registry credentials owned by the requesting user or their teams.
+      operationId: list_registry_credentials_api_v1_template_registry_credentials_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistryCredentialsListResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    RegistryCredentialsSummary:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        server:
+          type: string
+          title: Server
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+      type: object
+      required:
+      - id
+      - name
+      - server
+      - createdAt
+      - updatedAt
+      - userId
+      - teamId
+      title: RegistryCredentialsSummary
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    RegistryCredentialsListResponse:
+      properties:
+        credentials:
+          items:
+            $ref: '#/components/schemas/RegistryCredentialsSummary'
+          type: array
+          title: Credentials
+      type: object
+      required:
+      - credentials
+      title: RegistryCredentialsListResponse
+    DockerImageCheckRequest:
+      properties:
+        image:
+          type: string
+          title: Image
+        registry_credentials_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Registry Credentials Id
+      type: object
+      required:
+      - image
+      title: DockerImageCheckRequest
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

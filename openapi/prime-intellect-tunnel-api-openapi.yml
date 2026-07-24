@@ -1,0 +1,437 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Compute admin-clusters Tunnel API
+  version: 0.1.0
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: Tunnel
+paths:
+  /api/v1/tunnel:
+    post:
+      tags:
+      - Tunnel
+      summary: Create Tunnel Endpoint
+      description: Create a new tunnel for exposing a local service.
+      operationId: create_tunnel_endpoint_api_v1_tunnel_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTunnelRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TunnelResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          100 requests per 60 seconds per user.'
+    get:
+      tags:
+      - Tunnel
+      summary: List Tunnels Endpoint
+      description: List all active tunnels for the current user.
+      operationId: list_tunnels_endpoint_api_v1_tunnel_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: teamId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TunnelListResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          300 requests per 60 seconds per user.'
+    delete:
+      tags:
+      - Tunnel
+      summary: Bulk Delete Tunnels Endpoint
+      description: Bulk delete multiple tunnels by IDs.
+      operationId: bulk_delete_tunnels_endpoint_api_v1_tunnel_delete
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDeleteTunnelRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkDeleteTunnelResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          100 requests per 60 seconds per user.'
+  /api/v1/tunnel/{tunnel_id}:
+    get:
+      tags:
+      - Tunnel
+      summary: Get Tunnel Status Endpoint
+      description: Get status of a specific tunnel.
+      operationId: get_tunnel_status_endpoint_api_v1_tunnel__tunnel_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: tunnel_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Tunnel Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TunnelStatusResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          300 requests per 60 seconds per tunnel.'
+    delete:
+      tags:
+      - Tunnel
+      summary: Delete Tunnel Endpoint
+      description: Delete a tunnel and disconnect any active clients.
+      operationId: delete_tunnel_endpoint_api_v1_tunnel__tunnel_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: tunnel_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Tunnel Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTunnelResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-mint:
+        content: '## Rate Limit
+
+
+          100 requests per 60 seconds per user.'
+components:
+  schemas:
+    TunnelStatus:
+      type: string
+      enum:
+      - pending
+      - connected
+      - disconnected
+      - expired
+      title: TunnelStatus
+    CreateTunnelRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+            maxLength: 64
+            minLength: 1
+          - type: 'null'
+          title: Name
+          description: Optional friendly name for the tunnel
+        local_port:
+          type: integer
+          maximum: 65535.0
+          minimum: 1.0
+          title: Local Port
+          description: Local port the tunnel will forward traffic to
+          default: 8765
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Team ID for team tunnels
+      type: object
+      title: CreateTunnelRequest
+      description: Request to create a new tunnel.
+    DeleteTunnelResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Whether deletion succeeded
+        message:
+          type: string
+          title: Message
+          description: Status message
+      type: object
+      required:
+      - success
+      - message
+      title: DeleteTunnelResponse
+      description: Response for tunnel deletion.
+    TunnelListResponse:
+      properties:
+        tunnels:
+          items:
+            $ref: '#/components/schemas/TunnelStatusResponse'
+          type: array
+          title: Tunnels
+          description: List of active tunnels
+        total:
+          type: integer
+          title: Total
+          description: Total number of tunnels
+      type: object
+      required:
+      - total
+      title: TunnelListResponse
+      description: Response containing list of tunnels.
+    BulkDeleteTunnelRequest:
+      properties:
+        tunnel_ids:
+          items:
+            type: string
+          type: array
+          maxItems: 500
+          minItems: 1
+          title: Tunnel Ids
+          description: List of tunnel IDs to delete
+      type: object
+      required:
+      - tunnel_ids
+      title: BulkDeleteTunnelRequest
+      description: Request to bulk delete tunnels.
+    BulkDeleteTunnelResponse:
+      properties:
+        succeeded:
+          items:
+            type: string
+          type: array
+          title: Succeeded
+          description: Successfully deleted tunnel IDs
+        failed:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          type: array
+          title: Failed
+          description: Failed deletions with error messages
+        message:
+          type: string
+          title: Message
+          description: Summary message
+      type: object
+      required:
+      - message
+      title: BulkDeleteTunnelResponse
+      description: Response for bulk tunnel deletion.
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    TunnelStatusResponse:
+      properties:
+        tunnel_id:
+          type: string
+          title: Tunnel Id
+          description: Unique tunnel identifier
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Friendly name if set
+        status:
+          $ref: '#/components/schemas/TunnelStatus'
+          description: Current tunnel status
+        hostname:
+          type: string
+          title: Hostname
+          description: Tunnel hostname
+        url:
+          type: string
+          title: Url
+          description: Full HTTPS URL
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Tunnel creation time
+        connected_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Connected At
+          description: When the client connected
+        expires_at:
+          type: string
+          format: date-time
+          title: Expires At
+          description: Token expiration time
+        user_id:
+          type: string
+          title: User Id
+          description: Owner user ID
+        team_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Team Id
+          description: Team ID if applicable
+      type: object
+      required:
+      - tunnel_id
+      - status
+      - hostname
+      - url
+      - created_at
+      - expires_at
+      - user_id
+      title: TunnelStatusResponse
+      description: Response containing tunnel status information.
+    TunnelResponse:
+      properties:
+        tunnel_id:
+          type: string
+          title: Tunnel Id
+          description: Unique tunnel identifier
+        hostname:
+          type: string
+          title: Hostname
+          description: Full hostname for the tunnel
+        url:
+          type: string
+          title: Url
+          description: Full HTTPS URL for accessing the tunnel
+        frp_token:
+          type: string
+          title: Frp Token
+          description: Authentication token for frpc client
+        binding_secret:
+          type: string
+          title: Binding Secret
+          description: Per-tunnel secret for additional authentication via frpc metadata
+        server_host:
+          type: string
+          title: Server Host
+          description: frps server hostname
+        server_port:
+          type: integer
+          title: Server Port
+          description: frps server port
+          default: 7000
+        expires_at:
+          type: string
+          format: date-time
+          title: Expires At
+          description: Token expiration timestamp
+      type: object
+      required:
+      - tunnel_id
+      - hostname
+      - url
+      - frp_token
+      - binding_secret
+      - server_host
+      - expires_at
+      title: TunnelResponse
+      description: Response containing tunnel connection details.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

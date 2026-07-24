@@ -1,0 +1,1199 @@
+openapi: 3.1.0
+info:
+  title: Prime Intellect Compute admin-clusters Pods API
+  version: 0.1.0
+  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  contact:
+    name: Prime Intellect
+    url: https://www.primeintellect.ai
+servers:
+- url: https://api.primeintellect.ai
+security:
+- HTTPBearer: []
+tags:
+- name: Pods
+paths:
+  /api/v1/pods/:
+    get:
+      tags:
+      - Pods
+      summary: Get Pods
+      operationId: get_pods_api_v1_pods__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_List_APIPodConfig__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - Pods
+      summary: Create Pod
+      operationId: create_pod_api_v1_pods__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_create_pod_api_v1_pods__post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIPodConfig'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/pods/history:
+    get:
+      tags:
+      - Pods
+      summary: Get Pods History
+      operationId: get_pods_history_api_v1_pods_history_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: sort_by
+        in: query
+        required: false
+        schema:
+          enum:
+          - terminatedAt
+          - createdAt
+          type: string
+          default: terminatedAt
+          title: Sort By
+      - name: sort_order
+        in: query
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+          default: desc
+          title: Sort Order
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericPaginationResponse_List_HistoryObj__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/pods/status:
+    get:
+      tags:
+      - Pods
+      summary: Get Pods Status
+      operationId: get_pods_status_api_v1_pods_status_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: pod_ids
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          description: List of pod ids
+          default: []
+          title: Pod Ids
+        description: List of pod ids
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse_List_APIPodStatusResponse__'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/pods/{pod_id}:
+    get:
+      tags:
+      - Pods
+      summary: Get Pod
+      operationId: get_pod_api_v1_pods__pod_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: pod_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Pod Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIPodConfig'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - Pods
+      summary: Delete Pod
+      operationId: delete_pod_api_v1_pods__pod_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: pod_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Pod Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIDeletePodResponse'
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/pods/{pod_id}/log:
+    get:
+      tags:
+      - Pods
+      summary: Get Pod Logs Api
+      description: "Get logs for a pod.\n\nArgs:\n    tail: Number of most recent logs to return (default: 100)"
+      operationId: get_pod_logs_api_api_v1_pods__pod_id__log_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: pod_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Pod Id
+      - name: tail
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Tail
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authorization failed
+        '422':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    AttachableResourceStatus:
+      type: string
+      enum:
+      - UNATTACHED
+      - ATTACHED
+      - MOUNTED
+      title: AttachableResourceStatus
+    TeamConfig:
+      properties:
+        teamId:
+          type: string
+          title: Teamid
+      type: object
+      required:
+      - teamId
+      title: TeamConfig
+    SecurityType:
+      type: string
+      enum:
+      - secure_cloud
+      - community_cloud
+      title: SecurityType
+    GPUType:
+      type: string
+      enum:
+      - CPU_NODE
+      - A10_24GB
+      - A100_80GB
+      - A100_40GB
+      - A30_24GB
+      - A40_48GB
+      - B200_180GB
+      - B300_262GB
+      - GB200
+      - GB300
+      - RTX3070_8GB
+      - RTX3070_8GB
+      - RTX3080_10GB
+      - RTX3080Ti_12GB
+      - RTX3090_24GB
+      - RTX3090Ti_24GB
+      - RTX4070Ti_12GB
+      - RTX4080_16GB
+      - RTX4080Ti_16GB
+      - RTX4090_24GB
+      - RTX5090_32GB
+      - H100_80GB
+      - H200_96GB
+      - GH200_96GB
+      - H200_141GB
+      - GH200_480GB
+      - GH200_624GB
+      - L4_24GB
+      - L40_48GB
+      - L40S_48GB
+      - RTX4000_8GB
+      - RTX5000_16GB
+      - RTX6000_24GB
+      - RTX8000_48GB
+      - RTX2000Ada_16GB
+      - RTX4000Ada_20GB
+      - RTX5000Ada_32GB
+      - RTX6000Ada_48GB
+      - A2000_6GB
+      - A4000_16GB
+      - A4500_20GB
+      - A5000_24GB
+      - A6000_48GB
+      - V100_16GB
+      - V100_32GB
+      - P100_16GB
+      - T4_16GB
+      - P4_8GB
+      - P40_24GB
+      - RTX_PRO_6000B_96GB
+      title: GPUType
+    PodStatusEnum:
+      type: string
+      enum:
+      - PROVISIONING
+      - PENDING
+      - ACTIVE
+      - STOPPED
+      - ERROR
+      - DELETING
+      - UNKNOWN
+      - TERMINATED
+      title: PodStatusEnum
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    InstallationStatusEnum:
+      type: string
+      enum:
+      - PENDING
+      - ACTIVE
+      - FINISHED
+      - ERROR
+      - TERMINATED
+      title: InstallationStatusEnum
+    AttachedResources:
+      properties:
+        resourceType:
+          $ref: '#/components/schemas/AttachableResourceType'
+          description: Type of resource.
+          examples:
+          - DISK
+        id:
+          anyOf:
+          - type: string
+          - type: integer
+          title: Id
+          description: Unique identifier for the resource.
+        status:
+          $ref: '#/components/schemas/AttachableResourceStatus'
+          description: Resource status.
+          default: UNATTACHED
+        isDetachable:
+          type: boolean
+          title: Isdetachable
+          description: Whether the resource is detachable.
+          default: true
+        mountPath:
+          type: string
+          title: Mountpath
+          description: Path to the mount point.
+          default: /workspace
+        resourcePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Resourcepath
+          description: Path to the resource.
+        size:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: 'null'
+          title: Size
+          description: Size of the resource.
+        isShared:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Isshared
+          description: Whether the resource is shared.
+          default: false
+      type: object
+      required:
+      - resourceType
+      - id
+      title: AttachedResources
+    HistoryObj:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier for the record.
+        name:
+          type: string
+          title: Name
+          description: Name assigned to the resource.
+        providerType:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+          description: ID of the provider.
+        provisionedBy:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provisionedby
+          description: Name of the user who provisioned the resource.
+        type:
+          $ref: '#/components/schemas/ResourceType'
+          description: Type of the resource.
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the resource was created.
+        terminatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Terminatedat
+          description: Timestamp when the resource was terminated.
+        gpuName:
+          type: string
+          title: Gpuname
+          description: Model of the GPU used in the resource.
+        gpuCount:
+          type: integer
+          title: Gpucount
+          description: Number of GPUs allocated to the resource.
+          examples:
+          - 1
+        socket:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Socket
+          description: Type of socket used by the GPU, if applicable.
+        priceHr:
+          type: number
+          title: Pricehr
+          description: Price per hour for using the resource (average).
+          examples:
+          - 1.23
+        userId:
+          type: string
+          title: Userid
+          description: ID of the user who owns the resource.
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: ID of the team to which the resource is assigned, if applicable.
+        totalBilledPrice:
+          type: number
+          title: Totalbilledprice
+          description: Total amount billed for this resource.
+          examples:
+          - 123.45
+      type: object
+      required:
+      - id
+      - name
+      - providerType
+      - type
+      - createdAt
+      - gpuName
+      - gpuCount
+      - priceHr
+      - userId
+      - totalBilledPrice
+      title: HistoryObj
+    PortMapping:
+      properties:
+        internal:
+          type: string
+          title: Internal
+          examples:
+          - '8080'
+        external:
+          type: string
+          title: External
+          examples:
+          - '1234'
+        protocol:
+          $ref: '#/components/schemas/ProtocolEnum'
+        usedBy:
+          anyOf:
+          - $ref: '#/components/schemas/UsedByEnum'
+          - type: 'null'
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+      type: object
+      required:
+      - internal
+      - external
+      - protocol
+      title: PortMapping
+    APIDeletePodResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/PodStatusEnum'
+          examples:
+          - TERMINATED
+      type: object
+      required:
+      - status
+      title: APIDeletePodResponse
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    ProviderTypeEnum:
+      type: string
+      enum:
+      - runpod
+      - fluidstack
+      - lambdalabs
+      - hyperstack
+      - oblivus
+      - cudocompute
+      - scaleway
+      - tensordock
+      - datacrunch
+      - latitude
+      - crusoecloud
+      - massedcompute
+      - akash
+      - primeintellect
+      - primecompute
+      - dc_impala
+      - dc_kudu
+      - dc_roan
+      - nebius
+      - dc_eland
+      - dc_wildebeest
+      - vultr
+      - dc_gnu
+      - denvr
+      title: ProviderTypeEnum
+    ResourceType:
+      type: string
+      enum:
+      - Instance
+      - Cluster
+      - Disk
+      - Sandbox
+      - Inference
+      - Image
+      - Training
+      title: ResourceType
+    PodRequestConfig:
+      properties:
+        name:
+          type: string
+          title: Name
+        cloudId:
+          type: string
+          title: Cloudid
+        gpuType:
+          $ref: '#/components/schemas/GPUType'
+          description: Model of the GPU allocated.
+        socket:
+          $ref: '#/components/schemas/GPUSocket'
+          description: Type of socket used by the GPU.
+        gpuCount:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Gpucount
+        diskSize:
+          anyOf:
+          - type: integer
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Disksize
+        vcpus:
+          anyOf:
+          - type: integer
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Vcpus
+        memory:
+          anyOf:
+          - type: integer
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Memory
+        maxPrice:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Maxprice
+        image:
+          $ref: '#/components/schemas/EnvironmentTypeEnum'
+          default: ubuntu_22_cuda_12
+        customTemplateId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Customtemplateid
+        dataCenterId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Datacenterid
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+        security:
+          anyOf:
+          - $ref: '#/components/schemas/SecurityType'
+          - type: 'null'
+        envVars:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/EnvVar'
+            type: array
+          - type: 'null'
+          title: Envvars
+        jupyterPassword:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Jupyterpassword
+        sshKeyId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sshkeyid
+        autoRestart:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Autorestart
+          default: false
+        prepaidForHr:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Prepaidforhr
+          description: Number of hours to prepay for (used for reserved instances)
+      additionalProperties: false
+      type: object
+      required:
+      - cloudId
+      - gpuType
+      - socket
+      - gpuCount
+      title: PodRequestConfig
+    EnvironmentTypeEnum:
+      type: string
+      enum:
+      - ubuntu_22_cuda_12
+      - cuda_12_1_pytorch_2_2
+      - cuda_11_8_pytorch_2_1
+      - cuda_12_1_pytorch_2_3
+      - cuda_12_1_pytorch_2_4
+      - cuda_12_4_pytorch_2_4
+      - cuda_12_4_pytorch_2_5
+      - cuda_12_4_pytorch_2_6
+      - cuda_12_6_pytorch_2_7
+      - stable_diffusion
+      - axolotl
+      - bittensor
+      - hivemind
+      - petals_llama
+      - vllm_llama_8b
+      - vllm_llama_70b
+      - vllm_llama_405b
+      - custom_template
+      - flux
+      - prime_rl
+      title: EnvironmentTypeEnum
+    GenericPaginationResponse_List_HistoryObj__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/HistoryObj'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[HistoryObj]]
+    InstanceResources:
+      properties:
+        memory:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Memory
+          description: RAM available (in GB)
+          examples:
+          - '128'
+        disk:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Disk
+          description: Total disk space (in GB)
+          examples:
+          - '1000'
+        shared_disk:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Shared Disk
+          description: Total external shared disk space (in GB)
+          examples:
+          - '1000'
+        vcpus:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Vcpus
+          description: vCPUs available
+          examples:
+          - '32'
+      type: object
+      title: InstanceResources
+    GenericResponse_List_APIPodStatusResponse__:
+      properties:
+        data:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/APIPodStatusResponse'
+            type: array
+          - type: 'null'
+          title: Data
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[List[APIPodStatusResponse]]
+    APIPodStatusResponse:
+      properties:
+        podId:
+          type: string
+          title: Podid
+          description: Unique identifier for the pod.
+        providerType:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+          description: ID of the provider.
+        status:
+          $ref: '#/components/schemas/PodStatusEnum'
+          description: Current status of the pod.
+        sshConnection:
+          anyOf:
+          - type: string
+          - items:
+              anyOf:
+              - type: string
+              - type: 'null'
+            type: array
+          - type: 'null'
+          title: Sshconnection
+          description: SSH connection details for the pod, which may be a string or list of strings (if there are multiple nodes).
+          examples:
+          - root@135.23.125.123 -p 22
+        ip:
+          anyOf:
+          - type: string
+          - items:
+              anyOf:
+              - type: string
+              - type: 'null'
+            type: array
+          - type: 'null'
+          title: Ip
+          description: IP address or list (if there are multiple nodes) of IP addresses associated with the pod.
+          examples:
+          - 135.23.125.123
+        installationStatus:
+          anyOf:
+          - $ref: '#/components/schemas/InstallationStatusEnum'
+          - type: 'null'
+          description: Installation status of the pod, based on InstallationStatusEnum.
+        installationFailure:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Installationfailure
+          description: Details about any installation failures that occurred, if applicable.
+        installationProgress:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Installationprogress
+          description: Percentage of the installation process that has been completed, if available.
+      type: object
+      required:
+      - podId
+      - providerType
+      - status
+      title: APIPodStatusResponse
+    Body_create_pod_api_v1_pods__post:
+      properties:
+        pod:
+          $ref: '#/components/schemas/PodRequestConfig'
+        provider:
+          $ref: '#/components/schemas/ProviderConfig'
+        disks:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Disks
+        team:
+          anyOf:
+          - $ref: '#/components/schemas/TeamConfig'
+          - type: 'null'
+        team_member_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Team Member Ids
+        shared_with_team:
+          type: boolean
+          title: Shared With Team
+          default: false
+      type: object
+      required:
+      - pod
+      - provider
+      title: Body_create_pod_api_v1_pods__post
+    ProviderConfig:
+      properties:
+        type:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+      type: object
+      required:
+      - type
+      title: ProviderConfig
+    EnvVar:
+      properties:
+        key:
+          type: string
+          title: Key
+          description: Environment variable key
+        value:
+          type: string
+          title: Value
+          description: Environment variable value
+      type: object
+      required:
+      - key
+      - value
+      title: EnvVar
+    PodTypeEnum:
+      type: string
+      enum:
+      - HOSTED
+      - EXTERNAL
+      title: PodTypeEnum
+    UsedByEnum:
+      type: string
+      enum:
+      - SSH
+      - JUPYTER_NOTEBOOK
+      - WEB_SERVER
+      title: UsedByEnum
+    APIPodConfig:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier for the pod, generated as a UUID.
+        userId:
+          type: string
+          title: Userid
+          description: ID of the user associated with this pod, if applicable.
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: ID of the team owning this pod, if applicable.
+        walletId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Walletid
+          description: ID of the wallet associated with this pod for billing or resource tracking.
+        name:
+          type: string
+          title: Name
+          description: Name of the pod.
+        type:
+          $ref: '#/components/schemas/PodTypeEnum'
+          description: Type of the pod, based on PodTypeEnum.
+          default: HOSTED
+          deprecated: true
+        providerType:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+          description: Type of provider associated with the pod, based on ProviderTypeEnum.
+        status:
+          $ref: '#/components/schemas/PodStatusEnum'
+          description: Current status of the pod, based on PodStatusEnum.
+          default: PROVISIONING
+        installationStatus:
+          $ref: '#/components/schemas/InstallationStatusEnum'
+          description: Installation status of the pod, based on InstallationStatusEnum.
+          default: PENDING
+        installationFailure:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Installationfailure
+          description: Details about any installation failures that occurred, if applicable.
+        installationProgress:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Installationprogress
+          description: Percentage of the installation process completed.
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the pod was created.
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+          description: Timestamp when the pod was last updated.
+        terminatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Terminatedat
+          description: Timestamp when the pod was terminated.
+        gpuName:
+          $ref: '#/components/schemas/GPUType'
+          description: Model of the GPU allocated.
+        gpuCount:
+          type: integer
+          title: Gpucount
+          description: Number of GPUs allocated to the node.
+          examples:
+          - 1
+        socket:
+          $ref: '#/components/schemas/GPUSocket'
+          description: Type of socket used by the GPU.
+        priceHr:
+          type: number
+          title: Pricehr
+          description: Hourly price for running the pod.
+          examples:
+          - 1.23
+        stoppedPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Stoppedpricehr
+          description: Hourly price when the pod is stopped. If empty then `priceHr` is used.
+          examples:
+          - 0.005
+        provisioningPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Provisioningpricehr
+          description: Hourly price during the provisioning process. If empty then `priceHr` is used.
+          default: 0.0
+        environmentType:
+          $ref: '#/components/schemas/EnvironmentTypeEnum'
+          description: Type of image selected for the pod.
+          default: ubuntu_22_cuda_12
+        customTemplateId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Customtemplateid
+          description: ID of the custom template applied to the pod, if applicable.
+        clusterId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clusterid
+          description: ID of the cluster to which the pod belongs.
+        primePortMapping:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/PortMapping'
+            type: array
+          - type: 'null'
+          title: Primeportmapping
+          description: Port mapping.
+          default: []
+        sshConnection:
+          anyOf:
+          - type: string
+          - items:
+              anyOf:
+              - type: string
+              - type: 'null'
+            type: array
+          - type: 'null'
+          title: Sshconnection
+          description: SSH connection/connections details.
+        ip:
+          anyOf:
+          - type: string
+          - items:
+              anyOf:
+              - type: string
+              - type: 'null'
+            type: array
+          - type: 'null'
+          title: Ip
+          description: IP address/addresses of the instance.
+        resources:
+          anyOf:
+          - $ref: '#/components/schemas/InstanceResources'
+          - type: 'null'
+          description: Instance resources.
+        attachedResources:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/AttachedResources'
+            type: array
+          - type: 'null'
+          title: Attachedresources
+          description: Instance attached resources.
+          default: []
+        isSpot:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Isspot
+          description: Whether the instance is spot.
+        autoRestart:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Autorestart
+          description: Automatically restart the instance.
+      type: object
+      required:
+      - userId
+      - name
+      - providerType
+      - gpuName
+      - gpuCount
+      - socket
+      - priceHr
+      title: APIPodConfig
+    GPUSocket:
+      type: string
+      enum:
+      - PCIe
+      - SXM2
+      - SXM3
+      - SXM4
+      - SXM5
+      - SXM6
+      title: GPUSocket
+    GenericPaginationResponse_List_APIPodConfig__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/APIPodConfig'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[APIPodConfig]]
+    AttachableResourceType:
+      type: string
+      enum:
+      - DISK
+      const: DISK
+      title: AttachableResourceType
+    ProtocolEnum:
+      type: string
+      enum:
+      - TCP
+      - UDP
+      title: ProtocolEnum
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
