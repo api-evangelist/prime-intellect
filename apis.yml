@@ -1,161 +1,663 @@
 aid: prime-intellect
 url: https://raw.githubusercontent.com/api-evangelist/prime-intellect/refs/heads/main/apis.yml
 apis:
-  - aid: prime-intellect:prime-intellect-compute-api
-    name: Prime Intellect Compute API
-    tags:
-      - GPU Compute
-      - Marketplace
-      - Pods
-      - Disks
-      - SSH Keys
-      - Availability
-    humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
-    baseURL: https://api.primeintellect.ai
-    properties:
-      - url: https://docs.primeintellect.ai/api-reference/introduction
-        type: Documentation
-      - url: https://docs.primeintellect.ai/api-reference/managing-pods
-        type: Documentation
-      - url: https://docs.primeintellect.ai/api-reference/managing-disks
-        type: Documentation
-      - url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
-        type: Documentation
-      - url: openapi/prime-intellect-compute-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/prime-intellect-pod-schema.json
-        type: JSONSchema
-      - url: json-ld/prime-intellect-context.jsonld
-        type: JSONLD
-    description: >-
-      Programmatic access to the Prime Intellect compute marketplace. Query GPU availability across 50+ providers,
-      provision and manage on-demand or multi-node GPU pods (1-256 GPUs across H100, H200, B200, B300, A100), attach
-      persistent network disks, and manage SSH keys for pod access. Backs the `prime pods`, `prime availability`, and
-      `prime disks` CLI commands.
-  - aid: prime-intellect:prime-intellect-sandbox-api
-    name: Prime Intellect Sandbox API
-    tags:
-      - Sandbox
-      - Code Execution
-      - Agents
-      - Tunnels
-    humanURL: https://docs.primeintellect.ai/sandboxes/overview
-    baseURL: https://api.primeintellect.ai
-    properties:
-      - url: https://docs.primeintellect.ai/sandboxes/overview
-        type: Documentation
-      - url: https://docs.primeintellect.ai/sandboxes/sdk
-        type: Documentation
-      - url: https://docs.primeintellect.ai/sandboxes/cli
-        type: Documentation
-      - url: https://docs.primeintellect.ai/sandboxes/tunnel
-        type: Documentation
-      - url: openapi/prime-intellect-sandbox-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/prime-intellect-sandbox-schema.json
-        type: JSONSchema
-    description: >-
-      Secure remote code-execution sandboxes for AI agents. Create and manage Python-3.11-slim-based sandboxes, expose
-      ports for HTTP services running inside the sandbox, open SSH sessions, pull rich error context for failures, and
-      provision reverse tunnels back into a sandbox from an external network. Available as a lightweight
-      `prime-sandboxes` Python package (~50KB) in addition to the full `prime` CLI/SDK.
-  - aid: prime-intellect:prime-intellect-training-api
-    name: Prime Intellect Training API
-    tags:
-      - Reinforcement Learning
-      - Training
-      - Fine-Tuning
-      - Foundation Models
-      - Billing
-    humanURL: https://docs.primeintellect.ai/hosted-training/what-is-lab
-    baseURL: https://api.primeintellect.ai
-    properties:
-      - url: https://docs.primeintellect.ai/hosted-training/what-is-lab
-        type: Documentation
-      - url: https://docs.primeintellect.ai/hosted-training/getting-started
-        type: Documentation
-      - url: https://docs.primeintellect.ai/hosted-training/end-to-end-run
-        type: Documentation
-      - url: https://docs.primeintellect.ai/hosted-training/models-and-pricing
-        type: Pricing
-      - url: openapi/prime-intellect-training-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/prime-intellect-training-run-schema.json
-        type: JSONSchema
-    description: >-
-      Hosted reinforcement-learning post-training service ("Lab"). Launch dedicated training runs against a catalog of
-      base models — Qwen3.5 (0.8B through 397B-A17B), Llama 1B/3B Instruct, NVIDIA Nemotron 30B/120B, OpenAI gpt-oss
-      20B/120B — drive them with environments from the Environments Hub, and retrieve token-level usage + USD cost per
-      run from the billing endpoints. Pricing is per-million-token across separate input, output, and training meters.
-  - aid: prime-intellect:prime-intellect-evaluations-api
-    name: Prime Intellect Evaluations API
-    tags:
-      - Evaluations
-      - Benchmarks
-      - Reinforcement Learning
-      - Environments
-    humanURL: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
-    baseURL: https://api.primeintellect.ai
-    properties:
-      - url: https://docs.primeintellect.ai/tutorials-environments/environments
-        type: Documentation
-      - url: https://docs.primeintellect.ai/tutorials-environments/evaluating
-        type: Documentation
-      - url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
-        type: Documentation
-      - url: openapi/prime-intellect-evaluations-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/prime-intellect-evaluation-schema.json
-        type: JSONSchema
-    description: >-
-      Create, manage, and submit samples to evaluations against the Prime Intellect Environments Hub (2,500+ RL
-      environments). Supports both client-driven evaluations (push samples, finalize, retrieve) and fully hosted
-      evaluations executed by Prime Intellect with logs, cancellation, and selectable inference models. Backs `prime
-      eval` CLI commands.
-  - aid: prime-intellect:prime-intellect-inference-api
-    name: Prime Intellect Inference API
-    tags:
-      - Inference
-      - OpenAI Compatible
-      - Foundation Models
-      - LLM
-    humanURL: https://docs.primeintellect.ai/inference/overview
-    baseURL: https://api.pinference.ai/api/v1
-    properties:
-      - url: https://docs.primeintellect.ai/inference/overview
-        type: Documentation
-      - url: https://docs.primeintellect.ai/inference/usage
-        type: Documentation
-      - url: https://docs.primeintellect.ai/inference/adapter-deployments
-        type: Documentation
-      - url: openapi/prime-intellect-inference-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      OpenAI-compatible inference API for hosted frontier and open models served at api.pinference.ai. Supports
-      streaming chat completions, the full set of OpenAI parameters (temperature, top_p, max_tokens, logprobs), and
-      returns a `usage` object with input/output token counts and USD cost on every response. LoRA adapters can be
-      served alongside base models via 1-click deployments.
-  - aid: prime-intellect:prime-intellect-platform-api
-    name: Prime Intellect Platform API
-    tags:
-      - Account
-      - Teams
-      - Secrets
-      - Images
-      - Administration
-    humanURL: https://docs.primeintellect.ai/api-reference/teams
-    baseURL: https://api.primeintellect.ai
-    properties:
-      - url: https://docs.primeintellect.ai/api-reference/teams
-        type: Documentation
-      - url: https://docs.primeintellect.ai/api-reference/api-keys
-        type: Authentication
-      - url: openapi/prime-intellect-platform-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Account, team, secrets, image, and cluster administration. Whoami and team membership, secret CRUD for use inside
-      pods and sandboxes, Docker image builds with public/private visibility, registry credential checks, FRP plugin
-      validation, and admin-only cluster + node-log endpoints.
+- aid: prime-intellect:prime-intellect-sandbox-api
+  name: Prime Intellect Sandbox API
+  tags:
+  - Sandbox
+  - Code Execution
+  - Agents
+  - Tunnels
+  humanURL: https://docs.primeintellect.ai/sandboxes/overview
+  baseURL: https://api.primeintellect.ai
+  properties:
+  - url: https://docs.primeintellect.ai/sandboxes/overview
+    type: Documentation
+  - url: https://docs.primeintellect.ai/sandboxes/sdk
+    type: Documentation
+  - url: https://docs.primeintellect.ai/sandboxes/cli
+    type: Documentation
+  - url: https://docs.primeintellect.ai/sandboxes/tunnel
+    type: Documentation
+  - url: openapi/prime-intellect-sandbox-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/prime-intellect-sandbox-schema.json
+    type: JSONSchema
+  description: >-
+    Secure remote code-execution sandboxes for AI agents. Create and manage Python-3.11-slim-based sandboxes,
+    expose ports for HTTP services running inside the sandbox, open SSH sessions, pull rich error context
+    for failures, and provision reverse tunnels back into a sandbox from an external network. Available
+    as a lightweight `prime-sandboxes` Python package (~50KB) in addition to the full `prime` CLI/SDK.
+- aid: prime-intellect:prime-intellect-training-api
+  name: Prime Intellect Training API
+  tags:
+  - Reinforcement Learning
+  - Training
+  - Fine-Tuning
+  - Foundation Models
+  - Billing
+  humanURL: https://docs.primeintellect.ai/hosted-training/what-is-lab
+  baseURL: https://api.primeintellect.ai
+  properties:
+  - url: https://docs.primeintellect.ai/hosted-training/what-is-lab
+    type: Documentation
+  - url: https://docs.primeintellect.ai/hosted-training/getting-started
+    type: Documentation
+  - url: https://docs.primeintellect.ai/hosted-training/end-to-end-run
+    type: Documentation
+  - url: https://docs.primeintellect.ai/hosted-training/models-and-pricing
+    type: Pricing
+  - url: openapi/prime-intellect-training-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/prime-intellect-training-run-schema.json
+    type: JSONSchema
+  description: >-
+    Hosted reinforcement-learning post-training service ("Lab"). Launch dedicated training runs against
+    a catalog of base models — Qwen3.5 (0.8B through 397B-A17B), Llama 1B/3B Instruct, NVIDIA Nemotron
+    30B/120B, OpenAI gpt-oss 20B/120B — drive them with environments from the Environments Hub, and retrieve
+    token-level usage + USD cost per run from the billing endpoints. Pricing is per-million-token across
+    separate input, output, and training meters.
+- aid: prime-intellect:prime-intellect-inference-api
+  name: Prime Intellect Inference API
+  tags:
+  - Inference
+  - OpenAI Compatible
+  - Foundation Models
+  - LLM
+  humanURL: https://docs.primeintellect.ai/inference/overview
+  baseURL: https://api.pinference.ai/api/v1
+  properties:
+  - url: https://docs.primeintellect.ai/inference/overview
+    type: Documentation
+  - url: https://docs.primeintellect.ai/inference/usage
+    type: Documentation
+  - url: https://docs.primeintellect.ai/inference/adapter-deployments
+    type: Documentation
+  - url: openapi/prime-intellect-inference-api-openapi.yml
+    type: OpenAPI
+  description: >-
+    OpenAI-compatible inference API for hosted frontier and open models served at api.pinference.ai. Supports
+    streaming chat completions, the full set of OpenAI parameters (temperature, top_p, max_tokens, logprobs),
+    and returns a `usage` object with input/output token counts and USD cost on every response. LoRA adapters
+    can be served alongside base models via 1-click deployments.
+- aid: prime-intellect:prime-intellect-admin-clusters-api
+  name: Prime Intellect admin-clusters API
+  description: The admin-clusters API from Prime Intellect — 4 operation(s) for admin-clusters.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - admin-clusters
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-admin-clusters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-admin-users-api
+  name: Prime Intellect admin-users API
+  description: The admin-users API from Prime Intellect — 1 operation(s) for admin-users.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - admin-users
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-admin-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-availability-api
+  name: Prime Intellect Availability API
+  description: The Availability API from Prime Intellect — 7 operation(s) for availability.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - Availability
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-availability-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-billing-api
+  name: Prime Intellect Billing API
+  description: The Billing API from Prime Intellect — 2 operation(s) for billing.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-billing-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-disks-api
+  name: Prime Intellect Disks API
+  description: The Disks API from Prime Intellect — 2 operation(s) for disks.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - Disks
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-disks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-evals-api
+  name: Prime Intellect evals API
+  description: The evals API from Prime Intellect — 5 operation(s) for evals.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - evals
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-evals-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-feedback-api
+  name: Prime Intellect Feedback API
+  description: The Feedback API from Prime Intellect — 1 operation(s) for feedback.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - Feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-feedback-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-frp-plugin-api
+  name: Prime Intellect FRP Plugin API
+  description: The FRP Plugin API from Prime Intellect — 1 operation(s) for frp plugin.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - FRP Plugin
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-frp-plugin-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-hosted-evaluations-api
+  name: Prime Intellect hosted-evaluations API
+  description: The hosted-evaluations API from Prime Intellect — 4 operation(s) for hosted-evaluations.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - hosted-evaluations
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-hosted-evaluations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-images-api
+  name: Prime Intellect Images API
+  description: The Images API from Prime Intellect — 7 operation(s) for images.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - Images
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-images-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-pods-api
+  name: Prime Intellect Pods API
+  description: The Pods API from Prime Intellect — 5 operation(s) for pods.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - Pods
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-pods-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-secrets-api
+  name: Prime Intellect Secrets API
+  description: The Secrets API from Prime Intellect — 2 operation(s) for secrets.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - Secrets
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-secrets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-ssh-keys-api
+  name: Prime Intellect SSH Keys API
+  description: The SSH Keys API from Prime Intellect — 2 operation(s) for ssh keys.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - SSH Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-ssh-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-teams-api
+  name: Prime Intellect teams API
+  description: The teams API from Prime Intellect — 1 operation(s) for teams.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - teams
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-teams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-template-api
+  name: Prime Intellect Template API
+  description: The Template API from Prime Intellect — 2 operation(s) for template.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - Template
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-template-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-tunnel-api
+  name: Prime Intellect Tunnel API
+  description: The Tunnel API from Prime Intellect — 2 operation(s) for tunnel.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - Tunnel
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-tunnel-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
+- aid: prime-intellect:prime-intellect-user-api
+  name: Prime Intellect user API
+  description: The user API from Prime Intellect — 3 operation(s) for user.
+  humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
+  baseURL: https://api.primeintellect.ai
+  tags:
+  - user
+  properties:
+  - type: OpenAPI
+    url: openapi/prime-intellect-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/introduction
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-pods
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/managing-disks
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/check-gpu-availability
+  - type: JSONSchema
+    url: json-schema/prime-intellect-pod-schema.json
+  - type: JSONLD
+    url: json-ld/prime-intellect-context.jsonld
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/environments
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/evaluating
+  - type: Documentation
+    url: https://docs.primeintellect.ai/tutorials-environments/hosted-evaluations
+  - type: JSONSchema
+    url: json-schema/prime-intellect-evaluation-schema.json
+  - type: Documentation
+    url: https://docs.primeintellect.ai/api-reference/teams
+  - type: Authentication
+    url: https://docs.primeintellect.ai/api-reference/api-keys
 name: Prime Intellect
 description: >-
   Prime Intellect is a San Francisco–based startup building an open and decentralized stack for developing and improving
@@ -185,7 +687,20 @@ tags:
   - Open Source
   - Agents
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/prime-intellect.png
 access: 3rd-Party
 type: Index
 position: Provider
@@ -193,6 +708,8 @@ specificationVersion: '0.20'
 created: '2026-05-25'
 modified: '2026-05-25'
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/prime-intellect/overview
   - type: AgenticAccess
     url: agentic-access/prime-intellect-agentic-access.yml
   - type: VulnerabilityDisclosure
