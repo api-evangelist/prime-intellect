@@ -1,0 +1,3196 @@
+{
+  "info": {
+    "_postman_id": "1e2c4e15-687e-4125-9231-d4c19faced52",
+    "name": "Prime Intellect Compute admin-clusters Sandbox API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:40.000Z",
+    "updatedAt": "2026-07-28T02:40:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1e2c4e15-687e-4125-9231-d4c19faced52"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "sandbox",
+              "item": [
+                {
+                  "name": "expose",
+                  "item": [
+                    {
+                      "name": "all",
+                      "item": [
+                        {
+                          "name": "List All Exposed Ports Endpoint",
+                          "id": "53a51368-8bc3-4b64-aa32-e6caeea8b186",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/expose/all",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                "expose",
+                                "all"
+                              ]
+                            },
+                            "description": "List all exposed ports across all sandboxes for the current user"
+                          },
+                          "response": [
+                            {
+                              "id": "8c0da030-b5db-4846-8e12-c8fe3610d7e4",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/expose/all",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    "expose",
+                                    "all"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"exposures\": [\n    {\n      \"exposure_id\": \"<string>\",\n      \"sandbox_id\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"url\": \"<string>\",\n      \"tls_socket\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"external_port\": \"<integer>\",\n      \"external_endpoint\": \"<string>\",\n      \"created_at\": \"<string>\"\n    },\n    {\n      \"exposure_id\": \"<string>\",\n      \"sandbox_id\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"url\": \"<string>\",\n      \"tls_socket\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"external_port\": \"<integer>\",\n      \"external_endpoint\": \"<string>\",\n      \"created_at\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-8c0da030-b5db-4846-8e12-c8fe3610d7e4"
+                            },
+                            {
+                              "id": "ddef2678-40b9-4dcc-bdc8-637fce12819c",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/expose/all",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    "expose",
+                                    "all"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-ddef2678-40b9-4dcc-bdc8-637fce12819c"
+                            },
+                            {
+                              "id": "e2d014e4-cc28-42aa-ac58-4c98b27d72c0",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/expose/all",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    "expose",
+                                    "all"
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-e2d014e4-cc28-42aa-ac58-4c98b27d72c0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-53a51368-8bc3-4b64-aa32-e6caeea8b186"
+                        }
+                      ],
+                      "id": "f1eb3dc3-16ba-4000-943c-e9ecb657ea7e",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-f1eb3dc3-16ba-4000-943c-e9ecb657ea7e"
+                    }
+                  ],
+                  "id": "b9e5770f-7eaa-4c94-9bec-c452b299c675",
+                  "createdAt": "2026-07-28T02:40:41.000Z",
+                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                  "uid": "35240-b9e5770f-7eaa-4c94-9bec-c452b299c675"
+                },
+                {
+                  "name": "{sandbox_id}",
+                  "item": [
+                    {
+                      "name": "auth",
+                      "item": [
+                        {
+                          "name": "Get Sandbox Auth Token",
+                          "id": "275b27d8-ff0e-45b2-aee3-9d1ae42cfe4e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/auth",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id",
+                                "auth"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "78d3716c-5a86-4f3d-98df-a7f84030c958",
+                                  "key": "sandbox_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Get a token for direct sandbox access."
+                          },
+                          "response": [
+                            {
+                              "id": "0d2efa40-fdbb-4bdd-9434-33f162a451e0",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/auth",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "auth"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"token\": \"<string>\",\n  \"gateway_url\": \"<string>\",\n  \"user_ns\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"expires_at\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-0d2efa40-fdbb-4bdd-9434-33f162a451e0"
+                            },
+                            {
+                              "id": "d7a65e5d-f857-42f0-8782-7117d22047ce",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/auth",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "auth"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-d7a65e5d-f857-42f0-8782-7117d22047ce"
+                            },
+                            {
+                              "id": "69c88e9d-a361-4244-a9e1-fd7cf5a31728",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/auth",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "auth"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-69c88e9d-a361-4244-a9e1-fd7cf5a31728"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-275b27d8-ff0e-45b2-aee3-9d1ae42cfe4e"
+                        }
+                      ],
+                      "id": "81504911-39c2-49e7-9cc4-96f0485b68c4",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-81504911-39c2-49e7-9cc4-96f0485b68c4"
+                    },
+                    {
+                      "name": "error-context",
+                      "item": [
+                        {
+                          "name": "Get Sandbox Error Context Endpoint",
+                          "id": "c15814f4-0e78-4220-b15c-805bca7c2321",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/error-context",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id",
+                                "error-context"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "567b4e19-a3dc-429c-a887-abd3334e2047",
+                                  "key": "sandbox_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Get error context for a sandbox (optimized for SDK error handling flows)"
+                          },
+                          "response": [
+                            {
+                              "id": "07697576-56b0-41fe-b366-7abf0b6293d0",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/error-context",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "error-context"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<string>\",\n  \"errorType\": \"<string>\",\n  \"errorMessage\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-07697576-56b0-41fe-b366-7abf0b6293d0"
+                            },
+                            {
+                              "id": "d8b52959-92c2-4f17-b0db-63ed74f6f1c9",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/error-context",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "error-context"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-d8b52959-92c2-4f17-b0db-63ed74f6f1c9"
+                            },
+                            {
+                              "id": "b3af419a-182b-4f09-8086-cb1f1d468ade",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/error-context",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "error-context"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-b3af419a-182b-4f09-8086-cb1f1d468ade"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-c15814f4-0e78-4220-b15c-805bca7c2321"
+                        }
+                      ],
+                      "id": "80e9c575-b5aa-4d65-b3f9-945c7d604745",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-80e9c575-b5aa-4d65-b3f9-945c7d604745"
+                    },
+                    {
+                      "name": "expose",
+                      "item": [
+                        {
+                          "name": "{exposure_id}",
+                          "item": [
+                            {
+                              "name": "Unexpose Port Endpoint",
+                              "id": "c427c494-7e49-4e97-a21d-b040e75c52d3",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose/:exposure_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "expose",
+                                    ":exposure_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "2dcf3e74-4e34-484a-9896-b7bc4b910497",
+                                      "key": "sandbox_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "046c1d42-6c23-4fc0-847a-7f5e83dc7a1a",
+                                      "key": "exposure_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Unexpose a previously exposed port"
+                              },
+                              "response": [
+                                {
+                                  "id": "9ff7c8bf-3216-45db-8bdd-58fc1615dd1c",
+                                  "name": "Successful Response",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose/:exposure_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "sandbox",
+                                        ":sandbox_id",
+                                        "expose",
+                                        ":exposure_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "sandbox_id"
+                                        },
+                                        {
+                                          "key": "exposure_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:40:41.000Z",
+                                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                                  "uid": "35240-9ff7c8bf-3216-45db-8bdd-58fc1615dd1c"
+                                },
+                                {
+                                  "id": "138e72d0-ec70-42ff-bb9f-95b92a8ec9ad",
+                                  "name": "Authorization failed",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose/:exposure_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "sandbox",
+                                        ":sandbox_id",
+                                        "expose",
+                                        ":exposure_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "sandbox_id"
+                                        },
+                                        {
+                                          "key": "exposure_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:40:41.000Z",
+                                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                                  "uid": "35240-138e72d0-ec70-42ff-bb9f-95b92a8ec9ad"
+                                },
+                                {
+                                  "id": "447889b9-2926-431f-a40b-b13853d3b6dd",
+                                  "name": "Invalid request data",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose/:exposure_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "sandbox",
+                                        ":sandbox_id",
+                                        "expose",
+                                        ":exposure_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "sandbox_id"
+                                        },
+                                        {
+                                          "key": "exposure_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:40:41.000Z",
+                                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                                  "uid": "35240-447889b9-2926-431f-a40b-b13853d3b6dd"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-c427c494-7e49-4e97-a21d-b040e75c52d3"
+                            }
+                          ],
+                          "id": "ed36661b-add1-4640-91c7-5b2bfc4f704d",
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-ed36661b-add1-4640-91c7-5b2bfc4f704d"
+                        },
+                        {
+                          "name": "Expose Port Endpoint",
+                          "id": "f1a5d084-bec2-4a2f-bd2e-938a5063aaf4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"port\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"protocol\": \"HTTP\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id",
+                                "expose"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "cb91f14e-c991-4f7f-83d0-6f667cfd97a9",
+                                  "key": "sandbox_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Expose a port from a sandbox"
+                          },
+                          "response": [
+                            {
+                              "id": "cdff645b-2149-4fae-b6a3-40f003b2d2be",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"port\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"protocol\": \"HTTP\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "expose"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"exposure_id\": \"<string>\",\n  \"sandbox_id\": \"<string>\",\n  \"port\": \"<integer>\",\n  \"protocol\": \"<string>\",\n  \"url\": \"<string>\",\n  \"tls_socket\": \"<string>\",\n  \"name\": \"<string>\",\n  \"external_port\": \"<integer>\",\n  \"external_endpoint\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-cdff645b-2149-4fae-b6a3-40f003b2d2be"
+                            },
+                            {
+                              "id": "2e35e5ca-7781-4cd6-86e1-1c9ee4adac8e",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"port\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"protocol\": \"HTTP\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "expose"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-2e35e5ca-7781-4cd6-86e1-1c9ee4adac8e"
+                            },
+                            {
+                              "id": "9ab4372a-17c6-4cfa-8cee-87950ddaf1ae",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"port\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"protocol\": \"HTTP\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "expose"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-9ab4372a-17c6-4cfa-8cee-87950ddaf1ae"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-f1a5d084-bec2-4a2f-bd2e-938a5063aaf4"
+                        },
+                        {
+                          "name": "List Exposed Ports Endpoint",
+                          "id": "4142015f-833a-4ba4-ad4d-9a6f2a325c93",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id",
+                                "expose"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "db35cb8b-994f-480a-80bd-7ba3f40d2355",
+                                  "key": "sandbox_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "List all exposed ports for a sandbox"
+                          },
+                          "response": [
+                            {
+                              "id": "debb3815-d5e7-4f68-9983-9099fa6793f0",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "expose"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"exposures\": [\n    {\n      \"exposure_id\": \"<string>\",\n      \"sandbox_id\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"url\": \"<string>\",\n      \"tls_socket\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"external_port\": \"<integer>\",\n      \"external_endpoint\": \"<string>\",\n      \"created_at\": \"<string>\"\n    },\n    {\n      \"exposure_id\": \"<string>\",\n      \"sandbox_id\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"url\": \"<string>\",\n      \"tls_socket\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"external_port\": \"<integer>\",\n      \"external_endpoint\": \"<string>\",\n      \"created_at\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-debb3815-d5e7-4f68-9983-9099fa6793f0"
+                            },
+                            {
+                              "id": "70983912-f1d3-4f04-90d4-6a7f6db010ca",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "expose"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-70983912-f1d3-4f04-90d4-6a7f6db010ca"
+                            },
+                            {
+                              "id": "f28f4733-4d58-475a-9440-af4bd367edc0",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/expose",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "expose"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-f28f4733-4d58-475a-9440-af4bd367edc0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-4142015f-833a-4ba4-ad4d-9a6f2a325c93"
+                        }
+                      ],
+                      "id": "12890806-b597-4d8e-8bbd-324def6bcc02",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-12890806-b597-4d8e-8bbd-324def6bcc02"
+                    },
+                    {
+                      "name": "logs",
+                      "item": [
+                        {
+                          "name": "Get Sandbox Logs Endpoint",
+                          "id": "2d320b8b-02a1-49eb-90ec-d0cfbfb46698",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/logs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id",
+                                "logs"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "fefcac55-1443-4ea9-a6c0-0e6aaa763371",
+                                  "key": "sandbox_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Get sandbox logs"
+                          },
+                          "response": [
+                            {
+                              "id": "c925d2d9-37fc-4ece-8a0a-8cb9ff78e02f",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/logs",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "logs"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"logs\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-c925d2d9-37fc-4ece-8a0a-8cb9ff78e02f"
+                            },
+                            {
+                              "id": "a04d37c9-6784-4400-a241-d9460fafc7b5",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/logs",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "logs"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-a04d37c9-6784-4400-a241-d9460fafc7b5"
+                            },
+                            {
+                              "id": "fa953e42-9e99-470a-bbe0-f39b7447fecc",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/logs",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "logs"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-fa953e42-9e99-470a-bbe0-f39b7447fecc"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-2d320b8b-02a1-49eb-90ec-d0cfbfb46698"
+                        }
+                      ],
+                      "id": "e69e08c0-197d-4929-a401-3288d6fcc4dc",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-e69e08c0-197d-4929-a401-3288d6fcc4dc"
+                    },
+                    {
+                      "name": "ssh-session",
+                      "item": [
+                        {
+                          "name": "{session_id}",
+                          "item": [
+                            {
+                              "name": "Close Ssh Session Endpoint",
+                              "id": "af29fd9b-8c57-4ea3-b3ae-35639c39fd3a",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/ssh-session/:session_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "ssh-session",
+                                    ":session_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "79e93784-88d8-4fef-b7fb-ec460e15cfc9",
+                                      "key": "sandbox_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "254bf374-ab4e-4032-bdc8-55d86a769e2c",
+                                      "key": "session_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Close an SSH session (removes the TCP exposure)."
+                              },
+                              "response": [
+                                {
+                                  "id": "1f85baf9-6cc3-46f3-ae5f-e53eaf01295a",
+                                  "name": "Successful Response",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/ssh-session/:session_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "sandbox",
+                                        ":sandbox_id",
+                                        "ssh-session",
+                                        ":session_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "sandbox_id"
+                                        },
+                                        {
+                                          "key": "session_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:40:41.000Z",
+                                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                                  "uid": "35240-1f85baf9-6cc3-46f3-ae5f-e53eaf01295a"
+                                },
+                                {
+                                  "id": "4f1b1c1b-44c4-4757-b732-a22914e17795",
+                                  "name": "Authorization failed",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/ssh-session/:session_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "sandbox",
+                                        ":sandbox_id",
+                                        "ssh-session",
+                                        ":session_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "sandbox_id"
+                                        },
+                                        {
+                                          "key": "session_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:40:41.000Z",
+                                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                                  "uid": "35240-4f1b1c1b-44c4-4757-b732-a22914e17795"
+                                },
+                                {
+                                  "id": "76a0d5b3-2fe8-4682-b63c-b124259375a3",
+                                  "name": "Invalid request data",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/ssh-session/:session_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "sandbox",
+                                        ":sandbox_id",
+                                        "ssh-session",
+                                        ":session_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "sandbox_id"
+                                        },
+                                        {
+                                          "key": "session_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:40:41.000Z",
+                                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                                  "uid": "35240-76a0d5b3-2fe8-4682-b63c-b124259375a3"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-af29fd9b-8c57-4ea3-b3ae-35639c39fd3a"
+                            }
+                          ],
+                          "id": "571e1fd8-a77d-45cb-a87a-07812ec8a753",
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-571e1fd8-a77d-45cb-a87a-07812ec8a753"
+                        },
+                        {
+                          "name": "Create Ssh Session Endpoint",
+                          "id": "943bc4aa-9554-4465-8f5c-bc840d585fa7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"ttl_seconds\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/ssh-session",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id",
+                                "ssh-session"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1342fea2-4a12-40f4-9004-98498cfc14d4",
+                                  "key": "sandbox_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Create an SSH session using the SSH sidecar (no sshd required in the sandbox image)."
+                          },
+                          "response": [
+                            {
+                              "id": "fdf5177b-87b0-4696-9ba0-afcf9cf789fe",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"ttl_seconds\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/ssh-session",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "ssh-session"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"session_id\": \"<string>\",\n  \"exposure_id\": \"<string>\",\n  \"sandbox_id\": \"<string>\",\n  \"host\": \"<string>\",\n  \"port\": \"<integer>\",\n  \"external_endpoint\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"ttl_seconds\": \"<integer>\",\n  \"gateway_url\": \"<string>\",\n  \"user_ns\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"token\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-fdf5177b-87b0-4696-9ba0-afcf9cf789fe"
+                            },
+                            {
+                              "id": "a815cb97-d1fc-4728-aeb6-d2e6ee357e6f",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"ttl_seconds\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/ssh-session",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "ssh-session"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-a815cb97-d1fc-4728-aeb6-d2e6ee357e6f"
+                            },
+                            {
+                              "id": "55750fe7-d487-4f3d-9b25-12b1df436f33",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"ttl_seconds\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id/ssh-session",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sandbox",
+                                    ":sandbox_id",
+                                    "ssh-session"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:41.000Z",
+                              "updatedAt": "2026-07-28T02:40:41.000Z",
+                              "uid": "35240-55750fe7-d487-4f3d-9b25-12b1df436f33"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-943bc4aa-9554-4465-8f5c-bc840d585fa7"
+                        }
+                      ],
+                      "id": "47bf08ec-06ca-4301-bb3a-710d9ce510d9",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-47bf08ec-06ca-4301-bb3a-710d9ce510d9"
+                    },
+                    {
+                      "name": "Get Sandbox Endpoint",
+                      "id": "4c7a6442-3fd4-4ed9-a4ac-180a537884a8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox",
+                            ":sandbox_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f08382d9-e28e-4646-8be7-0bfe00cf79a0",
+                              "key": "sandbox_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Get a specific sandbox by ID"
+                      },
+                      "response": [
+                        {
+                          "id": "9ef6fa35-a218-4a0e-af8a-4dd3742f6e5f",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"dockerImage\": \"<string>\",\n  \"startCommand\": \"<string>\",\n  \"cpuCores\": \"<number>\",\n  \"memoryGB\": \"<number>\",\n  \"diskSizeGB\": \"<number>\",\n  \"diskMountPath\": \"<string>\",\n  \"gpuCount\": \"<integer>\",\n  \"networkAccess\": \"<boolean>\",\n  \"status\": \"PAUSED\",\n  \"timeoutMinutes\": \"<integer>\",\n  \"environmentVars\": {},\n  \"advancedConfigs\": {},\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"startedAt\": \"<dateTime>\",\n  \"terminatedAt\": \"<dateTime>\",\n  \"userId\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"kubernetesJobId\": \"<string>\",\n  \"gpuType\": \"RTX6000_24GB\",\n  \"vm\": false,\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exitCode\": \"<integer>\",\n  \"errorType\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"region\": \"<string>\",\n  \"registryCredentialsId\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-9ef6fa35-a218-4a0e-af8a-4dd3742f6e5f"
+                        },
+                        {
+                          "id": "a45ef5ad-7396-412c-8dde-039972bc7ab7",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-a45ef5ad-7396-412c-8dde-039972bc7ab7"
+                        },
+                        {
+                          "id": "56c0a026-f8ab-4f41-8b55-3650b0af0c58",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-56c0a026-f8ab-4f41-8b55-3650b0af0c58"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-4c7a6442-3fd4-4ed9-a4ac-180a537884a8"
+                    },
+                    {
+                      "name": "Delete Sandbox Endpoint",
+                      "id": "f92d00e0-bb6f-4ea8-9912-aff76f5b0f48",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox",
+                            ":sandbox_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0319d362-e2b1-4eb6-84fd-d41f85bd7e08",
+                              "key": "sandbox_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Delete a sandbox"
+                      },
+                      "response": [
+                        {
+                          "id": "9b041ae6-1fe8-4da9-90e6-f587efa8040c",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-9b041ae6-1fe8-4da9-90e6-f587efa8040c"
+                        },
+                        {
+                          "id": "206bb010-1476-41d0-af1f-18f50af34ee0",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-206bb010-1476-41d0-af1f-18f50af34ee0"
+                        },
+                        {
+                          "id": "2d20f31e-304c-491a-aed1-2086676bfb9c",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sandbox/:sandbox_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sandbox",
+                                ":sandbox_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:41.000Z",
+                          "updatedAt": "2026-07-28T02:40:41.000Z",
+                          "uid": "35240-2d20f31e-304c-491a-aed1-2086676bfb9c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-f92d00e0-bb6f-4ea8-9912-aff76f5b0f48"
+                    }
+                  ],
+                  "id": "155246e3-3630-4380-b0a9-3cbd99e41687",
+                  "createdAt": "2026-07-28T02:40:41.000Z",
+                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                  "uid": "35240-155246e3-3630-4380-b0a9-3cbd99e41687"
+                },
+                {
+                  "name": "Create Sandbox Endpoint",
+                  "id": "6091837f-1751-48d1-a03a-278c86968280",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"docker_image\": \"<string>\",\n  \"start_command\": \"<string>\",\n  \"cpu_cores\": 1,\n  \"memory_gb\": 2,\n  \"disk_size_gb\": 10,\n  \"gpu_count\": 0,\n  \"gpu_type\": \"RTX3090Ti_24GB\",\n  \"vm\": false,\n  \"network_access\": true,\n  \"timeout_minutes\": 60,\n  \"environment_vars\": {\n    \"et_99\": \"<string>\"\n  },\n  \"secrets\": {\n    \"eab0\": \"<string>\"\n  },\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"team_id\": \"<string>\",\n  \"advanced_configs\": {\n    \"minim9\": \"fugiat ea adipisicing\",\n    \"labore_21e\": \"adipisicing sed veniam cillum\"\n  },\n  \"registry_credentials_id\": \"<string>\",\n  \"region\": \"<string>\",\n  \"guaranteed\": false,\n  \"idempotency_key\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/sandbox",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "sandbox"
+                      ]
+                    },
+                    "description": "Create a new code sandbox"
+                  },
+                  "response": [
+                    {
+                      "id": "26d6bca4-49c7-43eb-a458-025590831fc3",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"docker_image\": \"<string>\",\n  \"start_command\": \"<string>\",\n  \"cpu_cores\": 1,\n  \"memory_gb\": 2,\n  \"disk_size_gb\": 10,\n  \"gpu_count\": 0,\n  \"gpu_type\": \"RTX3090Ti_24GB\",\n  \"vm\": false,\n  \"network_access\": true,\n  \"timeout_minutes\": 60,\n  \"environment_vars\": {\n    \"et_99\": \"<string>\"\n  },\n  \"secrets\": {\n    \"eab0\": \"<string>\"\n  },\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"team_id\": \"<string>\",\n  \"advanced_configs\": {\n    \"minim9\": \"fugiat ea adipisicing\",\n    \"labore_21e\": \"adipisicing sed veniam cillum\"\n  },\n  \"registry_credentials_id\": \"<string>\",\n  \"region\": \"<string>\",\n  \"guaranteed\": false,\n  \"idempotency_key\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"dockerImage\": \"<string>\",\n  \"startCommand\": \"<string>\",\n  \"cpuCores\": \"<number>\",\n  \"memoryGB\": \"<number>\",\n  \"diskSizeGB\": \"<number>\",\n  \"diskMountPath\": \"<string>\",\n  \"gpuCount\": \"<integer>\",\n  \"networkAccess\": \"<boolean>\",\n  \"status\": \"PAUSED\",\n  \"timeoutMinutes\": \"<integer>\",\n  \"environmentVars\": {},\n  \"advancedConfigs\": {},\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"startedAt\": \"<dateTime>\",\n  \"terminatedAt\": \"<dateTime>\",\n  \"userId\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"kubernetesJobId\": \"<string>\",\n  \"gpuType\": \"RTX6000_24GB\",\n  \"vm\": false,\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exitCode\": \"<integer>\",\n  \"errorType\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"region\": \"<string>\",\n  \"registryCredentialsId\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-26d6bca4-49c7-43eb-a458-025590831fc3"
+                    },
+                    {
+                      "id": "a412c5a5-0a56-4812-84b8-59db4fb48529",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"docker_image\": \"<string>\",\n  \"start_command\": \"<string>\",\n  \"cpu_cores\": 1,\n  \"memory_gb\": 2,\n  \"disk_size_gb\": 10,\n  \"gpu_count\": 0,\n  \"gpu_type\": \"RTX3090Ti_24GB\",\n  \"vm\": false,\n  \"network_access\": true,\n  \"timeout_minutes\": 60,\n  \"environment_vars\": {\n    \"et_99\": \"<string>\"\n  },\n  \"secrets\": {\n    \"eab0\": \"<string>\"\n  },\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"team_id\": \"<string>\",\n  \"advanced_configs\": {\n    \"minim9\": \"fugiat ea adipisicing\",\n    \"labore_21e\": \"adipisicing sed veniam cillum\"\n  },\n  \"registry_credentials_id\": \"<string>\",\n  \"region\": \"<string>\",\n  \"guaranteed\": false,\n  \"idempotency_key\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-a412c5a5-0a56-4812-84b8-59db4fb48529"
+                    },
+                    {
+                      "id": "add5a848-bfaa-4ea2-b65b-95dc231212b1",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"docker_image\": \"<string>\",\n  \"start_command\": \"<string>\",\n  \"cpu_cores\": 1,\n  \"memory_gb\": 2,\n  \"disk_size_gb\": 10,\n  \"gpu_count\": 0,\n  \"gpu_type\": \"RTX3090Ti_24GB\",\n  \"vm\": false,\n  \"network_access\": true,\n  \"timeout_minutes\": 60,\n  \"environment_vars\": {\n    \"et_99\": \"<string>\"\n  },\n  \"secrets\": {\n    \"eab0\": \"<string>\"\n  },\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"team_id\": \"<string>\",\n  \"advanced_configs\": {\n    \"minim9\": \"fugiat ea adipisicing\",\n    \"labore_21e\": \"adipisicing sed veniam cillum\"\n  },\n  \"registry_credentials_id\": \"<string>\",\n  \"region\": \"<string>\",\n  \"guaranteed\": false,\n  \"idempotency_key\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-add5a848-bfaa-4ea2-b65b-95dc231212b1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:40:41.000Z",
+                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                  "uid": "35240-6091837f-1751-48d1-a03a-278c86968280"
+                },
+                {
+                  "name": "List Sandboxes",
+                  "id": "b45b516c-e42b-45f6-87ca-c121aac8e0de",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/sandbox?team_id=<string>&user_id=<string>&status=TERMINATED&is_active=<boolean>&labels=<string>&labels=<string>&page=1&per_page=50",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "sandbox"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by team ID",
+                          "key": "team_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by user ID. When set to another user's ID, the caller must be a team admin of the provided team_id.",
+                          "key": "user_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by status",
+                          "key": "status",
+                          "value": "TERMINATED"
+                        },
+                        {
+                          "description": "Filter to exclude terminated sandboxes when True",
+                          "key": "is_active",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Filter by labels (sandboxes must have ALL specified labels)",
+                          "key": "labels",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by labels (sandboxes must have ALL specified labels)",
+                          "key": "labels",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Page number",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Items per page",
+                          "key": "per_page",
+                          "value": "50"
+                        }
+                      ]
+                    },
+                    "description": "List sandboxes for user or team"
+                  },
+                  "response": [
+                    {
+                      "id": "45d9be29-1e34-4544-87fb-3c8f507c91c8",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox?team_id=<string>&user_id=<string>&status=TERMINATED&is_active=<boolean>&labels=<string>&page=1&per_page=50",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by team ID",
+                              "key": "team_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by user ID. When set to another user's ID, the caller must be a team admin of the provided team_id.",
+                              "key": "user_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by status",
+                              "key": "status",
+                              "value": "TERMINATED"
+                            },
+                            {
+                              "description": "Filter to exclude terminated sandboxes when True",
+                              "key": "is_active",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Filter by labels (sandboxes must have ALL specified labels)",
+                              "key": "labels",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Items per page",
+                              "key": "per_page",
+                              "value": "50"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"sandboxes\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"dockerImage\": \"<string>\",\n      \"startCommand\": \"<string>\",\n      \"cpuCores\": \"<number>\",\n      \"memoryGB\": \"<number>\",\n      \"diskSizeGB\": \"<number>\",\n      \"diskMountPath\": \"<string>\",\n      \"gpuCount\": \"<integer>\",\n      \"networkAccess\": \"<boolean>\",\n      \"status\": \"PAUSED\",\n      \"timeoutMinutes\": \"<integer>\",\n      \"environmentVars\": {},\n      \"advancedConfigs\": {},\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"startedAt\": \"<dateTime>\",\n      \"terminatedAt\": \"<dateTime>\",\n      \"userId\": \"<string>\",\n      \"teamId\": \"<string>\",\n      \"kubernetesJobId\": \"<string>\",\n      \"gpuType\": \"A4500_20GB\",\n      \"vm\": false,\n      \"labels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"exitCode\": \"<integer>\",\n      \"errorType\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"region\": \"<string>\",\n      \"registryCredentialsId\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"dockerImage\": \"<string>\",\n      \"startCommand\": \"<string>\",\n      \"cpuCores\": \"<number>\",\n      \"memoryGB\": \"<number>\",\n      \"diskSizeGB\": \"<number>\",\n      \"diskMountPath\": \"<string>\",\n      \"gpuCount\": \"<integer>\",\n      \"networkAccess\": \"<boolean>\",\n      \"status\": \"PROVISIONING\",\n      \"timeoutMinutes\": \"<integer>\",\n      \"environmentVars\": {},\n      \"advancedConfigs\": {},\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"startedAt\": \"<dateTime>\",\n      \"terminatedAt\": \"<dateTime>\",\n      \"userId\": \"<string>\",\n      \"teamId\": \"<string>\",\n      \"kubernetesJobId\": \"<string>\",\n      \"gpuType\": \"GB300\",\n      \"vm\": false,\n      \"labels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"exitCode\": \"<integer>\",\n      \"errorType\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"region\": \"<string>\",\n      \"registryCredentialsId\": \"<string>\"\n    }\n  ],\n  \"total\": \"<integer>\",\n  \"page\": \"<integer>\",\n  \"per_page\": \"<integer>\",\n  \"has_next\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-45d9be29-1e34-4544-87fb-3c8f507c91c8"
+                    },
+                    {
+                      "id": "5e3beace-c3f8-470f-8e6f-cd203728a7ee",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox?team_id=<string>&user_id=<string>&status=TERMINATED&is_active=<boolean>&labels=<string>&page=1&per_page=50",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by team ID",
+                              "key": "team_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by user ID. When set to another user's ID, the caller must be a team admin of the provided team_id.",
+                              "key": "user_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by status",
+                              "key": "status",
+                              "value": "TERMINATED"
+                            },
+                            {
+                              "description": "Filter to exclude terminated sandboxes when True",
+                              "key": "is_active",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Filter by labels (sandboxes must have ALL specified labels)",
+                              "key": "labels",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Items per page",
+                              "key": "per_page",
+                              "value": "50"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-5e3beace-c3f8-470f-8e6f-cd203728a7ee"
+                    },
+                    {
+                      "id": "821a868a-f025-4287-943d-377ad042e45e",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox?team_id=<string>&user_id=<string>&status=TERMINATED&is_active=<boolean>&labels=<string>&page=1&per_page=50",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by team ID",
+                              "key": "team_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by user ID. When set to another user's ID, the caller must be a team admin of the provided team_id.",
+                              "key": "user_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by status",
+                              "key": "status",
+                              "value": "TERMINATED"
+                            },
+                            {
+                              "description": "Filter to exclude terminated sandboxes when True",
+                              "key": "is_active",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Filter by labels (sandboxes must have ALL specified labels)",
+                              "key": "labels",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Items per page",
+                              "key": "per_page",
+                              "value": "50"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-821a868a-f025-4287-943d-377ad042e45e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:40:41.000Z",
+                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                  "uid": "35240-b45b516c-e42b-45f6-87ca-c121aac8e0de"
+                },
+                {
+                  "name": "Bulk Delete Sandboxes Endpoint",
+                  "id": "2e9b0493-46ef-4c6a-9cca-b6a14b800051",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sandbox_ids\": [\n    \"<string>\"\n  ],\n  \"labels\": [\n    \"<string>\"\n  ],\n  \"team_id\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"all_users\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/sandbox",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "sandbox"
+                      ]
+                    },
+                    "description": "Bulk delete multiple sandboxes by IDs or labels"
+                  },
+                  "response": [
+                    {
+                      "id": "4993ed37-380e-4e9d-8e98-e71c7e958903",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sandbox_ids\": [\n    \"<string>\"\n  ],\n  \"labels\": [\n    \"<string>\"\n  ],\n  \"team_id\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"all_users\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"succeeded\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"failed\": [\n    {\n      \"proident__3\": \"<string>\",\n      \"qui_b\": \"<string>\",\n      \"nulla4\": \"<string>\",\n      \"adipisicing8de\": \"<string>\"\n    },\n    {\n      \"est500\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-4993ed37-380e-4e9d-8e98-e71c7e958903"
+                    },
+                    {
+                      "id": "c53dcb59-2311-40c5-8131-af73d8cdb356",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sandbox_ids\": [\n    \"<string>\"\n  ],\n  \"labels\": [\n    \"<string>\"\n  ],\n  \"team_id\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"all_users\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-c53dcb59-2311-40c5-8131-af73d8cdb356"
+                    },
+                    {
+                      "id": "2c82f840-5e48-4cc0-8ff5-94b1d9aec671",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sandbox_ids\": [\n    \"<string>\"\n  ],\n  \"labels\": [\n    \"<string>\"\n  ],\n  \"team_id\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"all_users\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sandbox",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sandbox"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:40:41.000Z",
+                      "updatedAt": "2026-07-28T02:40:41.000Z",
+                      "uid": "35240-2c82f840-5e48-4cc0-8ff5-94b1d9aec671"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:40:41.000Z",
+                  "updatedAt": "2026-07-28T02:40:41.000Z",
+                  "uid": "35240-2e9b0493-46ef-4c6a-9cca-b6a14b800051"
+                }
+              ],
+              "id": "71848a66-73a5-49b7-8306-bf65d6d9bdf6",
+              "createdAt": "2026-07-28T02:40:41.000Z",
+              "updatedAt": "2026-07-28T02:40:41.000Z",
+              "uid": "35240-71848a66-73a5-49b7-8306-bf65d6d9bdf6"
+            }
+          ],
+          "id": "b9d68f2e-67b3-4a73-a8ee-f9482411096e",
+          "createdAt": "2026-07-28T02:40:41.000Z",
+          "updatedAt": "2026-07-28T02:40:41.000Z",
+          "uid": "35240-b9d68f2e-67b3-4a73-a8ee-f9482411096e"
+        }
+      ],
+      "id": "f9d32522-b045-4922-ae2d-4a01bd877310",
+      "createdAt": "2026-07-28T02:40:41.000Z",
+      "updatedAt": "2026-07-28T02:40:41.000Z",
+      "uid": "35240-f9d32522-b045-4922-ae2d-4a01bd877310"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

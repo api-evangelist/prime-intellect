@@ -1,0 +1,471 @@
+{
+  "info": {
+    "_postman_id": "22384f14-614c-402d-a9fb-9adc7783de5e",
+    "name": "Prime Intellect Compute admin-clusters Template API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:47.000Z",
+    "updatedAt": "2026-07-28T02:41:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-22384f14-614c-402d-a9fb-9adc7783de5e"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "template",
+              "item": [
+                {
+                  "name": "check-docker-image",
+                  "item": [
+                    {
+                      "name": "Check Docker Image",
+                      "id": "626c1071-7472-4b37-b406-993aebaa8ac8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"registry_credentials_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/template/check-docker-image",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "template",
+                            "check-docker-image"
+                          ]
+                        },
+                        "description": "Check whether a docker image is accessible (optionally with registry credentials)."
+                      },
+                      "response": [
+                        {
+                          "id": "aaba5d4f-730f-4565-833e-e8e9b6ce47be",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"image\": \"<string>\",\n  \"registry_credentials_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/template/check-docker-image",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "template",
+                                "check-docker-image"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T02:41:48.000Z",
+                          "updatedAt": "2026-07-28T02:41:48.000Z",
+                          "uid": "35240-aaba5d4f-730f-4565-833e-e8e9b6ce47be"
+                        },
+                        {
+                          "id": "ef9af508-9c73-42e5-823d-28277ad592ea",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"image\": \"<string>\",\n  \"registry_credentials_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/template/check-docker-image",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "template",
+                                "check-docker-image"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:48.000Z",
+                          "updatedAt": "2026-07-28T02:41:48.000Z",
+                          "uid": "35240-ef9af508-9c73-42e5-823d-28277ad592ea"
+                        },
+                        {
+                          "id": "9f0d5bb7-db2b-4982-bc4a-75c5df312b4b",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"image\": \"<string>\",\n  \"registry_credentials_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/template/check-docker-image",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "template",
+                                "check-docker-image"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:48.000Z",
+                          "updatedAt": "2026-07-28T02:41:48.000Z",
+                          "uid": "35240-9f0d5bb7-db2b-4982-bc4a-75c5df312b4b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:48.000Z",
+                      "updatedAt": "2026-07-28T02:41:48.000Z",
+                      "uid": "35240-626c1071-7472-4b37-b406-993aebaa8ac8"
+                    }
+                  ],
+                  "id": "1521dc44-6dc1-40c8-a630-04e33f60af75",
+                  "createdAt": "2026-07-28T02:41:48.000Z",
+                  "updatedAt": "2026-07-28T02:41:48.000Z",
+                  "uid": "35240-1521dc44-6dc1-40c8-a630-04e33f60af75"
+                },
+                {
+                  "name": "registry-credentials",
+                  "item": [
+                    {
+                      "name": "List Registry Credentials",
+                      "id": "79420eec-e866-47dd-909b-119f953853a3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/template/registry-credentials",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "template",
+                            "registry-credentials"
+                          ]
+                        },
+                        "description": "List registry credentials owned by the requesting user or their teams."
+                      },
+                      "response": [
+                        {
+                          "id": "cb6f0248-cfb0-4129-91fa-6eac94b43f95",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/template/registry-credentials",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "template",
+                                "registry-credentials"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"credentials\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"server\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"userId\": \"<string>\",\n      \"teamId\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"server\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"userId\": \"<string>\",\n      \"teamId\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:48.000Z",
+                          "updatedAt": "2026-07-28T02:41:48.000Z",
+                          "uid": "35240-cb6f0248-cfb0-4129-91fa-6eac94b43f95"
+                        },
+                        {
+                          "id": "72763e72-b426-4baa-b385-8a21658f2831",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/template/registry-credentials",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "template",
+                                "registry-credentials"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:48.000Z",
+                          "updatedAt": "2026-07-28T02:41:48.000Z",
+                          "uid": "35240-72763e72-b426-4baa-b385-8a21658f2831"
+                        },
+                        {
+                          "id": "c333f989-a6b8-41fe-89f6-cd82473dfd63",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/template/registry-credentials",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "template",
+                                "registry-credentials"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:48.000Z",
+                          "updatedAt": "2026-07-28T02:41:48.000Z",
+                          "uid": "35240-c333f989-a6b8-41fe-89f6-cd82473dfd63"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:48.000Z",
+                      "updatedAt": "2026-07-28T02:41:48.000Z",
+                      "uid": "35240-79420eec-e866-47dd-909b-119f953853a3"
+                    }
+                  ],
+                  "id": "9c406db7-4316-419a-af2b-46f786498e04",
+                  "createdAt": "2026-07-28T02:41:48.000Z",
+                  "updatedAt": "2026-07-28T02:41:48.000Z",
+                  "uid": "35240-9c406db7-4316-419a-af2b-46f786498e04"
+                }
+              ],
+              "id": "9ae08b69-3ce1-431b-af50-2b0f0a80ebbd",
+              "createdAt": "2026-07-28T02:41:48.000Z",
+              "updatedAt": "2026-07-28T02:41:48.000Z",
+              "uid": "35240-9ae08b69-3ce1-431b-af50-2b0f0a80ebbd"
+            }
+          ],
+          "id": "1a1c553d-624e-4a03-98bc-73c9b6e3c354",
+          "createdAt": "2026-07-28T02:41:48.000Z",
+          "updatedAt": "2026-07-28T02:41:48.000Z",
+          "uid": "35240-1a1c553d-624e-4a03-98bc-73c9b6e3c354"
+        }
+      ],
+      "id": "7beabb09-ede9-40f6-a28e-2265848adf9e",
+      "createdAt": "2026-07-28T02:41:48.000Z",
+      "updatedAt": "2026-07-28T02:41:48.000Z",
+      "uid": "35240-7beabb09-ede9-40f6-a28e-2265848adf9e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

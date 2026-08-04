@@ -1,0 +1,282 @@
+{
+  "info": {
+    "_postman_id": "fdd4725f-eafb-4c1c-b646-0e04252aad6a",
+    "name": "Prime Intellect Compute admin-clusters FRP Plugin API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:37.000Z",
+    "updatedAt": "2026-07-28T02:41:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fdd4725f-eafb-4c1c-b646-0e04252aad6a"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "frp",
+              "item": [
+                {
+                  "name": "validate",
+                  "item": [
+                    {
+                      "name": "Validate Frp Plugin",
+                      "id": "362c11ce-1b48-4aab-946d-e014da1c9801",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"version\": \"<string>\",\n  \"op\": \"<string>\",\n  \"content\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/frp/validate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "frp",
+                            "validate"
+                          ]
+                        },
+                        "description": "Validate frpc client connections.\n\nThis endpoint is called by frps server plugin for:\n- Login: Validates tunnel token when client connects\n- NewProxy: Validates proxy creation requests\n\nThis endpoint is public but security is enforced via per-tunnel\ntoken validation. An attacker would need both a valid tunnel_id AND\nthe corresponding frp_token to get a successful response."
+                      },
+                      "response": [
+                        {
+                          "id": "b4d97e3b-6bd5-4c87-b564-500c436b6076",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"version\": \"<string>\",\n  \"op\": \"<string>\",\n  \"content\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/frp/validate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "frp",
+                                "validate"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"reject\": false,\n  \"reject_reason\": \"<string>\",\n  \"unchange\": true,\n  \"content\": {}\n}",
+                          "createdAt": "2026-07-28T02:41:37.000Z",
+                          "updatedAt": "2026-07-28T02:41:37.000Z",
+                          "uid": "35240-b4d97e3b-6bd5-4c87-b564-500c436b6076"
+                        },
+                        {
+                          "id": "6a72546b-f23e-4ed2-8b36-5a401f68afc8",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"version\": \"<string>\",\n  \"op\": \"<string>\",\n  \"content\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/frp/validate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "frp",
+                                "validate"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:37.000Z",
+                          "updatedAt": "2026-07-28T02:41:37.000Z",
+                          "uid": "35240-6a72546b-f23e-4ed2-8b36-5a401f68afc8"
+                        },
+                        {
+                          "id": "15a0fa39-625e-40f5-9d82-e426ba61877a",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"version\": \"<string>\",\n  \"op\": \"<string>\",\n  \"content\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/frp/validate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "frp",
+                                "validate"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:37.000Z",
+                          "updatedAt": "2026-07-28T02:41:37.000Z",
+                          "uid": "35240-15a0fa39-625e-40f5-9d82-e426ba61877a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:37.000Z",
+                      "updatedAt": "2026-07-28T02:41:37.000Z",
+                      "uid": "35240-362c11ce-1b48-4aab-946d-e014da1c9801"
+                    }
+                  ],
+                  "id": "d9e6d845-6423-4db6-9e3d-ec70c34d1789",
+                  "createdAt": "2026-07-28T02:41:37.000Z",
+                  "updatedAt": "2026-07-28T02:41:37.000Z",
+                  "uid": "35240-d9e6d845-6423-4db6-9e3d-ec70c34d1789"
+                }
+              ],
+              "id": "2c81c57c-7281-4c7c-93db-1e506827959e",
+              "createdAt": "2026-07-28T02:41:37.000Z",
+              "updatedAt": "2026-07-28T02:41:37.000Z",
+              "uid": "35240-2c81c57c-7281-4c7c-93db-1e506827959e"
+            }
+          ],
+          "id": "c39d8c80-c565-4272-aeb5-c118faee7248",
+          "createdAt": "2026-07-28T02:41:37.000Z",
+          "updatedAt": "2026-07-28T02:41:37.000Z",
+          "uid": "35240-c39d8c80-c565-4272-aeb5-c118faee7248"
+        }
+      ],
+      "id": "4bacc67b-c2d1-4803-9aea-c897b68c717b",
+      "createdAt": "2026-07-28T02:41:37.000Z",
+      "updatedAt": "2026-07-28T02:41:37.000Z",
+      "uid": "35240-4bacc67b-c2d1-4803-9aea-c897b68c717b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

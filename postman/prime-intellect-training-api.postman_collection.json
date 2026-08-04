@@ -1,0 +1,498 @@
+{
+  "info": {
+    "_postman_id": "fe4e190b-1dc7-4942-8e0f-a52fc9d5e4d5",
+    "name": "Prime Intellect Compute admin-clusters training API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:42.000Z",
+    "updatedAt": "2026-07-28T02:40:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fe4e190b-1dc7-4942-8e0f-a52fc9d5e4d5"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "training",
+              "item": [
+                {
+                  "name": "runs",
+                  "item": [
+                    {
+                      "name": "{run_id}",
+                      "item": [
+                        {
+                          "name": "Delete Dedicated Run",
+                          "id": "2f9add53-6327-4ae9-abdf-c8440085394e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/training/runs/:run_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "training",
+                                "runs",
+                                ":run_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ba9d7b28-671f-493c-ab5e-e8dd0b9e494c",
+                                  "key": "run_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Delete a dedicated run: helm uninstall + namespace delete + DB cleanup.\n\nIdempotent. Safe to call repeatedly. Cleans up the linked Job row too\n(which uninstalls the helm release on the customer cluster). Soft-\ndeletes the RFTRun row (matches the existing run-delete UX \u2014 Billing\nrefs are preserved)."
+                          },
+                          "response": [
+                            {
+                              "id": "b5968e3a-61be-41be-8d60-4ef9da74d266",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/training/runs/:run_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "training",
+                                    "runs",
+                                    ":run_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "run_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"runId\": \"<string>\",\n  \"deleted\": \"<boolean>\"\n}",
+                              "createdAt": "2026-07-28T02:40:42.000Z",
+                              "updatedAt": "2026-07-28T02:40:42.000Z",
+                              "uid": "35240-b5968e3a-61be-41be-8d60-4ef9da74d266"
+                            },
+                            {
+                              "id": "12463352-6b3f-486b-8f3e-d7af4ed0646e",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/training/runs/:run_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "training",
+                                    "runs",
+                                    ":run_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "run_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:42.000Z",
+                              "updatedAt": "2026-07-28T02:40:42.000Z",
+                              "uid": "35240-12463352-6b3f-486b-8f3e-d7af4ed0646e"
+                            },
+                            {
+                              "id": "7ef87645-d36c-4972-81db-90333f622c38",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/training/runs/:run_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "training",
+                                    "runs",
+                                    ":run_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "run_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:42.000Z",
+                              "updatedAt": "2026-07-28T02:40:42.000Z",
+                              "uid": "35240-7ef87645-d36c-4972-81db-90333f622c38"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:42.000Z",
+                          "updatedAt": "2026-07-28T02:40:42.000Z",
+                          "uid": "35240-2f9add53-6327-4ae9-abdf-c8440085394e"
+                        }
+                      ],
+                      "id": "8b81db19-4735-4ebc-96f4-f995fa75f195",
+                      "createdAt": "2026-07-28T02:40:42.000Z",
+                      "updatedAt": "2026-07-28T02:40:42.000Z",
+                      "uid": "35240-8b81db19-4735-4ebc-96f4-f995fa75f195"
+                    },
+                    {
+                      "name": "Create Dedicated Run",
+                      "id": "e5eb577f-fda1-41a0-9ed2-256863f8f4ba",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"config\": {},\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/training/runs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "training",
+                            "runs"
+                          ]
+                        },
+                        "description": "Dispatch a dedicated full-FT prime-rl run on a registered PrimeCluster."
+                      },
+                      "response": [
+                        {
+                          "id": "fea651d5-83ef-4cff-8dda-30534c70c047",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {},\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/training/runs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "training",
+                                "runs"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"runId\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"tokenValue\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:40:42.000Z",
+                          "updatedAt": "2026-07-28T02:40:42.000Z",
+                          "uid": "35240-fea651d5-83ef-4cff-8dda-30534c70c047"
+                        },
+                        {
+                          "id": "b3905cde-a866-4e2e-8645-24c4d18deeff",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {},\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/training/runs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "training",
+                                "runs"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:42.000Z",
+                          "updatedAt": "2026-07-28T02:40:42.000Z",
+                          "uid": "35240-b3905cde-a866-4e2e-8645-24c4d18deeff"
+                        },
+                        {
+                          "id": "c5e269d7-f881-4edb-bb86-01123ddb8d4d",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {},\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/training/runs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "training",
+                                "runs"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:42.000Z",
+                          "updatedAt": "2026-07-28T02:40:42.000Z",
+                          "uid": "35240-c5e269d7-f881-4edb-bb86-01123ddb8d4d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:42.000Z",
+                      "updatedAt": "2026-07-28T02:40:42.000Z",
+                      "uid": "35240-e5eb577f-fda1-41a0-9ed2-256863f8f4ba"
+                    }
+                  ],
+                  "id": "9eb27a99-f8fe-49be-a017-039a370b259e",
+                  "createdAt": "2026-07-28T02:40:42.000Z",
+                  "updatedAt": "2026-07-28T02:40:42.000Z",
+                  "uid": "35240-9eb27a99-f8fe-49be-a017-039a370b259e"
+                }
+              ],
+              "id": "1ea6b453-cb63-407d-a4e9-208ea549398d",
+              "createdAt": "2026-07-28T02:40:42.000Z",
+              "updatedAt": "2026-07-28T02:40:42.000Z",
+              "uid": "35240-1ea6b453-cb63-407d-a4e9-208ea549398d"
+            }
+          ],
+          "id": "9a14e6cb-3e9d-440f-9a1c-95ecb07356a5",
+          "createdAt": "2026-07-28T02:40:42.000Z",
+          "updatedAt": "2026-07-28T02:40:42.000Z",
+          "uid": "35240-9a14e6cb-3e9d-440f-9a1c-95ecb07356a5"
+        }
+      ],
+      "id": "615c548c-a480-49a1-b689-62315e36ed16",
+      "createdAt": "2026-07-28T02:40:42.000Z",
+      "updatedAt": "2026-07-28T02:40:42.000Z",
+      "uid": "35240-615c548c-a480-49a1-b689-62315e36ed16"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

@@ -1,0 +1,1132 @@
+{
+  "info": {
+    "_postman_id": "84dafd8f-37de-489e-a36b-94696753728f",
+    "name": "Prime Intellect Compute admin-clusters Disks API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:51.000Z",
+    "updatedAt": "2026-07-28T02:40:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-84dafd8f-37de-489e-a36b-94696753728f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "disks",
+              "item": [
+                {
+                  "name": "{disk_id}",
+                  "item": [
+                    {
+                      "name": "Get Disk",
+                      "id": "4e543bed-caf6-4b08-ad45-c41f930c1219",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "disks",
+                            ":disk_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9e9d1858-39e9-4706-87d5-f44428cd07e6",
+                              "key": "disk_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "16fd7b51-9138-4fdd-a675-6e2ec057f002",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disks",
+                                ":disk_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "disk_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"providerType\": \"primeintellect\",\n  \"userId\": \"<string>\",\n  \"id\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"terminatedAt\": \"<dateTime>\",\n  \"status\": \"UNKNOWN\",\n  \"size\": 0,\n  \"info\": {},\n  \"priceHr\": \"<number>\",\n  \"stoppedPriceHr\": \"<number>\",\n  \"provisioningPriceHr\": \"<number>\",\n  \"teamId\": \"<string>\",\n  \"walletId\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:40:51.000Z",
+                          "updatedAt": "2026-07-28T02:40:51.000Z",
+                          "uid": "35240-16fd7b51-9138-4fdd-a675-6e2ec057f002"
+                        },
+                        {
+                          "id": "4286d76a-f4e0-46f2-8520-1ec9a0b23ae3",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disks",
+                                ":disk_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "disk_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:51.000Z",
+                          "updatedAt": "2026-07-28T02:40:51.000Z",
+                          "uid": "35240-4286d76a-f4e0-46f2-8520-1ec9a0b23ae3"
+                        },
+                        {
+                          "id": "f7c9482a-0293-4e28-8dcf-5b7bed915142",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disks",
+                                ":disk_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "disk_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:51.000Z",
+                          "updatedAt": "2026-07-28T02:40:51.000Z",
+                          "uid": "35240-f7c9482a-0293-4e28-8dcf-5b7bed915142"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:51.000Z",
+                      "updatedAt": "2026-07-28T02:40:51.000Z",
+                      "uid": "35240-4e543bed-caf6-4b08-ad45-c41f930c1219"
+                    },
+                    {
+                      "name": "Update Disk",
+                      "id": "20fd52ee-0b08-4fb0-96bc-c4522a2c9a06",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "disks",
+                            ":disk_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6655829c-fe01-468b-add8-74780881108c",
+                              "key": "disk_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "628d2cd6-84e7-44ad-a64e-92e09e9e1407",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disks",
+                                ":disk_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "disk_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T02:40:51.000Z",
+                          "updatedAt": "2026-07-28T02:40:51.000Z",
+                          "uid": "35240-628d2cd6-84e7-44ad-a64e-92e09e9e1407"
+                        },
+                        {
+                          "id": "e9271252-6b94-4db7-b362-1990b717a3ec",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disks",
+                                ":disk_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "disk_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:51.000Z",
+                          "updatedAt": "2026-07-28T02:40:51.000Z",
+                          "uid": "35240-e9271252-6b94-4db7-b362-1990b717a3ec"
+                        },
+                        {
+                          "id": "652c3b9d-9e82-4e24-93a8-da06edc35711",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disks",
+                                ":disk_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "disk_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:51.000Z",
+                          "updatedAt": "2026-07-28T02:40:51.000Z",
+                          "uid": "35240-652c3b9d-9e82-4e24-93a8-da06edc35711"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:51.000Z",
+                      "updatedAt": "2026-07-28T02:40:51.000Z",
+                      "uid": "35240-20fd52ee-0b08-4fb0-96bc-c4522a2c9a06"
+                    },
+                    {
+                      "name": "Delete Disk",
+                      "id": "9ab2ed4f-c4cc-40fe-bfaa-f14a03c72a38",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "disks",
+                            ":disk_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "30847a78-4f4b-4e61-8489-220c9e32c796",
+                              "key": "disk_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "5c32fb7c-ff43-48d1-a491-43a08650e394",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disks",
+                                ":disk_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "disk_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T02:40:51.000Z",
+                          "updatedAt": "2026-07-28T02:40:51.000Z",
+                          "uid": "35240-5c32fb7c-ff43-48d1-a491-43a08650e394"
+                        },
+                        {
+                          "id": "a32c00a7-0b4c-4f72-97df-6b3f6a13fe01",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disks",
+                                ":disk_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "disk_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:51.000Z",
+                          "updatedAt": "2026-07-28T02:40:51.000Z",
+                          "uid": "35240-a32c00a7-0b4c-4f72-97df-6b3f6a13fe01"
+                        },
+                        {
+                          "id": "f968f368-b10c-4e38-bbe5-7a4bf479b003",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disks/:disk_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disks",
+                                ":disk_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "disk_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:51.000Z",
+                          "updatedAt": "2026-07-28T02:40:51.000Z",
+                          "uid": "35240-f968f368-b10c-4e38-bbe5-7a4bf479b003"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:51.000Z",
+                      "updatedAt": "2026-07-28T02:40:51.000Z",
+                      "uid": "35240-9ab2ed4f-c4cc-40fe-bfaa-f14a03c72a38"
+                    }
+                  ],
+                  "id": "66424bfc-c2f2-4148-80ff-f9d940aa9c67",
+                  "createdAt": "2026-07-28T02:40:51.000Z",
+                  "updatedAt": "2026-07-28T02:40:51.000Z",
+                  "uid": "35240-66424bfc-c2f2-4148-80ff-f9d940aa9c67"
+                },
+                {
+                  "name": "List Disks",
+                  "id": "5fa7f5ae-b4c4-4b11-8f82-977bfa54067c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/disks/?offset=0&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "disks",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "78e32520-3b2b-42e7-a160-c1a16898f08b",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/disks/?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "disks",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"providerType\": \"vultr\",\n      \"userId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"terminatedAt\": \"<dateTime>\",\n      \"status\": \"DELETING\",\n      \"size\": 0,\n      \"info\": {},\n      \"priceHr\": \"<number>\",\n      \"stoppedPriceHr\": \"<number>\",\n      \"provisioningPriceHr\": \"<number>\",\n      \"teamId\": \"<string>\",\n      \"walletId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"providerType\": \"scaleway\",\n      \"userId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"terminatedAt\": \"<dateTime>\",\n      \"status\": \"DELETING\",\n      \"size\": 0,\n      \"info\": {},\n      \"priceHr\": \"<number>\",\n      \"stoppedPriceHr\": \"<number>\",\n      \"provisioningPriceHr\": \"<number>\",\n      \"teamId\": \"<string>\",\n      \"walletId\": \"<string>\"\n    }\n  ],\n  \"total_count\": 0,\n  \"offset\": 0,\n  \"limit\": 100,\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:40:51.000Z",
+                      "updatedAt": "2026-07-28T02:40:51.000Z",
+                      "uid": "35240-78e32520-3b2b-42e7-a160-c1a16898f08b"
+                    },
+                    {
+                      "id": "779f5158-bcfa-4f76-a189-872f389ff22c",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/disks/?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "disks",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:40:51.000Z",
+                      "updatedAt": "2026-07-28T02:40:51.000Z",
+                      "uid": "35240-779f5158-bcfa-4f76-a189-872f389ff22c"
+                    },
+                    {
+                      "id": "dcc6d6cc-ac60-4bbc-89c6-e396bb361cee",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/disks/?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "disks",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:40:51.000Z",
+                      "updatedAt": "2026-07-28T02:40:51.000Z",
+                      "uid": "35240-dcc6d6cc-ac60-4bbc-89c6-e396bb361cee"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:40:51.000Z",
+                  "updatedAt": "2026-07-28T02:40:51.000Z",
+                  "uid": "35240-5fa7f5ae-b4c4-4b11-8f82-977bfa54067c"
+                },
+                {
+                  "name": "Create Disk",
+                  "id": "9a25fd3c-9ca9-4c4e-8072-8c4b1512a14f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"disk\": {\n    \"size\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"cloudId\": \"<string>\",\n    \"dataCenterId\": \"<string>\"\n  },\n  \"provider\": {\n    \"type\": \"akash\"\n  },\n  \"team\": {\n    \"teamId\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/disks/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "disks",
+                        ""
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a6eb700b-6723-4c58-86a3-ede705dd2900",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"disk\": {\n    \"size\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"cloudId\": \"<string>\",\n    \"dataCenterId\": \"<string>\"\n  },\n  \"provider\": {\n    \"type\": \"akash\"\n  },\n  \"team\": {\n    \"teamId\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/disks/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "disks",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"providerType\": \"primeintellect\",\n  \"userId\": \"<string>\",\n  \"id\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"terminatedAt\": \"<dateTime>\",\n  \"status\": \"UNKNOWN\",\n  \"size\": 0,\n  \"info\": {},\n  \"priceHr\": \"<number>\",\n  \"stoppedPriceHr\": \"<number>\",\n  \"provisioningPriceHr\": \"<number>\",\n  \"teamId\": \"<string>\",\n  \"walletId\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:40:51.000Z",
+                      "updatedAt": "2026-07-28T02:40:51.000Z",
+                      "uid": "35240-a6eb700b-6723-4c58-86a3-ede705dd2900"
+                    },
+                    {
+                      "id": "ea3b1246-839c-4f87-94f8-ced9c4bd0eb1",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"disk\": {\n    \"size\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"cloudId\": \"<string>\",\n    \"dataCenterId\": \"<string>\"\n  },\n  \"provider\": {\n    \"type\": \"akash\"\n  },\n  \"team\": {\n    \"teamId\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/disks/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "disks",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:40:51.000Z",
+                      "updatedAt": "2026-07-28T02:40:51.000Z",
+                      "uid": "35240-ea3b1246-839c-4f87-94f8-ced9c4bd0eb1"
+                    },
+                    {
+                      "id": "5ee9c2ca-fdfd-4071-a787-76d1d5d06405",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"disk\": {\n    \"size\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"cloudId\": \"<string>\",\n    \"dataCenterId\": \"<string>\"\n  },\n  \"provider\": {\n    \"type\": \"akash\"\n  },\n  \"team\": {\n    \"teamId\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/disks/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "disks",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:40:51.000Z",
+                      "updatedAt": "2026-07-28T02:40:51.000Z",
+                      "uid": "35240-5ee9c2ca-fdfd-4071-a787-76d1d5d06405"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:40:51.000Z",
+                  "updatedAt": "2026-07-28T02:40:51.000Z",
+                  "uid": "35240-9a25fd3c-9ca9-4c4e-8072-8c4b1512a14f"
+                }
+              ],
+              "id": "0cd87561-af4b-4d1d-be5d-e55c508e84d3",
+              "createdAt": "2026-07-28T02:40:51.000Z",
+              "updatedAt": "2026-07-28T02:40:51.000Z",
+              "uid": "35240-0cd87561-af4b-4d1d-be5d-e55c508e84d3"
+            }
+          ],
+          "id": "3a9efa59-d283-4719-912a-b54ed98c13cd",
+          "createdAt": "2026-07-28T02:40:51.000Z",
+          "updatedAt": "2026-07-28T02:40:51.000Z",
+          "uid": "35240-3a9efa59-d283-4719-912a-b54ed98c13cd"
+        }
+      ],
+      "id": "4e838133-cd32-4dcc-ac31-c13c65dbf4bd",
+      "createdAt": "2026-07-28T02:40:51.000Z",
+      "updatedAt": "2026-07-28T02:40:51.000Z",
+      "uid": "35240-4e838133-cd32-4dcc-ac31-c13c65dbf4bd"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

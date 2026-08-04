@@ -1,0 +1,532 @@
+{
+  "info": {
+    "_postman_id": "42269762-75e9-469a-82ff-fbd060f5de79",
+    "name": "Prime Intellect Compute admin-clusters Billing API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:50.000Z",
+    "updatedAt": "2026-07-28T02:40:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-42269762-75e9-469a-82ff-fbd060f5de79"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "billing",
+              "item": [
+                {
+                  "name": "runs",
+                  "item": [
+                    {
+                      "name": "{run_id}",
+                      "item": [
+                        {
+                          "name": "usage",
+                          "item": [
+                            {
+                              "name": "Token usage and cost for a single RFT run",
+                              "id": "2ac91922-2763-4e9a-9d1c-33beaae49e05",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/billing/runs/:run_id/usage",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "billing",
+                                    "runs",
+                                    ":run_id",
+                                    "usage"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "7ba6534c-e066-4472-8235-361ef9228bfe",
+                                      "key": "run_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Return the running token + cost totals for one RFT run.\n\nMirrors the per-row training data shown on the billing page (Training\ntokens, Inference input/output tokens, price per million tokens, and\ntotal cost) so an agent can poll this endpoint to monitor a live run."
+                              },
+                              "response": [
+                                {
+                                  "id": "1978631e-1526-406e-8b5a-a2717dc25f03",
+                                  "name": "Successful Response",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/billing/runs/:run_id/usage",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "billing",
+                                        "runs",
+                                        ":run_id",
+                                        "usage"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "run_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"run_id\": \"<string>\",\n  \"training\": {\n    \"tokens\": 0,\n    \"input_tokens\": 0,\n    \"output_tokens\": 0,\n    \"cost_usd\": 0\n  },\n  \"inference\": {\n    \"tokens\": 0,\n    \"input_tokens\": 0,\n    \"output_tokens\": 0,\n    \"cost_usd\": 0\n  },\n  \"total_tokens\": \"<integer>\",\n  \"total_cost_usd\": \"<number>\",\n  \"pricing\": {\n    \"training_per_mtok\": \"<number>\",\n    \"inference_input_per_mtok\": \"<number>\",\n    \"inference_output_per_mtok\": \"<number>\"\n  },\n  \"run_name\": \"<string>\",\n  \"base_model\": \"<string>\",\n  \"status\": \"<string>\",\n  \"record_count\": 0\n}",
+                                  "createdAt": "2026-07-28T02:40:50.000Z",
+                                  "updatedAt": "2026-07-28T02:40:50.000Z",
+                                  "uid": "35240-1978631e-1526-406e-8b5a-a2717dc25f03"
+                                },
+                                {
+                                  "id": "da9a0575-66bf-479c-9268-b39894b3cd1e",
+                                  "name": "Authorization failed",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/billing/runs/:run_id/usage",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "billing",
+                                        "runs",
+                                        ":run_id",
+                                        "usage"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "run_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:40:50.000Z",
+                                  "updatedAt": "2026-07-28T02:40:50.000Z",
+                                  "uid": "35240-da9a0575-66bf-479c-9268-b39894b3cd1e"
+                                },
+                                {
+                                  "id": "38990f9d-469e-4dba-8428-9c3ce4927d5e",
+                                  "name": "Invalid request data",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/billing/runs/:run_id/usage",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "billing",
+                                        "runs",
+                                        ":run_id",
+                                        "usage"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "run_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:40:50.000Z",
+                                  "updatedAt": "2026-07-28T02:40:50.000Z",
+                                  "uid": "35240-38990f9d-469e-4dba-8428-9c3ce4927d5e"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:40:50.000Z",
+                              "updatedAt": "2026-07-28T02:40:50.000Z",
+                              "uid": "35240-2ac91922-2763-4e9a-9d1c-33beaae49e05"
+                            }
+                          ],
+                          "id": "e3a79ac3-5f00-4683-bd8f-b20800d43cb3",
+                          "createdAt": "2026-07-28T02:40:50.000Z",
+                          "updatedAt": "2026-07-28T02:40:50.000Z",
+                          "uid": "35240-e3a79ac3-5f00-4683-bd8f-b20800d43cb3"
+                        }
+                      ],
+                      "id": "b38b2288-9efa-42c3-8010-f40418d434c1",
+                      "createdAt": "2026-07-28T02:40:50.000Z",
+                      "updatedAt": "2026-07-28T02:40:50.000Z",
+                      "uid": "35240-b38b2288-9efa-42c3-8010-f40418d434c1"
+                    }
+                  ],
+                  "id": "6a932dbe-3eec-4273-9297-b5ab3cdd977c",
+                  "createdAt": "2026-07-28T02:40:50.000Z",
+                  "updatedAt": "2026-07-28T02:40:50.000Z",
+                  "uid": "35240-6a932dbe-3eec-4273-9297-b5ab3cdd977c"
+                },
+                {
+                  "name": "wallet",
+                  "item": [
+                    {
+                      "name": "Wallet balance + most recent billing rows",
+                      "id": "69b2503d-3e7d-4d5c-b649-27fa93dd7888",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/billing/wallet?limit=20&offset=0&teamId=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "billing",
+                            "wallet"
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of recent billing rows to include (max 100).",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Skip this many rows before returning. Lets callers page.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "If provided, return the team's wallet (requires membership).",
+                              "key": "teamId",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Return the wallet's current balance and most recent billing rows.\n\nAll resource types are included (compute, training, inference, disks,\nsandboxes, images) \u2014 same source-of-truth `Billing` table the\ndashboard's Billing History tab reads. Sorted by `lastBilledAt` desc."
+                      },
+                      "response": [
+                        {
+                          "id": "8c500f3c-ee64-479d-83ea-a582ba29bbfc",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/billing/wallet?limit=20&offset=0&teamId=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "billing",
+                                "wallet"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Number of recent billing rows to include (max 100).",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Skip this many rows before returning. Lets callers page.",
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "If provided, return the team's wallet (requires membership).",
+                                  "key": "teamId",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"wallet_id\": \"<string>\",\n  \"balance_usd\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"total_billings\": \"<integer>\",\n  \"recent_billings\": [\n    {\n      \"id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"amount_usd\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"resource_type\": \"<string>\",\n      \"last_billed_at\": \"<dateTime>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"amount_usd\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"resource_type\": \"<string>\",\n      \"last_billed_at\": \"<dateTime>\",\n      \"resource_id\": \"<string>\"\n    }\n  ],\n  \"team_id\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:40:50.000Z",
+                          "updatedAt": "2026-07-28T02:40:50.000Z",
+                          "uid": "35240-8c500f3c-ee64-479d-83ea-a582ba29bbfc"
+                        },
+                        {
+                          "id": "dbbd5eb7-9bd3-440c-bf64-9a89d9ae0d11",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/billing/wallet?limit=20&offset=0&teamId=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "billing",
+                                "wallet"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Number of recent billing rows to include (max 100).",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Skip this many rows before returning. Lets callers page.",
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "If provided, return the team's wallet (requires membership).",
+                                  "key": "teamId",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:50.000Z",
+                          "updatedAt": "2026-07-28T02:40:50.000Z",
+                          "uid": "35240-dbbd5eb7-9bd3-440c-bf64-9a89d9ae0d11"
+                        },
+                        {
+                          "id": "9f2ea1be-b47f-44b8-9c1e-f7707921a1b3",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/billing/wallet?limit=20&offset=0&teamId=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "billing",
+                                "wallet"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Number of recent billing rows to include (max 100).",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Skip this many rows before returning. Lets callers page.",
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "If provided, return the team's wallet (requires membership).",
+                                  "key": "teamId",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:50.000Z",
+                          "updatedAt": "2026-07-28T02:40:50.000Z",
+                          "uid": "35240-9f2ea1be-b47f-44b8-9c1e-f7707921a1b3"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:50.000Z",
+                      "updatedAt": "2026-07-28T02:40:50.000Z",
+                      "uid": "35240-69b2503d-3e7d-4d5c-b649-27fa93dd7888"
+                    }
+                  ],
+                  "id": "a2cf132c-234c-4137-b32f-dfbefa941fb7",
+                  "createdAt": "2026-07-28T02:40:50.000Z",
+                  "updatedAt": "2026-07-28T02:40:50.000Z",
+                  "uid": "35240-a2cf132c-234c-4137-b32f-dfbefa941fb7"
+                }
+              ],
+              "id": "be46ecf2-5856-448d-a73c-fe0adba19483",
+              "createdAt": "2026-07-28T02:40:50.000Z",
+              "updatedAt": "2026-07-28T02:40:50.000Z",
+              "uid": "35240-be46ecf2-5856-448d-a73c-fe0adba19483"
+            }
+          ],
+          "id": "03eefad1-2c9b-4aa8-a342-9a8685436e7e",
+          "createdAt": "2026-07-28T02:40:50.000Z",
+          "updatedAt": "2026-07-28T02:40:50.000Z",
+          "uid": "35240-03eefad1-2c9b-4aa8-a342-9a8685436e7e"
+        }
+      ],
+      "id": "904b83e9-8047-4480-afcf-a62ba693da39",
+      "createdAt": "2026-07-28T02:40:50.000Z",
+      "updatedAt": "2026-07-28T02:40:50.000Z",
+      "uid": "35240-904b83e9-8047-4480-afcf-a62ba693da39"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

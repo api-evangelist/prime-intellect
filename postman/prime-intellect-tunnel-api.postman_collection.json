@@ -1,0 +1,1086 @@
+{
+  "info": {
+    "_postman_id": "8c0e5a84-0a5e-4aaf-b022-933be1e7cfdc",
+    "name": "Prime Intellect Compute admin-clusters Tunnel API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:48.000Z",
+    "updatedAt": "2026-07-28T02:41:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8c0e5a84-0a5e-4aaf-b022-933be1e7cfdc"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "tunnel",
+              "item": [
+                {
+                  "name": "{tunnel_id}",
+                  "item": [
+                    {
+                      "name": "Get Tunnel Status Endpoint",
+                      "id": "37b5ed11-439d-4e6d-bf38-52dbe44327c7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel/:tunnel_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel",
+                            ":tunnel_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e12b7f00-49d6-47d0-b8c2-4f96ca349dc6",
+                              "key": "tunnel_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Get status of a specific tunnel."
+                      },
+                      "response": [
+                        {
+                          "id": "9b32bc63-e957-4322-b635-9ea087de5f8e",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/tunnel/:tunnel_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "tunnel",
+                                ":tunnel_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tunnel_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"tunnel_id\": \"<string>\",\n  \"status\": \"connected\",\n  \"hostname\": \"<string>\",\n  \"url\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"expires_at\": \"<dateTime>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"connected_at\": \"<dateTime>\",\n  \"team_id\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:41:49.000Z",
+                          "updatedAt": "2026-07-28T02:41:49.000Z",
+                          "uid": "35240-9b32bc63-e957-4322-b635-9ea087de5f8e"
+                        },
+                        {
+                          "id": "9269f3d3-6fae-4f54-975f-6899ff53177d",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/tunnel/:tunnel_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "tunnel",
+                                ":tunnel_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tunnel_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:49.000Z",
+                          "updatedAt": "2026-07-28T02:41:49.000Z",
+                          "uid": "35240-9269f3d3-6fae-4f54-975f-6899ff53177d"
+                        },
+                        {
+                          "id": "887d9053-da4f-4450-a467-e90d4efcaa70",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/tunnel/:tunnel_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "tunnel",
+                                ":tunnel_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tunnel_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:49.000Z",
+                          "updatedAt": "2026-07-28T02:41:49.000Z",
+                          "uid": "35240-887d9053-da4f-4450-a467-e90d4efcaa70"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-37b5ed11-439d-4e6d-bf38-52dbe44327c7"
+                    },
+                    {
+                      "name": "Delete Tunnel Endpoint",
+                      "id": "c1a7da57-f64b-4c23-9db1-9b0e682946a8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel/:tunnel_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel",
+                            ":tunnel_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ab955caf-c262-4be2-b129-a078ed3bdb08",
+                              "key": "tunnel_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Delete a tunnel and disconnect any active clients."
+                      },
+                      "response": [
+                        {
+                          "id": "a53ec843-b704-4b6d-aee2-3f888aae64ec",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/tunnel/:tunnel_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "tunnel",
+                                ":tunnel_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tunnel_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:41:49.000Z",
+                          "updatedAt": "2026-07-28T02:41:49.000Z",
+                          "uid": "35240-a53ec843-b704-4b6d-aee2-3f888aae64ec"
+                        },
+                        {
+                          "id": "e3086def-bd7b-4a65-b049-efa671161fee",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/tunnel/:tunnel_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "tunnel",
+                                ":tunnel_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tunnel_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:49.000Z",
+                          "updatedAt": "2026-07-28T02:41:49.000Z",
+                          "uid": "35240-e3086def-bd7b-4a65-b049-efa671161fee"
+                        },
+                        {
+                          "id": "d764de53-ea2f-40e9-8114-0ce686107e30",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/tunnel/:tunnel_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "tunnel",
+                                ":tunnel_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tunnel_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:49.000Z",
+                          "updatedAt": "2026-07-28T02:41:49.000Z",
+                          "uid": "35240-d764de53-ea2f-40e9-8114-0ce686107e30"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-c1a7da57-f64b-4c23-9db1-9b0e682946a8"
+                    }
+                  ],
+                  "id": "050be680-254f-40c3-b6fd-a5cf2705f854",
+                  "createdAt": "2026-07-28T02:41:49.000Z",
+                  "updatedAt": "2026-07-28T02:41:49.000Z",
+                  "uid": "35240-050be680-254f-40c3-b6fd-a5cf2705f854"
+                },
+                {
+                  "name": "Create Tunnel Endpoint",
+                  "id": "f767bfff-032f-4778-8c1e-486db57a4a0f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"local_port\": 8765,\n  \"teamId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/tunnel",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "tunnel"
+                      ]
+                    },
+                    "description": "Create a new tunnel for exposing a local service."
+                  },
+                  "response": [
+                    {
+                      "id": "08d79845-ba40-4ff1-98b6-7f780d2c24a6",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"local_port\": 8765,\n  \"teamId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"tunnel_id\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"url\": \"<string>\",\n  \"frp_token\": \"<string>\",\n  \"binding_secret\": \"<string>\",\n  \"server_host\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"server_port\": 7000\n}",
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-08d79845-ba40-4ff1-98b6-7f780d2c24a6"
+                    },
+                    {
+                      "id": "1ba40e7a-e5e3-472a-8e03-d847390ccdbb",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"local_port\": 8765,\n  \"teamId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-1ba40e7a-e5e3-472a-8e03-d847390ccdbb"
+                    },
+                    {
+                      "id": "0e1cd8e4-9114-46c7-9adf-a1af80b61190",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"local_port\": 8765,\n  \"teamId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-0e1cd8e4-9114-46c7-9adf-a1af80b61190"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:49.000Z",
+                  "updatedAt": "2026-07-28T02:41:49.000Z",
+                  "uid": "35240-f767bfff-032f-4778-8c1e-486db57a4a0f"
+                },
+                {
+                  "name": "List Tunnels Endpoint",
+                  "id": "f2136a55-0cad-4ff4-83e9-fc382c9f9733",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/tunnel?teamId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "tunnel"
+                      ],
+                      "query": [
+                        {
+                          "key": "teamId",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "List all active tunnels for the current user."
+                  },
+                  "response": [
+                    {
+                      "id": "1a73ee5f-1e04-40d7-bf14-de20bb106481",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel?teamId=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel"
+                          ],
+                          "query": [
+                            {
+                              "key": "teamId",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"tunnels\": [\n    {\n      \"tunnel_id\": \"<string>\",\n      \"status\": \"expired\",\n      \"hostname\": \"<string>\",\n      \"url\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"expires_at\": \"<dateTime>\",\n      \"user_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"connected_at\": \"<dateTime>\",\n      \"team_id\": \"<string>\"\n    },\n    {\n      \"tunnel_id\": \"<string>\",\n      \"status\": \"expired\",\n      \"hostname\": \"<string>\",\n      \"url\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"expires_at\": \"<dateTime>\",\n      \"user_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"connected_at\": \"<dateTime>\",\n      \"team_id\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-1a73ee5f-1e04-40d7-bf14-de20bb106481"
+                    },
+                    {
+                      "id": "6f34aa0e-e863-4074-a5cb-11f636a2c611",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel?teamId=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel"
+                          ],
+                          "query": [
+                            {
+                              "key": "teamId",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-6f34aa0e-e863-4074-a5cb-11f636a2c611"
+                    },
+                    {
+                      "id": "900fc8ad-0006-413d-98fd-515e526fe0e5",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel?teamId=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel"
+                          ],
+                          "query": [
+                            {
+                              "key": "teamId",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-900fc8ad-0006-413d-98fd-515e526fe0e5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:49.000Z",
+                  "updatedAt": "2026-07-28T02:41:49.000Z",
+                  "uid": "35240-f2136a55-0cad-4ff4-83e9-fc382c9f9733"
+                },
+                {
+                  "name": "Bulk Delete Tunnels Endpoint",
+                  "id": "e1632105-19ed-4cbc-852e-53675426934f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"tunnel_ids\": [\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/tunnel",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "tunnel"
+                      ]
+                    },
+                    "description": "Bulk delete multiple tunnels by IDs."
+                  },
+                  "response": [
+                    {
+                      "id": "600ae8fe-5881-4d7b-a307-1feec63d9e25",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"tunnel_ids\": [\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"succeeded\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"failed\": [\n    {\n      \"adipisicing_\": \"<string>\"\n    },\n    {\n      \"voluptate_088\": \"<string>\",\n      \"Ut2\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-600ae8fe-5881-4d7b-a307-1feec63d9e25"
+                    },
+                    {
+                      "id": "27d90b00-d9f1-429a-8661-82d9ae65ffcf",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"tunnel_ids\": [\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-27d90b00-d9f1-429a-8661-82d9ae65ffcf"
+                    },
+                    {
+                      "id": "4a906ed3-69be-4e28-ace0-06d2acb7fa71",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"tunnel_ids\": [\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/tunnel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "tunnel"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:49.000Z",
+                      "updatedAt": "2026-07-28T02:41:49.000Z",
+                      "uid": "35240-4a906ed3-69be-4e28-ace0-06d2acb7fa71"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:49.000Z",
+                  "updatedAt": "2026-07-28T02:41:49.000Z",
+                  "uid": "35240-e1632105-19ed-4cbc-852e-53675426934f"
+                }
+              ],
+              "id": "98afc844-651a-41ec-b75a-17dfcd7fb46a",
+              "createdAt": "2026-07-28T02:41:49.000Z",
+              "updatedAt": "2026-07-28T02:41:49.000Z",
+              "uid": "35240-98afc844-651a-41ec-b75a-17dfcd7fb46a"
+            }
+          ],
+          "id": "6e74f12c-9205-40ad-9583-581b25eb50de",
+          "createdAt": "2026-07-28T02:41:49.000Z",
+          "updatedAt": "2026-07-28T02:41:49.000Z",
+          "uid": "35240-6e74f12c-9205-40ad-9583-581b25eb50de"
+        }
+      ],
+      "id": "8bdf0568-93c3-404b-aa80-d35c8adccb6d",
+      "createdAt": "2026-07-28T02:41:49.000Z",
+      "updatedAt": "2026-07-28T02:41:49.000Z",
+      "uid": "35240-8bdf0568-93c3-404b-aa80-d35c8adccb6d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

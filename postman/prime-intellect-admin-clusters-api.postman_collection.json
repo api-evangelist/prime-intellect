@@ -1,0 +1,1326 @@
+{
+  "info": {
+    "_postman_id": "26ae934b-bb31-41bd-8bca-1c00133e8c2b",
+    "name": "Prime Intellect Compute admin-clusters API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:47.000Z",
+    "updatedAt": "2026-07-28T02:40:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-26ae934b-bb31-41bd-8bca-1c00133e8c2b"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "admin",
+          "item": [
+            {
+              "name": "clusters",
+              "item": [
+                {
+                  "name": "{cluster_id}",
+                  "item": [
+                    {
+                      "name": "authorizations",
+                      "item": [
+                        {
+                          "name": "certificate",
+                          "item": [
+                            {
+                              "name": "Request Certificate",
+                              "id": "9de7f5c0-bee5-44cd-bd80-8b9d820239db",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"publicKey\": \"<string>\",\n  \"ttl\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id/authorizations/certificate",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "admin",
+                                    "clusters",
+                                    ":cluster_id",
+                                    "authorizations",
+                                    "certificate"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "9d81cfec-7cce-4433-9903-329bd41893e6",
+                                      "key": "cluster_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Sign the requesting admin's SSH public key via Vault.\n\nIf a ``publicKey`` is provided in the body, it is signed directly.\nOtherwise the admin's DB-stored SSH public key is used."
+                              },
+                              "response": [
+                                {
+                                  "id": "23a14d7d-0cfb-4ddd-b800-52df9bb5d813",
+                                  "name": "Successful Response",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"publicKey\": \"<string>\",\n  \"ttl\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id/authorizations/certificate",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "admin",
+                                        "clusters",
+                                        ":cluster_id",
+                                        "authorizations",
+                                        "certificate"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cluster_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": {\n    \"signedKey\": \"<string>\",\n    \"validPrincipals\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ttl\": \"<string>\",\n    \"nodes\": [\n      {\n        \"podId\": \"<string>\",\n        \"host\": \"<string>\",\n        \"user\": \"<string>\",\n        \"podName\": \"<string>\",\n        \"port\": 22,\n        \"role\": \"<string>\",\n        \"isControlNode\": false\n      },\n      {\n        \"podId\": \"<string>\",\n        \"host\": \"<string>\",\n        \"user\": \"<string>\",\n        \"podName\": \"<string>\",\n        \"port\": 22,\n        \"role\": \"<string>\",\n        \"isControlNode\": false\n      }\n    ]\n  },\n  \"status\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:40:47.000Z",
+                                  "updatedAt": "2026-07-28T02:40:47.000Z",
+                                  "uid": "35240-23a14d7d-0cfb-4ddd-b800-52df9bb5d813"
+                                },
+                                {
+                                  "id": "1c2148ab-fb05-4934-896f-2c540e38c5ad",
+                                  "name": "Authorization failed",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"publicKey\": \"<string>\",\n  \"ttl\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id/authorizations/certificate",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "admin",
+                                        "clusters",
+                                        ":cluster_id",
+                                        "authorizations",
+                                        "certificate"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cluster_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:40:47.000Z",
+                                  "updatedAt": "2026-07-28T02:40:47.000Z",
+                                  "uid": "35240-1c2148ab-fb05-4934-896f-2c540e38c5ad"
+                                },
+                                {
+                                  "id": "4022f98c-6c82-4667-a8a8-66189a795328",
+                                  "name": "Insufficient permissions",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"publicKey\": \"<string>\",\n  \"ttl\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id/authorizations/certificate",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "admin",
+                                        "clusters",
+                                        ":cluster_id",
+                                        "authorizations",
+                                        "certificate"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cluster_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:40:47.000Z",
+                                  "updatedAt": "2026-07-28T02:40:47.000Z",
+                                  "uid": "35240-4022f98c-6c82-4667-a8a8-66189a795328"
+                                },
+                                {
+                                  "id": "3dc32112-a2d7-43d1-9d72-cc9636266e36",
+                                  "name": "Invalid request data",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"publicKey\": \"<string>\",\n  \"ttl\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id/authorizations/certificate",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "admin",
+                                        "clusters",
+                                        ":cluster_id",
+                                        "authorizations",
+                                        "certificate"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cluster_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:40:47.000Z",
+                                  "updatedAt": "2026-07-28T02:40:47.000Z",
+                                  "uid": "35240-3dc32112-a2d7-43d1-9d72-cc9636266e36"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:40:47.000Z",
+                              "updatedAt": "2026-07-28T02:40:47.000Z",
+                              "uid": "35240-9de7f5c0-bee5-44cd-bd80-8b9d820239db"
+                            }
+                          ],
+                          "id": "e0947ec8-6057-4c06-836a-76a32cd3e5f3",
+                          "createdAt": "2026-07-28T02:40:47.000Z",
+                          "updatedAt": "2026-07-28T02:40:47.000Z",
+                          "uid": "35240-e0947ec8-6057-4c06-836a-76a32cd3e5f3"
+                        }
+                      ],
+                      "id": "97467782-62dd-4c91-a828-3d7361714a81",
+                      "createdAt": "2026-07-28T02:40:47.000Z",
+                      "updatedAt": "2026-07-28T02:40:47.000Z",
+                      "uid": "35240-97467782-62dd-4c91-a828-3d7361714a81"
+                    },
+                    {
+                      "name": "node-logs",
+                      "item": [
+                        {
+                          "name": "List Cluster Node Logs",
+                          "id": "584f6950-6cee-4627-86c4-30ea899ea9de",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id/node-logs?podId=<string>&eventType=ATTACHED&offset=0&limit=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "admin",
+                                "clusters",
+                                ":cluster_id",
+                                "node-logs"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter logs to a single pod.",
+                                  "key": "podId",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter logs to a single event type.",
+                                  "key": "eventType",
+                                  "value": "ATTACHED"
+                                },
+                                {
+                                  "description": "Number of items to skip.",
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "Max items to return (1-100, default 20).",
+                                  "key": "limit",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "68219c4c-8e88-4b09-b0fa-4c563e30d90a",
+                                  "key": "cluster_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Return paginated ClusterNodeLog entries for one cluster, newest first."
+                          },
+                          "response": [
+                            {
+                              "id": "7ad6be3f-d596-456f-8de4-8a551f62f7dc",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id/node-logs?podId=<string>&eventType=ATTACHED&offset=0&limit=20",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "admin",
+                                    "clusters",
+                                    ":cluster_id",
+                                    "node-logs"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter logs to a single pod.",
+                                      "key": "podId",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Filter logs to a single event type.",
+                                      "key": "eventType",
+                                      "value": "ATTACHED"
+                                    },
+                                    {
+                                      "description": "Number of items to skip.",
+                                      "key": "offset",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "description": "Max items to return (1-100, default 20).",
+                                      "key": "limit",
+                                      "value": "20"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cluster_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"eventType\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"podName\": \"<string>\",\n      \"podStatus\": \"<string>\",\n      \"gpuName\": \"<string>\",\n      \"gpuCount\": \"<integer>\",\n      \"podId\": \"<string>\",\n      \"host\": \"<string>\",\n      \"role\": \"<string>\",\n      \"changeSummary\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"eventType\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"podName\": \"<string>\",\n      \"podStatus\": \"<string>\",\n      \"gpuName\": \"<string>\",\n      \"gpuCount\": \"<integer>\",\n      \"podId\": \"<string>\",\n      \"host\": \"<string>\",\n      \"role\": \"<string>\",\n      \"changeSummary\": \"<string>\"\n    }\n  ],\n  \"total_count\": 0,\n  \"offset\": 0,\n  \"limit\": 100,\n  \"status\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:40:47.000Z",
+                              "updatedAt": "2026-07-28T02:40:47.000Z",
+                              "uid": "35240-7ad6be3f-d596-456f-8de4-8a551f62f7dc"
+                            },
+                            {
+                              "id": "c9b77a40-1c65-4bcf-a946-cb152b6037dc",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id/node-logs?podId=<string>&eventType=ATTACHED&offset=0&limit=20",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "admin",
+                                    "clusters",
+                                    ":cluster_id",
+                                    "node-logs"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter logs to a single pod.",
+                                      "key": "podId",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Filter logs to a single event type.",
+                                      "key": "eventType",
+                                      "value": "ATTACHED"
+                                    },
+                                    {
+                                      "description": "Number of items to skip.",
+                                      "key": "offset",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "description": "Max items to return (1-100, default 20).",
+                                      "key": "limit",
+                                      "value": "20"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cluster_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:47.000Z",
+                              "updatedAt": "2026-07-28T02:40:47.000Z",
+                              "uid": "35240-c9b77a40-1c65-4bcf-a946-cb152b6037dc"
+                            },
+                            {
+                              "id": "70b6f3e6-4dc3-4dcc-8e0e-77107ef12e43",
+                              "name": "Insufficient permissions",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id/node-logs?podId=<string>&eventType=ATTACHED&offset=0&limit=20",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "admin",
+                                    "clusters",
+                                    ":cluster_id",
+                                    "node-logs"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter logs to a single pod.",
+                                      "key": "podId",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Filter logs to a single event type.",
+                                      "key": "eventType",
+                                      "value": "ATTACHED"
+                                    },
+                                    {
+                                      "description": "Number of items to skip.",
+                                      "key": "offset",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "description": "Max items to return (1-100, default 20).",
+                                      "key": "limit",
+                                      "value": "20"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cluster_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:40:47.000Z",
+                              "updatedAt": "2026-07-28T02:40:47.000Z",
+                              "uid": "35240-70b6f3e6-4dc3-4dcc-8e0e-77107ef12e43"
+                            },
+                            {
+                              "id": "772de3af-feda-48cd-9f03-e32146e93d53",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id/node-logs?podId=<string>&eventType=ATTACHED&offset=0&limit=20",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "admin",
+                                    "clusters",
+                                    ":cluster_id",
+                                    "node-logs"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter logs to a single pod.",
+                                      "key": "podId",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Filter logs to a single event type.",
+                                      "key": "eventType",
+                                      "value": "ATTACHED"
+                                    },
+                                    {
+                                      "description": "Number of items to skip.",
+                                      "key": "offset",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "description": "Max items to return (1-100, default 20).",
+                                      "key": "limit",
+                                      "value": "20"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cluster_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:40:47.000Z",
+                              "updatedAt": "2026-07-28T02:40:47.000Z",
+                              "uid": "35240-772de3af-feda-48cd-9f03-e32146e93d53"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:40:47.000Z",
+                          "updatedAt": "2026-07-28T02:40:47.000Z",
+                          "uid": "35240-584f6950-6cee-4627-86c4-30ea899ea9de"
+                        }
+                      ],
+                      "id": "fe12125b-01d1-4039-9ed4-44a5d4f47d70",
+                      "createdAt": "2026-07-28T02:40:47.000Z",
+                      "updatedAt": "2026-07-28T02:40:47.000Z",
+                      "uid": "35240-fe12125b-01d1-4039-9ed4-44a5d4f47d70"
+                    },
+                    {
+                      "name": "Get Cluster",
+                      "id": "c3763765-217e-4d13-8138-fd180ec79379",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "admin",
+                            "clusters",
+                            ":cluster_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "02409709-8a53-4cb4-9ddb-078ff09d4758",
+                              "key": "cluster_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Return full DB details for one cluster (columns + nodes + SSH keys)."
+                      },
+                      "response": [
+                        {
+                          "id": "0ec3edb0-8859-46bd-91aa-1352343f529e",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "admin",
+                                "clusters",
+                                ":cluster_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cluster_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"remoteId\": \"<string>\",\n    \"name\": \"<string>\",\n    \"providerType\": \"<string>\",\n    \"status\": \"<string>\",\n    \"vaultEnabled\": \"<boolean>\",\n    \"gpuName\": \"<string>\",\n    \"gpuCount\": \"<integer>\",\n    \"orchestratorType\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"socket\": \"<string>\",\n    \"priceHr\": \"<number>\",\n    \"stoppedPriceHr\": \"<number>\",\n    \"provisioningPriceHr\": \"<number>\",\n    \"basePriceHr\": \"<number>\",\n    \"baseCurrency\": \"<string>\",\n    \"userId\": \"<string>\",\n    \"teamId\": \"<string>\",\n    \"walletId\": \"<string>\",\n    \"orchestratorVersion\": \"<string>\",\n    \"orchestratorEndpoint\": \"<string>\",\n    \"orchestratorConfig\": {},\n    \"orchestratorDeploymentJobId\": \"<string>\",\n    \"orchestratorDeploymentStatus\": \"<string>\",\n    \"terminatedAt\": \"<dateTime>\",\n    \"info\": {\n      \"title\": \"Info\"\n    },\n    \"nodes\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"remoteId\": \"<string>\",\n        \"providerType\": \"<string>\",\n        \"status\": \"<string>\",\n        \"gpuName\": \"<string>\",\n        \"gpuCount\": \"<integer>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"type\": \"<string>\",\n        \"installationStatus\": \"<string>\",\n        \"testStatus\": \"<string>\",\n        \"finalizerStatus\": \"<string>\",\n        \"installationProgress\": \"<integer>\",\n        \"installationFailure\": \"<string>\",\n        \"socket\": \"<string>\",\n        \"priceHr\": \"<number>\",\n        \"stoppedPriceHr\": \"<number>\",\n        \"provisioningPriceHr\": \"<number>\",\n        \"basePriceHr\": \"<number>\",\n        \"baseCurrency\": \"<string>\",\n        \"environmentType\": \"<string>\",\n        \"userId\": \"<string>\",\n        \"teamId\": \"<string>\",\n        \"walletId\": \"<string>\",\n        \"isDetached\": false,\n        \"terminatedAt\": \"<dateTime>\",\n        \"providerReadyAt\": \"<dateTime>\",\n        \"piReadyAt\": \"<dateTime>\",\n        \"info\": {\n          \"title\": \"Info\"\n        },\n        \"connections\": [\n          {\n            \"podId\": \"<string>\",\n            \"host\": \"<string>\",\n            \"user\": \"<string>\",\n            \"podName\": \"<string>\",\n            \"port\": 22,\n            \"role\": \"<string>\",\n            \"isControlNode\": false\n          },\n          {\n            \"podId\": \"<string>\",\n            \"host\": \"<string>\",\n            \"user\": \"<string>\",\n            \"podName\": \"<string>\",\n            \"port\": 22,\n            \"role\": \"<string>\",\n            \"isControlNode\": false\n          }\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"remoteId\": \"<string>\",\n        \"providerType\": \"<string>\",\n        \"status\": \"<string>\",\n        \"gpuName\": \"<string>\",\n        \"gpuCount\": \"<integer>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"type\": \"<string>\",\n        \"installationStatus\": \"<string>\",\n        \"testStatus\": \"<string>\",\n        \"finalizerStatus\": \"<string>\",\n        \"installationProgress\": \"<integer>\",\n        \"installationFailure\": \"<string>\",\n        \"socket\": \"<string>\",\n        \"priceHr\": \"<number>\",\n        \"stoppedPriceHr\": \"<number>\",\n        \"provisioningPriceHr\": \"<number>\",\n        \"basePriceHr\": \"<number>\",\n        \"baseCurrency\": \"<string>\",\n        \"environmentType\": \"<string>\",\n        \"userId\": \"<string>\",\n        \"teamId\": \"<string>\",\n        \"walletId\": \"<string>\",\n        \"isDetached\": false,\n        \"terminatedAt\": \"<dateTime>\",\n        \"providerReadyAt\": \"<dateTime>\",\n        \"piReadyAt\": \"<dateTime>\",\n        \"info\": {\n          \"title\": \"Info\"\n        },\n        \"connections\": [\n          {\n            \"podId\": \"<string>\",\n            \"host\": \"<string>\",\n            \"user\": \"<string>\",\n            \"podName\": \"<string>\",\n            \"port\": 22,\n            \"role\": \"<string>\",\n            \"isControlNode\": false\n          },\n          {\n            \"podId\": \"<string>\",\n            \"host\": \"<string>\",\n            \"user\": \"<string>\",\n            \"podName\": \"<string>\",\n            \"port\": 22,\n            \"role\": \"<string>\",\n            \"isControlNode\": false\n          }\n        ]\n      }\n    ],\n    \"sshKeys\": [\n      {\n        \"id\": \"<string>\",\n        \"role\": \"<string>\",\n        \"userId\": \"<string>\",\n        \"sshKeyId\": \"<string>\",\n        \"publicKey\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"role\": \"<string>\",\n        \"userId\": \"<string>\",\n        \"sshKeyId\": \"<string>\",\n        \"publicKey\": \"<string>\"\n      }\n    ]\n  },\n  \"status\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:40:47.000Z",
+                          "updatedAt": "2026-07-28T02:40:47.000Z",
+                          "uid": "35240-0ec3edb0-8859-46bd-91aa-1352343f529e"
+                        },
+                        {
+                          "id": "13aec5a0-be71-4877-a533-b84bbc90aea3",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "admin",
+                                "clusters",
+                                ":cluster_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cluster_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:47.000Z",
+                          "updatedAt": "2026-07-28T02:40:47.000Z",
+                          "uid": "35240-13aec5a0-be71-4877-a533-b84bbc90aea3"
+                        },
+                        {
+                          "id": "b66b243a-6e83-426f-8278-dd80743fb141",
+                          "name": "Insufficient permissions",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "admin",
+                                "clusters",
+                                ":cluster_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cluster_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:47.000Z",
+                          "updatedAt": "2026-07-28T02:40:47.000Z",
+                          "uid": "35240-b66b243a-6e83-426f-8278-dd80743fb141"
+                        },
+                        {
+                          "id": "531090ec-0751-499b-9875-73c0a8959760",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/admin/clusters/:cluster_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "admin",
+                                "clusters",
+                                ":cluster_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cluster_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:47.000Z",
+                          "updatedAt": "2026-07-28T02:40:47.000Z",
+                          "uid": "35240-531090ec-0751-499b-9875-73c0a8959760"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:47.000Z",
+                      "updatedAt": "2026-07-28T02:40:47.000Z",
+                      "uid": "35240-c3763765-217e-4d13-8138-fd180ec79379"
+                    }
+                  ],
+                  "id": "07e18ab7-95e8-4f0e-8c66-7f5c7d8541d3",
+                  "createdAt": "2026-07-28T02:40:47.000Z",
+                  "updatedAt": "2026-07-28T02:40:47.000Z",
+                  "uid": "35240-07e18ab7-95e8-4f0e-8c66-7f5c7d8541d3"
+                },
+                {
+                  "name": "List Clusters",
+                  "id": "c7a2487f-6275-4dfb-852b-d1317119d2c7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/admin/clusters?vaultEnabled=<boolean>&search=<string>&offset=0&limit=20&detailed=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "admin",
+                        "clusters"
+                      ],
+                      "query": [
+                        {
+                          "description": "If true, return only vault-enabled clusters; if false, only non-vault-enabled. Omit to include both.",
+                          "key": "vaultEnabled",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Case-insensitive substring match against cluster name or id.",
+                          "key": "search",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of items to skip.",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Max items to return (1-100).",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "If true, populate `nodes` for each cluster (one entry per pod). Otherwise only the `controller` connection is returned.",
+                          "key": "detailed",
+                          "value": "false"
+                        }
+                      ]
+                    },
+                    "description": "List non-terminated clusters."
+                  },
+                  "response": [
+                    {
+                      "id": "5e397b95-61ab-46c6-a3b2-8ecc422d5560",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/admin/clusters?vaultEnabled=<boolean>&search=<string>&offset=0&limit=20&detailed=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "admin",
+                            "clusters"
+                          ],
+                          "query": [
+                            {
+                              "description": "If true, return only vault-enabled clusters; if false, only non-vault-enabled. Omit to include both.",
+                              "key": "vaultEnabled",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Case-insensitive substring match against cluster name or id.",
+                              "key": "search",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to skip.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max items to return (1-100).",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "If true, populate `nodes` for each cluster (one entry per pod). Otherwise only the `controller` connection is returned.",
+                              "key": "detailed",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"providerType\": \"<string>\",\n      \"status\": \"<string>\",\n      \"vaultEnabled\": \"<boolean>\",\n      \"createdAt\": \"<dateTime>\",\n      \"teamId\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"controller\": {\n        \"podId\": \"<string>\",\n        \"host\": \"<string>\",\n        \"user\": \"<string>\",\n        \"podName\": \"<string>\",\n        \"port\": 22,\n        \"role\": \"<string>\",\n        \"isControlNode\": false\n      },\n      \"nodes\": [\n        {\n          \"podId\": \"<string>\",\n          \"host\": \"<string>\",\n          \"user\": \"<string>\",\n          \"podName\": \"<string>\",\n          \"port\": 22,\n          \"role\": \"<string>\",\n          \"isControlNode\": false\n        },\n        {\n          \"podId\": \"<string>\",\n          \"host\": \"<string>\",\n          \"user\": \"<string>\",\n          \"podName\": \"<string>\",\n          \"port\": 22,\n          \"role\": \"<string>\",\n          \"isControlNode\": false\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"providerType\": \"<string>\",\n      \"status\": \"<string>\",\n      \"vaultEnabled\": \"<boolean>\",\n      \"createdAt\": \"<dateTime>\",\n      \"teamId\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"controller\": {\n        \"podId\": \"<string>\",\n        \"host\": \"<string>\",\n        \"user\": \"<string>\",\n        \"podName\": \"<string>\",\n        \"port\": 22,\n        \"role\": \"<string>\",\n        \"isControlNode\": false\n      },\n      \"nodes\": [\n        {\n          \"podId\": \"<string>\",\n          \"host\": \"<string>\",\n          \"user\": \"<string>\",\n          \"podName\": \"<string>\",\n          \"port\": 22,\n          \"role\": \"<string>\",\n          \"isControlNode\": false\n        },\n        {\n          \"podId\": \"<string>\",\n          \"host\": \"<string>\",\n          \"user\": \"<string>\",\n          \"podName\": \"<string>\",\n          \"port\": 22,\n          \"role\": \"<string>\",\n          \"isControlNode\": false\n        }\n      ]\n    }\n  ],\n  \"total_count\": 0,\n  \"offset\": 0,\n  \"limit\": 100,\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:40:47.000Z",
+                      "updatedAt": "2026-07-28T02:40:47.000Z",
+                      "uid": "35240-5e397b95-61ab-46c6-a3b2-8ecc422d5560"
+                    },
+                    {
+                      "id": "4a42f9cb-01ce-4e9f-9107-53f2dae46554",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/admin/clusters?vaultEnabled=<boolean>&search=<string>&offset=0&limit=20&detailed=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "admin",
+                            "clusters"
+                          ],
+                          "query": [
+                            {
+                              "description": "If true, return only vault-enabled clusters; if false, only non-vault-enabled. Omit to include both.",
+                              "key": "vaultEnabled",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Case-insensitive substring match against cluster name or id.",
+                              "key": "search",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to skip.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max items to return (1-100).",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "If true, populate `nodes` for each cluster (one entry per pod). Otherwise only the `controller` connection is returned.",
+                              "key": "detailed",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:40:47.000Z",
+                      "updatedAt": "2026-07-28T02:40:47.000Z",
+                      "uid": "35240-4a42f9cb-01ce-4e9f-9107-53f2dae46554"
+                    },
+                    {
+                      "id": "4898f948-c99a-4452-8eb9-ce68bf5f7a0b",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/admin/clusters?vaultEnabled=<boolean>&search=<string>&offset=0&limit=20&detailed=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "admin",
+                            "clusters"
+                          ],
+                          "query": [
+                            {
+                              "description": "If true, return only vault-enabled clusters; if false, only non-vault-enabled. Omit to include both.",
+                              "key": "vaultEnabled",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Case-insensitive substring match against cluster name or id.",
+                              "key": "search",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to skip.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max items to return (1-100).",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "If true, populate `nodes` for each cluster (one entry per pod). Otherwise only the `controller` connection is returned.",
+                              "key": "detailed",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:40:47.000Z",
+                      "updatedAt": "2026-07-28T02:40:47.000Z",
+                      "uid": "35240-4898f948-c99a-4452-8eb9-ce68bf5f7a0b"
+                    },
+                    {
+                      "id": "c547fb7e-5e31-4ed9-9f91-0fcf0460755e",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/admin/clusters?vaultEnabled=<boolean>&search=<string>&offset=0&limit=20&detailed=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "admin",
+                            "clusters"
+                          ],
+                          "query": [
+                            {
+                              "description": "If true, return only vault-enabled clusters; if false, only non-vault-enabled. Omit to include both.",
+                              "key": "vaultEnabled",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Case-insensitive substring match against cluster name or id.",
+                              "key": "search",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to skip.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max items to return (1-100).",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "If true, populate `nodes` for each cluster (one entry per pod). Otherwise only the `controller` connection is returned.",
+                              "key": "detailed",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:40:47.000Z",
+                      "updatedAt": "2026-07-28T02:40:47.000Z",
+                      "uid": "35240-c547fb7e-5e31-4ed9-9f91-0fcf0460755e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:40:47.000Z",
+                  "updatedAt": "2026-07-28T02:40:47.000Z",
+                  "uid": "35240-c7a2487f-6275-4dfb-852b-d1317119d2c7"
+                }
+              ],
+              "id": "fb633ea6-e14a-4c3f-a08c-b01f9272537c",
+              "createdAt": "2026-07-28T02:40:47.000Z",
+              "updatedAt": "2026-07-28T02:40:47.000Z",
+              "uid": "35240-fb633ea6-e14a-4c3f-a08c-b01f9272537c"
+            }
+          ],
+          "id": "bf165497-8be9-40bc-b6a5-185fd6e150cc",
+          "createdAt": "2026-07-28T02:40:47.000Z",
+          "updatedAt": "2026-07-28T02:40:47.000Z",
+          "uid": "35240-bf165497-8be9-40bc-b6a5-185fd6e150cc"
+        }
+      ],
+      "id": "ccb39e9e-e5e3-41be-94e6-b5a1a7853c03",
+      "createdAt": "2026-07-28T02:40:47.000Z",
+      "updatedAt": "2026-07-28T02:40:47.000Z",
+      "uid": "35240-ccb39e9e-e5e3-41be-94e6-b5a1a7853c03"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

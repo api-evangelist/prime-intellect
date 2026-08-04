@@ -1,0 +1,233 @@
+{
+  "info": {
+    "_postman_id": "c46ddf8e-97f3-4c8e-910c-639bb82df075",
+    "name": "Prime Intellect Compute admin-clusters Inference API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:43.000Z",
+    "updatedAt": "2026-07-28T02:40:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c46ddf8e-97f3-4c8e-910c-639bb82df075"
+  },
+  "item": [
+    {
+      "name": "models",
+      "item": [
+        {
+          "name": "Prime Intellect List Inference Models",
+          "id": "da4eb748-f4c9-4e43-ba12-63cd2ac94ddf",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/models",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "models"
+              ]
+            },
+            "description": "List models available through the Prime Intellect inference API."
+          },
+          "response": [
+            {
+              "id": "1e6bf07f-a1f7-4a18-8e39-e7733dea3549",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/models",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "models"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"object\": \"<string>\",\n      \"created\": \"<integer>\",\n      \"owned_by\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"object\": \"<string>\",\n      \"created\": \"<integer>\",\n      \"owned_by\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:40:43.000Z",
+              "updatedAt": "2026-07-28T02:40:43.000Z",
+              "uid": "35240-1e6bf07f-a1f7-4a18-8e39-e7733dea3549"
+            }
+          ],
+          "createdAt": "2026-07-28T02:40:43.000Z",
+          "updatedAt": "2026-07-28T02:40:43.000Z",
+          "uid": "35240-da4eb748-f4c9-4e43-ba12-63cd2ac94ddf"
+        }
+      ],
+      "id": "bf4899d8-758a-4153-a782-615ce9fc9ff2",
+      "createdAt": "2026-07-28T02:40:43.000Z",
+      "updatedAt": "2026-07-28T02:40:43.000Z",
+      "uid": "35240-bf4899d8-758a-4153-a782-615ce9fc9ff2"
+    },
+    {
+      "name": "chat",
+      "item": [
+        {
+          "name": "completions",
+          "item": [
+            {
+              "name": "Prime Intellect Create Chat Completion",
+              "id": "ad48cae1-1d13-4597-83eb-35c3505a6f7b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"stream\": false,\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_tokens\": \"<integer>\",\n  \"logprobs\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/chat/completions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "chat",
+                    "completions"
+                  ]
+                },
+                "description": "OpenAI-compatible chat completions endpoint. Supports streaming, temperature, token limits, and logprobs. Responses include a usage object with input/output tokens and cost."
+              },
+              "response": [
+                {
+                  "id": "d20d1a18-c5bd-4e94-aa71-404b2bab343a",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"stream\": false,\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_tokens\": \"<integer>\",\n  \"logprobs\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/chat/completions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "chat",
+                        "completions"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"object\": \"<string>\",\n  \"created\": \"<integer>\",\n  \"model\": \"<string>\",\n  \"choices\": [\n    {\n      \"index\": \"<integer>\",\n      \"message\": {\n        \"role\": \"tool\",\n        \"content\": \"<string>\"\n      },\n      \"finish_reason\": \"<string>\"\n    },\n    {\n      \"index\": \"<integer>\",\n      \"message\": {\n        \"role\": \"tool\",\n        \"content\": \"<string>\"\n      },\n      \"finish_reason\": \"<string>\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": \"<integer>\",\n    \"completion_tokens\": \"<integer>\",\n    \"total_tokens\": \"<integer>\",\n    \"cost\": \"<number>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:40:43.000Z",
+                  "updatedAt": "2026-07-28T02:40:43.000Z",
+                  "uid": "35240-d20d1a18-c5bd-4e94-aa71-404b2bab343a"
+                }
+              ],
+              "createdAt": "2026-07-28T02:40:43.000Z",
+              "updatedAt": "2026-07-28T02:40:43.000Z",
+              "uid": "35240-ad48cae1-1d13-4597-83eb-35c3505a6f7b"
+            }
+          ],
+          "id": "bd8ce235-ef90-4244-9b14-8c99669a38d8",
+          "createdAt": "2026-07-28T02:40:43.000Z",
+          "updatedAt": "2026-07-28T02:40:43.000Z",
+          "uid": "35240-bd8ce235-ef90-4244-9b14-8c99669a38d8"
+        }
+      ],
+      "id": "c4603a2c-8fb8-4083-be67-d0d51adf8c31",
+      "createdAt": "2026-07-28T02:40:43.000Z",
+      "updatedAt": "2026-07-28T02:40:43.000Z",
+      "uid": "35240-c4603a2c-8fb8-4083-be67-d0d51adf8c31"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

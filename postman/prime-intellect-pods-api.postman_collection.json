@@ -1,0 +1,1542 @@
+{
+  "info": {
+    "_postman_id": "fdcdff44-1980-4edf-8d55-30fbdbc7db1b",
+    "name": "Prime Intellect Compute admin-clusters Pods API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:40.000Z",
+    "updatedAt": "2026-07-28T02:41:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fdcdff44-1980-4edf-8d55-30fbdbc7db1b"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "pods",
+              "item": [
+                {
+                  "name": "history",
+                  "item": [
+                    {
+                      "name": "Get Pods History",
+                      "id": "d9970301-503e-4e11-afd3-b383f3bdf812",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/pods/history?sort_by=terminatedAt&sort_order=desc&offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "pods",
+                            "history"
+                          ],
+                          "query": [
+                            {
+                              "key": "sort_by",
+                              "value": "terminatedAt"
+                            },
+                            {
+                              "key": "sort_order",
+                              "value": "desc"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "e7185de2-d4e9-449e-820e-3eeb01069d4c",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/history?sort_by=terminatedAt&sort_order=desc&offset=0&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                "history"
+                              ],
+                              "query": [
+                                {
+                                  "key": "sort_by",
+                                  "value": "terminatedAt"
+                                },
+                                {
+                                  "key": "sort_order",
+                                  "value": "desc"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"providerType\": \"dc_wildebeest\",\n      \"type\": \"Disk\",\n      \"createdAt\": \"<dateTime>\",\n      \"gpuName\": \"<string>\",\n      \"gpuCount\": \"<integer>\",\n      \"priceHr\": \"<number>\",\n      \"userId\": \"<string>\",\n      \"totalBilledPrice\": \"<number>\",\n      \"provisionedBy\": \"<string>\",\n      \"terminatedAt\": \"<dateTime>\",\n      \"socket\": \"<string>\",\n      \"teamId\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"providerType\": \"fluidstack\",\n      \"type\": \"Disk\",\n      \"createdAt\": \"<dateTime>\",\n      \"gpuName\": \"<string>\",\n      \"gpuCount\": \"<integer>\",\n      \"priceHr\": \"<number>\",\n      \"userId\": \"<string>\",\n      \"totalBilledPrice\": \"<number>\",\n      \"provisionedBy\": \"<string>\",\n      \"terminatedAt\": \"<dateTime>\",\n      \"socket\": \"<string>\",\n      \"teamId\": \"<string>\"\n    }\n  ],\n  \"total_count\": 0,\n  \"offset\": 0,\n  \"limit\": 100,\n  \"status\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-e7185de2-d4e9-449e-820e-3eeb01069d4c"
+                        },
+                        {
+                          "id": "66a1a901-7ff3-4d61-9ff0-296a5d0a9871",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/history?sort_by=terminatedAt&sort_order=desc&offset=0&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                "history"
+                              ],
+                              "query": [
+                                {
+                                  "key": "sort_by",
+                                  "value": "terminatedAt"
+                                },
+                                {
+                                  "key": "sort_order",
+                                  "value": "desc"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-66a1a901-7ff3-4d61-9ff0-296a5d0a9871"
+                        },
+                        {
+                          "id": "04db900b-af16-4028-bd2f-c2bfc00e926e",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/history?sort_by=terminatedAt&sort_order=desc&offset=0&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                "history"
+                              ],
+                              "query": [
+                                {
+                                  "key": "sort_by",
+                                  "value": "terminatedAt"
+                                },
+                                {
+                                  "key": "sort_order",
+                                  "value": "desc"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-04db900b-af16-4028-bd2f-c2bfc00e926e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-d9970301-503e-4e11-afd3-b383f3bdf812"
+                    }
+                  ],
+                  "id": "1efdc7c7-c747-4109-85db-c39df6264b5e",
+                  "createdAt": "2026-07-28T02:41:40.000Z",
+                  "updatedAt": "2026-07-28T02:41:40.000Z",
+                  "uid": "35240-1efdc7c7-c747-4109-85db-c39df6264b5e"
+                },
+                {
+                  "name": "status",
+                  "item": [
+                    {
+                      "name": "Get Pods Status",
+                      "id": "7c0afb88-6d82-447c-8ab5-fdbb66ca3086",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/pods/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "pods",
+                            "status"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "d83178cb-45be-4069-a487-01903a090668",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/status",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                "status"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"podId\": \"<string>\",\n      \"providerType\": \"primecompute\",\n      \"status\": \"DELETING\",\n      \"sshConnection\": \"<string>\",\n      \"ip\": \"<string>\",\n      \"installationStatus\": \"PENDING\",\n      \"installationFailure\": \"<string>\",\n      \"installationProgress\": \"<integer>\"\n    },\n    {\n      \"podId\": \"<string>\",\n      \"providerType\": \"lambdalabs\",\n      \"status\": \"ACTIVE\",\n      \"sshConnection\": \"<string>\",\n      \"ip\": \"<string>\",\n      \"installationStatus\": \"ACTIVE\",\n      \"installationFailure\": \"<string>\",\n      \"installationProgress\": \"<integer>\"\n    }\n  ],\n  \"status\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-d83178cb-45be-4069-a487-01903a090668"
+                        },
+                        {
+                          "id": "ec420a9e-1002-41d7-921f-91133a5576a0",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/status",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                "status"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-ec420a9e-1002-41d7-921f-91133a5576a0"
+                        },
+                        {
+                          "id": "8e89d986-9f39-4df1-97a4-6da26ff2c6cd",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/status",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                "status"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-8e89d986-9f39-4df1-97a4-6da26ff2c6cd"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-7c0afb88-6d82-447c-8ab5-fdbb66ca3086"
+                    }
+                  ],
+                  "id": "4a6557a1-b448-427a-b8a9-8c56cfefd340",
+                  "createdAt": "2026-07-28T02:41:40.000Z",
+                  "updatedAt": "2026-07-28T02:41:40.000Z",
+                  "uid": "35240-4a6557a1-b448-427a-b8a9-8c56cfefd340"
+                },
+                {
+                  "name": "{pod_id}",
+                  "item": [
+                    {
+                      "name": "log",
+                      "item": [
+                        {
+                          "name": "Get Pod Logs Api",
+                          "id": "912bc7e5-a97e-422c-9cf0-240fd9053a36",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/:pod_id/log?tail=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                ":pod_id",
+                                "log"
+                              ],
+                              "query": [
+                                {
+                                  "key": "tail",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "992a2e53-c1bf-4133-8abf-38dcc269fed0",
+                                  "key": "pod_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Get logs for a pod.\n\nArgs:\n    tail: Number of most recent logs to return (default: 100)"
+                          },
+                          "response": [
+                            {
+                              "id": "6fb97805-5fba-472c-9814-6167c74e3f86",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/pods/:pod_id/log?tail=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "pods",
+                                    ":pod_id",
+                                    "log"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "tail",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pod_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T02:41:40.000Z",
+                              "updatedAt": "2026-07-28T02:41:40.000Z",
+                              "uid": "35240-6fb97805-5fba-472c-9814-6167c74e3f86"
+                            },
+                            {
+                              "id": "9c350810-e6b7-47c4-bca9-212f39a709b0",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/pods/:pod_id/log?tail=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "pods",
+                                    ":pod_id",
+                                    "log"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "tail",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pod_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:41:40.000Z",
+                              "updatedAt": "2026-07-28T02:41:40.000Z",
+                              "uid": "35240-9c350810-e6b7-47c4-bca9-212f39a709b0"
+                            },
+                            {
+                              "id": "eb586344-6020-4a10-96df-821c71e0ed39",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/pods/:pod_id/log?tail=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "pods",
+                                    ":pod_id",
+                                    "log"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "tail",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pod_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:41:40.000Z",
+                              "updatedAt": "2026-07-28T02:41:40.000Z",
+                              "uid": "35240-eb586344-6020-4a10-96df-821c71e0ed39"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-912bc7e5-a97e-422c-9cf0-240fd9053a36"
+                        }
+                      ],
+                      "id": "c2c949db-25aa-46d6-b25b-1621a0cead39",
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-c2c949db-25aa-46d6-b25b-1621a0cead39"
+                    },
+                    {
+                      "name": "Get Pod",
+                      "id": "220f83cb-cabc-487b-a990-88beb51960c9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/pods/:pod_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "pods",
+                            ":pod_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9f58f2af-321a-44ea-9ce1-8023c735d869",
+                              "key": "pod_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "4aa4f4b1-a72c-4216-a128-6baa0dec5532",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/:pod_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                ":pod_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "pod_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"userId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"providerType\": \"denvr\",\n  \"gpuName\": \"A40_48GB\",\n  \"gpuCount\": \"<integer>\",\n  \"socket\": \"SXM2\",\n  \"priceHr\": \"<number>\",\n  \"id\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"walletId\": \"<string>\",\n  \"type\": \"EXTERNAL\",\n  \"status\": \"STOPPED\",\n  \"installationStatus\": \"ERROR\",\n  \"installationFailure\": \"<string>\",\n  \"installationProgress\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"terminatedAt\": \"<dateTime>\",\n  \"stoppedPriceHr\": \"<number>\",\n  \"provisioningPriceHr\": \"<number>\",\n  \"environmentType\": \"cuda_12_6_pytorch_2_7\",\n  \"customTemplateId\": \"<string>\",\n  \"clusterId\": \"<string>\",\n  \"primePortMapping\": [\n    {\n      \"internal\": \"<string>\",\n      \"external\": \"<string>\",\n      \"protocol\": \"TCP\",\n      \"usedBy\": \"WEB_SERVER\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"internal\": \"<string>\",\n      \"external\": \"<string>\",\n      \"protocol\": \"UDP\",\n      \"usedBy\": \"SSH\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"sshConnection\": \"<string>\",\n  \"ip\": \"<string>\",\n  \"resources\": {\n    \"memory\": \"<integer>\",\n    \"disk\": \"<integer>\",\n    \"shared_disk\": \"<integer>\",\n    \"vcpus\": \"<integer>\"\n  },\n  \"attachedResources\": [\n    {\n      \"resourceType\": \"DISK\",\n      \"id\": \"<string>\",\n      \"status\": \"UNATTACHED\",\n      \"isDetachable\": true,\n      \"mountPath\": \"/workspace\",\n      \"resourcePath\": \"<string>\",\n      \"size\": \"<string>\",\n      \"isShared\": \"<boolean>\"\n    },\n    {\n      \"resourceType\": \"DISK\",\n      \"id\": \"<string>\",\n      \"status\": \"ATTACHED\",\n      \"isDetachable\": true,\n      \"mountPath\": \"/workspace\",\n      \"resourcePath\": \"<string>\",\n      \"size\": \"<string>\",\n      \"isShared\": \"<boolean>\"\n    }\n  ],\n  \"isSpot\": \"<boolean>\",\n  \"autoRestart\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-4aa4f4b1-a72c-4216-a128-6baa0dec5532"
+                        },
+                        {
+                          "id": "dbe53d37-92a7-4aea-9e7d-edb6a409be50",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/:pod_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                ":pod_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "pod_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-dbe53d37-92a7-4aea-9e7d-edb6a409be50"
+                        },
+                        {
+                          "id": "6e95119a-cf48-42a1-a21f-b64ccd42f1df",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/:pod_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                ":pod_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "pod_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-6e95119a-cf48-42a1-a21f-b64ccd42f1df"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-220f83cb-cabc-487b-a990-88beb51960c9"
+                    },
+                    {
+                      "name": "Delete Pod",
+                      "id": "3ce7f01b-a64a-42e2-9550-e2915cbcd5c7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/pods/:pod_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "pods",
+                            ":pod_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c6456605-5938-42b7-809a-28b388c5e558",
+                              "key": "pod_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "9889d842-a92e-4f51-af7f-258f798bc1e2",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/:pod_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                ":pod_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "pod_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"TERMINATED\"\n}",
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-9889d842-a92e-4f51-af7f-258f798bc1e2"
+                        },
+                        {
+                          "id": "f6fe03a3-45a6-4d60-9376-4b6da7295f23",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/:pod_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                ":pod_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "pod_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-f6fe03a3-45a6-4d60-9376-4b6da7295f23"
+                        },
+                        {
+                          "id": "ca91e2c2-2128-412f-acae-02bcc0fdf40d",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/pods/:pod_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "pods",
+                                ":pod_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "pod_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:40.000Z",
+                          "updatedAt": "2026-07-28T02:41:40.000Z",
+                          "uid": "35240-ca91e2c2-2128-412f-acae-02bcc0fdf40d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-3ce7f01b-a64a-42e2-9550-e2915cbcd5c7"
+                    }
+                  ],
+                  "id": "74ecac2c-494e-4cb3-ad7e-654aa7a6d9fb",
+                  "createdAt": "2026-07-28T02:41:40.000Z",
+                  "updatedAt": "2026-07-28T02:41:40.000Z",
+                  "uid": "35240-74ecac2c-494e-4cb3-ad7e-654aa7a6d9fb"
+                },
+                {
+                  "name": "Get Pods",
+                  "id": "cf272764-49cc-41b4-b4f3-3d8bc4039671",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/pods/?offset=0&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "pods",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "8549ffb8-93cd-463a-933b-f0c825aac0b0",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/pods/?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "pods",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"userId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"providerType\": \"primecompute\",\n      \"gpuName\": \"RTX3070_8GB\",\n      \"gpuCount\": \"<integer>\",\n      \"socket\": \"PCIe\",\n      \"priceHr\": \"<number>\",\n      \"id\": \"<string>\",\n      \"teamId\": \"<string>\",\n      \"walletId\": \"<string>\",\n      \"type\": \"HOSTED\",\n      \"status\": \"ACTIVE\",\n      \"installationStatus\": \"ACTIVE\",\n      \"installationFailure\": \"<string>\",\n      \"installationProgress\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"terminatedAt\": \"<dateTime>\",\n      \"stoppedPriceHr\": \"<number>\",\n      \"provisioningPriceHr\": \"<number>\",\n      \"environmentType\": \"vllm_llama_405b\",\n      \"customTemplateId\": \"<string>\",\n      \"clusterId\": \"<string>\",\n      \"primePortMapping\": [\n        {\n          \"internal\": \"<string>\",\n          \"external\": \"<string>\",\n          \"protocol\": \"TCP\",\n          \"usedBy\": \"JUPYTER_NOTEBOOK\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"internal\": \"<string>\",\n          \"external\": \"<string>\",\n          \"protocol\": \"TCP\",\n          \"usedBy\": \"WEB_SERVER\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"sshConnection\": \"<string>\",\n      \"ip\": \"<string>\",\n      \"resources\": {\n        \"memory\": \"<integer>\",\n        \"disk\": \"<integer>\",\n        \"shared_disk\": \"<integer>\",\n        \"vcpus\": \"<integer>\"\n      },\n      \"attachedResources\": [\n        {\n          \"resourceType\": \"DISK\",\n          \"id\": \"<string>\",\n          \"status\": \"UNATTACHED\",\n          \"isDetachable\": true,\n          \"mountPath\": \"/workspace\",\n          \"resourcePath\": \"<string>\",\n          \"size\": \"<string>\",\n          \"isShared\": \"<boolean>\"\n        },\n        {\n          \"resourceType\": \"DISK\",\n          \"id\": \"<string>\",\n          \"status\": \"ATTACHED\",\n          \"isDetachable\": true,\n          \"mountPath\": \"/workspace\",\n          \"resourcePath\": \"<string>\",\n          \"size\": \"<string>\",\n          \"isShared\": \"<boolean>\"\n        }\n      ],\n      \"isSpot\": \"<boolean>\",\n      \"autoRestart\": \"<boolean>\"\n    },\n    {\n      \"userId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"providerType\": \"dc_kudu\",\n      \"gpuName\": \"RTX3080Ti_12GB\",\n      \"gpuCount\": \"<integer>\",\n      \"socket\": \"SXM4\",\n      \"priceHr\": \"<number>\",\n      \"id\": \"<string>\",\n      \"teamId\": \"<string>\",\n      \"walletId\": \"<string>\",\n      \"type\": \"EXTERNAL\",\n      \"status\": \"ACTIVE\",\n      \"installationStatus\": \"FINISHED\",\n      \"installationFailure\": \"<string>\",\n      \"installationProgress\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"terminatedAt\": \"<dateTime>\",\n      \"stoppedPriceHr\": \"<number>\",\n      \"provisioningPriceHr\": \"<number>\",\n      \"environmentType\": \"cuda_12_4_pytorch_2_5\",\n      \"customTemplateId\": \"<string>\",\n      \"clusterId\": \"<string>\",\n      \"primePortMapping\": [\n        {\n          \"internal\": \"<string>\",\n          \"external\": \"<string>\",\n          \"protocol\": \"TCP\",\n          \"usedBy\": \"SSH\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"internal\": \"<string>\",\n          \"external\": \"<string>\",\n          \"protocol\": \"TCP\",\n          \"usedBy\": \"WEB_SERVER\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"sshConnection\": \"<string>\",\n      \"ip\": \"<string>\",\n      \"resources\": {\n        \"memory\": \"<integer>\",\n        \"disk\": \"<integer>\",\n        \"shared_disk\": \"<integer>\",\n        \"vcpus\": \"<integer>\"\n      },\n      \"attachedResources\": [\n        {\n          \"resourceType\": \"DISK\",\n          \"id\": \"<string>\",\n          \"status\": \"ATTACHED\",\n          \"isDetachable\": true,\n          \"mountPath\": \"/workspace\",\n          \"resourcePath\": \"<string>\",\n          \"size\": \"<string>\",\n          \"isShared\": \"<boolean>\"\n        },\n        {\n          \"resourceType\": \"DISK\",\n          \"id\": \"<string>\",\n          \"status\": \"MOUNTED\",\n          \"isDetachable\": true,\n          \"mountPath\": \"/workspace\",\n          \"resourcePath\": \"<string>\",\n          \"size\": \"<string>\",\n          \"isShared\": \"<boolean>\"\n        }\n      ],\n      \"isSpot\": \"<boolean>\",\n      \"autoRestart\": \"<boolean>\"\n    }\n  ],\n  \"total_count\": 0,\n  \"offset\": 0,\n  \"limit\": 100,\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-8549ffb8-93cd-463a-933b-f0c825aac0b0"
+                    },
+                    {
+                      "id": "d1145e9b-0bcf-42f3-8c0c-edb7d6301c66",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/pods/?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "pods",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-d1145e9b-0bcf-42f3-8c0c-edb7d6301c66"
+                    },
+                    {
+                      "id": "0a9303dc-921d-4422-bc63-cd628b89a287",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/pods/?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "pods",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-0a9303dc-921d-4422-bc63-cd628b89a287"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:40.000Z",
+                  "updatedAt": "2026-07-28T02:41:40.000Z",
+                  "uid": "35240-cf272764-49cc-41b4-b4f3-3d8bc4039671"
+                },
+                {
+                  "name": "Create Pod",
+                  "id": "d0fc6304-984a-4723-8a0f-14a1c7664d8d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pod\": {\n    \"cloudId\": \"<string>\",\n    \"gpuType\": \"RTX3080_10GB\",\n    \"socket\": \"SXM3\",\n    \"gpuCount\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"diskSize\": \"<integer>\",\n    \"vcpus\": \"<integer>\",\n    \"memory\": \"<integer>\",\n    \"maxPrice\": \"<number>\",\n    \"image\": \"cuda_12_1_pytorch_2_2\",\n    \"customTemplateId\": \"<string>\",\n    \"dataCenterId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"security\": \"secure_cloud\",\n    \"envVars\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"jupyterPassword\": \"<string>\",\n    \"sshKeyId\": \"<string>\",\n    \"autoRestart\": \"<boolean>\",\n    \"prepaidForHr\": \"<number>\"\n  },\n  \"provider\": {\n    \"type\": \"vultr\"\n  },\n  \"disks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"team\": {\n    \"teamId\": \"<string>\"\n  },\n  \"team_member_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shared_with_team\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/pods/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "pods",
+                        ""
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "ce90e33a-7de8-4ee8-a484-c8d5d17aeba0",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pod\": {\n    \"cloudId\": \"<string>\",\n    \"gpuType\": \"RTX3080_10GB\",\n    \"socket\": \"SXM3\",\n    \"gpuCount\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"diskSize\": \"<integer>\",\n    \"vcpus\": \"<integer>\",\n    \"memory\": \"<integer>\",\n    \"maxPrice\": \"<number>\",\n    \"image\": \"cuda_12_1_pytorch_2_2\",\n    \"customTemplateId\": \"<string>\",\n    \"dataCenterId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"security\": \"secure_cloud\",\n    \"envVars\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"jupyterPassword\": \"<string>\",\n    \"sshKeyId\": \"<string>\",\n    \"autoRestart\": \"<boolean>\",\n    \"prepaidForHr\": \"<number>\"\n  },\n  \"provider\": {\n    \"type\": \"vultr\"\n  },\n  \"disks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"team\": {\n    \"teamId\": \"<string>\"\n  },\n  \"team_member_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shared_with_team\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/pods/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "pods",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"userId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"providerType\": \"denvr\",\n  \"gpuName\": \"A40_48GB\",\n  \"gpuCount\": \"<integer>\",\n  \"socket\": \"SXM2\",\n  \"priceHr\": \"<number>\",\n  \"id\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"walletId\": \"<string>\",\n  \"type\": \"EXTERNAL\",\n  \"status\": \"STOPPED\",\n  \"installationStatus\": \"ERROR\",\n  \"installationFailure\": \"<string>\",\n  \"installationProgress\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"terminatedAt\": \"<dateTime>\",\n  \"stoppedPriceHr\": \"<number>\",\n  \"provisioningPriceHr\": \"<number>\",\n  \"environmentType\": \"cuda_12_6_pytorch_2_7\",\n  \"customTemplateId\": \"<string>\",\n  \"clusterId\": \"<string>\",\n  \"primePortMapping\": [\n    {\n      \"internal\": \"<string>\",\n      \"external\": \"<string>\",\n      \"protocol\": \"TCP\",\n      \"usedBy\": \"WEB_SERVER\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"internal\": \"<string>\",\n      \"external\": \"<string>\",\n      \"protocol\": \"UDP\",\n      \"usedBy\": \"SSH\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"sshConnection\": \"<string>\",\n  \"ip\": \"<string>\",\n  \"resources\": {\n    \"memory\": \"<integer>\",\n    \"disk\": \"<integer>\",\n    \"shared_disk\": \"<integer>\",\n    \"vcpus\": \"<integer>\"\n  },\n  \"attachedResources\": [\n    {\n      \"resourceType\": \"DISK\",\n      \"id\": \"<string>\",\n      \"status\": \"UNATTACHED\",\n      \"isDetachable\": true,\n      \"mountPath\": \"/workspace\",\n      \"resourcePath\": \"<string>\",\n      \"size\": \"<string>\",\n      \"isShared\": \"<boolean>\"\n    },\n    {\n      \"resourceType\": \"DISK\",\n      \"id\": \"<string>\",\n      \"status\": \"ATTACHED\",\n      \"isDetachable\": true,\n      \"mountPath\": \"/workspace\",\n      \"resourcePath\": \"<string>\",\n      \"size\": \"<string>\",\n      \"isShared\": \"<boolean>\"\n    }\n  ],\n  \"isSpot\": \"<boolean>\",\n  \"autoRestart\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-ce90e33a-7de8-4ee8-a484-c8d5d17aeba0"
+                    },
+                    {
+                      "id": "ca1a71fe-fbc6-4892-930e-651206274720",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pod\": {\n    \"cloudId\": \"<string>\",\n    \"gpuType\": \"RTX3080_10GB\",\n    \"socket\": \"SXM3\",\n    \"gpuCount\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"diskSize\": \"<integer>\",\n    \"vcpus\": \"<integer>\",\n    \"memory\": \"<integer>\",\n    \"maxPrice\": \"<number>\",\n    \"image\": \"cuda_12_1_pytorch_2_2\",\n    \"customTemplateId\": \"<string>\",\n    \"dataCenterId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"security\": \"secure_cloud\",\n    \"envVars\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"jupyterPassword\": \"<string>\",\n    \"sshKeyId\": \"<string>\",\n    \"autoRestart\": \"<boolean>\",\n    \"prepaidForHr\": \"<number>\"\n  },\n  \"provider\": {\n    \"type\": \"vultr\"\n  },\n  \"disks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"team\": {\n    \"teamId\": \"<string>\"\n  },\n  \"team_member_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shared_with_team\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/pods/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "pods",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-ca1a71fe-fbc6-4892-930e-651206274720"
+                    },
+                    {
+                      "id": "84da8bda-bfa3-47f7-b1a4-4fa33bdd5e63",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pod\": {\n    \"cloudId\": \"<string>\",\n    \"gpuType\": \"RTX3080_10GB\",\n    \"socket\": \"SXM3\",\n    \"gpuCount\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"diskSize\": \"<integer>\",\n    \"vcpus\": \"<integer>\",\n    \"memory\": \"<integer>\",\n    \"maxPrice\": \"<number>\",\n    \"image\": \"cuda_12_1_pytorch_2_2\",\n    \"customTemplateId\": \"<string>\",\n    \"dataCenterId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"security\": \"secure_cloud\",\n    \"envVars\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"jupyterPassword\": \"<string>\",\n    \"sshKeyId\": \"<string>\",\n    \"autoRestart\": \"<boolean>\",\n    \"prepaidForHr\": \"<number>\"\n  },\n  \"provider\": {\n    \"type\": \"vultr\"\n  },\n  \"disks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"team\": {\n    \"teamId\": \"<string>\"\n  },\n  \"team_member_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shared_with_team\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/pods/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "pods",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:40.000Z",
+                      "updatedAt": "2026-07-28T02:41:40.000Z",
+                      "uid": "35240-84da8bda-bfa3-47f7-b1a4-4fa33bdd5e63"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:40.000Z",
+                  "updatedAt": "2026-07-28T02:41:40.000Z",
+                  "uid": "35240-d0fc6304-984a-4723-8a0f-14a1c7664d8d"
+                }
+              ],
+              "id": "61e6c6d9-3023-4097-9370-531f55663197",
+              "createdAt": "2026-07-28T02:41:40.000Z",
+              "updatedAt": "2026-07-28T02:41:40.000Z",
+              "uid": "35240-61e6c6d9-3023-4097-9370-531f55663197"
+            }
+          ],
+          "id": "5207032b-6cff-4307-a406-3cdbd24da809",
+          "createdAt": "2026-07-28T02:41:40.000Z",
+          "updatedAt": "2026-07-28T02:41:40.000Z",
+          "uid": "35240-5207032b-6cff-4307-a406-3cdbd24da809"
+        }
+      ],
+      "id": "8087144f-a5a1-4640-bd9f-a5c25b646b3a",
+      "createdAt": "2026-07-28T02:41:40.000Z",
+      "updatedAt": "2026-07-28T02:41:40.000Z",
+      "uid": "35240-8087144f-a5a1-4640-bd9f-a5c25b646b3a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

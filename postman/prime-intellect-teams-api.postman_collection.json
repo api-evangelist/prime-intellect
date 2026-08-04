@@ -1,0 +1,311 @@
+{
+  "info": {
+    "_postman_id": "acb80438-f4ba-4609-98ba-a5f4837b3f07",
+    "name": "Prime Intellect Compute admin-clusters teams API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:46.000Z",
+    "updatedAt": "2026-07-28T02:41:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-acb80438-f4ba-4609-98ba-a5f4837b3f07"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "teams",
+              "item": [
+                {
+                  "name": "{team_id}",
+                  "item": [
+                    {
+                      "name": "members",
+                      "item": [
+                        {
+                          "name": "List Team Members",
+                          "id": "9902aefb-468f-4f68-8727-2c99f93ff6a2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/teams/:team_id/members?offset=0&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "teams",
+                                ":team_id",
+                                "members"
+                              ],
+                              "query": [
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "30e180e3-5c5d-4521-a35c-b33ee67faa45",
+                                  "key": "team_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "a863de6a-43ad-41b5-8b37-97287a40d24e",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/teams/:team_id/members?offset=0&limit=100",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "teams",
+                                    ":team_id",
+                                    "members"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "offset",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "key": "limit",
+                                      "value": "100"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "team_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": [\n    {\n      \"userId\": \"<string>\",\n      \"userName\": \"<string>\",\n      \"userEmail\": \"<string>\",\n      \"role\": \"<string>\",\n      \"joinedAt\": \"<dateTime>\"\n    },\n    {\n      \"userId\": \"<string>\",\n      \"userName\": \"<string>\",\n      \"userEmail\": \"<string>\",\n      \"role\": \"<string>\",\n      \"joinedAt\": \"<dateTime>\"\n    }\n  ],\n  \"total_count\": 0,\n  \"offset\": 0,\n  \"limit\": 100,\n  \"status\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:41:47.000Z",
+                              "updatedAt": "2026-07-28T02:41:47.000Z",
+                              "uid": "35240-a863de6a-43ad-41b5-8b37-97287a40d24e"
+                            },
+                            {
+                              "id": "9221afae-a76e-4336-96ae-04f21b0c443e",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/teams/:team_id/members?offset=0&limit=100",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "teams",
+                                    ":team_id",
+                                    "members"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "offset",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "key": "limit",
+                                      "value": "100"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "team_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:41:47.000Z",
+                              "updatedAt": "2026-07-28T02:41:47.000Z",
+                              "uid": "35240-9221afae-a76e-4336-96ae-04f21b0c443e"
+                            },
+                            {
+                              "id": "ba7a0ce5-fc61-404a-8aef-6ecf6a295f38",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/teams/:team_id/members?offset=0&limit=100",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "teams",
+                                    ":team_id",
+                                    "members"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "offset",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "key": "limit",
+                                      "value": "100"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "team_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:41:47.000Z",
+                              "updatedAt": "2026-07-28T02:41:47.000Z",
+                              "uid": "35240-ba7a0ce5-fc61-404a-8aef-6ecf6a295f38"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:41:47.000Z",
+                          "updatedAt": "2026-07-28T02:41:47.000Z",
+                          "uid": "35240-9902aefb-468f-4f68-8727-2c99f93ff6a2"
+                        }
+                      ],
+                      "id": "264fc529-fd99-44aa-98c8-0db6b65f47b7",
+                      "createdAt": "2026-07-28T02:41:47.000Z",
+                      "updatedAt": "2026-07-28T02:41:47.000Z",
+                      "uid": "35240-264fc529-fd99-44aa-98c8-0db6b65f47b7"
+                    }
+                  ],
+                  "id": "5f60cbbb-9adf-4543-a094-6f0b0683ac9b",
+                  "createdAt": "2026-07-28T02:41:47.000Z",
+                  "updatedAt": "2026-07-28T02:41:47.000Z",
+                  "uid": "35240-5f60cbbb-9adf-4543-a094-6f0b0683ac9b"
+                }
+              ],
+              "id": "a2378c43-2471-4fd0-8f59-fe111bba923d",
+              "createdAt": "2026-07-28T02:41:47.000Z",
+              "updatedAt": "2026-07-28T02:41:47.000Z",
+              "uid": "35240-a2378c43-2471-4fd0-8f59-fe111bba923d"
+            }
+          ],
+          "id": "1dd0fd59-60ea-4788-8515-2e8dadd7d21a",
+          "createdAt": "2026-07-28T02:41:47.000Z",
+          "updatedAt": "2026-07-28T02:41:47.000Z",
+          "uid": "35240-1dd0fd59-60ea-4788-8515-2e8dadd7d21a"
+        }
+      ],
+      "id": "704c4db2-7adb-48ec-8819-d77d271e396a",
+      "createdAt": "2026-07-28T02:41:47.000Z",
+      "updatedAt": "2026-07-28T02:41:47.000Z",
+      "uid": "35240-704c4db2-7adb-48ec-8819-d77d271e396a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

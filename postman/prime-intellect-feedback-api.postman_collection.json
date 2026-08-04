@@ -1,0 +1,278 @@
+{
+  "info": {
+    "_postman_id": "048fb8b1-0ce6-4429-ab2e-2a4bc5fc6e0d",
+    "name": "Prime Intellect Compute admin-clusters Feedback API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:36.000Z",
+    "updatedAt": "2026-07-28T02:41:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-048fb8b1-0ce6-4429-ab2e-2a4bc5fc6e0d"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "feedback",
+              "item": [
+                {
+                  "name": "Submit Feedback",
+                  "id": "b76961a9-5cae-4792-984b-dd53babb4894",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"message\": \"<string>\",\n  \"category\": \"feature\",\n  \"cli_version\": \"<string>\",\n  \"run_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/feedback",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "feedback"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "564e88ea-6ade-4cb7-9dc4-2c52908da339",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"message\": \"<string>\",\n  \"category\": \"feature\",\n  \"cli_version\": \"<string>\",\n  \"run_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/feedback",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "feedback"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:41:36.000Z",
+                      "updatedAt": "2026-07-28T02:41:36.000Z",
+                      "uid": "35240-564e88ea-6ade-4cb7-9dc4-2c52908da339"
+                    },
+                    {
+                      "id": "116d2208-bf21-4bd2-bff4-2c1926473bca",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"message\": \"<string>\",\n  \"category\": \"feature\",\n  \"cli_version\": \"<string>\",\n  \"run_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/feedback",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "feedback"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:41:36.000Z",
+                      "updatedAt": "2026-07-28T02:41:36.000Z",
+                      "uid": "35240-116d2208-bf21-4bd2-bff4-2c1926473bca"
+                    },
+                    {
+                      "id": "b9444e79-7feb-4d12-b36c-ac983a694451",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"message\": \"<string>\",\n  \"category\": \"feature\",\n  \"cli_version\": \"<string>\",\n  \"run_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/feedback",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "feedback"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:36.000Z",
+                      "updatedAt": "2026-07-28T02:41:36.000Z",
+                      "uid": "35240-b9444e79-7feb-4d12-b36c-ac983a694451"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:36.000Z",
+                  "updatedAt": "2026-07-28T02:41:36.000Z",
+                  "uid": "35240-b76961a9-5cae-4792-984b-dd53babb4894"
+                }
+              ],
+              "id": "802827a5-7b29-4850-b2be-f6c222da6026",
+              "createdAt": "2026-07-28T02:41:36.000Z",
+              "updatedAt": "2026-07-28T02:41:36.000Z",
+              "uid": "35240-802827a5-7b29-4850-b2be-f6c222da6026"
+            }
+          ],
+          "id": "afc1c6d7-08c7-4279-9a21-b75b322d2a89",
+          "createdAt": "2026-07-28T02:41:36.000Z",
+          "updatedAt": "2026-07-28T02:41:36.000Z",
+          "uid": "35240-afc1c6d7-08c7-4279-9a21-b75b322d2a89"
+        }
+      ],
+      "id": "edcbc307-66c3-41fe-8239-a0d3bc38bf2d",
+      "createdAt": "2026-07-28T02:41:36.000Z",
+      "updatedAt": "2026-07-28T02:41:36.000Z",
+      "uid": "35240-edcbc307-66c3-41fe-8239-a0d3bc38bf2d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

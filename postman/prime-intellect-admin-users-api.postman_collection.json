@@ -1,0 +1,272 @@
+{
+  "info": {
+    "_postman_id": "5f7edaa0-c96b-4de8-82e8-9e8d8de7195a",
+    "name": "Prime Intellect Compute admin-clusters admin-users API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:48.000Z",
+    "updatedAt": "2026-07-28T02:40:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5f7edaa0-c96b-4de8-82e8-9e8d8de7195a"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "admin",
+          "item": [
+            {
+              "name": "users",
+              "item": [
+                {
+                  "name": "whoami",
+                  "item": [
+                    {
+                      "name": "Get Current User",
+                      "id": "6e937492-024d-49f9-9d3f-495f4c8aa3b8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/admin/users/whoami",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "admin",
+                            "users",
+                            "whoami"
+                          ]
+                        },
+                        "description": "Identity + envelope for the calling admin API key.\n\nIntentionally bypasses ``require_admin_permission``: any valid, non-\nexpired, non-disabled admin API key whose owner is still ADMIN/MANAGER\ncan call this. Returning the resolved permission envelope is what makes\na freshly-minted scoped key able to discover what it can do."
+                      },
+                      "response": [
+                        {
+                          "id": "d7f961ff-39c2-436f-8fda-922494b0ba3f",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/admin/users/whoami",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "admin",
+                                "users",
+                                "whoami"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"admin_role\": \"USER\",\n    \"id\": \"<string>\",\n    \"role\": \"USER\",\n    \"createdAt\": \"<dateTime>\",\n    \"slug\": \"<string>\",\n    \"image\": \"<string>\",\n    \"emailVerified\": \"<boolean>\",\n    \"hasBetaAccess\": false,\n    \"isBanned\": false,\n    \"skipPrepay\": false,\n    \"permissions\": {\n      \"et_95\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"do324\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"dolor_5\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"status\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:40:48.000Z",
+                          "updatedAt": "2026-07-28T02:40:48.000Z",
+                          "uid": "35240-d7f961ff-39c2-436f-8fda-922494b0ba3f"
+                        },
+                        {
+                          "id": "21ab590e-d2da-4978-bea3-9c39b7227b69",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/admin/users/whoami",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "admin",
+                                "users",
+                                "whoami"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:48.000Z",
+                          "updatedAt": "2026-07-28T02:40:48.000Z",
+                          "uid": "35240-21ab590e-d2da-4978-bea3-9c39b7227b69"
+                        },
+                        {
+                          "id": "4432a4ec-8ee8-4d94-9110-d7870e70c8b3",
+                          "name": "Insufficient permissions",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/admin/users/whoami",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "admin",
+                                "users",
+                                "whoami"
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:48.000Z",
+                          "updatedAt": "2026-07-28T02:40:48.000Z",
+                          "uid": "35240-4432a4ec-8ee8-4d94-9110-d7870e70c8b3"
+                        },
+                        {
+                          "id": "9b9ed6be-b1c0-4ae9-b446-8872aaf03394",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/admin/users/whoami",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "admin",
+                                "users",
+                                "whoami"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:48.000Z",
+                          "updatedAt": "2026-07-28T02:40:48.000Z",
+                          "uid": "35240-9b9ed6be-b1c0-4ae9-b446-8872aaf03394"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:48.000Z",
+                      "updatedAt": "2026-07-28T02:40:48.000Z",
+                      "uid": "35240-6e937492-024d-49f9-9d3f-495f4c8aa3b8"
+                    }
+                  ],
+                  "id": "82163a06-b825-472c-8707-41376e241a88",
+                  "createdAt": "2026-07-28T02:40:48.000Z",
+                  "updatedAt": "2026-07-28T02:40:48.000Z",
+                  "uid": "35240-82163a06-b825-472c-8707-41376e241a88"
+                }
+              ],
+              "id": "e2649a54-ae7f-48fc-9442-0dd24e5b0789",
+              "createdAt": "2026-07-28T02:40:48.000Z",
+              "updatedAt": "2026-07-28T02:40:48.000Z",
+              "uid": "35240-e2649a54-ae7f-48fc-9442-0dd24e5b0789"
+            }
+          ],
+          "id": "1286f068-c6a2-45f5-b712-db2bce192531",
+          "createdAt": "2026-07-28T02:40:48.000Z",
+          "updatedAt": "2026-07-28T02:40:48.000Z",
+          "uid": "35240-1286f068-c6a2-45f5-b712-db2bce192531"
+        }
+      ],
+      "id": "5e45d720-cf11-49b5-91ae-752221cc6741",
+      "createdAt": "2026-07-28T02:40:48.000Z",
+      "updatedAt": "2026-07-28T02:40:48.000Z",
+      "uid": "35240-5e45d720-cf11-49b5-91ae-752221cc6741"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

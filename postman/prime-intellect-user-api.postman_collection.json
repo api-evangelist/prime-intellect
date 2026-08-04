@@ -1,0 +1,687 @@
+{
+  "info": {
+    "_postman_id": "3d8305a5-15e6-405c-9f65-bf2792c2d92a",
+    "name": "Prime Intellect Compute admin-clusters user API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:49.000Z",
+    "updatedAt": "2026-07-28T02:41:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3d8305a5-15e6-405c-9f65-bf2792c2d92a"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "user",
+              "item": [
+                {
+                  "name": "slug",
+                  "item": [
+                    {
+                      "name": "Set Username Slug",
+                      "id": "aee1825f-ba6a-4665-bd8c-c25a446fb17c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"slug\": \"rrrr\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/user/slug",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "user",
+                            "slug"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "f0fa75a9-0c34-4843-91df-53fc84d31bde",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"slug\": \"rrrr\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/user/slug",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "slug"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"id\": \"<string>\",\n    \"role\": \"ADMIN\",\n    \"createdAt\": \"<dateTime>\",\n    \"slug\": \"<string>\",\n    \"image\": \"<string>\",\n    \"emailVerified\": \"<boolean>\",\n    \"hasBetaAccess\": false,\n    \"isBanned\": false,\n    \"skipPrepay\": false\n  },\n  \"status\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:41:50.000Z",
+                          "updatedAt": "2026-07-28T02:41:50.000Z",
+                          "uid": "35240-f0fa75a9-0c34-4843-91df-53fc84d31bde"
+                        },
+                        {
+                          "id": "a4e016b7-8c9a-47ef-a9d2-86dcc8452839",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"slug\": \"rrrr\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/user/slug",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "slug"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:50.000Z",
+                          "updatedAt": "2026-07-28T02:41:50.000Z",
+                          "uid": "35240-a4e016b7-8c9a-47ef-a9d2-86dcc8452839"
+                        },
+                        {
+                          "id": "dd877c8a-276e-45c5-ba96-69725356517c",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"slug\": \"rrrr\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/user/slug",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "slug"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:50.000Z",
+                          "updatedAt": "2026-07-28T02:41:50.000Z",
+                          "uid": "35240-dd877c8a-276e-45c5-ba96-69725356517c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:50.000Z",
+                      "updatedAt": "2026-07-28T02:41:50.000Z",
+                      "uid": "35240-aee1825f-ba6a-4665-bd8c-c25a446fb17c"
+                    }
+                  ],
+                  "id": "b176c2cc-6d75-4441-ab51-6d962bef49c0",
+                  "createdAt": "2026-07-28T02:41:50.000Z",
+                  "updatedAt": "2026-07-28T02:41:50.000Z",
+                  "uid": "35240-b176c2cc-6d75-4441-ab51-6d962bef49c0"
+                },
+                {
+                  "name": "teams",
+                  "item": [
+                    {
+                      "name": "List My Teams",
+                      "id": "20dac6ca-59c1-4c5a-9d72-865341df9d55",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/user/teams?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "user",
+                            "teams"
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "db56ff3e-e0ba-4035-9039-f231492f6164",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/user/teams?offset=0&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "teams"
+                              ],
+                              "query": [
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"teamId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"ADMIN\",\n      \"createdAt\": \"<dateTime>\",\n      \"slug\": \"<string>\"\n    },\n    {\n      \"teamId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"ADMIN\",\n      \"createdAt\": \"<dateTime>\",\n      \"slug\": \"<string>\"\n    }\n  ],\n  \"total_count\": 0,\n  \"offset\": 0,\n  \"limit\": 100,\n  \"status\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:41:50.000Z",
+                          "updatedAt": "2026-07-28T02:41:50.000Z",
+                          "uid": "35240-db56ff3e-e0ba-4035-9039-f231492f6164"
+                        },
+                        {
+                          "id": "6fb43358-57df-48e7-b144-b049e70580d7",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/user/teams?offset=0&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "teams"
+                              ],
+                              "query": [
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:50.000Z",
+                          "updatedAt": "2026-07-28T02:41:50.000Z",
+                          "uid": "35240-6fb43358-57df-48e7-b144-b049e70580d7"
+                        },
+                        {
+                          "id": "956a00b7-25c8-450d-9363-edad8ef2dab2",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/user/teams?offset=0&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "teams"
+                              ],
+                              "query": [
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:50.000Z",
+                          "updatedAt": "2026-07-28T02:41:50.000Z",
+                          "uid": "35240-956a00b7-25c8-450d-9363-edad8ef2dab2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:50.000Z",
+                      "updatedAt": "2026-07-28T02:41:50.000Z",
+                      "uid": "35240-20dac6ca-59c1-4c5a-9d72-865341df9d55"
+                    }
+                  ],
+                  "id": "31fed7ba-01b3-4966-a51d-3fd606c16e6f",
+                  "createdAt": "2026-07-28T02:41:50.000Z",
+                  "updatedAt": "2026-07-28T02:41:50.000Z",
+                  "uid": "35240-31fed7ba-01b3-4966-a51d-3fd606c16e6f"
+                },
+                {
+                  "name": "whoami",
+                  "item": [
+                    {
+                      "name": "Get Whoami",
+                      "id": "b64f8f10-d106-49be-8133-57580af2b70d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/user/whoami",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "user",
+                            "whoami"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "2349c861-79db-400b-9f66-edb336cbec9c",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/user/whoami",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "whoami"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"id\": \"<string>\",\n    \"role\": \"MANAGER\",\n    \"createdAt\": \"<dateTime>\",\n    \"slug\": \"<string>\",\n    \"image\": \"<string>\",\n    \"emailVerified\": \"<boolean>\",\n    \"hasBetaAccess\": false,\n    \"isBanned\": false,\n    \"skipPrepay\": false,\n    \"scope\": {}\n  },\n  \"status\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:41:50.000Z",
+                          "updatedAt": "2026-07-28T02:41:50.000Z",
+                          "uid": "35240-2349c861-79db-400b-9f66-edb336cbec9c"
+                        },
+                        {
+                          "id": "3b2522df-3450-4c7e-9b72-7a76dab7746c",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/user/whoami",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "whoami"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:50.000Z",
+                          "updatedAt": "2026-07-28T02:41:50.000Z",
+                          "uid": "35240-3b2522df-3450-4c7e-9b72-7a76dab7746c"
+                        },
+                        {
+                          "id": "a07d8afe-d922-4ed5-b691-5557b054caa6",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/user/whoami",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "whoami"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:50.000Z",
+                          "updatedAt": "2026-07-28T02:41:50.000Z",
+                          "uid": "35240-a07d8afe-d922-4ed5-b691-5557b054caa6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:50.000Z",
+                      "updatedAt": "2026-07-28T02:41:50.000Z",
+                      "uid": "35240-b64f8f10-d106-49be-8133-57580af2b70d"
+                    }
+                  ],
+                  "id": "d092418f-413c-471f-9bf1-aabe50f94517",
+                  "createdAt": "2026-07-28T02:41:50.000Z",
+                  "updatedAt": "2026-07-28T02:41:50.000Z",
+                  "uid": "35240-d092418f-413c-471f-9bf1-aabe50f94517"
+                }
+              ],
+              "id": "1364949a-04e4-4adc-b8a4-3473cf82c20d",
+              "createdAt": "2026-07-28T02:41:50.000Z",
+              "updatedAt": "2026-07-28T02:41:50.000Z",
+              "uid": "35240-1364949a-04e4-4adc-b8a4-3473cf82c20d"
+            }
+          ],
+          "id": "7af27156-8e6a-49df-ad30-41463ac23d95",
+          "createdAt": "2026-07-28T02:41:50.000Z",
+          "updatedAt": "2026-07-28T02:41:50.000Z",
+          "uid": "35240-7af27156-8e6a-49df-ad30-41463ac23d95"
+        }
+      ],
+      "id": "4d081ed5-f384-44e8-b790-f9a51275c30e",
+      "createdAt": "2026-07-28T02:41:50.000Z",
+      "updatedAt": "2026-07-28T02:41:50.000Z",
+      "uid": "35240-4d081ed5-f384-44e8-b790-f9a51275c30e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

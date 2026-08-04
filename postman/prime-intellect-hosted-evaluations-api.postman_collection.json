@@ -1,0 +1,879 @@
+{
+  "info": {
+    "_postman_id": "b5ec2193-3456-456d-9a8f-97d5ed382a2f",
+    "name": "Prime Intellect Compute admin-clusters hosted-evaluations API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:37.000Z",
+    "updatedAt": "2026-07-28T02:41:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b5ec2193-3456-456d-9a8f-97d5ed382a2f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "hosted-evaluations",
+              "item": [
+                {
+                  "name": "models",
+                  "item": [
+                    {
+                      "name": "Get Inference Models",
+                      "id": "a3f11255-aa4c-4645-9229-a8765dafdc49",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/hosted-evaluations/models",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "hosted-evaluations",
+                            "models"
+                          ]
+                        },
+                        "description": "Get available models from Prime Inference API for hosted evaluations"
+                      },
+                      "response": [
+                        {
+                          "id": "c6cf959b-5724-42a7-ba58-f8723271f26a",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/hosted-evaluations/models",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "hosted-evaluations",
+                                "models"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"models\": []\n}",
+                          "createdAt": "2026-07-28T02:41:38.000Z",
+                          "updatedAt": "2026-07-28T02:41:38.000Z",
+                          "uid": "35240-c6cf959b-5724-42a7-ba58-f8723271f26a"
+                        },
+                        {
+                          "id": "4e74dfa6-40f5-4a08-ba09-83d575672899",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/hosted-evaluations/models",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "hosted-evaluations",
+                                "models"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:38.000Z",
+                          "updatedAt": "2026-07-28T02:41:38.000Z",
+                          "uid": "35240-4e74dfa6-40f5-4a08-ba09-83d575672899"
+                        },
+                        {
+                          "id": "a21a2a04-227d-4055-8bb7-6ee1dccc6c23",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/hosted-evaluations/models",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "hosted-evaluations",
+                                "models"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:38.000Z",
+                          "updatedAt": "2026-07-28T02:41:38.000Z",
+                          "uid": "35240-a21a2a04-227d-4055-8bb7-6ee1dccc6c23"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:38.000Z",
+                      "updatedAt": "2026-07-28T02:41:38.000Z",
+                      "uid": "35240-a3f11255-aa4c-4645-9229-a8765dafdc49"
+                    }
+                  ],
+                  "id": "2d89d0ae-30f9-43e3-97e4-29755c686fb5",
+                  "createdAt": "2026-07-28T02:41:38.000Z",
+                  "updatedAt": "2026-07-28T02:41:38.000Z",
+                  "uid": "35240-2d89d0ae-30f9-43e3-97e4-29755c686fb5"
+                },
+                {
+                  "name": "{evaluation_id}",
+                  "item": [
+                    {
+                      "name": "cancel",
+                      "item": [
+                        {
+                          "name": "Cancel Hosted Evaluation Route",
+                          "id": "5cd29913-dd47-413d-b668-cdf949bf76b3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/hosted-evaluations/:evaluation_id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "hosted-evaluations",
+                                ":evaluation_id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "85a2ccca-982d-424b-8ad3-967245d5d6d0",
+                                  "key": "evaluation_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Cancel a running hosted evaluation."
+                          },
+                          "response": [
+                            {
+                              "id": "f3d64131-10ef-41c6-aa51-0f28975f863b",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/hosted-evaluations/:evaluation_id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "hosted-evaluations",
+                                    ":evaluation_id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "evaluation_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\",\n  \"evaluation_id\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:41:38.000Z",
+                              "updatedAt": "2026-07-28T02:41:38.000Z",
+                              "uid": "35240-f3d64131-10ef-41c6-aa51-0f28975f863b"
+                            },
+                            {
+                              "id": "2a8fbabf-dcd9-4fc4-bb2b-84bb97d418cd",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/hosted-evaluations/:evaluation_id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "hosted-evaluations",
+                                    ":evaluation_id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "evaluation_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:41:38.000Z",
+                              "updatedAt": "2026-07-28T02:41:38.000Z",
+                              "uid": "35240-2a8fbabf-dcd9-4fc4-bb2b-84bb97d418cd"
+                            },
+                            {
+                              "id": "4b87e9c7-4373-451b-bf08-0dc9de28170f",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/hosted-evaluations/:evaluation_id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "hosted-evaluations",
+                                    ":evaluation_id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "evaluation_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:41:38.000Z",
+                              "updatedAt": "2026-07-28T02:41:38.000Z",
+                              "uid": "35240-4b87e9c7-4373-451b-bf08-0dc9de28170f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:41:38.000Z",
+                          "updatedAt": "2026-07-28T02:41:38.000Z",
+                          "uid": "35240-5cd29913-dd47-413d-b668-cdf949bf76b3"
+                        }
+                      ],
+                      "id": "848440c8-36fb-4b4e-98aa-bf152465c58f",
+                      "createdAt": "2026-07-28T02:41:38.000Z",
+                      "updatedAt": "2026-07-28T02:41:38.000Z",
+                      "uid": "35240-848440c8-36fb-4b4e-98aa-bf152465c58f"
+                    },
+                    {
+                      "name": "logs",
+                      "item": [
+                        {
+                          "name": "Get Hosted Evaluation Logs Route",
+                          "id": "ee417178-e588-4a60-9a8b-246eaef6e238",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/hosted-evaluations/:evaluation_id/logs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "hosted-evaluations",
+                                ":evaluation_id",
+                                "logs"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "10abc5fd-8d51-41ac-9f9f-a55faa6807c7",
+                                  "key": "evaluation_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Get real-time logs from the sandbox running a hosted evaluation."
+                          },
+                          "response": [
+                            {
+                              "id": "65f9ad1c-cbf3-410d-844f-47e92256ba37",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/hosted-evaluations/:evaluation_id/logs",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "hosted-evaluations",
+                                    ":evaluation_id",
+                                    "logs"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "evaluation_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"logs\": \"<string>\",\n  \"evaluation_id\": \"<string>\",\n  \"sandbox_id\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:41:38.000Z",
+                              "updatedAt": "2026-07-28T02:41:38.000Z",
+                              "uid": "35240-65f9ad1c-cbf3-410d-844f-47e92256ba37"
+                            },
+                            {
+                              "id": "c8769534-8381-4259-9707-b779483a83af",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/hosted-evaluations/:evaluation_id/logs",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "hosted-evaluations",
+                                    ":evaluation_id",
+                                    "logs"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "evaluation_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:41:38.000Z",
+                              "updatedAt": "2026-07-28T02:41:38.000Z",
+                              "uid": "35240-c8769534-8381-4259-9707-b779483a83af"
+                            },
+                            {
+                              "id": "5c5d6861-9e48-45d1-b427-31cae9cec78a",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/hosted-evaluations/:evaluation_id/logs",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "hosted-evaluations",
+                                    ":evaluation_id",
+                                    "logs"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "evaluation_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:41:38.000Z",
+                              "updatedAt": "2026-07-28T02:41:38.000Z",
+                              "uid": "35240-5c5d6861-9e48-45d1-b427-31cae9cec78a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:41:38.000Z",
+                          "updatedAt": "2026-07-28T02:41:38.000Z",
+                          "uid": "35240-ee417178-e588-4a60-9a8b-246eaef6e238"
+                        }
+                      ],
+                      "id": "953b7b42-b2b9-4bf1-8c23-add183b6ee72",
+                      "createdAt": "2026-07-28T02:41:38.000Z",
+                      "updatedAt": "2026-07-28T02:41:38.000Z",
+                      "uid": "35240-953b7b42-b2b9-4bf1-8c23-add183b6ee72"
+                    }
+                  ],
+                  "id": "7d149bd3-e922-4864-9383-8ac2ff14cd2e",
+                  "createdAt": "2026-07-28T02:41:38.000Z",
+                  "updatedAt": "2026-07-28T02:41:38.000Z",
+                  "uid": "35240-7d149bd3-e922-4864-9383-8ac2ff14cd2e"
+                },
+                {
+                  "name": "Create Hosted Evaluation",
+                  "id": "d4c61193-6189-410c-adc9-0453740f7a5b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"environment_ids\": [\n    \"<string>\"\n  ],\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": \"<integer>\",\n    \"rollouts_per_example\": \"<integer>\",\n    \"env_args\": {},\n    \"allow_sandbox_access\": \"<boolean>\",\n    \"allow_instances_access\": \"<boolean>\",\n    \"allow_tunnel_access\": \"<boolean>\",\n    \"timeout_minutes\": \"<integer>\",\n    \"custom_secrets\": {\n      \"deseruntbc7\": \"<string>\",\n      \"consectetur_97c\": \"<string>\",\n      \"ad6\": \"<string>\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": \"<integer>\",\n    \"max_retries\": \"<integer>\",\n    \"state_columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"independent_scoring\": \"<boolean>\",\n    \"verbose\": \"<boolean>\",\n    \"headers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"<string>\",\n    \"api_base_url\": \"<string>\",\n    \"api_key_var\": \"<string>\"\n  },\n  \"team_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/hosted-evaluations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "hosted-evaluations"
+                      ]
+                    },
+                    "description": "Create and start a hosted evaluation."
+                  },
+                  "response": [
+                    {
+                      "id": "f2b4c160-b661-4cde-8242-d03c496c671a",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"environment_ids\": [\n    \"<string>\"\n  ],\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": \"<integer>\",\n    \"rollouts_per_example\": \"<integer>\",\n    \"env_args\": {},\n    \"allow_sandbox_access\": \"<boolean>\",\n    \"allow_instances_access\": \"<boolean>\",\n    \"allow_tunnel_access\": \"<boolean>\",\n    \"timeout_minutes\": \"<integer>\",\n    \"custom_secrets\": {\n      \"deseruntbc7\": \"<string>\",\n      \"consectetur_97c\": \"<string>\",\n      \"ad6\": \"<string>\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": \"<integer>\",\n    \"max_retries\": \"<integer>\",\n    \"state_columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"independent_scoring\": \"<boolean>\",\n    \"verbose\": \"<boolean>\",\n    \"headers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"<string>\",\n    \"api_base_url\": \"<string>\",\n    \"api_key_var\": \"<string>\"\n  },\n  \"team_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/hosted-evaluations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "hosted-evaluations"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"evaluation_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"sandbox_id\": \"<string>\",\n  \"evaluation_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:41:38.000Z",
+                      "updatedAt": "2026-07-28T02:41:38.000Z",
+                      "uid": "35240-f2b4c160-b661-4cde-8242-d03c496c671a"
+                    },
+                    {
+                      "id": "fcdd45b0-ddda-4b2f-b043-ba232114a2ae",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"environment_ids\": [\n    \"<string>\"\n  ],\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": \"<integer>\",\n    \"rollouts_per_example\": \"<integer>\",\n    \"env_args\": {},\n    \"allow_sandbox_access\": \"<boolean>\",\n    \"allow_instances_access\": \"<boolean>\",\n    \"allow_tunnel_access\": \"<boolean>\",\n    \"timeout_minutes\": \"<integer>\",\n    \"custom_secrets\": {\n      \"deseruntbc7\": \"<string>\",\n      \"consectetur_97c\": \"<string>\",\n      \"ad6\": \"<string>\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": \"<integer>\",\n    \"max_retries\": \"<integer>\",\n    \"state_columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"independent_scoring\": \"<boolean>\",\n    \"verbose\": \"<boolean>\",\n    \"headers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"<string>\",\n    \"api_base_url\": \"<string>\",\n    \"api_key_var\": \"<string>\"\n  },\n  \"team_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/hosted-evaluations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "hosted-evaluations"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:41:38.000Z",
+                      "updatedAt": "2026-07-28T02:41:38.000Z",
+                      "uid": "35240-fcdd45b0-ddda-4b2f-b043-ba232114a2ae"
+                    },
+                    {
+                      "id": "4d50e5d4-266c-4850-bcad-5a6b508ece16",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"environment_ids\": [\n    \"<string>\"\n  ],\n  \"inference_model\": \"<string>\",\n  \"eval_config\": {\n    \"num_examples\": \"<integer>\",\n    \"rollouts_per_example\": \"<integer>\",\n    \"env_args\": {},\n    \"allow_sandbox_access\": \"<boolean>\",\n    \"allow_instances_access\": \"<boolean>\",\n    \"allow_tunnel_access\": \"<boolean>\",\n    \"timeout_minutes\": \"<integer>\",\n    \"custom_secrets\": {\n      \"deseruntbc7\": \"<string>\",\n      \"consectetur_97c\": \"<string>\",\n      \"ad6\": \"<string>\"\n    },\n    \"sampling_args\": {},\n    \"max_concurrent\": \"<integer>\",\n    \"max_retries\": \"<integer>\",\n    \"state_columns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"independent_scoring\": \"<boolean>\",\n    \"verbose\": \"<boolean>\",\n    \"headers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_env_kwargs\": {},\n    \"api_client_type\": \"<string>\",\n    \"api_base_url\": \"<string>\",\n    \"api_key_var\": \"<string>\"\n  },\n  \"team_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/hosted-evaluations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "hosted-evaluations"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:38.000Z",
+                      "updatedAt": "2026-07-28T02:41:38.000Z",
+                      "uid": "35240-4d50e5d4-266c-4850-bcad-5a6b508ece16"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:38.000Z",
+                  "updatedAt": "2026-07-28T02:41:38.000Z",
+                  "uid": "35240-d4c61193-6189-410c-adc9-0453740f7a5b"
+                }
+              ],
+              "id": "837d0a77-a00c-4c3d-b891-015d35277922",
+              "createdAt": "2026-07-28T02:41:38.000Z",
+              "updatedAt": "2026-07-28T02:41:38.000Z",
+              "uid": "35240-837d0a77-a00c-4c3d-b891-015d35277922"
+            }
+          ],
+          "id": "f9a7c29e-8b72-4c37-925e-399804d20dd9",
+          "createdAt": "2026-07-28T02:41:38.000Z",
+          "updatedAt": "2026-07-28T02:41:38.000Z",
+          "uid": "35240-f9a7c29e-8b72-4c37-925e-399804d20dd9"
+        }
+      ],
+      "id": "d153e9e2-ea8a-445b-a39c-ed721c0a51f5",
+      "createdAt": "2026-07-28T02:41:38.000Z",
+      "updatedAt": "2026-07-28T02:41:38.000Z",
+      "uid": "35240-d153e9e2-ea8a-445b-a39c-ed721c0a51f5"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

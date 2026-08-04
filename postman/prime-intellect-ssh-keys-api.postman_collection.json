@@ -1,0 +1,940 @@
+{
+  "info": {
+    "_postman_id": "a9e5c575-e980-494b-b30d-d1038b865377",
+    "name": "Prime Intellect Compute admin-clusters SSH Keys API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:42.000Z",
+    "updatedAt": "2026-07-28T02:41:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a9e5c575-e980-494b-b30d-d1038b865377"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "ssh_keys",
+              "item": [
+                {
+                  "name": "{key_id}",
+                  "item": [
+                    {
+                      "name": "Delete Ssh Key",
+                      "id": "0edf448b-cb05-449c-a5a1-f407d6a21930",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh_keys/:key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh_keys",
+                            ":key_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "54ea5e91-410a-4892-949c-53424bd4ef90",
+                              "key": "key_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "2b553b0b-53dd-4ad3-83d2-634463b44bce",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh_keys/:key_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh_keys",
+                                ":key_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "key_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T02:41:42.000Z",
+                          "updatedAt": "2026-07-28T02:41:42.000Z",
+                          "uid": "35240-2b553b0b-53dd-4ad3-83d2-634463b44bce"
+                        },
+                        {
+                          "id": "7a0978c3-2032-4184-8773-16583c25e854",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh_keys/:key_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh_keys",
+                                ":key_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "key_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:42.000Z",
+                          "updatedAt": "2026-07-28T02:41:42.000Z",
+                          "uid": "35240-7a0978c3-2032-4184-8773-16583c25e854"
+                        },
+                        {
+                          "id": "75163edb-ed1f-4018-847e-245db923ec4f",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh_keys/:key_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh_keys",
+                                ":key_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "key_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:42.000Z",
+                          "updatedAt": "2026-07-28T02:41:42.000Z",
+                          "uid": "35240-75163edb-ed1f-4018-847e-245db923ec4f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:42.000Z",
+                      "updatedAt": "2026-07-28T02:41:42.000Z",
+                      "uid": "35240-0edf448b-cb05-449c-a5a1-f407d6a21930"
+                    },
+                    {
+                      "name": "Set Primary Key",
+                      "id": "a12583d1-9db9-4e03-8881-f6287221cd40",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"isPrimary\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh_keys/:key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh_keys",
+                            ":key_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "bae0705e-2e52-402b-82d7-37ecb93e2831",
+                              "key": "key_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "54d48b6e-ae86-42d8-8546-0a1c88eacbec",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"isPrimary\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh_keys/:key_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh_keys",
+                                ":key_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "key_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"updated_fields\": {}\n}",
+                          "createdAt": "2026-07-28T02:41:42.000Z",
+                          "updatedAt": "2026-07-28T02:41:42.000Z",
+                          "uid": "35240-54d48b6e-ae86-42d8-8546-0a1c88eacbec"
+                        },
+                        {
+                          "id": "49df2951-2a8c-487f-854c-3e1a250a5660",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"isPrimary\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh_keys/:key_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh_keys",
+                                ":key_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "key_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:42.000Z",
+                          "updatedAt": "2026-07-28T02:41:42.000Z",
+                          "uid": "35240-49df2951-2a8c-487f-854c-3e1a250a5660"
+                        },
+                        {
+                          "id": "1ee64704-fec8-4474-8d40-15ac7456e849",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"isPrimary\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh_keys/:key_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh_keys",
+                                ":key_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "key_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:42.000Z",
+                          "updatedAt": "2026-07-28T02:41:42.000Z",
+                          "uid": "35240-1ee64704-fec8-4474-8d40-15ac7456e849"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:42.000Z",
+                      "updatedAt": "2026-07-28T02:41:42.000Z",
+                      "uid": "35240-a12583d1-9db9-4e03-8881-f6287221cd40"
+                    }
+                  ],
+                  "id": "dcc0d7e5-7dc7-401f-9a6d-4bcc3cfb71f2",
+                  "createdAt": "2026-07-28T02:41:42.000Z",
+                  "updatedAt": "2026-07-28T02:41:42.000Z",
+                  "uid": "35240-dcc0d7e5-7dc7-401f-9a6d-4bcc3cfb71f2"
+                },
+                {
+                  "name": "Get Ssh Keys",
+                  "id": "c600e6d6-5fca-46a4-a1de-d7772fb75623",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/ssh_keys/?offset=0&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "ssh_keys",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "471a5fcf-3de0-4d72-851c-0f8246c2099f",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh_keys/?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh_keys",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"publicKey\": \"<string>\",\n      \"isPrimary\": \"<boolean>\",\n      \"isUserKey\": \"<boolean>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"publicKey\": \"<string>\",\n      \"isPrimary\": \"<boolean>\",\n      \"isUserKey\": \"<boolean>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"total_count\": 0,\n  \"offset\": 0,\n  \"limit\": 100,\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:41:42.000Z",
+                      "updatedAt": "2026-07-28T02:41:42.000Z",
+                      "uid": "35240-471a5fcf-3de0-4d72-851c-0f8246c2099f"
+                    },
+                    {
+                      "id": "78f65acd-f96e-4db5-9461-bf093b49fc9c",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh_keys/?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh_keys",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:41:42.000Z",
+                      "updatedAt": "2026-07-28T02:41:42.000Z",
+                      "uid": "35240-78f65acd-f96e-4db5-9461-bf093b49fc9c"
+                    },
+                    {
+                      "id": "ebdd6b9f-c7d0-4678-a772-02cd50515741",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh_keys/?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh_keys",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:42.000Z",
+                      "updatedAt": "2026-07-28T02:41:42.000Z",
+                      "uid": "35240-ebdd6b9f-c7d0-4678-a772-02cd50515741"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:42.000Z",
+                  "updatedAt": "2026-07-28T02:41:42.000Z",
+                  "uid": "35240-c600e6d6-5fca-46a4-a1de-d7772fb75623"
+                },
+                {
+                  "name": "Upload Ssh Key",
+                  "id": "1f6c5e9d-0d0a-430b-b909-907393182b93",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"publicKey\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/ssh_keys/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "ssh_keys",
+                        ""
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "84632e01-8126-439c-bc4f-0e908a3b265e",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"publicKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh_keys/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh_keys",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"publicKey\": \"<string>\",\n  \"isPrimary\": \"<boolean>\",\n  \"isUserKey\": \"<boolean>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T02:41:42.000Z",
+                      "updatedAt": "2026-07-28T02:41:42.000Z",
+                      "uid": "35240-84632e01-8126-439c-bc4f-0e908a3b265e"
+                    },
+                    {
+                      "id": "0a222f7a-38e0-44d4-8ef1-a3d3e57d868f",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"publicKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh_keys/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh_keys",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:41:42.000Z",
+                      "updatedAt": "2026-07-28T02:41:42.000Z",
+                      "uid": "35240-0a222f7a-38e0-44d4-8ef1-a3d3e57d868f"
+                    },
+                    {
+                      "id": "c22b393b-5a1b-4ff4-aa72-1c93b9b71249",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"publicKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh_keys/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh_keys",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:42.000Z",
+                      "updatedAt": "2026-07-28T02:41:42.000Z",
+                      "uid": "35240-c22b393b-5a1b-4ff4-aa72-1c93b9b71249"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:42.000Z",
+                  "updatedAt": "2026-07-28T02:41:42.000Z",
+                  "uid": "35240-1f6c5e9d-0d0a-430b-b909-907393182b93"
+                }
+              ],
+              "id": "7a2ec5c3-9909-4cc9-b262-5671b13861d1",
+              "createdAt": "2026-07-28T02:41:42.000Z",
+              "updatedAt": "2026-07-28T02:41:42.000Z",
+              "uid": "35240-7a2ec5c3-9909-4cc9-b262-5671b13861d1"
+            }
+          ],
+          "id": "1dbce98e-a1a5-4a38-9dbf-bd78e6983188",
+          "createdAt": "2026-07-28T02:41:42.000Z",
+          "updatedAt": "2026-07-28T02:41:42.000Z",
+          "uid": "35240-1dbce98e-a1a5-4a38-9dbf-bd78e6983188"
+        }
+      ],
+      "id": "38c7640a-50b1-4e6e-84d6-c2cd4ad8a352",
+      "createdAt": "2026-07-28T02:41:42.000Z",
+      "updatedAt": "2026-07-28T02:41:42.000Z",
+      "uid": "35240-38c7640a-50b1-4e6e-84d6-c2cd4ad8a352"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

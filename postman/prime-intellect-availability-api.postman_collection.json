@@ -1,0 +1,2281 @@
+{
+  "info": {
+    "_postman_id": "c2dd5f46-140c-4303-8b81-1c0b03aa9c31",
+    "name": "Prime Intellect Compute admin-clusters Availability API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:40:49.000Z",
+    "updatedAt": "2026-07-28T02:40:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c2dd5f46-140c-4303-8b81-1c0b03aa9c31"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "availability",
+              "item": [
+                {
+                  "name": "clusters",
+                  "item": [
+                    {
+                      "name": "Get Legacy Cluster Availability",
+                      "id": "1e3882f5-bacb-4497-aa96-e199575ba075",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/availability/clusters?page=1&page_size=500&regions=asia_south&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>&disks=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "availability",
+                            "clusters"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number (1-indexed)",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page",
+                              "key": "page_size",
+                              "value": "500"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "asia_south"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "united_states"
+                            },
+                            {
+                              "description": "Desired number of GPUs",
+                              "key": "gpu_count",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "GPU model",
+                              "key": "gpu_type",
+                              "value": "H100_80GB"
+                            },
+                            {
+                              "description": "Socket for selected gpu model",
+                              "key": "socket",
+                              "value": "SXM2"
+                            },
+                            {
+                              "description": "Security type",
+                              "key": "security",
+                              "value": "secure_cloud"
+                            },
+                            {
+                              "description": "Filter by data center ID",
+                              "key": "data_center_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by cloud ID",
+                              "key": "cloud_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List of disk IDs to filter instances by location",
+                              "key": "disks",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List of disk IDs to filter instances by location",
+                              "key": "disks",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "ec00a4c6-f8e7-4ead-9335-6a6e30915ca5",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/clusters?page=1&page_size=500&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "clusters"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "500"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Desired number of GPUs",
+                                  "key": "gpu_count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "GPU model",
+                                  "key": "gpu_type",
+                                  "value": "H100_80GB"
+                                },
+                                {
+                                  "description": "Socket for selected gpu model",
+                                  "key": "socket",
+                                  "value": "SXM2"
+                                },
+                                {
+                                  "description": "Security type",
+                                  "key": "security",
+                                  "value": "secure_cloud"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List of disk IDs to filter instances by location",
+                                  "key": "disks",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"{GPUType}\": [\n    {\n      \"cloudId\": \"<string>\",\n      \"gpuType\": \"L40_48GB\",\n      \"socket\": \"SXM2\",\n      \"provider\": \"dc_roan\",\n      \"gpuCount\": \"<integer>\",\n      \"gpuMemory\": \"<integer>\",\n      \"security\": \"community_cloud\",\n      \"prices\": {\n        \"currency\": \"USD\",\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"isVariable\": \"<boolean>\"\n      },\n      \"images\": [\n        \"cuda_12_1_pytorch_2_2\",\n        \"flux\"\n      ],\n      \"region\": \"asia_south\",\n      \"dataCenter\": \"<string>\",\n      \"country\": \"<string>\",\n      \"disk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"sharedDisk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"vcpu\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"memory\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"internetSpeed\": \"<integer>\",\n      \"interconnect\": \"<integer>\",\n      \"interconnectType\": \"<string>\",\n      \"provisioningTime\": \"<integer>\",\n      \"stockStatus\": \"Available\",\n      \"isSpot\": \"<boolean>\",\n      \"prepaidTime\": \"<number>\"\n    },\n    {\n      \"cloudId\": \"<string>\",\n      \"gpuType\": \"RTX_PRO_6000B_96GB\",\n      \"socket\": \"SXM6\",\n      \"provider\": \"dc_eland\",\n      \"gpuCount\": \"<integer>\",\n      \"gpuMemory\": \"<integer>\",\n      \"security\": \"secure_cloud\",\n      \"prices\": {\n        \"currency\": \"EUR\",\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"isVariable\": \"<boolean>\"\n      },\n      \"images\": [\n        \"prime_rl\",\n        \"bittensor\"\n      ],\n      \"region\": \"middle_east\",\n      \"dataCenter\": \"<string>\",\n      \"country\": \"<string>\",\n      \"disk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"sharedDisk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"vcpu\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"memory\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"internetSpeed\": \"<integer>\",\n      \"interconnect\": \"<integer>\",\n      \"interconnectType\": \"<string>\",\n      \"provisioningTime\": \"<integer>\",\n      \"stockStatus\": \"Available\",\n      \"isSpot\": \"<boolean>\",\n      \"prepaidTime\": \"<number>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-ec00a4c6-f8e7-4ead-9335-6a6e30915ca5"
+                        },
+                        {
+                          "id": "c24f551b-3519-4480-a342-928c2067d5fb",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/clusters?page=1&page_size=500&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "clusters"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "500"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Desired number of GPUs",
+                                  "key": "gpu_count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "GPU model",
+                                  "key": "gpu_type",
+                                  "value": "H100_80GB"
+                                },
+                                {
+                                  "description": "Socket for selected gpu model",
+                                  "key": "socket",
+                                  "value": "SXM2"
+                                },
+                                {
+                                  "description": "Security type",
+                                  "key": "security",
+                                  "value": "secure_cloud"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List of disk IDs to filter instances by location",
+                                  "key": "disks",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-c24f551b-3519-4480-a342-928c2067d5fb"
+                        },
+                        {
+                          "id": "b03b7a22-d404-48b8-b1d9-f04c7d96ebd2",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/clusters?page=1&page_size=500&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "clusters"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "500"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Desired number of GPUs",
+                                  "key": "gpu_count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "GPU model",
+                                  "key": "gpu_type",
+                                  "value": "H100_80GB"
+                                },
+                                {
+                                  "description": "Socket for selected gpu model",
+                                  "key": "socket",
+                                  "value": "SXM2"
+                                },
+                                {
+                                  "description": "Security type",
+                                  "key": "security",
+                                  "value": "secure_cloud"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List of disk IDs to filter instances by location",
+                                  "key": "disks",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-b03b7a22-d404-48b8-b1d9-f04c7d96ebd2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:49.000Z",
+                      "updatedAt": "2026-07-28T02:40:49.000Z",
+                      "uid": "35240-1e3882f5-bacb-4497-aa96-e199575ba075"
+                    }
+                  ],
+                  "id": "6ebb8dbb-76ce-463c-ae1b-07bec6d2373b",
+                  "createdAt": "2026-07-28T02:40:49.000Z",
+                  "updatedAt": "2026-07-28T02:40:49.000Z",
+                  "uid": "35240-6ebb8dbb-76ce-463c-ae1b-07bec6d2373b"
+                },
+                {
+                  "name": "disks",
+                  "item": [
+                    {
+                      "name": "Get Disks Availability",
+                      "id": "483a655c-f8fb-4804-8f8c-25bc35136f59",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/availability/disks?page=1&page_size=100&regions=asia_south&regions=united_states&data_center_id=<string>&cloud_id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "availability",
+                            "disks"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number (1-indexed)",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page",
+                              "key": "page_size",
+                              "value": "100"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "asia_south"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "united_states"
+                            },
+                            {
+                              "description": "Filter by data center ID",
+                              "key": "data_center_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by cloud ID",
+                              "key": "cloud_id",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "74183c8b-49cc-4d62-828b-f5e958ccebd7",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/disks?page=1&page_size=100&regions=united_states&data_center_id=<string>&cloud_id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "disks"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"items\": [\n    {\n      \"provider\": \"lambdalabs\",\n      \"security\": \"secure_cloud\",\n      \"cloudId\": \"<string>\",\n      \"dataCenter\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"africa\",\n      \"spec\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"stockStatus\": \"Available\",\n      \"isMultinode\": \"<boolean>\"\n    },\n    {\n      \"provider\": \"dc_wildebeest\",\n      \"security\": \"community_cloud\",\n      \"cloudId\": \"<string>\",\n      \"dataCenter\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"middle_east\",\n      \"spec\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"stockStatus\": \"Available\",\n      \"isMultinode\": \"<boolean>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-74183c8b-49cc-4d62-828b-f5e958ccebd7"
+                        },
+                        {
+                          "id": "ed29164f-87b3-4602-99f6-f5018425c4f1",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/disks?page=1&page_size=100&regions=united_states&data_center_id=<string>&cloud_id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "disks"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-ed29164f-87b3-4602-99f6-f5018425c4f1"
+                        },
+                        {
+                          "id": "31189589-2645-4456-9f7c-45b4bdf2dc84",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/disks?page=1&page_size=100&regions=united_states&data_center_id=<string>&cloud_id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "disks"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-31189589-2645-4456-9f7c-45b4bdf2dc84"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:49.000Z",
+                      "updatedAt": "2026-07-28T02:40:49.000Z",
+                      "uid": "35240-483a655c-f8fb-4804-8f8c-25bc35136f59"
+                    }
+                  ],
+                  "id": "079613a7-3ae6-4967-b726-bbc01a3118a3",
+                  "createdAt": "2026-07-28T02:40:49.000Z",
+                  "updatedAt": "2026-07-28T02:40:49.000Z",
+                  "uid": "35240-079613a7-3ae6-4967-b726-bbc01a3118a3"
+                },
+                {
+                  "name": "gpu-summary",
+                  "item": [
+                    {
+                      "name": "Get Gpu Summary",
+                      "id": "96370749-bd8b-4944-a169-70c4d114188a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/availability/gpu-summary",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "availability",
+                            "gpu-summary"
+                          ]
+                        },
+                        "description": "Get GPU pricing summary data grouped by GPU type and instance count."
+                      },
+                      "response": [
+                        {
+                          "id": "7554786d-f888-47ee-b908-bb63de3c5a25",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/gpu-summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "gpu-summary"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"Loremd7\": {\n    \"adipisicing_9\": {\n      \"cheapest\": {\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"spotPrice\": \"<number>\"\n      },\n      \"exercitation_35\": 76001301,\n      \"labore0_8\": 45428148.365288645,\n      \"consequat1\": \"pariatur Excepteur eiusmod do\",\n      \"eiusmod_228\": -77757440.94899441\n    },\n    \"ut8e4\": {\n      \"cheapest\": {\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"spotPrice\": \"<number>\"\n      },\n      \"velit_f\": false\n    },\n    \"voluptate_37\": {\n      \"cheapest\": {\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"spotPrice\": \"<number>\"\n      },\n      \"commodo_0da\": false\n    },\n    \"aliquip_90c\": {\n      \"cheapest\": {\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"spotPrice\": \"<number>\"\n      },\n      \"quis5_2\": \"exercitation in aliqua sed id\",\n      \"voluptate6\": \"ea am\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-7554786d-f888-47ee-b908-bb63de3c5a25"
+                        },
+                        {
+                          "id": "ab0c3598-5d4e-4064-a717-a844badce9da",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/gpu-summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "gpu-summary"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-ab0c3598-5d4e-4064-a717-a844badce9da"
+                        },
+                        {
+                          "id": "32802cfa-14ef-4e01-bfac-a2957c99ea64",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/gpu-summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "gpu-summary"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-32802cfa-14ef-4e01-bfac-a2957c99ea64"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:49.000Z",
+                      "updatedAt": "2026-07-28T02:40:49.000Z",
+                      "uid": "35240-96370749-bd8b-4944-a169-70c4d114188a"
+                    }
+                  ],
+                  "id": "505fea38-cf77-4d02-b7a7-6b37ff4b4562",
+                  "createdAt": "2026-07-28T02:40:49.000Z",
+                  "updatedAt": "2026-07-28T02:40:49.000Z",
+                  "uid": "35240-505fea38-cf77-4d02-b7a7-6b37ff4b4562"
+                },
+                {
+                  "name": "gpus",
+                  "item": [
+                    {
+                      "name": "Get Gpu Availability",
+                      "id": "471d2b34-64a7-4987-b1a7-001d8b198310",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/availability/gpus?page=1&page_size=100&regions=asia_south&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>&disks=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "availability",
+                            "gpus"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number (1-indexed)",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page",
+                              "key": "page_size",
+                              "value": "100"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "asia_south"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "united_states"
+                            },
+                            {
+                              "description": "Desired number of GPUs",
+                              "key": "gpu_count",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "GPU model",
+                              "key": "gpu_type",
+                              "value": "H100_80GB"
+                            },
+                            {
+                              "description": "Socket for selected gpu model",
+                              "key": "socket",
+                              "value": "SXM2"
+                            },
+                            {
+                              "description": "Security type",
+                              "key": "security",
+                              "value": "secure_cloud"
+                            },
+                            {
+                              "description": "Filter by data center ID",
+                              "key": "data_center_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by cloud ID",
+                              "key": "cloud_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List of disk IDs to filter instances by location",
+                              "key": "disks",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List of disk IDs to filter instances by location",
+                              "key": "disks",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "814f7db1-3fd6-46e7-a0fd-61866661da80",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/gpus?page=1&page_size=100&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "gpus"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Desired number of GPUs",
+                                  "key": "gpu_count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "GPU model",
+                                  "key": "gpu_type",
+                                  "value": "H100_80GB"
+                                },
+                                {
+                                  "description": "Socket for selected gpu model",
+                                  "key": "socket",
+                                  "value": "SXM2"
+                                },
+                                {
+                                  "description": "Security type",
+                                  "key": "security",
+                                  "value": "secure_cloud"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List of disk IDs to filter instances by location",
+                                  "key": "disks",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"items\": [\n    {\n      \"cloudId\": \"<string>\",\n      \"gpuType\": \"RTX4070Ti_12GB\",\n      \"socket\": \"SXM5\",\n      \"provider\": \"datacrunch\",\n      \"gpuCount\": \"<integer>\",\n      \"gpuMemory\": \"<integer>\",\n      \"security\": \"community_cloud\",\n      \"prices\": {\n        \"currency\": \"EUR\",\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"isVariable\": \"<boolean>\"\n      },\n      \"images\": [\n        \"cuda_12_4_pytorch_2_5\",\n        \"vllm_llama_405b\"\n      ],\n      \"region\": \"asia_south\",\n      \"dataCenter\": \"<string>\",\n      \"country\": \"<string>\",\n      \"disk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"sharedDisk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"vcpu\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"memory\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"internetSpeed\": \"<integer>\",\n      \"interconnect\": \"<integer>\",\n      \"interconnectType\": \"<string>\",\n      \"provisioningTime\": \"<integer>\",\n      \"stockStatus\": \"Available\",\n      \"isSpot\": \"<boolean>\",\n      \"prepaidTime\": \"<number>\"\n    },\n    {\n      \"cloudId\": \"<string>\",\n      \"gpuType\": \"RTX4070Ti_12GB\",\n      \"socket\": \"SXM2\",\n      \"provider\": \"fluidstack\",\n      \"gpuCount\": \"<integer>\",\n      \"gpuMemory\": \"<integer>\",\n      \"security\": \"secure_cloud\",\n      \"prices\": {\n        \"currency\": \"USD\",\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"isVariable\": \"<boolean>\"\n      },\n      \"images\": [\n        \"cuda_12_1_pytorch_2_2\",\n        \"cuda_12_1_pytorch_2_3\"\n      ],\n      \"region\": \"australia\",\n      \"dataCenter\": \"<string>\",\n      \"country\": \"<string>\",\n      \"disk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"sharedDisk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"vcpu\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"memory\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"internetSpeed\": \"<integer>\",\n      \"interconnect\": \"<integer>\",\n      \"interconnectType\": \"<string>\",\n      \"provisioningTime\": \"<integer>\",\n      \"stockStatus\": \"Available\",\n      \"isSpot\": \"<boolean>\",\n      \"prepaidTime\": \"<number>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-814f7db1-3fd6-46e7-a0fd-61866661da80"
+                        },
+                        {
+                          "id": "7b1c6b2e-0ee9-431e-be16-363563d7b240",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/gpus?page=1&page_size=100&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "gpus"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Desired number of GPUs",
+                                  "key": "gpu_count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "GPU model",
+                                  "key": "gpu_type",
+                                  "value": "H100_80GB"
+                                },
+                                {
+                                  "description": "Socket for selected gpu model",
+                                  "key": "socket",
+                                  "value": "SXM2"
+                                },
+                                {
+                                  "description": "Security type",
+                                  "key": "security",
+                                  "value": "secure_cloud"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List of disk IDs to filter instances by location",
+                                  "key": "disks",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-7b1c6b2e-0ee9-431e-be16-363563d7b240"
+                        },
+                        {
+                          "id": "548e8c95-8630-4504-8766-923140d33f1c",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/gpus?page=1&page_size=100&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "gpus"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Desired number of GPUs",
+                                  "key": "gpu_count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "GPU model",
+                                  "key": "gpu_type",
+                                  "value": "H100_80GB"
+                                },
+                                {
+                                  "description": "Socket for selected gpu model",
+                                  "key": "socket",
+                                  "value": "SXM2"
+                                },
+                                {
+                                  "description": "Security type",
+                                  "key": "security",
+                                  "value": "secure_cloud"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List of disk IDs to filter instances by location",
+                                  "key": "disks",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-548e8c95-8630-4504-8766-923140d33f1c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:49.000Z",
+                      "updatedAt": "2026-07-28T02:40:49.000Z",
+                      "uid": "35240-471d2b34-64a7-4987-b1a7-001d8b198310"
+                    }
+                  ],
+                  "id": "e68e5814-8b43-4ff7-8900-ad01d37e069d",
+                  "createdAt": "2026-07-28T02:40:49.000Z",
+                  "updatedAt": "2026-07-28T02:40:49.000Z",
+                  "uid": "35240-e68e5814-8b43-4ff7-8900-ad01d37e069d"
+                },
+                {
+                  "name": "multi-node",
+                  "item": [
+                    {
+                      "name": "Get Multinode Availability",
+                      "id": "7fbfe4c0-7586-4e00-9f69-0a6b15de2b7b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/availability/multi-node?page=1&page_size=100&regions=asia_south&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>&disks=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "availability",
+                            "multi-node"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number (1-indexed)",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page",
+                              "key": "page_size",
+                              "value": "100"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "asia_south"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "united_states"
+                            },
+                            {
+                              "description": "Desired number of GPUs",
+                              "key": "gpu_count",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "GPU model",
+                              "key": "gpu_type",
+                              "value": "H100_80GB"
+                            },
+                            {
+                              "description": "Socket for selected gpu model",
+                              "key": "socket",
+                              "value": "SXM2"
+                            },
+                            {
+                              "description": "Security type",
+                              "key": "security",
+                              "value": "secure_cloud"
+                            },
+                            {
+                              "description": "Filter by data center ID",
+                              "key": "data_center_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by cloud ID",
+                              "key": "cloud_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List of disk IDs to filter instances by location",
+                              "key": "disks",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List of disk IDs to filter instances by location",
+                              "key": "disks",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "9e1ba90a-5825-4439-99d3-c2a27bfb4287",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/multi-node?page=1&page_size=100&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "multi-node"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Desired number of GPUs",
+                                  "key": "gpu_count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "GPU model",
+                                  "key": "gpu_type",
+                                  "value": "H100_80GB"
+                                },
+                                {
+                                  "description": "Socket for selected gpu model",
+                                  "key": "socket",
+                                  "value": "SXM2"
+                                },
+                                {
+                                  "description": "Security type",
+                                  "key": "security",
+                                  "value": "secure_cloud"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List of disk IDs to filter instances by location",
+                                  "key": "disks",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"items\": [\n    {\n      \"cloudId\": \"<string>\",\n      \"gpuType\": \"RTX4070Ti_12GB\",\n      \"socket\": \"SXM5\",\n      \"provider\": \"datacrunch\",\n      \"gpuCount\": \"<integer>\",\n      \"gpuMemory\": \"<integer>\",\n      \"security\": \"community_cloud\",\n      \"prices\": {\n        \"currency\": \"EUR\",\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"isVariable\": \"<boolean>\"\n      },\n      \"images\": [\n        \"cuda_12_4_pytorch_2_5\",\n        \"vllm_llama_405b\"\n      ],\n      \"region\": \"asia_south\",\n      \"dataCenter\": \"<string>\",\n      \"country\": \"<string>\",\n      \"disk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"sharedDisk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"vcpu\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"memory\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"internetSpeed\": \"<integer>\",\n      \"interconnect\": \"<integer>\",\n      \"interconnectType\": \"<string>\",\n      \"provisioningTime\": \"<integer>\",\n      \"stockStatus\": \"Available\",\n      \"isSpot\": \"<boolean>\",\n      \"prepaidTime\": \"<number>\"\n    },\n    {\n      \"cloudId\": \"<string>\",\n      \"gpuType\": \"RTX4070Ti_12GB\",\n      \"socket\": \"SXM2\",\n      \"provider\": \"fluidstack\",\n      \"gpuCount\": \"<integer>\",\n      \"gpuMemory\": \"<integer>\",\n      \"security\": \"secure_cloud\",\n      \"prices\": {\n        \"currency\": \"USD\",\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"isVariable\": \"<boolean>\"\n      },\n      \"images\": [\n        \"cuda_12_1_pytorch_2_2\",\n        \"cuda_12_1_pytorch_2_3\"\n      ],\n      \"region\": \"australia\",\n      \"dataCenter\": \"<string>\",\n      \"country\": \"<string>\",\n      \"disk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"sharedDisk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"vcpu\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"memory\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"internetSpeed\": \"<integer>\",\n      \"interconnect\": \"<integer>\",\n      \"interconnectType\": \"<string>\",\n      \"provisioningTime\": \"<integer>\",\n      \"stockStatus\": \"Available\",\n      \"isSpot\": \"<boolean>\",\n      \"prepaidTime\": \"<number>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-9e1ba90a-5825-4439-99d3-c2a27bfb4287"
+                        },
+                        {
+                          "id": "c62af700-8377-4bb0-8839-a522c67e2afc",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/multi-node?page=1&page_size=100&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "multi-node"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Desired number of GPUs",
+                                  "key": "gpu_count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "GPU model",
+                                  "key": "gpu_type",
+                                  "value": "H100_80GB"
+                                },
+                                {
+                                  "description": "Socket for selected gpu model",
+                                  "key": "socket",
+                                  "value": "SXM2"
+                                },
+                                {
+                                  "description": "Security type",
+                                  "key": "security",
+                                  "value": "secure_cloud"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List of disk IDs to filter instances by location",
+                                  "key": "disks",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-c62af700-8377-4bb0-8839-a522c67e2afc"
+                        },
+                        {
+                          "id": "4e84c671-47aa-4519-856e-54b347745220",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/multi-node?page=1&page_size=100&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "multi-node"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number (1-indexed)",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page",
+                                  "key": "page_size",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "List of regions to filter",
+                                  "key": "regions",
+                                  "value": "united_states"
+                                },
+                                {
+                                  "description": "Desired number of GPUs",
+                                  "key": "gpu_count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "GPU model",
+                                  "key": "gpu_type",
+                                  "value": "H100_80GB"
+                                },
+                                {
+                                  "description": "Socket for selected gpu model",
+                                  "key": "socket",
+                                  "value": "SXM2"
+                                },
+                                {
+                                  "description": "Security type",
+                                  "key": "security",
+                                  "value": "secure_cloud"
+                                },
+                                {
+                                  "description": "Filter by data center ID",
+                                  "key": "data_center_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by cloud ID",
+                                  "key": "cloud_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List of disk IDs to filter instances by location",
+                                  "key": "disks",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-4e84c671-47aa-4519-856e-54b347745220"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:49.000Z",
+                      "updatedAt": "2026-07-28T02:40:49.000Z",
+                      "uid": "35240-7fbfe4c0-7586-4e00-9f69-0a6b15de2b7b"
+                    }
+                  ],
+                  "id": "d5584bf7-84f1-4f0c-9aa9-ba0ad3c8dde6",
+                  "createdAt": "2026-07-28T02:40:49.000Z",
+                  "updatedAt": "2026-07-28T02:40:49.000Z",
+                  "uid": "35240-d5584bf7-84f1-4f0c-9aa9-ba0ad3c8dde6"
+                },
+                {
+                  "name": "multi-node-summary",
+                  "item": [
+                    {
+                      "name": "Get Multinode Summary",
+                      "id": "a1af4451-5e4e-4ab9-b0d7-9d34dd56ed6f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/availability/multi-node-summary",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "availability",
+                            "multi-node-summary"
+                          ]
+                        },
+                        "description": "Get multi-node (cluster) pricing summary data grouped by GPU type and instance count."
+                      },
+                      "response": [
+                        {
+                          "id": "aea798cb-1455-4671-bce5-26786d92a82f",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/multi-node-summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "multi-node-summary"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"labore7\": {\n    \"minim599\": {\n      \"cheapest\": {\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"spotPrice\": \"<number>\"\n      }\n    },\n    \"Duis8\": {\n      \"cheapest\": {\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"spotPrice\": \"<number>\"\n      }\n    },\n    \"culpa_89\": {\n      \"cheapest\": {\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"spotPrice\": \"<number>\"\n      }\n    }\n  },\n  \"cillum31\": {\n    \"ullamco__\": {\n      \"cheapest\": {\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"spotPrice\": \"<number>\"\n      }\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-aea798cb-1455-4671-bce5-26786d92a82f"
+                        },
+                        {
+                          "id": "e7f156ac-efb9-4a76-a852-148e0bdb2a43",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/multi-node-summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "multi-node-summary"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-e7f156ac-efb9-4a76-a852-148e0bdb2a43"
+                        },
+                        {
+                          "id": "aeecf472-148e-4d97-998d-7ba4af051c19",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/availability/multi-node-summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "availability",
+                                "multi-node-summary"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:40:49.000Z",
+                          "updatedAt": "2026-07-28T02:40:49.000Z",
+                          "uid": "35240-aeecf472-148e-4d97-998d-7ba4af051c19"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:40:49.000Z",
+                      "updatedAt": "2026-07-28T02:40:49.000Z",
+                      "uid": "35240-a1af4451-5e4e-4ab9-b0d7-9d34dd56ed6f"
+                    }
+                  ],
+                  "id": "9079e66c-4735-474c-82e7-a45667d1d42e",
+                  "createdAt": "2026-07-28T02:40:49.000Z",
+                  "updatedAt": "2026-07-28T02:40:49.000Z",
+                  "uid": "35240-9079e66c-4735-474c-82e7-a45667d1d42e"
+                },
+                {
+                  "name": "Get Legacygpu Availability",
+                  "id": "bbdcac88-9f61-405b-952b-0492aafb7e0a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/availability/?page=1&page_size=500&regions=asia_south&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>&disks=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "availability",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number (1-indexed)",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of results per page",
+                          "key": "page_size",
+                          "value": "500"
+                        },
+                        {
+                          "description": "List of regions to filter",
+                          "key": "regions",
+                          "value": "asia_south"
+                        },
+                        {
+                          "description": "List of regions to filter",
+                          "key": "regions",
+                          "value": "united_states"
+                        },
+                        {
+                          "description": "Desired number of GPUs",
+                          "key": "gpu_count",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "GPU model",
+                          "key": "gpu_type",
+                          "value": "H100_80GB"
+                        },
+                        {
+                          "description": "Socket for selected gpu model",
+                          "key": "socket",
+                          "value": "SXM2"
+                        },
+                        {
+                          "description": "Security type",
+                          "key": "security",
+                          "value": "secure_cloud"
+                        },
+                        {
+                          "description": "Filter by data center ID",
+                          "key": "data_center_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by cloud ID",
+                          "key": "cloud_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "List of disk IDs to filter instances by location",
+                          "key": "disks",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "List of disk IDs to filter instances by location",
+                          "key": "disks",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b84ed4aa-6d7f-41eb-a9e8-a89396f9e14d",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/availability/?page=1&page_size=500&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "availability",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number (1-indexed)",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page",
+                              "key": "page_size",
+                              "value": "500"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "united_states"
+                            },
+                            {
+                              "description": "Desired number of GPUs",
+                              "key": "gpu_count",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "GPU model",
+                              "key": "gpu_type",
+                              "value": "H100_80GB"
+                            },
+                            {
+                              "description": "Socket for selected gpu model",
+                              "key": "socket",
+                              "value": "SXM2"
+                            },
+                            {
+                              "description": "Security type",
+                              "key": "security",
+                              "value": "secure_cloud"
+                            },
+                            {
+                              "description": "Filter by data center ID",
+                              "key": "data_center_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by cloud ID",
+                              "key": "cloud_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List of disk IDs to filter instances by location",
+                              "key": "disks",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"{GPUType}\": [\n    {\n      \"cloudId\": \"<string>\",\n      \"gpuType\": \"L40_48GB\",\n      \"socket\": \"SXM2\",\n      \"provider\": \"dc_roan\",\n      \"gpuCount\": \"<integer>\",\n      \"gpuMemory\": \"<integer>\",\n      \"security\": \"community_cloud\",\n      \"prices\": {\n        \"currency\": \"USD\",\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"isVariable\": \"<boolean>\"\n      },\n      \"images\": [\n        \"cuda_12_1_pytorch_2_2\",\n        \"flux\"\n      ],\n      \"region\": \"asia_south\",\n      \"dataCenter\": \"<string>\",\n      \"country\": \"<string>\",\n      \"disk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"sharedDisk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"vcpu\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"memory\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"internetSpeed\": \"<integer>\",\n      \"interconnect\": \"<integer>\",\n      \"interconnectType\": \"<string>\",\n      \"provisioningTime\": \"<integer>\",\n      \"stockStatus\": \"Available\",\n      \"isSpot\": \"<boolean>\",\n      \"prepaidTime\": \"<number>\"\n    },\n    {\n      \"cloudId\": \"<string>\",\n      \"gpuType\": \"RTX_PRO_6000B_96GB\",\n      \"socket\": \"SXM6\",\n      \"provider\": \"dc_eland\",\n      \"gpuCount\": \"<integer>\",\n      \"gpuMemory\": \"<integer>\",\n      \"security\": \"secure_cloud\",\n      \"prices\": {\n        \"currency\": \"EUR\",\n        \"onDemand\": \"<number>\",\n        \"communityPrice\": \"<number>\",\n        \"isVariable\": \"<boolean>\"\n      },\n      \"images\": [\n        \"prime_rl\",\n        \"bittensor\"\n      ],\n      \"region\": \"middle_east\",\n      \"dataCenter\": \"<string>\",\n      \"country\": \"<string>\",\n      \"disk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"sharedDisk\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"vcpu\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"memory\": {\n        \"minCount\": \"<integer>\",\n        \"defaultCount\": \"<integer>\",\n        \"maxCount\": \"<integer>\",\n        \"pricePerUnit\": \"<number>\",\n        \"step\": \"<integer>\",\n        \"defaultIncludedInPrice\": \"<boolean>\",\n        \"additionalInfo\": \"<string>\"\n      },\n      \"internetSpeed\": \"<integer>\",\n      \"interconnect\": \"<integer>\",\n      \"interconnectType\": \"<string>\",\n      \"provisioningTime\": \"<integer>\",\n      \"stockStatus\": \"Available\",\n      \"isSpot\": \"<boolean>\",\n      \"prepaidTime\": \"<number>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:40:49.000Z",
+                      "updatedAt": "2026-07-28T02:40:49.000Z",
+                      "uid": "35240-b84ed4aa-6d7f-41eb-a9e8-a89396f9e14d"
+                    },
+                    {
+                      "id": "ce7e0029-e094-4f73-85d4-443d9f919a04",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/availability/?page=1&page_size=500&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "availability",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number (1-indexed)",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page",
+                              "key": "page_size",
+                              "value": "500"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "united_states"
+                            },
+                            {
+                              "description": "Desired number of GPUs",
+                              "key": "gpu_count",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "GPU model",
+                              "key": "gpu_type",
+                              "value": "H100_80GB"
+                            },
+                            {
+                              "description": "Socket for selected gpu model",
+                              "key": "socket",
+                              "value": "SXM2"
+                            },
+                            {
+                              "description": "Security type",
+                              "key": "security",
+                              "value": "secure_cloud"
+                            },
+                            {
+                              "description": "Filter by data center ID",
+                              "key": "data_center_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by cloud ID",
+                              "key": "cloud_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List of disk IDs to filter instances by location",
+                              "key": "disks",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:40:49.000Z",
+                      "updatedAt": "2026-07-28T02:40:49.000Z",
+                      "uid": "35240-ce7e0029-e094-4f73-85d4-443d9f919a04"
+                    },
+                    {
+                      "id": "948d940f-006b-409c-b171-42bcc96f5c9b",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/availability/?page=1&page_size=500&regions=united_states&gpu_count=<integer>&gpu_type=H100_80GB&socket=SXM2&security=secure_cloud&data_center_id=<string>&cloud_id=<string>&disks=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "availability",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number (1-indexed)",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page",
+                              "key": "page_size",
+                              "value": "500"
+                            },
+                            {
+                              "description": "List of regions to filter",
+                              "key": "regions",
+                              "value": "united_states"
+                            },
+                            {
+                              "description": "Desired number of GPUs",
+                              "key": "gpu_count",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "GPU model",
+                              "key": "gpu_type",
+                              "value": "H100_80GB"
+                            },
+                            {
+                              "description": "Socket for selected gpu model",
+                              "key": "socket",
+                              "value": "SXM2"
+                            },
+                            {
+                              "description": "Security type",
+                              "key": "security",
+                              "value": "secure_cloud"
+                            },
+                            {
+                              "description": "Filter by data center ID",
+                              "key": "data_center_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by cloud ID",
+                              "key": "cloud_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List of disk IDs to filter instances by location",
+                              "key": "disks",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:40:49.000Z",
+                      "updatedAt": "2026-07-28T02:40:49.000Z",
+                      "uid": "35240-948d940f-006b-409c-b171-42bcc96f5c9b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:40:49.000Z",
+                  "updatedAt": "2026-07-28T02:40:49.000Z",
+                  "uid": "35240-bbdcac88-9f61-405b-952b-0492aafb7e0a"
+                }
+              ],
+              "id": "02c87581-91e2-4750-ae14-8837add46c15",
+              "createdAt": "2026-07-28T02:40:49.000Z",
+              "updatedAt": "2026-07-28T02:40:49.000Z",
+              "uid": "35240-02c87581-91e2-4750-ae14-8837add46c15"
+            }
+          ],
+          "id": "1e196828-2bc8-4ae6-8c19-da49d86fa92c",
+          "createdAt": "2026-07-28T02:40:49.000Z",
+          "updatedAt": "2026-07-28T02:40:49.000Z",
+          "uid": "35240-1e196828-2bc8-4ae6-8c19-da49d86fa92c"
+        }
+      ],
+      "id": "f25035cc-68b8-4b0d-a86c-15197eb54008",
+      "createdAt": "2026-07-28T02:40:49.000Z",
+      "updatedAt": "2026-07-28T02:40:49.000Z",
+      "uid": "35240-f25035cc-68b8-4b0d-a86c-15197eb54008"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}

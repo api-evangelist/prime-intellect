@@ -1,0 +1,1748 @@
+{
+  "info": {
+    "_postman_id": "545b40f8-39d5-433e-a207-8a955df48064",
+    "name": "Prime Intellect Compute admin-clusters Images API",
+    "description": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:38.000Z",
+    "updatedAt": "2026-07-28T02:41:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-545b40f8-39d5-433e-a207-8a955df48064"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "images",
+              "item": [
+                {
+                  "name": "build",
+                  "item": [
+                    {
+                      "name": "{build_id}",
+                      "item": [
+                        {
+                          "name": "start",
+                          "item": [
+                            {
+                              "name": "Start Image Build",
+                              "id": "6310478a-aa35-4559-bc5f-d22cdcacd7c1",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"context_uploaded\": true\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/images/build/:build_id/start",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "images",
+                                    "build",
+                                    ":build_id",
+                                    "start"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "59cd1669-64c5-426b-a39e-92dff53058af",
+                                      "key": "build_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Start the image build process after uploading the build context.\n\nThis creates a sandbox with Docker-in-Docker to build and push the image."
+                              },
+                              "response": [
+                                {
+                                  "id": "ab8d407c-6c86-49dc-b88b-fd02ad58f2b4",
+                                  "name": "Successful Response",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"context_uploaded\": true\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/images/build/:build_id/start",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "images",
+                                        "build",
+                                        ":build_id",
+                                        "start"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "build_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\",\n  \"imageName\": \"<string>\",\n  \"imageTag\": \"<string>\",\n  \"status\": \"BUILDING\",\n  \"createdAt\": \"<dateTime>\",\n  \"startedAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"artifacts\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"PENDING\",\n      \"createdAt\": \"<dateTime>\",\n      \"artifactType\": \"VM_SANDBOX\",\n      \"fullImagePath\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"startedAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"CANCELLED\",\n      \"createdAt\": \"<dateTime>\",\n      \"artifactType\": \"VM_SANDBOX\",\n      \"fullImagePath\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"startedAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:41:39.000Z",
+                                  "updatedAt": "2026-07-28T02:41:39.000Z",
+                                  "uid": "35240-ab8d407c-6c86-49dc-b88b-fd02ad58f2b4"
+                                },
+                                {
+                                  "id": "2f269163-043a-4df4-bbeb-6b97f7e4d315",
+                                  "name": "Authorization failed",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"context_uploaded\": true\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/images/build/:build_id/start",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "images",
+                                        "build",
+                                        ":build_id",
+                                        "start"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "build_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:41:39.000Z",
+                                  "updatedAt": "2026-07-28T02:41:39.000Z",
+                                  "uid": "35240-2f269163-043a-4df4-bbeb-6b97f7e4d315"
+                                },
+                                {
+                                  "id": "dc9c459a-335c-4b74-81c9-aed0303cc42e",
+                                  "name": "Invalid request data",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"context_uploaded\": true\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/images/build/:build_id/start",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "images",
+                                        "build",
+                                        ":build_id",
+                                        "start"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "build_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:41:39.000Z",
+                                  "updatedAt": "2026-07-28T02:41:39.000Z",
+                                  "uid": "35240-dc9c459a-335c-4b74-81c9-aed0303cc42e"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:41:39.000Z",
+                              "updatedAt": "2026-07-28T02:41:39.000Z",
+                              "uid": "35240-6310478a-aa35-4559-bc5f-d22cdcacd7c1"
+                            }
+                          ],
+                          "id": "448d8d43-a021-4a1b-922a-a54705eb9a7c",
+                          "createdAt": "2026-07-28T02:41:39.000Z",
+                          "updatedAt": "2026-07-28T02:41:39.000Z",
+                          "uid": "35240-448d8d43-a021-4a1b-922a-a54705eb9a7c"
+                        },
+                        {
+                          "name": "Get Build Status",
+                          "id": "6baf6e52-dfff-4dd9-8be0-bdb359e4459d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/images/build/:build_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "images",
+                                "build",
+                                ":build_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6570381d-ca77-44ff-95b8-33dee411c98e",
+                                  "key": "build_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Get the status of an image build."
+                          },
+                          "response": [
+                            {
+                              "id": "1a23f117-2d4b-47b7-baf4-6d7e170b22e8",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/images/build/:build_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "images",
+                                    "build",
+                                    ":build_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "build_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"imageName\": \"<string>\",\n  \"imageTag\": \"<string>\",\n  \"status\": \"BUILDING\",\n  \"createdAt\": \"<dateTime>\",\n  \"startedAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"artifacts\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"PENDING\",\n      \"createdAt\": \"<dateTime>\",\n      \"artifactType\": \"VM_SANDBOX\",\n      \"fullImagePath\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"startedAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"CANCELLED\",\n      \"createdAt\": \"<dateTime>\",\n      \"artifactType\": \"VM_SANDBOX\",\n      \"fullImagePath\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"startedAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:41:39.000Z",
+                              "updatedAt": "2026-07-28T02:41:39.000Z",
+                              "uid": "35240-1a23f117-2d4b-47b7-baf4-6d7e170b22e8"
+                            },
+                            {
+                              "id": "b1965acc-16f1-4bd4-b5d7-378eb8ecfb0f",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/images/build/:build_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "images",
+                                    "build",
+                                    ":build_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "build_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:41:39.000Z",
+                              "updatedAt": "2026-07-28T02:41:39.000Z",
+                              "uid": "35240-b1965acc-16f1-4bd4-b5d7-378eb8ecfb0f"
+                            },
+                            {
+                              "id": "b4214e68-7c83-4794-bb4f-17a277f15a6d",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/images/build/:build_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "images",
+                                    "build",
+                                    ":build_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "build_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:41:39.000Z",
+                              "updatedAt": "2026-07-28T02:41:39.000Z",
+                              "uid": "35240-b4214e68-7c83-4794-bb4f-17a277f15a6d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:41:39.000Z",
+                          "updatedAt": "2026-07-28T02:41:39.000Z",
+                          "uid": "35240-6baf6e52-dfff-4dd9-8be0-bdb359e4459d"
+                        }
+                      ],
+                      "id": "1bff2967-d931-44f5-ab1c-d87970aaabb5",
+                      "createdAt": "2026-07-28T02:41:39.000Z",
+                      "updatedAt": "2026-07-28T02:41:39.000Z",
+                      "uid": "35240-1bff2967-d931-44f5-ab1c-d87970aaabb5"
+                    },
+                    {
+                      "name": "Initiate Image Build",
+                      "id": "b2403d00-be03-4edf-b589-936129fd67ea",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image_name\": \"<string>\",\n  \"image_tag\": \"<string>\",\n  \"dockerfile_path\": \"Dockerfile\",\n  \"platform\": \"linux/amd64\",\n  \"teamId\": \"<string>\",\n  \"visibility\": \"PRIVATE\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/images/build",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "images",
+                            "build"
+                          ]
+                        },
+                        "description": "Initiate an image build process.\n\nReturns a presigned URL to upload the build context (tar.gz file).\nAfter uploading, call /images/build/{build_id}/start to begin the build."
+                      },
+                      "response": [
+                        {
+                          "id": "f07f0df6-2cbb-4b95-98e2-9fd655771faa",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"image_name\": \"<string>\",\n  \"image_tag\": \"<string>\",\n  \"dockerfile_path\": \"Dockerfile\",\n  \"platform\": \"linux/amd64\",\n  \"teamId\": \"<string>\",\n  \"visibility\": \"PRIVATE\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/images/build",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "images",
+                                "build"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"build_id\": \"<string>\",\n  \"upload_url\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"fullImagePath\": \"<string>\",\n  \"visibility\": \"PRIVATE\"\n}",
+                          "createdAt": "2026-07-28T02:41:39.000Z",
+                          "updatedAt": "2026-07-28T02:41:39.000Z",
+                          "uid": "35240-f07f0df6-2cbb-4b95-98e2-9fd655771faa"
+                        },
+                        {
+                          "id": "28e1a903-f24f-464d-877f-486e256f2ce2",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"image_name\": \"<string>\",\n  \"image_tag\": \"<string>\",\n  \"dockerfile_path\": \"Dockerfile\",\n  \"platform\": \"linux/amd64\",\n  \"teamId\": \"<string>\",\n  \"visibility\": \"PRIVATE\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/images/build",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "images",
+                                "build"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:39.000Z",
+                          "updatedAt": "2026-07-28T02:41:39.000Z",
+                          "uid": "35240-28e1a903-f24f-464d-877f-486e256f2ce2"
+                        },
+                        {
+                          "id": "08e6d748-7483-4f18-9bc8-c5d921962c23",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"image_name\": \"<string>\",\n  \"image_tag\": \"<string>\",\n  \"dockerfile_path\": \"Dockerfile\",\n  \"platform\": \"linux/amd64\",\n  \"teamId\": \"<string>\",\n  \"visibility\": \"PRIVATE\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/images/build",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "images",
+                                "build"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:39.000Z",
+                          "updatedAt": "2026-07-28T02:41:39.000Z",
+                          "uid": "35240-08e6d748-7483-4f18-9bc8-c5d921962c23"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:39.000Z",
+                      "updatedAt": "2026-07-28T02:41:39.000Z",
+                      "uid": "35240-b2403d00-be03-4edf-b589-936129fd67ea"
+                    }
+                  ],
+                  "id": "d11701bd-4cd5-4e1e-ad5e-a16052aa5b0e",
+                  "createdAt": "2026-07-28T02:41:39.000Z",
+                  "updatedAt": "2026-07-28T02:41:39.000Z",
+                  "uid": "35240-d11701bd-4cd5-4e1e-ad5e-a16052aa5b0e"
+                },
+                {
+                  "name": "builds",
+                  "item": [
+                    {
+                      "name": "List Image Builds",
+                      "id": "c1ef8fb7-ae82-4e0a-8fab-65810c10f17e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/images/builds?offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "images",
+                            "builds"
+                          ],
+                          "query": [
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        },
+                        "description": "List all image builds for the current user."
+                      },
+                      "response": [
+                        {
+                          "id": "829c823f-05d3-4848-90bc-c38b6b1a8e18",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/images/builds?offset=0&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "images",
+                                "builds"
+                              ],
+                              "query": [
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"imageName\": \"<string>\",\n      \"imageTag\": \"<string>\",\n      \"status\": \"FAILED\",\n      \"createdAt\": \"<dateTime>\",\n      \"startedAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\",\n      \"artifacts\": [\n        {\n          \"id\": \"<string>\",\n          \"status\": \"CANCELLED\",\n          \"createdAt\": \"<dateTime>\",\n          \"artifactType\": \"CONTAINER_IMAGE\",\n          \"fullImagePath\": \"<string>\",\n          \"errorMessage\": \"<string>\",\n          \"startedAt\": \"<dateTime>\",\n          \"completedAt\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"status\": \"BUILDING\",\n          \"createdAt\": \"<dateTime>\",\n          \"artifactType\": \"VM_SANDBOX\",\n          \"fullImagePath\": \"<string>\",\n          \"errorMessage\": \"<string>\",\n          \"startedAt\": \"<dateTime>\",\n          \"completedAt\": \"<dateTime>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"imageName\": \"<string>\",\n      \"imageTag\": \"<string>\",\n      \"status\": \"BUILDING\",\n      \"createdAt\": \"<dateTime>\",\n      \"startedAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\",\n      \"artifacts\": [\n        {\n          \"id\": \"<string>\",\n          \"status\": \"PENDING\",\n          \"createdAt\": \"<dateTime>\",\n          \"artifactType\": \"CONTAINER_IMAGE\",\n          \"fullImagePath\": \"<string>\",\n          \"errorMessage\": \"<string>\",\n          \"startedAt\": \"<dateTime>\",\n          \"completedAt\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"status\": \"PENDING\",\n          \"createdAt\": \"<dateTime>\",\n          \"artifactType\": \"VM_SANDBOX\",\n          \"fullImagePath\": \"<string>\",\n          \"errorMessage\": \"<string>\",\n          \"startedAt\": \"<dateTime>\",\n          \"completedAt\": \"<dateTime>\"\n        }\n      ]\n    }\n  ],\n  \"total_count\": 0,\n  \"offset\": 0,\n  \"limit\": 100,\n  \"status\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:41:39.000Z",
+                          "updatedAt": "2026-07-28T02:41:39.000Z",
+                          "uid": "35240-829c823f-05d3-4848-90bc-c38b6b1a8e18"
+                        },
+                        {
+                          "id": "1a7619e0-a71f-4931-b758-ee1f2a92bc75",
+                          "name": "Authorization failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/images/builds?offset=0&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "images",
+                                "builds"
+                              ],
+                              "query": [
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:39.000Z",
+                          "updatedAt": "2026-07-28T02:41:39.000Z",
+                          "uid": "35240-1a7619e0-a71f-4931-b758-ee1f2a92bc75"
+                        },
+                        {
+                          "id": "f6ca37eb-7361-4db3-8ce8-36d8294c99f8",
+                          "name": "Invalid request data",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/images/builds?offset=0&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "images",
+                                "builds"
+                              ],
+                              "query": [
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:39.000Z",
+                          "updatedAt": "2026-07-28T02:41:39.000Z",
+                          "uid": "35240-f6ca37eb-7361-4db3-8ce8-36d8294c99f8"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:39.000Z",
+                      "updatedAt": "2026-07-28T02:41:39.000Z",
+                      "uid": "35240-c1ef8fb7-ae82-4e0a-8fab-65810c10f17e"
+                    }
+                  ],
+                  "id": "c90154c1-6073-4385-8ac5-0495239bf749",
+                  "createdAt": "2026-07-28T02:41:39.000Z",
+                  "updatedAt": "2026-07-28T02:41:39.000Z",
+                  "uid": "35240-c90154c1-6073-4385-8ac5-0495239bf749"
+                },
+                {
+                  "name": "{image_name}",
+                  "item": [
+                    {
+                      "name": "{image_tag}",
+                      "item": [
+                        {
+                          "name": "visibility",
+                          "item": [
+                            {
+                              "name": "Update Image Visibility",
+                              "id": "1f607c3f-bb8b-44f5-92bd-d8f6c0986c21",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"visibility\": \"PRIVATE\",\n  \"teamId\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/images/:image_name/:image_tag/visibility",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "images",
+                                    ":image_name",
+                                    ":image_tag",
+                                    "visibility"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "b42a47b5-41a5-43e9-8e01-0b86d8f17b7d",
+                                      "key": "image_name",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "1e92a51d-eb19-4107-b07a-c80786fb210f",
+                                      "key": "image_tag",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Publish or unpublish an image in the current personal or team context."
+                              },
+                              "response": [
+                                {
+                                  "id": "2896e165-4c22-4b53-9e37-687e275f969c",
+                                  "name": "Successful Response",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"visibility\": \"PRIVATE\",\n  \"teamId\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/images/:image_name/:image_tag/visibility",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "images",
+                                        ":image_name",
+                                        ":image_tag",
+                                        "visibility"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "image_name"
+                                        },
+                                        {
+                                          "key": "image_tag"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\",\n  \"visibility\": \"PUBLIC\",\n  \"images\": [\n    {\n      \"id\": \"<string>\",\n      \"imageName\": \"<string>\",\n      \"imageTag\": \"<string>\",\n      \"status\": \"PENDING\",\n      \"createdAt\": \"<dateTime>\",\n      \"artifactType\": \"VM_SANDBOX\",\n      \"fullImagePath\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"sizeBytes\": \"<integer>\",\n      \"visibility\": \"PUBLIC\",\n      \"startedAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\",\n      \"pushedAt\": \"<dateTime>\",\n      \"teamId\": \"<string>\",\n      \"ownerType\": \"personal\",\n      \"displayRef\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"imageName\": \"<string>\",\n      \"imageTag\": \"<string>\",\n      \"status\": \"COMPLETED\",\n      \"createdAt\": \"<dateTime>\",\n      \"artifactType\": \"CONTAINER_IMAGE\",\n      \"fullImagePath\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"sizeBytes\": \"<integer>\",\n      \"visibility\": \"PUBLIC\",\n      \"startedAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\",\n      \"pushedAt\": \"<dateTime>\",\n      \"teamId\": \"<string>\",\n      \"ownerType\": \"personal\",\n      \"displayRef\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:41:39.000Z",
+                                  "updatedAt": "2026-07-28T02:41:39.000Z",
+                                  "uid": "35240-2896e165-4c22-4b53-9e37-687e275f969c"
+                                },
+                                {
+                                  "id": "8d78bbd7-4c76-4c20-a4cf-d39f0225c4c8",
+                                  "name": "Authorization failed",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"visibility\": \"PRIVATE\",\n  \"teamId\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/images/:image_name/:image_tag/visibility",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "images",
+                                        ":image_name",
+                                        ":image_tag",
+                                        "visibility"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "image_name"
+                                        },
+                                        {
+                                          "key": "image_tag"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:41:39.000Z",
+                                  "updatedAt": "2026-07-28T02:41:39.000Z",
+                                  "uid": "35240-8d78bbd7-4c76-4c20-a4cf-d39f0225c4c8"
+                                },
+                                {
+                                  "id": "2d3e7186-688c-43bf-8072-1c0dddd842c3",
+                                  "name": "Invalid request data",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"visibility\": \"PRIVATE\",\n  \"teamId\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/images/:image_name/:image_tag/visibility",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "images",
+                                        ":image_name",
+                                        ":image_tag",
+                                        "visibility"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "image_name"
+                                        },
+                                        {
+                                          "key": "image_tag"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:41:39.000Z",
+                                  "updatedAt": "2026-07-28T02:41:39.000Z",
+                                  "uid": "35240-2d3e7186-688c-43bf-8072-1c0dddd842c3"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:41:39.000Z",
+                              "updatedAt": "2026-07-28T02:41:39.000Z",
+                              "uid": "35240-1f607c3f-bb8b-44f5-92bd-d8f6c0986c21"
+                            }
+                          ],
+                          "id": "0308ca4e-a276-4aab-9b06-c52c6d65ff42",
+                          "createdAt": "2026-07-28T02:41:39.000Z",
+                          "updatedAt": "2026-07-28T02:41:39.000Z",
+                          "uid": "35240-0308ca4e-a276-4aab-9b06-c52c6d65ff42"
+                        },
+                        {
+                          "name": "Delete User Image",
+                          "id": "e8c98127-4307-459e-8d18-83d2817ab75b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/images/:image_name/:image_tag?teamId=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "images",
+                                ":image_name",
+                                ":image_tag"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Team ID if deleting a team image",
+                                  "key": "teamId",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "89eb8c59-a43b-4376-9fbe-44d0656685cd",
+                                  "key": "image_name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "5237d8c4-c1b9-4401-8ffb-9f200fd31f05",
+                                  "key": "image_tag",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Delete a user image from the database and Google Artifact Registry.\n\nFor team images, only the image creator or team admins can delete."
+                          },
+                          "response": [
+                            {
+                              "id": "50a7f25d-07b8-4d6d-ab5a-48919e043b7f",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/images/:image_name/:image_tag?teamId=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "images",
+                                    ":image_name",
+                                    ":image_tag"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Team ID if deleting a team image",
+                                      "key": "teamId",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "image_name"
+                                    },
+                                    {
+                                      "key": "image_tag"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:41:39.000Z",
+                              "updatedAt": "2026-07-28T02:41:39.000Z",
+                              "uid": "35240-50a7f25d-07b8-4d6d-ab5a-48919e043b7f"
+                            },
+                            {
+                              "id": "0dbd43ab-9063-4927-ae98-bc98e42cd8f6",
+                              "name": "Authorization failed",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/images/:image_name/:image_tag?teamId=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "images",
+                                    ":image_name",
+                                    ":image_tag"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Team ID if deleting a team image",
+                                      "key": "teamId",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "image_name"
+                                    },
+                                    {
+                                      "key": "image_tag"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:41:39.000Z",
+                              "updatedAt": "2026-07-28T02:41:39.000Z",
+                              "uid": "35240-0dbd43ab-9063-4927-ae98-bc98e42cd8f6"
+                            },
+                            {
+                              "id": "63e16399-769d-4552-b72c-ae065092a321",
+                              "name": "Invalid request data",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/images/:image_name/:image_tag?teamId=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "images",
+                                    ":image_name",
+                                    ":image_tag"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Team ID if deleting a team image",
+                                      "key": "teamId",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "image_name"
+                                    },
+                                    {
+                                      "key": "image_tag"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:41:39.000Z",
+                              "updatedAt": "2026-07-28T02:41:39.000Z",
+                              "uid": "35240-63e16399-769d-4552-b72c-ae065092a321"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:41:39.000Z",
+                          "updatedAt": "2026-07-28T02:41:39.000Z",
+                          "uid": "35240-e8c98127-4307-459e-8d18-83d2817ab75b"
+                        }
+                      ],
+                      "id": "8ee91f68-3e72-4b88-9307-29ebe2e9472a",
+                      "createdAt": "2026-07-28T02:41:39.000Z",
+                      "updatedAt": "2026-07-28T02:41:39.000Z",
+                      "uid": "35240-8ee91f68-3e72-4b88-9307-29ebe2e9472a"
+                    }
+                  ],
+                  "id": "d67cff99-b58d-469c-9073-12e9f57a913b",
+                  "createdAt": "2026-07-28T02:41:39.000Z",
+                  "updatedAt": "2026-07-28T02:41:39.000Z",
+                  "uid": "35240-d67cff99-b58d-469c-9073-12e9f57a913b"
+                },
+                {
+                  "name": "List User Images",
+                  "id": "bb6dda1a-c3cb-42a6-b0cf-748b2136bcb0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/images?teamId=<string>&offset=0&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "images"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by team ID. If provided, returns only that team's images. If not provided, returns only personal images.",
+                          "key": "teamId",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    },
+                    "description": "List images and builds for the current user, scoped by team context. Returns personal images by default, or team images if teamId is provided.\n\nPagination note: `limit`, `offset`, and `totalCount` count logical images\n(unique `owner/imageName:imageTag`). A single image may produce multiple\n`data[]` rows (one per artifact type plus any active builds), so\n`len(data)` can exceed `limit` and `totalCount` reflects images, not rows."
+                  },
+                  "response": [
+                    {
+                      "id": "bb199d17-61c6-48ef-878a-c6472a00f405",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/images?teamId=<string>&offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "images"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by team ID. If provided, returns only that team's images. If not provided, returns only personal images.",
+                              "key": "teamId",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"imageName\": \"<string>\",\n      \"imageTag\": \"<string>\",\n      \"status\": \"BUILDING\",\n      \"createdAt\": \"<dateTime>\",\n      \"artifactType\": \"VM_SANDBOX\",\n      \"fullImagePath\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"sizeBytes\": \"<integer>\",\n      \"visibility\": \"PRIVATE\",\n      \"startedAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\",\n      \"pushedAt\": \"<dateTime>\",\n      \"teamId\": \"<string>\",\n      \"ownerType\": \"personal\",\n      \"displayRef\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"imageName\": \"<string>\",\n      \"imageTag\": \"<string>\",\n      \"status\": \"PENDING\",\n      \"createdAt\": \"<dateTime>\",\n      \"artifactType\": \"CONTAINER_IMAGE\",\n      \"fullImagePath\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"sizeBytes\": \"<integer>\",\n      \"visibility\": \"PUBLIC\",\n      \"startedAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\",\n      \"pushedAt\": \"<dateTime>\",\n      \"teamId\": \"<string>\",\n      \"ownerType\": \"personal\",\n      \"displayRef\": \"<string>\"\n    }\n  ],\n  \"total_count\": 0,\n  \"offset\": 0,\n  \"limit\": 100,\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:41:39.000Z",
+                      "updatedAt": "2026-07-28T02:41:39.000Z",
+                      "uid": "35240-bb199d17-61c6-48ef-878a-c6472a00f405"
+                    },
+                    {
+                      "id": "7773fbeb-ad1c-41ec-8d65-c06a1f6fcb37",
+                      "name": "Authorization failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/images?teamId=<string>&offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "images"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by team ID. If provided, returns only that team's images. If not provided, returns only personal images.",
+                              "key": "teamId",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:41:39.000Z",
+                      "updatedAt": "2026-07-28T02:41:39.000Z",
+                      "uid": "35240-7773fbeb-ad1c-41ec-8d65-c06a1f6fcb37"
+                    },
+                    {
+                      "id": "b8891b22-7279-48f3-99da-7595b875ecb6",
+                      "name": "Invalid request data",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/images?teamId=<string>&offset=0&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "images"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by team ID. If provided, returns only that team's images. If not provided, returns only personal images.",
+                              "key": "teamId",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"param\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:39.000Z",
+                      "updatedAt": "2026-07-28T02:41:39.000Z",
+                      "uid": "35240-b8891b22-7279-48f3-99da-7595b875ecb6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:39.000Z",
+                  "updatedAt": "2026-07-28T02:41:39.000Z",
+                  "uid": "35240-bb6dda1a-c3cb-42a6-b0cf-748b2136bcb0"
+                }
+              ],
+              "id": "2df3b101-1061-43c2-9471-3b98e82ad17d",
+              "createdAt": "2026-07-28T02:41:39.000Z",
+              "updatedAt": "2026-07-28T02:41:39.000Z",
+              "uid": "35240-2df3b101-1061-43c2-9471-3b98e82ad17d"
+            }
+          ],
+          "id": "1caef728-b498-4a0f-9827-3d8e8cb827d4",
+          "createdAt": "2026-07-28T02:41:39.000Z",
+          "updatedAt": "2026-07-28T02:41:39.000Z",
+          "uid": "35240-1caef728-b498-4a0f-9827-3d8e8cb827d4"
+        }
+      ],
+      "id": "c13f614d-1250-4c70-8d8d-8402ea49bf18",
+      "createdAt": "2026-07-28T02:41:39.000Z",
+      "updatedAt": "2026-07-28T02:41:39.000Z",
+      "uid": "35240-c13f614d-1250-4c70-8d8d-8402ea49bf18"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.primeintellect.ai"
+    }
+  ]
+}
