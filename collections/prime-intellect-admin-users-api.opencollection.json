@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Compute admin-clusters admin-users API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "admin-users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Current User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/admin/users/whoami",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Identity + envelope for the calling admin API key.\n\nIntentionally bypasses ``require_admin_permission``: any valid, non-\nexpired, non-disabled admin API key whose owner is still ADMIN/MANAGER\ncan call this. Returning the resolved permission envelope is what makes\na freshly-minted scoped key able to discover what it can do."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

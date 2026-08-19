@@ -1,246 +1,30 @@
 {
   "item": [
     {
-      "id": "d0e6341c-d677-40a2-9a18-1ec3633265a5",
-      "name": "training",
+      "id": "3647e532-f479-4ea4-8b09-ed5b7bb54a66",
+      "name": "Billing",
       "description": {
         "content": "",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "abb7bf60-97aa-48df-a2d7-69559fd4c63e",
-          "name": "Create Dedicated Run",
+          "id": "90208166-40c8-46c1-b0a9-e86f1ddd04cb",
+          "name": "Token usage and cost for a single RFT run",
           "request": {
-            "name": "Create Dedicated Run",
+            "name": "Token usage and cost for a single RFT run",
             "description": {
-              "content": "Dispatch a dedicated full-FT prime-rl run on a registered PrimeCluster.",
+              "content": "Return the running token + cost totals for one RFT run.\n\nMirrors the per-row training data shown on the billing page (Training\ntokens, Inference input/output tokens, price per million tokens, and\ntotal cost) so an agent can poll this endpoint to monitor a live run.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "api",
                 "v1",
-                "training",
-                "runs"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"config\": \"<object>\",\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "8aa9f456-c51e-41ba-a240-14aa630c43c8",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "training",
-                    "runs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"config\": \"<object>\",\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"runId\": \"string\",\n  \"jobId\": \"string\",\n  \"tokenValue\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2aaf95f5-64d8-4980-adf0-3b26b62c5b65",
-              "name": "Authorization failed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "training",
-                    "runs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"config\": \"<object>\",\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "35d9c789-0141-4e9e-8f65-4f037100277a",
-              "name": "Invalid request data",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "training",
-                    "runs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"config\": \"<object>\",\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a929a691-8057-49a9-9691-f59fca7d9f5a",
-          "name": "Delete Dedicated Run",
-          "request": {
-            "name": "Delete Dedicated Run",
-            "description": {
-              "content": "Delete a dedicated run: helm uninstall + namespace delete + DB cleanup.\n\nIdempotent. Safe to call repeatedly. Cleans up the linked Job row too\n(which uninstalls the helm release on the customer cluster). Soft-\ndeletes the RFTRun row (matches the existing run-delete UX — Billing\nrefs are preserved).",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "training",
+                "billing",
                 "runs",
-                ":run_id"
+                ":run_id",
+                "usage"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -262,7 +46,7 @@
                 "value": "application/json"
               }
             ],
-            "method": "DELETE",
+            "method": "GET",
             "auth": {
               "type": "bearer",
               "bearer": [
@@ -275,16 +59,17 @@
           },
           "response": [
             {
-              "id": "eea5037f-13ca-48a1-8142-3740d988ce1d",
+              "id": "07c55f50-ce48-4d16-953f-1b0c8d21d6f2",
               "name": "Successful Response",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "v1",
-                    "training",
+                    "billing",
                     "runs",
-                    ":run_id"
+                    ":run_id",
+                    "usage"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -314,7 +99,7 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
+                "method": "GET",
                 "body": {}
               },
               "status": "OK",
@@ -325,21 +110,22 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"runId\": \"string\",\n  \"deleted\": false\n}",
+              "body": "{\n  \"run_id\": \"string\",\n  \"training\": {\n    \"tokens\": 0,\n    \"input_tokens\": 0,\n    \"output_tokens\": 0,\n    \"cost_usd\": 0\n  },\n  \"inference\": {\n    \"tokens\": 0,\n    \"input_tokens\": 0,\n    \"output_tokens\": 0,\n    \"cost_usd\": 0\n  },\n  \"total_tokens\": 6626,\n  \"total_cost_usd\": 2663.278071506113,\n  \"pricing\": {\n    \"training_per_mtok\": 8122.29978091216,\n    \"inference_input_per_mtok\": 7103.643314399941,\n    \"inference_output_per_mtok\": 5998.863734714345\n  },\n  \"run_name\": \"string\",\n  \"base_model\": \"string\",\n  \"status\": \"string\",\n  \"record_count\": 0\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "0556d8a5-b4aa-480f-a2be-eee60c998026",
+              "id": "d439efaa-8ad8-4fc9-9957-5ca4895b743a",
               "name": "Authorization failed",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "v1",
-                    "training",
+                    "billing",
                     "runs",
-                    ":run_id"
+                    ":run_id",
+                    "usage"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -365,7 +151,7 @@
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "DELETE",
+                "method": "GET",
                 "body": {}
               },
               "status": "Unauthorized",
@@ -381,16 +167,17 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "c8c30d19-d99e-4fcf-9816-19c5d5656d41",
+              "id": "d01c4a45-6aac-4336-adc9-fefac315d9a7",
               "name": "Invalid request data",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "v1",
-                    "training",
+                    "billing",
                     "runs",
-                    ":run_id"
+                    ":run_id",
+                    "usage"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -420,7 +207,245 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ecac4ec-1535-41f3-85be-37e2e2b9cd3b",
+          "name": "Wallet balance + most recent billing rows",
+          "request": {
+            "name": "Wallet balance + most recent billing rows",
+            "description": {
+              "content": "Return the wallet's current balance and most recent billing rows.\n\nAll resource types are included (compute, training, inference, disks,\nsandboxes, images) — same source-of-truth `Billing` table the\ndashboard's Billing History tab reads. Sorted by `lastBilledAt` desc.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "billing",
+                "wallet"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of recent billing rows to include (max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Skip this many rows before returning. Lets callers page."
+                },
+                {
+                  "disabled": false,
+                  "key": "teamId",
+                  "value": "<string>",
+                  "description": "If provided, return the team's wallet (requires membership)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "191ebcb4-272a-428d-a61d-8aa492b1f9a4",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "billing",
+                    "wallet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"wallet_id\": \"string\",\n  \"balance_usd\": 1699.1214445308478,\n  \"currency\": \"string\",\n  \"total_billings\": 2458,\n  \"recent_billings\": [\n    {\n      \"id\": \"string\",\n      \"created_at\": \"1988-07-09T14:23:37.416Z\",\n      \"updated_at\": \"1956-08-27T00:00:19.606Z\",\n      \"amount_usd\": 2071.497050823432,\n      \"currency\": \"string\",\n      \"resource_type\": \"string\",\n      \"last_billed_at\": \"2003-02-15T22:48:47.014Z\",\n      \"resource_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created_at\": \"1979-05-26T21:10:39.987Z\",\n      \"updated_at\": \"1963-03-14T03:42:43.333Z\",\n      \"amount_usd\": 4412.178108659866,\n      \"currency\": \"string\",\n      \"resource_type\": \"string\",\n      \"last_billed_at\": \"1994-09-02T03:58:25.488Z\",\n      \"resource_id\": \"string\"\n    }\n  ],\n  \"team_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "571765d7-3bde-40a2-8d28-0771badca552",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "billing",
+                    "wallet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "40d73dba-ff81-45e2-a325-12dbb6125e96",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "billing",
+                    "wallet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
                 "body": {}
               },
               "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
@@ -463,8 +488,8 @@
     ]
   },
   "info": {
-    "_postman_id": "1a261ab2-41d2-40ff-aacc-6566b279ebbb",
-    "name": "Prime Intellect Compute admin-clusters training API",
+    "_postman_id": "8bb62172-7105-4ea7-ac05-3a868ee48e7c",
+    "name": "Prime Intellect Compute admin-clusters Billing API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",

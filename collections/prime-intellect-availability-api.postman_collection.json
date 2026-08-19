@@ -1,0 +1,2278 @@
+{
+  "item": [
+    {
+      "id": "b9674291-bdc0-43db-be5d-e6e49bd5713e",
+      "name": "Availability",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6392772-e82c-47e6-abda-3e403de54620",
+          "name": "Get Legacygpu Availability",
+          "request": {
+            "name": "Get Legacygpu Availability",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "availability",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (1-indexed)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "500",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "List of regions to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "List of regions to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "gpu_count",
+                  "value": "<integer>",
+                  "description": "Desired number of GPUs"
+                },
+                {
+                  "disabled": false,
+                  "key": "gpu_type",
+                  "value": "<string>",
+                  "description": "GPU model"
+                },
+                {
+                  "disabled": false,
+                  "key": "socket",
+                  "value": "<string>",
+                  "description": "Socket for selected gpu model"
+                },
+                {
+                  "disabled": false,
+                  "key": "security",
+                  "value": "<string>",
+                  "description": "Security type"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_center_id",
+                  "value": "<string>",
+                  "description": "Filter by data center ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_id",
+                  "value": "<string>",
+                  "description": "Filter by cloud ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "disks",
+                  "value": "<string>",
+                  "description": "List of disk IDs to filter instances by location"
+                },
+                {
+                  "disabled": false,
+                  "key": "disks",
+                  "value": "<string>",
+                  "description": "List of disk IDs to filter instances by location"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f0739ab2-04a5-46af-bd73-80ab6636180b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "500"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"{GPUType}\": [\n    {\n      \"cloudId\": \"string\",\n      \"gpuType\": \"GH200_480GB\",\n      \"socket\": \"SXM2\",\n      \"provider\": \"crusoecloud\",\n      \"gpuCount\": 3316,\n      \"gpuMemory\": 3255,\n      \"security\": \"secure_cloud\",\n      \"prices\": {\n        \"currency\": \"USD\",\n        \"onDemand\": 5525.695937680543,\n        \"communityPrice\": 7362.5772569151295,\n        \"isVariable\": false\n      },\n      \"images\": [\n        \"vllm_llama_405b\",\n        \"cuda_12_1_pytorch_2_2\"\n      ],\n      \"region\": \"united_states\",\n      \"dataCenter\": \"string\",\n      \"country\": \"string\",\n      \"disk\": {},\n      \"sharedDisk\": {},\n      \"vcpu\": {},\n      \"memory\": {},\n      \"internetSpeed\": 9956,\n      \"interconnect\": 3540,\n      \"interconnectType\": \"string\",\n      \"provisioningTime\": 2309,\n      \"stockStatus\": \"Available\",\n      \"isSpot\": false,\n      \"prepaidTime\": 5467.54446692394\n    },\n    {\n      \"cloudId\": \"string\",\n      \"gpuType\": \"V100_16GB\",\n      \"socket\": \"SXM6\",\n      \"provider\": \"scaleway\",\n      \"gpuCount\": 1105,\n      \"gpuMemory\": 3929,\n      \"security\": \"community_cloud\",\n      \"prices\": {\n        \"currency\": \"EUR\",\n        \"onDemand\": 6815.300181030692,\n        \"communityPrice\": 5664.181060534604,\n        \"isVariable\": true\n      },\n      \"images\": [\n        \"stable_diffusion\",\n        \"bittensor\"\n      ],\n      \"region\": \"middle_east\",\n      \"dataCenter\": \"string\",\n      \"country\": \"string\",\n      \"disk\": {},\n      \"sharedDisk\": {},\n      \"vcpu\": {},\n      \"memory\": {},\n      \"internetSpeed\": 3097,\n      \"interconnect\": 1203,\n      \"interconnectType\": \"string\",\n      \"provisioningTime\": 239,\n      \"stockStatus\": \"Available\",\n      \"isSpot\": false,\n      \"prepaidTime\": 853.5093360606028\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07b23476-a241-4e01-9021-5843b92b2cd0",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "500"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5efd540b-1393-4770-9810-ef9b6be238aa",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "500"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e477390-c79d-4772-b923-d360545a1981",
+          "name": "Get Legacy Cluster Availability",
+          "request": {
+            "name": "Get Legacy Cluster Availability",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "availability",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (1-indexed)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "500",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "List of regions to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "List of regions to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "gpu_count",
+                  "value": "<integer>",
+                  "description": "Desired number of GPUs"
+                },
+                {
+                  "disabled": false,
+                  "key": "gpu_type",
+                  "value": "<string>",
+                  "description": "GPU model"
+                },
+                {
+                  "disabled": false,
+                  "key": "socket",
+                  "value": "<string>",
+                  "description": "Socket for selected gpu model"
+                },
+                {
+                  "disabled": false,
+                  "key": "security",
+                  "value": "<string>",
+                  "description": "Security type"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_center_id",
+                  "value": "<string>",
+                  "description": "Filter by data center ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_id",
+                  "value": "<string>",
+                  "description": "Filter by cloud ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "disks",
+                  "value": "<string>",
+                  "description": "List of disk IDs to filter instances by location"
+                },
+                {
+                  "disabled": false,
+                  "key": "disks",
+                  "value": "<string>",
+                  "description": "List of disk IDs to filter instances by location"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d4879d71-d5c7-450a-bbd0-3d8fe9d2456c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "500"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"{GPUType}\": [\n    {\n      \"cloudId\": \"string\",\n      \"gpuType\": \"GH200_480GB\",\n      \"socket\": \"SXM2\",\n      \"provider\": \"crusoecloud\",\n      \"gpuCount\": 3316,\n      \"gpuMemory\": 3255,\n      \"security\": \"secure_cloud\",\n      \"prices\": {\n        \"currency\": \"USD\",\n        \"onDemand\": 5525.695937680543,\n        \"communityPrice\": 7362.5772569151295,\n        \"isVariable\": false\n      },\n      \"images\": [\n        \"vllm_llama_405b\",\n        \"cuda_12_1_pytorch_2_2\"\n      ],\n      \"region\": \"united_states\",\n      \"dataCenter\": \"string\",\n      \"country\": \"string\",\n      \"disk\": {},\n      \"sharedDisk\": {},\n      \"vcpu\": {},\n      \"memory\": {},\n      \"internetSpeed\": 9956,\n      \"interconnect\": 3540,\n      \"interconnectType\": \"string\",\n      \"provisioningTime\": 2309,\n      \"stockStatus\": \"Available\",\n      \"isSpot\": false,\n      \"prepaidTime\": 5467.54446692394\n    },\n    {\n      \"cloudId\": \"string\",\n      \"gpuType\": \"V100_16GB\",\n      \"socket\": \"SXM6\",\n      \"provider\": \"scaleway\",\n      \"gpuCount\": 1105,\n      \"gpuMemory\": 3929,\n      \"security\": \"community_cloud\",\n      \"prices\": {\n        \"currency\": \"EUR\",\n        \"onDemand\": 6815.300181030692,\n        \"communityPrice\": 5664.181060534604,\n        \"isVariable\": true\n      },\n      \"images\": [\n        \"stable_diffusion\",\n        \"bittensor\"\n      ],\n      \"region\": \"middle_east\",\n      \"dataCenter\": \"string\",\n      \"country\": \"string\",\n      \"disk\": {},\n      \"sharedDisk\": {},\n      \"vcpu\": {},\n      \"memory\": {},\n      \"internetSpeed\": 3097,\n      \"interconnect\": 1203,\n      \"interconnectType\": \"string\",\n      \"provisioningTime\": 239,\n      \"stockStatus\": \"Available\",\n      \"isSpot\": false,\n      \"prepaidTime\": 853.5093360606028\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d023a97f-01d9-45a0-9c1e-d03b600cb40c",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "500"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "66480ad0-45d7-452e-a223-d447023b3223",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "500"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7014aeb3-3239-4500-b6fa-15dc9b39124a",
+          "name": "Get Disks Availability",
+          "request": {
+            "name": "Get Disks Availability",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "availability",
+                "disks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (1-indexed)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "List of regions to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "List of regions to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_center_id",
+                  "value": "<string>",
+                  "description": "Filter by data center ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_id",
+                  "value": "<string>",
+                  "description": "Filter by cloud ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c633e994-3adb-43e2-bf5d-37be7c09f741",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"provider\": \"vultr\",\n      \"security\": \"secure_cloud\",\n      \"cloudId\": \"string\",\n      \"dataCenter\": \"string\",\n      \"country\": \"string\",\n      \"region\": \"eu_west\",\n      \"spec\": {},\n      \"stockStatus\": \"Available\",\n      \"isMultinode\": true\n    },\n    {\n      \"provider\": \"massedcompute\",\n      \"security\": \"community_cloud\",\n      \"cloudId\": \"string\",\n      \"dataCenter\": \"string\",\n      \"country\": \"string\",\n      \"region\": \"canada\",\n      \"spec\": {},\n      \"stockStatus\": \"Available\",\n      \"isMultinode\": true\n    }\n  ],\n  \"totalCount\": 8606\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63f8abfc-2f58-43b6-9877-7c04cbb0aa3c",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f7bb7766-3ae6-4466-9eb5-85c5d2c2b51a",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a9608e1-1534-401b-8927-f13156d6130f",
+          "name": "Get Gpu Summary",
+          "request": {
+            "name": "Get Gpu Summary",
+            "description": {
+              "content": "Get GPU pricing summary data grouped by GPU type and instance count.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "availability",
+                "gpu-summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d06795c3-1172-4b54-9bd7-125922e4dee3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "gpu-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"key_0\": {\n      \"cheapest\": {\n        \"onDemand\": 6050.451418486547,\n        \"communityPrice\": 1470.6909209080288,\n        \"spotPrice\": 8857.758582008719\n      }\n    },\n    \"key_1\": {\n      \"cheapest\": {\n        \"onDemand\": 1608.0423030831537,\n        \"communityPrice\": 7882.9840297925775,\n        \"spotPrice\": 4665.105311969607\n      },\n      \"key_0\": 9145.46223980949\n    }\n  },\n  \"key_1\": {\n    \"key_0\": {\n      \"cheapest\": {\n        \"onDemand\": 5049.867411732313,\n        \"communityPrice\": 3226.99755786245,\n        \"spotPrice\": 2074.939748316388\n      },\n      \"key_0\": 9841.325199629693,\n      \"key_1\": \"string\"\n    },\n    \"key_1\": {\n      \"cheapest\": {\n        \"onDemand\": 8219.7714019457,\n        \"communityPrice\": 8746.48122824536,\n        \"spotPrice\": 2466.3288115879445\n      },\n      \"key_0\": false,\n      \"key_1\": 3657,\n      \"key_2\": \"string\",\n      \"key_3\": 2575\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92603825-21b1-45c5-960e-7bfb9b31b8c3",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "gpu-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9cdbce50-98f1-421e-a837-bbfb99a3bc47",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "gpu-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d15e6a8-40fb-4f84-b3f2-82e8c6c6a7b9",
+          "name": "Get Gpu Availability",
+          "request": {
+            "name": "Get Gpu Availability",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "availability",
+                "gpus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (1-indexed)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "List of regions to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "List of regions to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "gpu_count",
+                  "value": "<integer>",
+                  "description": "Desired number of GPUs"
+                },
+                {
+                  "disabled": false,
+                  "key": "gpu_type",
+                  "value": "<string>",
+                  "description": "GPU model"
+                },
+                {
+                  "disabled": false,
+                  "key": "socket",
+                  "value": "<string>",
+                  "description": "Socket for selected gpu model"
+                },
+                {
+                  "disabled": false,
+                  "key": "security",
+                  "value": "<string>",
+                  "description": "Security type"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_center_id",
+                  "value": "<string>",
+                  "description": "Filter by data center ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_id",
+                  "value": "<string>",
+                  "description": "Filter by cloud ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "disks",
+                  "value": "<string>",
+                  "description": "List of disk IDs to filter instances by location"
+                },
+                {
+                  "disabled": false,
+                  "key": "disks",
+                  "value": "<string>",
+                  "description": "List of disk IDs to filter instances by location"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0ca252b9-148c-45a5-9bef-2ecf112a2a5d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "gpus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"cloudId\": \"string\",\n      \"gpuType\": \"B300_262GB\",\n      \"socket\": \"PCIe\",\n      \"provider\": \"latitude\",\n      \"gpuCount\": 758,\n      \"gpuMemory\": 7858,\n      \"security\": \"secure_cloud\",\n      \"prices\": {\n        \"currency\": \"EUR\",\n        \"onDemand\": 727.6617571112997,\n        \"communityPrice\": 4899.830835669285,\n        \"isVariable\": true\n      },\n      \"images\": [\n        \"ubuntu_22_cuda_12\",\n        \"custom_template\"\n      ],\n      \"region\": \"eu_north\",\n      \"dataCenter\": \"string\",\n      \"country\": \"string\",\n      \"disk\": {},\n      \"sharedDisk\": {},\n      \"vcpu\": {},\n      \"memory\": {},\n      \"internetSpeed\": 5026,\n      \"interconnect\": 4892,\n      \"interconnectType\": \"string\",\n      \"provisioningTime\": 1762,\n      \"stockStatus\": \"Available\",\n      \"isSpot\": true,\n      \"prepaidTime\": 8364.88981439544\n    },\n    {\n      \"cloudId\": \"string\",\n      \"gpuType\": \"A4500_20GB\",\n      \"socket\": \"PCIe\",\n      \"provider\": \"tensordock\",\n      \"gpuCount\": 72,\n      \"gpuMemory\": 5962,\n      \"security\": \"community_cloud\",\n      \"prices\": {\n        \"currency\": \"EUR\",\n        \"onDemand\": 3409.3229572721516,\n        \"communityPrice\": 4545.391849896324,\n        \"isVariable\": false\n      },\n      \"images\": [\n        \"cuda_12_1_pytorch_2_3\",\n        \"cuda_12_1_pytorch_2_4\"\n      ],\n      \"region\": \"eu_west\",\n      \"dataCenter\": \"string\",\n      \"country\": \"string\",\n      \"disk\": {},\n      \"sharedDisk\": {},\n      \"vcpu\": {},\n      \"memory\": {},\n      \"internetSpeed\": 300,\n      \"interconnect\": 957,\n      \"interconnectType\": \"string\",\n      \"provisioningTime\": 4398,\n      \"stockStatus\": \"Available\",\n      \"isSpot\": false,\n      \"prepaidTime\": 1592.1490651908755\n    }\n  ],\n  \"totalCount\": 3401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8eff01b4-c90f-4742-9fbd-79f1311ea9e9",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "gpus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e8827475-8a3b-4f72-bf6b-0a8b91fcfe7e",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "gpus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "866061d8-37f9-4744-8914-11f4f0e556d8",
+          "name": "Get Multinode Availability",
+          "request": {
+            "name": "Get Multinode Availability",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "availability",
+                "multi-node"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (1-indexed)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "List of regions to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "List of regions to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "gpu_count",
+                  "value": "<integer>",
+                  "description": "Desired number of GPUs"
+                },
+                {
+                  "disabled": false,
+                  "key": "gpu_type",
+                  "value": "<string>",
+                  "description": "GPU model"
+                },
+                {
+                  "disabled": false,
+                  "key": "socket",
+                  "value": "<string>",
+                  "description": "Socket for selected gpu model"
+                },
+                {
+                  "disabled": false,
+                  "key": "security",
+                  "value": "<string>",
+                  "description": "Security type"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_center_id",
+                  "value": "<string>",
+                  "description": "Filter by data center ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_id",
+                  "value": "<string>",
+                  "description": "Filter by cloud ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "disks",
+                  "value": "<string>",
+                  "description": "List of disk IDs to filter instances by location"
+                },
+                {
+                  "disabled": false,
+                  "key": "disks",
+                  "value": "<string>",
+                  "description": "List of disk IDs to filter instances by location"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e1f5d864-9730-4c48-98a0-32f1620963ec",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "multi-node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"cloudId\": \"string\",\n      \"gpuType\": \"B300_262GB\",\n      \"socket\": \"PCIe\",\n      \"provider\": \"latitude\",\n      \"gpuCount\": 758,\n      \"gpuMemory\": 7858,\n      \"security\": \"secure_cloud\",\n      \"prices\": {\n        \"currency\": \"EUR\",\n        \"onDemand\": 727.6617571112997,\n        \"communityPrice\": 4899.830835669285,\n        \"isVariable\": true\n      },\n      \"images\": [\n        \"ubuntu_22_cuda_12\",\n        \"custom_template\"\n      ],\n      \"region\": \"eu_north\",\n      \"dataCenter\": \"string\",\n      \"country\": \"string\",\n      \"disk\": {},\n      \"sharedDisk\": {},\n      \"vcpu\": {},\n      \"memory\": {},\n      \"internetSpeed\": 5026,\n      \"interconnect\": 4892,\n      \"interconnectType\": \"string\",\n      \"provisioningTime\": 1762,\n      \"stockStatus\": \"Available\",\n      \"isSpot\": true,\n      \"prepaidTime\": 8364.88981439544\n    },\n    {\n      \"cloudId\": \"string\",\n      \"gpuType\": \"A4500_20GB\",\n      \"socket\": \"PCIe\",\n      \"provider\": \"tensordock\",\n      \"gpuCount\": 72,\n      \"gpuMemory\": 5962,\n      \"security\": \"community_cloud\",\n      \"prices\": {\n        \"currency\": \"EUR\",\n        \"onDemand\": 3409.3229572721516,\n        \"communityPrice\": 4545.391849896324,\n        \"isVariable\": false\n      },\n      \"images\": [\n        \"cuda_12_1_pytorch_2_3\",\n        \"cuda_12_1_pytorch_2_4\"\n      ],\n      \"region\": \"eu_west\",\n      \"dataCenter\": \"string\",\n      \"country\": \"string\",\n      \"disk\": {},\n      \"sharedDisk\": {},\n      \"vcpu\": {},\n      \"memory\": {},\n      \"internetSpeed\": 300,\n      \"interconnect\": 957,\n      \"interconnectType\": \"string\",\n      \"provisioningTime\": 4398,\n      \"stockStatus\": \"Available\",\n      \"isSpot\": false,\n      \"prepaidTime\": 1592.1490651908755\n    }\n  ],\n  \"totalCount\": 3401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "072829eb-711f-4dc1-af80-7d148dc8d781",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "multi-node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "74850d0a-688d-406a-8c39-11a907241d2a",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "multi-node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "united_states"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "eu_east"
+                    },
+                    {
+                      "key": "gpu_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gpu_type",
+                      "value": "RTX2000Ada_16GB"
+                    },
+                    {
+                      "key": "socket",
+                      "value": "PCIe"
+                    },
+                    {
+                      "key": "security",
+                      "value": "secure_cloud"
+                    },
+                    {
+                      "key": "data_center_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "disks",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ce5230e-0310-4cbb-bc8e-7686cecd8903",
+          "name": "Get Multinode Summary",
+          "request": {
+            "name": "Get Multinode Summary",
+            "description": {
+              "content": "Get multi-node (cluster) pricing summary data grouped by GPU type and instance count.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "availability",
+                "multi-node-summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "46ca6372-20ae-4cbc-b3f6-df6f10183906",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "multi-node-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"key_0\": {\n      \"cheapest\": {\n        \"onDemand\": 8504.26186611749,\n        \"communityPrice\": 1181.6693805763289,\n        \"spotPrice\": 1427.3760932541725\n      },\n      \"key_0\": 3903\n    },\n    \"key_1\": {\n      \"cheapest\": {\n        \"onDemand\": 8086.460190472666,\n        \"communityPrice\": 7799.36881458524,\n        \"spotPrice\": 6994.781424335369\n      },\n      \"key_0\": 6755.666719575451\n    },\n    \"key_2\": {\n      \"cheapest\": {\n        \"onDemand\": 3883.4335072720073,\n        \"communityPrice\": 6308.560408637321,\n        \"spotPrice\": 3192.3368568716783\n      }\n    },\n    \"key_3\": {\n      \"cheapest\": {\n        \"onDemand\": 4465.857516385372,\n        \"communityPrice\": 2856.1128979990335,\n        \"spotPrice\": 7586.314535046837\n      },\n      \"key_0\": 7322.1268767316205\n    }\n  },\n  \"key_1\": {\n    \"key_0\": {\n      \"cheapest\": {\n        \"onDemand\": 3538.203076912638,\n        \"communityPrice\": 4955.324330608706,\n        \"spotPrice\": 2881.0636967845085\n      },\n      \"key_0\": \"string\",\n      \"key_1\": 255,\n      \"key_2\": false\n    },\n    \"key_1\": {\n      \"cheapest\": {\n        \"onDemand\": 8580.519993676515,\n        \"communityPrice\": 5375.564934984069,\n        \"spotPrice\": 4188.744835016682\n      },\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e25d5dc-4e28-40a1-80ae-c071214f3116",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "multi-node-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4a475a6-088a-43b5-8e3b-15d7e675560d",
+              "name": "Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "availability",
+                    "multi-node-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"param\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.primeintellect.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9b8ad0a6-61ad-433e-bc47-84d73982d442",
+    "name": "Prime Intellect Compute admin-clusters Availability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
+      "type": "text/plain"
+    }
+  }
+}

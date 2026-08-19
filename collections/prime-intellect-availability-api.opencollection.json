@@ -1,0 +1,409 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Compute admin-clusters Availability API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Legacygpu Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "List of regions to filter"
+              },
+              {
+                "name": "gpu_count",
+                "value": "",
+                "type": "query",
+                "description": "Desired number of GPUs"
+              },
+              {
+                "name": "gpu_type",
+                "value": "",
+                "type": "query",
+                "description": "GPU model"
+              },
+              {
+                "name": "socket",
+                "value": "",
+                "type": "query",
+                "description": "Socket for selected gpu model"
+              },
+              {
+                "name": "security",
+                "value": "",
+                "type": "query",
+                "description": "Security type"
+              },
+              {
+                "name": "data_center_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by data center ID"
+              },
+              {
+                "name": "cloud_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cloud ID"
+              },
+              {
+                "name": "disks",
+                "value": "",
+                "type": "query",
+                "description": "List of disk IDs to filter instances by location"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Legacygpu Availability"
+        },
+        {
+          "info": {
+            "name": "Get Legacy Cluster Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/clusters",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "List of regions to filter"
+              },
+              {
+                "name": "gpu_count",
+                "value": "",
+                "type": "query",
+                "description": "Desired number of GPUs"
+              },
+              {
+                "name": "gpu_type",
+                "value": "",
+                "type": "query",
+                "description": "GPU model"
+              },
+              {
+                "name": "socket",
+                "value": "",
+                "type": "query",
+                "description": "Socket for selected gpu model"
+              },
+              {
+                "name": "security",
+                "value": "",
+                "type": "query",
+                "description": "Security type"
+              },
+              {
+                "name": "data_center_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by data center ID"
+              },
+              {
+                "name": "cloud_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cloud ID"
+              },
+              {
+                "name": "disks",
+                "value": "",
+                "type": "query",
+                "description": "List of disk IDs to filter instances by location"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Legacy Cluster Availability"
+        },
+        {
+          "info": {
+            "name": "Get Disks Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/disks",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "List of regions to filter"
+              },
+              {
+                "name": "data_center_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by data center ID"
+              },
+              {
+                "name": "cloud_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cloud ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Disks Availability"
+        },
+        {
+          "info": {
+            "name": "Get Gpu Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/gpu-summary",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get GPU pricing summary data grouped by GPU type and instance count."
+        },
+        {
+          "info": {
+            "name": "Get Gpu Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/gpus",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "List of regions to filter"
+              },
+              {
+                "name": "gpu_count",
+                "value": "",
+                "type": "query",
+                "description": "Desired number of GPUs"
+              },
+              {
+                "name": "gpu_type",
+                "value": "",
+                "type": "query",
+                "description": "GPU model"
+              },
+              {
+                "name": "socket",
+                "value": "",
+                "type": "query",
+                "description": "Socket for selected gpu model"
+              },
+              {
+                "name": "security",
+                "value": "",
+                "type": "query",
+                "description": "Security type"
+              },
+              {
+                "name": "data_center_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by data center ID"
+              },
+              {
+                "name": "cloud_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cloud ID"
+              },
+              {
+                "name": "disks",
+                "value": "",
+                "type": "query",
+                "description": "List of disk IDs to filter instances by location"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Gpu Availability"
+        },
+        {
+          "info": {
+            "name": "Get Multinode Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/multi-node",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "List of regions to filter"
+              },
+              {
+                "name": "gpu_count",
+                "value": "",
+                "type": "query",
+                "description": "Desired number of GPUs"
+              },
+              {
+                "name": "gpu_type",
+                "value": "",
+                "type": "query",
+                "description": "GPU model"
+              },
+              {
+                "name": "socket",
+                "value": "",
+                "type": "query",
+                "description": "Socket for selected gpu model"
+              },
+              {
+                "name": "security",
+                "value": "",
+                "type": "query",
+                "description": "Security type"
+              },
+              {
+                "name": "data_center_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by data center ID"
+              },
+              {
+                "name": "cloud_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cloud ID"
+              },
+              {
+                "name": "disks",
+                "value": "",
+                "type": "query",
+                "description": "List of disk IDs to filter instances by location"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Multinode Availability"
+        },
+        {
+          "info": {
+            "name": "Get Multinode Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/availability/multi-node-summary",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get multi-node (cluster) pricing summary data grouped by GPU type and instance count."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

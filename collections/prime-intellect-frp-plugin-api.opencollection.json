@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Compute admin-clusters FRP Plugin API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FRP Plugin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate Frp Plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/frp/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate frpc client connections.\n\nThis endpoint is called by frps server plugin for:\n- Login: Validates tunnel token when client connects\n- NewProxy: Validates proxy creation requests\n\nThis endpoint is public but security is enforced via per-tunnel\ntoken validation. An attacker would need both a valid tunnel_id AND\nthe corresponding frp_token to get a successful response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,215 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Compute admin-clusters Images API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List User Images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/images",
+            "params": [
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by team ID. If provided, returns only that team's images. If not provided, returns only personal images."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List images and builds for the current user, scoped by team context. Returns personal images by default, or team images if teamId is provided.\n\nPagination note: `limit`, `offset`, and `totalCount` count logical images\n(unique `owner/imageName:imageTag`). A single image may produce multiple\n`data[]` rows (one per artifact type plus any active builds), so\n`len(data)` can exceed `limit` and `totalCount` reflects images, not rows."
+        },
+        {
+          "info": {
+            "name": "Initiate Image Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/images/build",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initiate an image build process.\n\nReturns a presigned URL to upload the build context (tar.gz file).\nAfter uploading, call /images/build/{build_id}/start to begin the build."
+        },
+        {
+          "info": {
+            "name": "Get Build Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/images/build/:build_id",
+            "params": [
+              {
+                "name": "build_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the status of an image build."
+        },
+        {
+          "info": {
+            "name": "Start Image Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/images/build/:build_id/start",
+            "params": [
+              {
+                "name": "build_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Start the image build process after uploading the build context.\n\nThis creates a sandbox with Docker-in-Docker to build and push the image."
+        },
+        {
+          "info": {
+            "name": "List Image Builds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/images/builds",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all image builds for the current user."
+        },
+        {
+          "info": {
+            "name": "Delete User Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.primeintellect.ai/api/v1/images/:image_name/:image_tag",
+            "params": [
+              {
+                "name": "image_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "image_tag",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Team ID if deleting a team image"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a user image from the database and Google Artifact Registry.\n\nFor team images, only the image creator or team admins can delete."
+        },
+        {
+          "info": {
+            "name": "Update Image Visibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.primeintellect.ai/api/v1/images/:image_name/:image_tag/visibility",
+            "params": [
+              {
+                "name": "image_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "image_tag",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Publish or unpublish an image in the current personal or team context."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

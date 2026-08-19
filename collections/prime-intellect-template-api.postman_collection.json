@@ -1,28 +1,28 @@
 {
   "item": [
     {
-      "id": "d0e6341c-d677-40a2-9a18-1ec3633265a5",
-      "name": "training",
+      "id": "1c9cba7c-6a40-418b-bc91-4bb1997f5711",
+      "name": "Template",
       "description": {
         "content": "",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "abb7bf60-97aa-48df-a2d7-69559fd4c63e",
-          "name": "Create Dedicated Run",
+          "id": "ab60078c-c24e-483a-bc1e-c1bb0323a581",
+          "name": "Check Docker Image",
           "request": {
-            "name": "Create Dedicated Run",
+            "name": "Check Docker Image",
             "description": {
-              "content": "Dispatch a dedicated full-FT prime-rl run on a registered PrimeCluster.",
+              "content": "Check whether a docker image is accessible (optionally with registry credentials).",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "api",
                 "v1",
-                "training",
-                "runs"
+                "template",
+                "check-docker-image"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -52,7 +52,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"config\": \"<object>\",\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"registry_credentials_id\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -62,15 +62,15 @@
           },
           "response": [
             {
-              "id": "8aa9f456-c51e-41ba-a240-14aa630c43c8",
+              "id": "eef9db0f-e13d-435d-a3fc-994d544ea56d",
               "name": "Successful Response",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "v1",
-                    "training",
-                    "runs"
+                    "template",
+                    "check-docker-image"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -95,7 +95,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"config\": \"<object>\",\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"registry_credentials_id\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -103,28 +103,28 @@
                   }
                 }
               },
-              "status": "Created",
-              "code": 201,
+              "status": "OK",
+              "code": 200,
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"runId\": \"string\",\n  \"jobId\": \"string\",\n  \"tokenValue\": \"string\"\n}",
+              "body": "{}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "2aaf95f5-64d8-4980-adf0-3b26b62c5b65",
+              "id": "3cc5d53b-d1c9-481b-8b07-eab55864e6de",
               "name": "Authorization failed",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "v1",
-                    "training",
-                    "runs"
+                    "template",
+                    "check-docker-image"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -145,7 +145,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"config\": \"<object>\",\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"registry_credentials_id\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -166,15 +166,15 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "35d9c789-0141-4e9e-8f65-4f037100277a",
+              "id": "a0dfb5f1-6611-4d4b-9780-80ba90144887",
               "name": "Invalid request data",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "v1",
-                    "training",
-                    "runs"
+                    "template",
+                    "check-docker-image"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -199,7 +199,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"config\": \"<object>\",\n  \"imageTag\": \"main\",\n  \"name\": \"<string>\",\n  \"teamId\": \"<string>\",\n  \"wandbApiKey\": \"<string>\",\n  \"hfToken\": \"<string>\"\n}",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"registry_credentials_id\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -226,35 +226,26 @@
           }
         },
         {
-          "id": "a929a691-8057-49a9-9691-f59fca7d9f5a",
-          "name": "Delete Dedicated Run",
+          "id": "6d57b0a7-1488-45e5-9340-b16db4d6029c",
+          "name": "List Registry Credentials",
           "request": {
-            "name": "Delete Dedicated Run",
+            "name": "List Registry Credentials",
             "description": {
-              "content": "Delete a dedicated run: helm uninstall + namespace delete + DB cleanup.\n\nIdempotent. Safe to call repeatedly. Cleans up the linked Job row too\n(which uninstalls the helm release on the customer cluster). Soft-\ndeletes the RFTRun row (matches the existing run-delete UX — Billing\nrefs are preserved).",
+              "content": "List registry credentials owned by the requesting user or their teams.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "api",
                 "v1",
-                "training",
-                "runs",
-                ":run_id"
+                "template",
+                "registry-credentials"
               ],
               "host": [
                 "{{baseUrl}}"
               ],
               "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "run_id",
-                  "description": "(Required) "
-                }
-              ]
+              "variable": []
             },
             "header": [
               {
@@ -262,7 +253,7 @@
                 "value": "application/json"
               }
             ],
-            "method": "DELETE",
+            "method": "GET",
             "auth": {
               "type": "bearer",
               "bearer": [
@@ -275,30 +266,21 @@
           },
           "response": [
             {
-              "id": "eea5037f-13ca-48a1-8142-3740d988ce1d",
+              "id": "bb3a60ea-9250-4053-af7a-8f611aa9ddd2",
               "name": "Successful Response",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "v1",
-                    "training",
-                    "runs",
-                    ":run_id"
+                    "template",
+                    "registry-credentials"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "run_id",
-                      "description": "(Required) "
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -314,7 +296,7 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
+                "method": "GET",
                 "body": {}
               },
               "status": "OK",
@@ -325,35 +307,26 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"runId\": \"string\",\n  \"deleted\": false\n}",
+              "body": "{\n  \"credentials\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"server\": \"string\",\n      \"createdAt\": \"1996-07-15T01:14:10.324Z\",\n      \"updatedAt\": \"1977-01-13T07:18:49.633Z\",\n      \"userId\": \"string\",\n      \"teamId\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"server\": \"string\",\n      \"createdAt\": \"2011-10-25T05:04:34.833Z\",\n      \"updatedAt\": \"1998-09-23T08:36:03.912Z\",\n      \"userId\": \"string\",\n      \"teamId\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "0556d8a5-b4aa-480f-a2be-eee60c998026",
+              "id": "014555e6-fbf5-43fa-9c58-92870ff8253e",
               "name": "Authorization failed",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "v1",
-                    "training",
-                    "runs",
-                    ":run_id"
+                    "template",
+                    "registry-credentials"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "run_id",
-                      "description": "(Required) "
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -365,7 +338,7 @@
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "DELETE",
+                "method": "GET",
                 "body": {}
               },
               "status": "Unauthorized",
@@ -381,30 +354,21 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "c8c30d19-d99e-4fcf-9816-19c5d5656d41",
+              "id": "a9cd9ffa-13b6-4d6f-b58b-0833fec56c39",
               "name": "Invalid request data",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "v1",
-                    "training",
-                    "runs",
-                    ":run_id"
+                    "template",
+                    "registry-credentials"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "run_id",
-                      "description": "(Required) "
-                    }
-                  ]
+                  "variable": []
                 },
                 "header": [
                   {
@@ -420,7 +384,7 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "DELETE",
+                "method": "GET",
                 "body": {}
               },
               "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
@@ -463,8 +427,8 @@
     ]
   },
   "info": {
-    "_postman_id": "1a261ab2-41d2-40ff-aacc-6566b279ebbb",
-    "name": "Prime Intellect Compute admin-clusters training API",
+    "_postman_id": "d9e55aff-e470-46c7-af36-be79b6c55d37",
+    "name": "Prime Intellect Compute admin-clusters Template API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",

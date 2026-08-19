@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Prime Intellect Compute admin-clusters hosted-evaluations API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "hosted-evaluations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Hosted Evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.primeintellect.ai/api/v1/hosted-evaluations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create and start a hosted evaluation."
+        },
+        {
+          "info": {
+            "name": "Get Inference Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/hosted-evaluations/models",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get available models from Prime Inference API for hosted evaluations"
+        },
+        {
+          "info": {
+            "name": "Cancel Hosted Evaluation Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.primeintellect.ai/api/v1/hosted-evaluations/:evaluation_id/cancel",
+            "params": [
+              {
+                "name": "evaluation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cancel a running hosted evaluation."
+        },
+        {
+          "info": {
+            "name": "Get Hosted Evaluation Logs Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.primeintellect.ai/api/v1/hosted-evaluations/:evaluation_id/logs",
+            "params": [
+              {
+                "name": "evaluation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get real-time logs from the sandbox running a hosted evaluation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

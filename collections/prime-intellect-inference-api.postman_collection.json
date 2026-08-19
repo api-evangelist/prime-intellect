@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "9f578934-764c-4b47-a3bf-aad84b7174b5",
+      "id": "aca23d83-ce74-4b3b-8651-ea455ada00c6",
       "name": "Inference",
       "description": {
         "content": "",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "6a5a8841-a7e4-440f-bdc7-53a050218401",
+          "id": "4be2f259-9f7e-4928-aaf0-a398b1b200da",
           "name": "Prime Intellect List Inference Models",
           "request": {
             "name": "Prime Intellect List Inference Models",
@@ -38,7 +38,7 @@
           },
           "response": [
             {
-              "id": "3cc8bf50-c7fd-433e-a929-c86e99f983ad",
+              "id": "3153502f-d159-4e2d-b386-0ee3313228c7",
               "name": "OK",
               "originalRequest": {
                 "url": {
@@ -76,7 +76,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"model\",\n      \"created\": 8067,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"model\",\n      \"created\": 3343,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+              "body": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"model\",\n      \"created\": 4640,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"model\",\n      \"created\": 3842,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -87,7 +87,7 @@
           }
         },
         {
-          "id": "bd6e9d4b-e1ab-492f-9b87-9035ea1f1b3a",
+          "id": "94fbb82f-9d34-48a3-8230-fcfe923373ab",
           "name": "Prime Intellect Create Chat Completion",
           "request": {
             "name": "Prime Intellect Create Chat Completion",
@@ -130,7 +130,7 @@
           },
           "response": [
             {
-              "id": "2342e0bd-7b91-435b-80ef-2fbc41ff97c1",
+              "id": "7bbf214d-862a-48a2-a9f7-3c1d50f026f2",
               "name": "OK",
               "originalRequest": {
                 "url": {
@@ -161,7 +161,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"tool\",\n      \"content\": \"string\"\n    }\n  ],\n  \"stream\": false,\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_tokens\": \"<integer>\",\n  \"logprobs\": \"<boolean>\"\n}",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"string\"\n    }\n  ],\n  \"stream\": false,\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_tokens\": \"<integer>\",\n  \"logprobs\": \"<boolean>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -177,7 +177,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"object\": \"chat.completion\",\n  \"created\": 2473,\n  \"model\": \"string\",\n  \"choices\": [\n    {\n      \"index\": 5727,\n      \"message\": {\n        \"role\": \"user\",\n        \"content\": \"string\"\n      },\n      \"finish_reason\": \"string\"\n    },\n    {\n      \"index\": 1188,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"string\"\n      },\n      \"finish_reason\": \"string\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 6499,\n    \"completion_tokens\": 2591,\n    \"total_tokens\": 8202,\n    \"cost\": 2650.687494134597\n  }\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"chat.completion\",\n  \"created\": 3205,\n  \"model\": \"string\",\n  \"choices\": [\n    {\n      \"index\": 5213,\n      \"message\": {\n        \"role\": \"tool\",\n        \"content\": \"string\"\n      },\n      \"finish_reason\": \"string\"\n    },\n    {\n      \"index\": 4257,\n      \"message\": {\n        \"role\": \"user\",\n        \"content\": \"string\"\n      },\n      \"finish_reason\": \"string\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 2603,\n    \"completion_tokens\": 7120,\n    \"total_tokens\": 3763,\n    \"cost\": 4946.611173889471\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -195,7 +195,7 @@
   "variable": [
     {
       "type": "string",
-      "value": "https://api.pinference.ai/api/v1",
+      "value": "https://api.primeintellect.ai",
       "key": "baseUrl"
     }
   ],
@@ -209,11 +209,11 @@
     ]
   },
   "info": {
-    "_postman_id": "ee7cf2cd-e6be-43a0-94fb-8ecc647a4180",
-    "name": "Prime Intellect Inference API",
+    "_postman_id": "dcc68712-4e88-4030-9e6d-b97dfacb937b",
+    "name": "Prime Intellect Compute admin-clusters Inference API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "OpenAI-compatible inference API for hosted frontier and open models, served at api.pinference.ai. Supports streaming chat completions and model listing. Billed per million input/output tokens with usage metadata returned on each response.\n\nContact Support:\n Name: Prime Intellect",
+      "content": "GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.\n\nContact Support:\n Name: Prime Intellect",
       "type": "text/plain"
     }
   }

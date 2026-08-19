@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Prime Intellect Sandbox API",
+    "name": "Prime Intellect Compute admin-clusters Sandbox API",
     "version": "0.1.0"
   },
   "request": {
@@ -366,118 +366,6 @@
             }
           },
           "docs": "Close an SSH session (removes the TCP exposure)."
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Tunnel",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "List Tunnels Endpoint",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api.primeintellect.ai/api/v1/tunnel",
-            "params": [
-              {
-                "name": "teamId",
-                "value": "",
-                "type": "query"
-              }
-            ],
-            "auth": {
-              "type": "bearer",
-              "token": "{{bearerToken}}"
-            }
-          },
-          "docs": "List all active tunnels for the current user."
-        },
-        {
-          "info": {
-            "name": "Create Tunnel Endpoint",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api.primeintellect.ai/api/v1/tunnel",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            },
-            "auth": {
-              "type": "bearer",
-              "token": "{{bearerToken}}"
-            }
-          },
-          "docs": "Create a new tunnel for exposing a local service."
-        },
-        {
-          "info": {
-            "name": "Bulk Delete Tunnels Endpoint",
-            "type": "http"
-          },
-          "http": {
-            "method": "DELETE",
-            "url": "https://api.primeintellect.ai/api/v1/tunnel",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            },
-            "auth": {
-              "type": "bearer",
-              "token": "{{bearerToken}}"
-            }
-          },
-          "docs": "Bulk delete multiple tunnels by IDs."
-        },
-        {
-          "info": {
-            "name": "Get Tunnel Status Endpoint",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api.primeintellect.ai/api/v1/tunnel/:tunnel_id",
-            "params": [
-              {
-                "name": "tunnel_id",
-                "value": "",
-                "type": "path"
-              }
-            ],
-            "auth": {
-              "type": "bearer",
-              "token": "{{bearerToken}}"
-            }
-          },
-          "docs": "Get status of a specific tunnel."
-        },
-        {
-          "info": {
-            "name": "Delete Tunnel Endpoint",
-            "type": "http"
-          },
-          "http": {
-            "method": "DELETE",
-            "url": "https://api.primeintellect.ai/api/v1/tunnel/:tunnel_id",
-            "params": [
-              {
-                "name": "tunnel_id",
-                "value": "",
-                "type": "path"
-              }
-            ],
-            "auth": {
-              "type": "bearer",
-              "token": "{{bearerToken}}"
-            }
-          },
-          "docs": "Delete a tunnel and disconnect any active clients."
         }
       ]
     }
