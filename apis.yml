@@ -61,6 +61,11 @@ apis:
   name: Prime Intellect Inference API
   tags:
   - Inference
+  - OpenAI-Compatible
+  - Foundation Models
+  - LLM
+  tags_raw:
+  - Inference
   - OpenAI Compatible
   - Foundation Models
   - LLM
@@ -120,6 +125,8 @@ apis:
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
   tags:
+  - Admin Users
+  tags_raw:
   - admin-users
   properties:
   - type: OpenAPI
@@ -256,6 +263,8 @@ apis:
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
   tags:
+  - Evals
+  tags_raw:
   - evals
   properties:
   - type: OpenAPI
@@ -392,6 +401,8 @@ apis:
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
   tags:
+  - Image
+  tags_raw:
   - Images
   properties:
   - type: OpenAPI
@@ -528,6 +539,8 @@ apis:
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
   tags:
+  - Team
+  tags_raw:
   - teams
   properties:
   - type: OpenAPI
@@ -596,6 +609,8 @@ apis:
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
   tags:
+  - tunnel
+  tags_raw:
   - Tunnel
   properties:
   - type: OpenAPI
@@ -630,6 +645,8 @@ apis:
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
   tags:
+  - User
+  tags_raw:
   - user
   properties:
   - type: OpenAPI
@@ -672,6 +689,20 @@ description: >-
   REST API at api.primeintellect.ai, a `prime` Python CLI/SDK (PyPI: `prime`, lightweight `prime-sandboxes`), and the
   OpenAI protocol on the inference plane.
 tags:
+  - Artificial Intelligence
+  - Reinforcement Learning
+  - GPU Compute
+  - Decentralized Compute
+  - Foundation Models
+  - Inference
+  - Sandboxes
+  - Training
+  - Environments
+  - Evaluations
+  - LoRA
+  - Open-Source
+  - Agents
+tags_raw:
   - AI
   - Artificial Intelligence
   - Reinforcement Learning
