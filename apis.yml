@@ -751,6 +751,9 @@ specificationVersion: '0.23'
 created: '2026-05-25'
 modified: '2026-05-25'
 common:
+  - type: CapabilityMap
+    url: capabilities/prime-intellect-capability-edges.yml
+    name: Prime Intellect Business Capability Map
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/prime-intellect/overview
   - type: AgenticAccess
