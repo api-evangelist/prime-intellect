@@ -609,7 +609,7 @@ apis:
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
   tags:
-  - Tunnel
+  - tunnel
   tags_raw:
   - Tunnel
   properties:
