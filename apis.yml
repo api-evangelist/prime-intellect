@@ -575,6 +575,8 @@ apis:
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
   tags:
+  - Templates
+  tags_raw:
   - Template
   properties:
   - type: OpenAPI
@@ -695,10 +697,10 @@ tags:
   - Decentralized Compute
   - Foundation Models
   - Inference
-  - Sandboxes
+  - Sandbox
   - Training
-  - Environments
-  - Evaluations
+  - Environment
+  - Evaluation
   - LoRA
   - Open-Source
   - Agents
