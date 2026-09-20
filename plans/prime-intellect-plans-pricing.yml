@@ -1,170 +1,102 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Prime Intellect
-providerId: prime-intellect
-created: '2026-05-25'
-modified: '2026-05-25'
-reconciled: true
-tags:
-  - AI
-  - GPU Compute
-  - Reinforcement Learning
-  - Inference
-  - Sandboxes
-description: 'Reconciled plans and pricing for Prime Intellect — GPU compute marketplace (on-demand hourly), hosted
-  RL training (per-million-token input/output/training), inference (per-million-token input/output), sandboxes, and
-  persistent disks. Source: primeintellect.ai and docs.primeintellect.ai.'
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://docs.primeintellect.ai/hosted-training/models-and-pricing
 sources:
-  - https://www.primeintellect.ai/
-  - https://docs.primeintellect.ai/hosted-training/models-and-pricing
-  - https://docs.primeintellect.ai/inference/overview
-  - https://docs.primeintellect.ai/sandboxes/overview
+- https://docs.primeintellect.ai/hosted-training/models-and-pricing
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: per-call
+published: true
+note: Hosted Training model pricing table; prices per million tokens, billed separately for input, output,
+  and training. Page notes live pricing via CLI may differ.
+plan_count: 12
+currency: USD
 plans:
-  - id: prime-intellect-compute-on-demand
-    name: Compute Marketplace — On-Demand GPUs
-    type: usage-based
-    description: Hourly on-demand GPU instances across 50+ providers. Single-node and multi-node (1-256 GPUs) with
-      Infiniband, SLURM, and Kubernetes orchestration.
-    entries:
-      - label: H100 GPU-hour (representative)
-        name: gpu_h100_hour
-        type: metered
-        metric: gpu_hour
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '2.43'
-        userMultiplied: false
-      - label: H200 GPU-hour (representative low)
-        name: gpu_h200_low_hour
-        type: metered
-        metric: gpu_hour
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.47'
-        userMultiplied: false
-      - label: H200 GPU-hour (representative high)
-        name: gpu_h200_high_hour
-        type: metered
-        metric: gpu_hour
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '1.99'
-        userMultiplied: false
-      - label: B300 GPU-hour (representative)
-        name: gpu_b300_hour
-        type: metered
-        metric: gpu_hour
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '4.99'
-        userMultiplied: false
-  - id: prime-intellect-compute-reserved
-    name: Compute Marketplace — Liquid Reserved Clusters
-    type: quote-based
-    description: Custom-quoted reserved GPU clusters built by gathering competitive quotes from 50+ providers. Pricing
-      is per-engagement; talk to sales.
-    entries: []
-  - id: prime-intellect-training-qwen35-0p8b
-    name: Hosted Training — Qwen3.5 0.8B
-    type: usage-based
-    description: Hosted RL post-training for the smallest Qwen3.5 model. Billed per million tokens across input,
-      output, and training.
-    entries:
-      - label: Input tokens
-        name: input
-        type: metered
-        metric: tokens
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1000000
-        price: '0.02'
-        userMultiplied: false
-      - label: Output tokens
-        name: output
-        type: metered
-        metric: tokens
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1000000
-        price: '0.06'
-        userMultiplied: false
-      - label: Training tokens
-        name: training
-        type: metered
-        metric: tokens
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1000000
-        price: '0.06'
-        userMultiplied: false
-  - id: prime-intellect-training-qwen35-397b
-    name: Hosted Training — Qwen3.5 397B-A17B
-    type: usage-based
-    description: Hosted RL post-training for the largest available Qwen3.5 MoE. Billed per million tokens across
-      input, output, and training.
-    entries:
-      - label: Input tokens
-        name: input
-        type: metered
-        metric: tokens
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1000000
-        price: '1.00'
-        userMultiplied: false
-      - label: Output tokens
-        name: output
-        type: metered
-        metric: tokens
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1000000
-        price: '3.00'
-        userMultiplied: false
-      - label: Training tokens
-        name: training
-        type: metered
-        metric: tokens
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1000000
-        price: '4.00'
-        userMultiplied: false
-  - id: prime-intellect-training-catalog
-    name: Hosted Training — Additional Models
-    type: usage-based
-    description: Other supported base models include Qwen3.5 sizes 2B, 4B, 9B, 35B-A3B, 122B-A10B; Llama 1B/3B
-      Instruct; NVIDIA Nemotron 30B/120B; and OpenAI gpt-oss 20B/120B. All billed per million tokens (input, output,
-      training).
-    entries: []
-  - id: prime-intellect-inference
-    name: Inference API
-    type: usage-based
-    description: OpenAI-compatible inference at api.pinference.ai. Per-million-token pricing with usage and cost
-      returned in every response.
-    entries:
-      - label: Per-request usage metadata (cost field)
-        name: usage_cost
-        type: metered
-        metric: tokens
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1000000
-        price: see-models-endpoint
-        userMultiplied: false
+- name: Qwen/Qwen3.5-0.8B
+  price_text: '0.02'
+  price: 0.02
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.06 / 1M, Train 0.06 / 1M
+- name: Qwen/Qwen3.5-2B
+  price_text: '0.05'
+  price: 0.05
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.15 / 1M, Train 0.15 / 1M
+- name: Qwen/Qwen3.5-4B
+  price_text: '0.10'
+  price: 0.1
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.30 / 1M, Train 0.30 / 1M
+- name: Qwen/Qwen3.5-9B
+  price_text: '0.20'
+  price: 0.2
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.60 / 1M, Train 0.60 / 1M
+- name: Qwen/Qwen3.5-35B-A3B
+  price_text: '0.25'
+  price: 0.25
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.75 / 1M, Train 1.00 / 1M
+- name: Qwen/Qwen3.6-35B-A3B
+  price_text: '0.25'
+  price: 0.25
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.75 / 1M, Train 1.00 / 1M
+- name: meta-llama/Llama-3.2-1B-Instruct
+  price_text: '0.02'
+  price: 0.02
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.06 / 1M, Train 0.06 / 1M
+- name: meta-llama/Llama-3.2-3B-Instruct
+  price_text: '0.05'
+  price: 0.05
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.15 / 1M, Train 0.15 / 1M
+- name: nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16
+  price_text: '0.15'
+  price: 0.15
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.45 / 1M, Train 0.60 / 1M
+- name: openai/gpt-oss-20b
+  price_text: '0.10'
+  price: 0.1
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.30 / 1M, Train 0.40 / 1M
+- name: poolside/Laguna-XS.2
+  price_text: '0.00'
+  price: 0
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.00, Train 0.00
+- name: sprints/Llama-3.2-1B-Instruct
+  price_text: '0.00'
+  price: 0
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: Output 0.00, Train 0.00
