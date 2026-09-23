@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Prime Intellect Compute admin-clusters hosted-evaluations API
+  title: Prime Intellect Evaluations Hosted Evaluations API
   version: 0.1.0
-  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  description: Run and manage model evaluations against the Environments Hub. Includes both client-driven evaluations (push samples, finalize, retrieve) and hosted evaluations executed by Prime Intellect with logs, cancellation, and selectable inference models.
   contact:
     name: Prime Intellect
     url: https://www.primeintellect.ai
@@ -131,6 +131,40 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    CancelHostedEvaluationResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        message:
+          type: string
+          title: Message
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - success
+      - message
+      - evaluation_id
+      - status
+      title: CancelHostedEvaluationResponse
     CreateHostedEvaluationRequest:
       properties:
         environment_ids:
@@ -213,6 +247,27 @@ components:
       required:
       - errors
       title: ErrorResponse
+    GetHostedEvaluationLogsResponse:
+      properties:
+        logs:
+          type: string
+          title: Logs
+          description: Sandbox logs
+        sandbox_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sandbox Id
+          description: Sandbox ID
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+          description: Evaluation ID
+      type: object
+      required:
+      - logs
+      - evaluation_id
+      title: GetHostedEvaluationLogsResponse
     ListInferenceModelsResponse:
       properties:
         models:
@@ -226,40 +281,6 @@ components:
       - models
       title: ListInferenceModelsResponse
       description: Response for listing available inference models
-    CancelHostedEvaluationResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-        message:
-          type: string
-          title: Message
-        evaluation_id:
-          type: string
-          title: Evaluation Id
-        status:
-          type: string
-          title: Status
-      type: object
-      required:
-      - success
-      - message
-      - evaluation_id
-      - status
-      title: CancelHostedEvaluationResponse
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
     HostedEvalConfig:
       properties:
         num_examples:
@@ -399,27 +420,6 @@ components:
       - rollouts_per_example
       title: HostedEvalConfig
       description: Hosted evaluation configuration
-    GetHostedEvaluationLogsResponse:
-      properties:
-        logs:
-          type: string
-          title: Logs
-          description: Sandbox logs
-        sandbox_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sandbox Id
-          description: Sandbox ID
-        evaluation_id:
-          type: string
-          title: Evaluation Id
-          description: Evaluation ID
-      type: object
-      required:
-      - logs
-      - evaluation_id
-      title: GetHostedEvaluationLogsResponse
   securitySchemes:
     HTTPBearer:
       type: http

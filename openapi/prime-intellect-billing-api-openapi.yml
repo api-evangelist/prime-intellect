@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Prime Intellect Compute admin-clusters Billing API
   version: 0.1.0
@@ -116,46 +116,19 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    WalletResponse:
+    ErrorDetail:
       properties:
-        wallet_id:
+        param:
           type: string
-          title: Wallet Id
-        team_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Team Id
-        balance_usd:
-          type: number
-          title: Balance Usd
-          description: Current balance in USD
-        currency:
+          title: Param
+        details:
           type: string
-          title: Currency
-        total_billings:
-          type: integer
-          title: Total Billings
-          description: Total billing rows on the wallet (across all pages)
-        recent_billings:
-          items:
-            $ref: '#/components/schemas/BillingEntry'
-          type: array
-          title: Recent Billings
+          title: Details
       type: object
       required:
-      - wallet_id
-      - balance_usd
-      - currency
-      - total_billings
-      - recent_billings
-      title: WalletResponse
-      description: 'Snapshot of a wallet''s balance + most recent billing rows.
-
-
-        Drives `prime wallet`. One call returns everything an agent needs to
-
-        audit the billing flow against a known training run.'
+      - param
+      - details
+      title: ErrorDetail
     RunUsageResponse:
       properties:
         run_id:
@@ -202,26 +175,46 @@ components:
       - pricing
       title: RunUsageResponse
       description: Per-run usage totals — drives `prime train usage <run_id>`.
-    RunPricing:
+    WalletResponse:
       properties:
-        training_per_mtok:
+        wallet_id:
+          type: string
+          title: Wallet Id
+        team_id:
           anyOf:
-          - type: number
+          - type: string
           - type: 'null'
-          title: Training Per Mtok
-        inference_input_per_mtok:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Inference Input Per Mtok
-        inference_output_per_mtok:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Inference Output Per Mtok
+          title: Team Id
+        balance_usd:
+          type: number
+          title: Balance Usd
+          description: Current balance in USD
+        currency:
+          type: string
+          title: Currency
+        total_billings:
+          type: integer
+          title: Total Billings
+          description: Total billing rows on the wallet (across all pages)
+        recent_billings:
+          items:
+            $ref: '#/components/schemas/BillingEntry'
+          type: array
+          title: Recent Billings
       type: object
-      title: RunPricing
-      description: Snapshotted per-million-token pricing used to bill the run.
+      required:
+      - wallet_id
+      - balance_usd
+      - currency
+      - total_billings
+      - recent_billings
+      title: WalletResponse
+      description: 'Snapshot of a wallet''s balance + most recent billing rows.
+
+
+        Drives `prime wallet`. One call returns everything an agent needs to
+
+        audit the billing flow against a known training run.'
     ErrorResponse:
       properties:
         errors:
@@ -312,19 +305,26 @@ components:
         `resource_id` is the matching FK value, so callers can drill back into
 
         the run / pod / disk / etc. that produced the charge.'
-    ErrorDetail:
+    RunPricing:
       properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
+        training_per_mtok:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Training Per Mtok
+        inference_input_per_mtok:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Inference Input Per Mtok
+        inference_output_per_mtok:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Inference Output Per Mtok
       type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
+      title: RunPricing
+      description: Snapshotted per-million-token pricing used to bill the run.
   securitySchemes:
     HTTPBearer:
       type: http

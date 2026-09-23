@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Prime Intellect Compute admin-clusters teams API
+  title: Prime Intellect Platform Teams API
   version: 0.1.0
-  description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
+  description: Account, team, secrets, image, and cluster administration. Whoami, team listing, secret CRUD, Docker image builds and visibility, registry credential checks, FRP plugin validation, and admin-only cluster + node-log operations.
   contact:
     name: Prime Intellect
     url: https://www.primeintellect.ai
@@ -11,12 +11,12 @@ servers:
 security:
 - HTTPBearer: []
 tags:
-- name: teams
+- name: Teams
 paths:
   /api/v1/teams/{team_id}/members:
     get:
       tags:
-      - teams
+      - Teams
       summary: List Team Members
       operationId: list_team_members_api_v1_teams__team_id__members_get
       security:
@@ -59,17 +59,19 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
+    ErrorDetail:
       properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
       type: object
       required:
-      - errors
-      title: ErrorResponse
+      - param
+      - details
+      title: ErrorDetail
     GenericPaginationResponse_List_TeamMemberDetail__:
       properties:
         total_count:
@@ -104,19 +106,17 @@ components:
       required:
       - data
       title: GenericPaginationResponse[List[TeamMemberDetail]]
-    ErrorDetail:
+    ErrorResponse:
       properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
       type: object
       required:
-      - param
-      - details
-      title: ErrorDetail
+      - errors
+      title: ErrorResponse
     TeamMemberDetail:
       properties:
         userId:

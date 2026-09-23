@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Prime Intellect Compute admin-clusters Availability API
+  title: Prime Intellect Compute Availability API
   version: 0.1.0
   description: 'GPU compute marketplace and pod orchestration: availability across providers, on-demand and multi-node GPU pod lifecycle, persistent network-attached disks, and SSH key management. Supports H100, H200, B200, B300, and other GPU families with 1-256 GPU configurations.'
   contact:
@@ -666,251 +666,19 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    EnvironmentTypeEnum:
-      type: string
-      enum:
-      - ubuntu_22_cuda_12
-      - cuda_12_1_pytorch_2_2
-      - cuda_11_8_pytorch_2_1
-      - cuda_12_1_pytorch_2_3
-      - cuda_12_1_pytorch_2_4
-      - cuda_12_4_pytorch_2_4
-      - cuda_12_4_pytorch_2_5
-      - cuda_12_4_pytorch_2_6
-      - cuda_12_6_pytorch_2_7
-      - stable_diffusion
-      - axolotl
-      - bittensor
-      - hivemind
-      - petals_llama
-      - vllm_llama_8b
-      - vllm_llama_70b
-      - vllm_llama_405b
-      - custom_template
-      - flux
-      - prime_rl
-      title: EnvironmentTypeEnum
-    AvailabilityResponse:
+    ErrorDetail:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/GpuAvailability'
-          type: array
-          title: Items
-          description: List of available GPU configurations
-        totalCount:
-          type: integer
-          title: Totalcount
-          description: Total number of matching GPU configurations
-      type: object
-      required:
-      - items
-      - totalCount
-      title: AvailabilityResponse
-    InstanceCountPricing:
-      properties:
-        cheapest:
-          anyOf:
-          - $ref: '#/components/schemas/PricingInfo'
-          - type: 'null'
-          description: Cheapest pricing across all regions
-      additionalProperties: true
-      type: object
-      title: InstanceCountPricing
-    DiskAvailabilityResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/DiskAvailability'
-          type: array
-          title: Items
-          description: List of available disk configurations
-        totalCount:
-          type: integer
-          title: Totalcount
-          description: Total number of matching disk configurations
-      type: object
-      required:
-      - items
-      - totalCount
-      title: DiskAvailabilityResponse
-    Regions:
-      type: string
-      enum:
-      - africa
-      - asia_south
-      - asia_northeast
-      - australia
-      - canada
-      - eu_east
-      - eu_north
-      - eu_west
-      - middle_east
-      - south_america
-      - united_states
-      title: Regions
-    Prices:
-      properties:
-        onDemand:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Ondemand
-          description: Price for on-demand usage, specified for secure_cloud security type.
-          examples:
-          - 1.15
-        communityPrice:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Communityprice
-          description: Price for community cloud instances, specified for community_cloud security type.
-          examples:
-          - null
-        isVariable:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Isvariable
-          description: Indicates whether the price is variable and subject to change based on market conditions.
-          examples:
-          - false
-        currency:
-          $ref: '#/components/schemas/Currency'
-          description: The currency in which the prices are denominated (e.g., USD, EUR).
-      type: object
-      required:
-      - currency
-      title: Prices
-    DiskAvailability:
-      properties:
-        cloudId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Cloudid
-          description: Cloud ID, used for provisioning
-        provider:
-          $ref: '#/components/schemas/ProviderTypeEnum'
-          description: Provider's ID
-        dataCenter:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Datacenter
-          description: Location of the data center housing the disk.
-        country:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Country
-          description: Country where the data center is located.
-        region:
-          anyOf:
-          - $ref: '#/components/schemas/Regions'
-          - type: 'null'
-          description: Region where the disk is located.
-        spec:
-          $ref: '#/components/schemas/CustomSpecValue'
-          description: Configurable shared disk size in GB and price per GB per hour.
-          default: {}
-        stockStatus:
+        param:
           type: string
-          enum:
-          - Available
-          - Low
-          - Medium
-          - High
-          - Unavailable
-          title: Stockstatus
-          description: Current stock availability status of disks.
-          default: Available
-        security:
-          $ref: '#/components/schemas/SecurityType'
-          description: Disk security classification (e.g., secure_cloud or community_cloud).
-        isMultinode:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Ismultinode
-          description: Indicates if the disk can be used with multiple instances.
-          default: true
+          title: Param
+        details:
+          type: string
+          title: Details
       type: object
       required:
-      - provider
-      - security
-      title: DiskAvailability
-    GPUSocket:
-      type: string
-      enum:
-      - PCIe
-      - SXM2
-      - SXM3
-      - SXM4
-      - SXM5
-      - SXM6
-      title: GPUSocket
-    CustomSpecValue:
-      properties:
-        minCount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Mincount
-          description: Minimum count for this specification.
-          examples:
-          - 2
-        defaultCount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Defaultcount
-          description: Default count for the specification.
-          examples:
-          - 8
-        maxCount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Maxcount
-          description: Maximum allowable count for this specification.
-          examples:
-          - 24
-        pricePerUnit:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Priceperunit
-          description: Price per unit per hr.
-          examples:
-          - 0.005
-        step:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Step
-          description: Increment step for adjusting the count (e.g., increments by 1 or 10).
-          examples:
-          - 2
-        defaultIncludedInPrice:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Defaultincludedinprice
-          description: Indicates if the default count is included in the base price.
-          examples:
-          - false
-        additionalInfo:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Additionalinfo
-          description: Any additional information or notes regarding this specification.
-          examples:
-          - null
-          - This price is charged even for stopped instance
-      type: object
-      title: CustomSpecValue
+      - param
+      - details
+      title: ErrorDetail
     GpuAvailability:
       properties:
         cloudId:
@@ -1038,17 +806,6 @@ components:
       - prices
       - images
       title: GpuAvailability
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
     ProviderTypeEnum:
       type: string
       enum:
@@ -1077,12 +834,66 @@ components:
       - dc_gnu
       - denvr
       title: ProviderTypeEnum
-    SecurityType:
-      type: string
-      enum:
-      - secure_cloud
-      - community_cloud
-      title: SecurityType
+    InstanceCountPricing:
+      properties:
+        cheapest:
+          anyOf:
+          - $ref: '#/components/schemas/PricingInfo'
+          - type: 'null'
+          description: Cheapest pricing across all regions
+      additionalProperties: true
+      type: object
+      title: InstanceCountPricing
+    DiskAvailabilityResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DiskAvailability'
+          type: array
+          title: Items
+          description: List of available disk configurations
+        totalCount:
+          type: integer
+          title: Totalcount
+          description: Total number of matching disk configurations
+      type: object
+      required:
+      - items
+      - totalCount
+      title: DiskAvailabilityResponse
+    Prices:
+      properties:
+        onDemand:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Ondemand
+          description: Price for on-demand usage, specified for secure_cloud security type.
+          examples:
+          - 1.15
+        communityPrice:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Communityprice
+          description: Price for community cloud instances, specified for community_cloud security type.
+          examples:
+          - null
+        isVariable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Isvariable
+          description: Indicates whether the price is variable and subject to change based on market conditions.
+          examples:
+          - false
+        currency:
+          $ref: '#/components/schemas/Currency'
+          description: The currency in which the prices are denominated (e.g., USD, EUR).
+      type: object
+      required:
+      - currency
+      title: Prices
     GPUType:
       type: string
       enum:
@@ -1137,25 +948,169 @@ components:
       - P40_24GB
       - RTX_PRO_6000B_96GB
       title: GPUType
-    Currency:
-      type: string
-      enum:
-      - USD
-      - EUR
-      title: Currency
-    ErrorDetail:
+    ErrorResponse:
       properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
       type: object
       required:
-      - param
-      - details
-      title: ErrorDetail
+      - errors
+      title: ErrorResponse
+    GPUSocket:
+      type: string
+      enum:
+      - PCIe
+      - SXM2
+      - SXM3
+      - SXM4
+      - SXM5
+      - SXM6
+      title: GPUSocket
+    AvailabilityResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/GpuAvailability'
+          type: array
+          title: Items
+          description: List of available GPU configurations
+        totalCount:
+          type: integer
+          title: Totalcount
+          description: Total number of matching GPU configurations
+      type: object
+      required:
+      - items
+      - totalCount
+      title: AvailabilityResponse
+    CustomSpecValue:
+      properties:
+        minCount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Mincount
+          description: Minimum count for this specification.
+          examples:
+          - 2
+        defaultCount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Defaultcount
+          description: Default count for the specification.
+          examples:
+          - 8
+        maxCount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Maxcount
+          description: Maximum allowable count for this specification.
+          examples:
+          - 24
+        pricePerUnit:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Priceperunit
+          description: Price per unit per hr.
+          examples:
+          - 0.005
+        step:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Step
+          description: Increment step for adjusting the count (e.g., increments by 1 or 10).
+          examples:
+          - 2
+        defaultIncludedInPrice:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Defaultincludedinprice
+          description: Indicates if the default count is included in the base price.
+          examples:
+          - false
+        additionalInfo:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Additionalinfo
+          description: Any additional information or notes regarding this specification.
+          examples:
+          - null
+          - This price is charged even for stopped instance
+      type: object
+      title: CustomSpecValue
+    DiskAvailability:
+      properties:
+        cloudId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cloudid
+          description: Cloud ID, used for provisioning
+        provider:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+          description: Provider's ID
+        dataCenter:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Datacenter
+          description: Location of the data center housing the disk.
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+          description: Country where the data center is located.
+        region:
+          anyOf:
+          - $ref: '#/components/schemas/Regions'
+          - type: 'null'
+          description: Region where the disk is located.
+        spec:
+          $ref: '#/components/schemas/CustomSpecValue'
+          description: Configurable shared disk size in GB and price per GB per hour.
+          default: {}
+        stockStatus:
+          type: string
+          enum:
+          - Available
+          - Low
+          - Medium
+          - High
+          - Unavailable
+          title: Stockstatus
+          description: Current stock availability status of disks.
+          default: Available
+        security:
+          $ref: '#/components/schemas/SecurityType'
+          description: Disk security classification (e.g., secure_cloud or community_cloud).
+        isMultinode:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Ismultinode
+          description: Indicates if the disk can be used with multiple instances.
+          default: true
+      type: object
+      required:
+      - provider
+      - security
+      title: DiskAvailability
+    SecurityType:
+      type: string
+      enum:
+      - secure_cloud
+      - community_cloud
+      title: SecurityType
     PricingInfo:
       properties:
         onDemand:
@@ -1186,6 +1141,51 @@ components:
           type: array
       type: object
       title: LegacyAvailabilityResponse
+    Currency:
+      type: string
+      enum:
+      - USD
+      - EUR
+      title: Currency
+    Regions:
+      type: string
+      enum:
+      - africa
+      - asia_south
+      - asia_northeast
+      - australia
+      - canada
+      - eu_east
+      - eu_north
+      - eu_west
+      - middle_east
+      - south_america
+      - united_states
+      title: Regions
+    EnvironmentTypeEnum:
+      type: string
+      enum:
+      - ubuntu_22_cuda_12
+      - cuda_12_1_pytorch_2_2
+      - cuda_11_8_pytorch_2_1
+      - cuda_12_1_pytorch_2_3
+      - cuda_12_1_pytorch_2_4
+      - cuda_12_4_pytorch_2_4
+      - cuda_12_4_pytorch_2_5
+      - cuda_12_4_pytorch_2_6
+      - cuda_12_6_pytorch_2_7
+      - stable_diffusion
+      - axolotl
+      - bittensor
+      - hivemind
+      - petals_llama
+      - vllm_llama_8b
+      - vllm_llama_70b
+      - vllm_llama_405b
+      - custom_template
+      - flux
+      - prime_rl
+      title: EnvironmentTypeEnum
   securitySchemes:
     HTTPBearer:
       type: http
