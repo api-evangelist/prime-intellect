@@ -68,6 +68,28 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
+    RegistryCredentialsListResponse:
+      properties:
+        credentials:
+          items:
+            $ref: '#/components/schemas/RegistryCredentialsSummary'
+          type: array
+          title: Credentials
+      type: object
+      required:
+      - credentials
+      title: RegistryCredentialsListResponse
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
     ErrorDetail:
       properties:
         param:
@@ -81,17 +103,6 @@ components:
       - param
       - details
       title: ErrorDetail
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
     RegistryCredentialsSummary:
       properties:
         id:
@@ -145,17 +156,6 @@ components:
       required:
       - image
       title: DockerImageCheckRequest
-    RegistryCredentialsListResponse:
-      properties:
-        credentials:
-          items:
-            $ref: '#/components/schemas/RegistryCredentialsSummary'
-          type: array
-          title: Credentials
-      type: object
-      required:
-      - credentials
-      title: RegistryCredentialsListResponse
   securitySchemes:
     HTTPBearer:
       type: http

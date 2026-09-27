@@ -59,19 +59,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
     GenericPaginationResponse_List_TeamMemberDetail__:
       properties:
         total_count:
@@ -147,6 +134,19 @@ components:
       - role
       - joinedAt
       title: TeamMemberDetail
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http

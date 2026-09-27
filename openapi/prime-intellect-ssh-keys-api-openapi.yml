@@ -145,68 +145,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
-    APISSHKeyUpdateRequestConfig:
-      properties:
-        isPrimary:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Isprimary
-          description: Whether to set the key as the primary key. Must be true when provided.
-      type: object
-      title: APISSHKeyUpdateRequestConfig
-    APISSHKeyUploadRequestConfig:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: The name for the key.
-        publicKey:
-          type: string
-          title: Publickey
-          description: The public key part of the SSH key.
-      type: object
-      required:
-      - name
-      - publicKey
-      title: APISSHKeyUploadRequestConfig
-    APISSHKeyUpdateResponseConfig:
-      properties:
-        message:
-          type: string
-          title: Message
-        updated_fields:
-          type: object
-          title: Updated Fields
-      type: object
-      required:
-      - message
-      - updated_fields
-      title: APISSHKeyUpdateResponseConfig
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
     APISSHKeyConfig:
       properties:
         id:
@@ -252,6 +190,68 @@ components:
       - isPrimary
       - isUserKey
       title: APISSHKeyConfig
+    APISSHKeyUploadRequestConfig:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name for the key.
+        publicKey:
+          type: string
+          title: Publickey
+          description: The public key part of the SSH key.
+      type: object
+      required:
+      - name
+      - publicKey
+      title: APISSHKeyUploadRequestConfig
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    APISSHKeyUpdateResponseConfig:
+      properties:
+        message:
+          type: string
+          title: Message
+        updated_fields:
+          type: object
+          title: Updated Fields
+      type: object
+      required:
+      - message
+      - updated_fields
+      title: APISSHKeyUpdateResponseConfig
+    APISSHKeyUpdateRequestConfig:
+      properties:
+        isPrimary:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Isprimary
+          description: Whether to set the key as the primary key. Must be true when provided.
+      type: object
+      title: APISSHKeyUpdateRequestConfig
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
     GenericPaginationResponse_List_APISSHKeyConfig__:
       properties:
         total_count:

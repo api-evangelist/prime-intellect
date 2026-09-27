@@ -86,7 +86,7 @@ apis:
     and returns a `usage` object with input/output token counts and USD cost on every response. LoRA adapters
     can be served alongside base models via 1-click deployments.
 - aid: prime-intellect:prime-intellect-admin-clusters-api
-  name: Prime Intellect admin-clusters API
+  name: Prime Intellect Admin Clusters API
   description: The admin-clusters API from Prime Intellect — 4 operation(s) for admin-clusters.
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
@@ -120,7 +120,7 @@ apis:
   - type: Authentication
     url: https://docs.primeintellect.ai/api-reference/api-keys
 - aid: prime-intellect:prime-intellect-admin-users-api
-  name: Prime Intellect admin-users API
+  name: Prime Intellect Admin Users API
   description: The admin-users API from Prime Intellect — 1 operation(s) for admin-users.
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
@@ -258,7 +258,7 @@ apis:
   - type: Authentication
     url: https://docs.primeintellect.ai/api-reference/api-keys
 - aid: prime-intellect:prime-intellect-evals-api
-  name: Prime Intellect evals API
+  name: Prime Intellect Evals API
   description: The evals API from Prime Intellect — 5 operation(s) for evals.
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
@@ -362,7 +362,7 @@ apis:
   - type: Authentication
     url: https://docs.primeintellect.ai/api-reference/api-keys
 - aid: prime-intellect:prime-intellect-hosted-evaluations-api
-  name: Prime Intellect hosted-evaluations API
+  name: Prime Intellect Hosted Evaluations API
   description: The hosted-evaluations API from Prime Intellect — 4 operation(s) for hosted-evaluations.
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
@@ -534,7 +534,7 @@ apis:
   - type: Authentication
     url: https://docs.primeintellect.ai/api-reference/api-keys
 - aid: prime-intellect:prime-intellect-teams-api
-  name: Prime Intellect teams API
+  name: Prime Intellect Teams API
   description: The teams API from Prime Intellect — 1 operation(s) for teams.
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
@@ -642,7 +642,7 @@ apis:
   - type: Authentication
     url: https://docs.primeintellect.ai/api-reference/api-keys
 - aid: prime-intellect:prime-intellect-user-api
-  name: Prime Intellect user API
+  name: Prime Intellect User API
   description: The user API from Prime Intellect — 3 operation(s) for user.
   humanURL: https://docs.primeintellect.ai/api-reference/managing-pods
   baseURL: https://api.primeintellect.ai
@@ -702,7 +702,7 @@ tags:
   - Environment
   - Evaluation
   - LoRA
-  - Open-Source
+  - Open Source
   - Agents
 tags_raw:
   - AI
@@ -719,6 +719,7 @@ tags_raw:
   - LoRA
   - Open Source
   - Agents
+  - Open-Source
 kind: contract
 deliveryModel:
   model: saas

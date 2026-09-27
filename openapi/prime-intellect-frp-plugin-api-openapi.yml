@@ -57,19 +57,17 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorDetail:
+    ErrorResponse:
       properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
       type: object
       required:
-      - param
-      - details
-      title: ErrorDetail
+      - errors
+      title: ErrorResponse
     FrpPluginRequest:
       properties:
         version:
@@ -91,17 +89,19 @@ components:
       - content
       title: FrpPluginRequest
       description: Request from frps server plugin.
-    ErrorResponse:
+    ErrorDetail:
       properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
       type: object
       required:
-      - errors
-      title: ErrorResponse
+      - param
+      - details
+      title: ErrorDetail
     FrpPluginResponse:
       properties:
         reject:

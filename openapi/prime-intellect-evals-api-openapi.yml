@@ -395,161 +395,178 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CreateEvaluationRequest:
+    EnvironmentReference:
       properties:
-        name:
+        id:
           type: string
-          title: Name
-          description: Name of the evaluation
-        team_id:
+          title: Id
+        version_id:
           anyOf:
           - type: string
           - type: 'null'
-          title: Team Id
-          description: Team ID if creating evaluation for a team
-        environments:
+          title: Version Id
+      type: object
+      required:
+      - id
+      title: EnvironmentReference
+      description: Environment reference with optional version
+    PushSamplesRequest:
+      properties:
+        samples:
+          items:
+            type: object
+          type: array
+          title: Samples
+          description: List of evaluation samples
+      type: object
+      required:
+      - samples
+      title: PushSamplesRequest
+      description: Request to push evaluation samples (replaces traces)
+    BulkDeleteEvaluationsRequest:
+      properties:
+        evaluation_ids:
+          items:
+            type: string
+          type: array
+          maxItems: 100
+          minItems: 1
+          title: Evaluation Ids
+      type: object
+      required:
+      - evaluation_ids
+      title: BulkDeleteEvaluationsRequest
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    EvaluationStatus:
+      type: string
+      enum:
+      - PENDING
+      - RUNNING
+      - PROCESSING
+      - COMPLETED
+      - FAILED
+      - TIMEOUT
+      - CANCELLED
+      title: EvaluationStatus
+      description: Evaluation status enum
+    EvaluationType:
+      type: string
+      enum:
+      - suite
+      - training
+      - environment
+      title: EvaluationType
+      description: Evaluation type enum
+    CreateEvaluationResponse:
+      properties:
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+          description: ID of the created evaluation
+        name:
+          type: string
+          title: Name
+        status:
+          $ref: '#/components/schemas/EvaluationStatus'
+        eval_type:
+          $ref: '#/components/schemas/EvaluationType'
+          description: 'Type: ''prime_rl'', ''environment'', or ''suite'''
+        environment_ids:
           anyOf:
           - items:
-              $ref: '#/components/schemas/EnvironmentReference'
+              type: string
             type: array
           - type: 'null'
-          title: Environments
-          description: List of environment references with optional version IDs
+          title: Environment Ids
         suite_id:
           anyOf:
           - type: string
           - type: 'null'
           title: Suite Id
-          description: Suite ID if this evaluation is part of a suite
         run_id:
           anyOf:
           - type: string
           - type: 'null'
           title: Run Id
-          description: Run ID for Prime RL runs (optional)
-        is_hosted:
-          type: boolean
-          title: Is Hosted
-          description: Whether this is a hosted evaluation
-          default: false
-        inference_model:
+        version_id:
           anyOf:
           - type: string
           - type: 'null'
-          title: Inference Model
-          description: Prime Inference model ID
-        eval_config:
-          anyOf:
-          - $ref: '#/components/schemas/HostedEvalConfig'
-          - type: 'null'
-          description: Hosted evaluation configuration
-        model_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Model Name
-          description: Model name
-        dataset:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Dataset
-          description: Dataset name
-        framework:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Framework
-          description: Framework used (e.g., 'prime-rl', 'openai/evals')
-        task_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Task Type
-          description: Type of task (e.g., 'classification', 'generation')
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Description of the evaluation
-        tags:
-          items:
-            type: string
-          type: array
-          title: Tags
-          description: Tags for categorization
-          default: []
-        metadata:
-          anyOf:
-          - type: object
-          - type: 'null'
-          title: Metadata
-          description: Additional metadata
-        metrics:
-          anyOf:
-          - type: object
-          - type: 'null'
-          title: Metrics
-          description: High-level metrics summary
-        is_public:
-          type: boolean
-          title: Is Public
-          description: Whether this evaluation is publicly shareable by link
-          default: false
-        show_on_leaderboard:
-          type: boolean
-          title: Show On Leaderboard
-          description: Whether this public evaluation appears on environment leaderboards
-          default: false
-      type: object
-      required:
-      - name
-      title: CreateEvaluationRequest
-      description: Request to create a new evaluation
-    FinalizeEvaluationResponse:
-      properties:
-        evaluation_id:
-          type: string
-          title: Evaluation Id
-        status:
-          $ref: '#/components/schemas/EvaluationStatus'
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
-        total_samples:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Total Samples
-        avg_score:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Avg Score
-        min_score:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Min Score
-        max_score:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Max Score
+          title: Version Id
         viewer_url:
           anyOf:
           - type: string
           - type: 'null'
           title: Viewer Url
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
       type: object
       required:
       - evaluation_id
+      - name
       - status
-      title: FinalizeEvaluationResponse
-      description: Response after finalizing an evaluation
+      - eval_type
+      - created_at
+      title: CreateEvaluationResponse
+      description: Response after creating an evaluation
+    BulkDeleteEvaluationsResponse:
+      properties:
+        success_count:
+          type: integer
+          title: Success Count
+          description: Number of evaluations successfully deleted
+        failure_count:
+          type: integer
+          title: Failure Count
+          description: Number of evaluations that failed to delete
+        successful_ids:
+          items:
+            type: string
+          type: array
+          title: Successful Ids
+          description: IDs of successfully deleted evaluations
+        failed_ids:
+          items:
+            type: string
+          type: array
+          title: Failed Ids
+          description: IDs of evaluations that failed to delete
+      type: object
+      required:
+      - success_count
+      - failure_count
+      - successful_ids
+      - failed_ids
+      title: BulkDeleteEvaluationsResponse
+    PushSamplesResponse:
+      properties:
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+        samples_pushed:
+          type: integer
+          title: Samples Pushed
+        status:
+          $ref: '#/components/schemas/EvaluationStatus'
+      type: object
+      required:
+      - evaluation_id
+      - samples_pushed
+      - status
+      title: PushSamplesResponse
+      description: Response after pushing samples
     HostedEvalConfig:
       properties:
         num_examples:
@@ -689,60 +706,86 @@ components:
       - rollouts_per_example
       title: HostedEvalConfig
       description: Hosted evaluation configuration
-    CreateEvaluationResponse:
+    FinalizeEvaluationResponse:
       properties:
         evaluation_id:
           type: string
           title: Evaluation Id
-          description: ID of the created evaluation
-        name:
-          type: string
-          title: Name
         status:
           $ref: '#/components/schemas/EvaluationStatus'
-        eval_type:
-          $ref: '#/components/schemas/EvaluationType'
-          description: 'Type: ''prime_rl'', ''environment'', or ''suite'''
-        environment_ids:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Environment Ids
-        suite_id:
+        message:
           anyOf:
           - type: string
           - type: 'null'
-          title: Suite Id
-        run_id:
+          title: Message
+        total_samples:
           anyOf:
-          - type: string
+          - type: integer
           - type: 'null'
-          title: Run Id
-        version_id:
+          title: Total Samples
+        avg_score:
           anyOf:
-          - type: string
+          - type: number
           - type: 'null'
-          title: Version Id
+          title: Avg Score
+        min_score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Min Score
+        max_score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Max Score
         viewer_url:
           anyOf:
           - type: string
           - type: 'null'
           title: Viewer Url
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
       type: object
       required:
       - evaluation_id
-      - name
       - status
-      - eval_type
-      - created_at
-      title: CreateEvaluationResponse
-      description: Response after creating an evaluation
+      title: FinalizeEvaluationResponse
+      description: Response after finalizing an evaluation
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    ListEvaluationsResponse:
+      properties:
+        evaluations:
+          items:
+            $ref: '#/components/schemas/GetEvaluationResponse'
+          type: array
+          title: Evaluations
+        total:
+          type: integer
+          title: Total
+        skip:
+          type: integer
+          title: Skip
+        limit:
+          type: integer
+          title: Limit
+      type: object
+      required:
+      - evaluations
+      - total
+      - skip
+      - limit
+      title: ListEvaluationsResponse
+      description: Response for listing evaluations
     GetEvaluationResponse:
       properties:
         evaluation_id:
@@ -960,69 +1003,183 @@ components:
       - updated_at
       title: GetEvaluationResponse
       description: Response for getting evaluation details
-    ListEvaluationsResponse:
+    GetSamplesResponse:
       properties:
-        evaluations:
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+        samples:
           items:
-            $ref: '#/components/schemas/GetEvaluationResponse'
+            type: object
           type: array
-          title: Evaluations
+          title: Samples
         total:
           type: integer
           title: Total
-        skip:
+        page:
           type: integer
-          title: Skip
+          title: Page
         limit:
           type: integer
           title: Limit
+        total_pages:
+          type: integer
+          title: Total Pages
       type: object
       required:
-      - evaluations
+      - evaluation_id
+      - samples
       - total
-      - skip
+      - page
       - limit
-      title: ListEvaluationsResponse
-      description: Response for listing evaluations
-    BulkDeleteEvaluationsRequest:
+      - total_pages
+      title: GetSamplesResponse
+      description: Response for getting evaluation samples
+    CreateEvaluationRequest:
       properties:
-        evaluation_ids:
-          items:
-            type: string
-          type: array
-          maxItems: 100
-          minItems: 1
-          title: Evaluation Ids
-      type: object
-      required:
-      - evaluation_ids
-      title: BulkDeleteEvaluationsRequest
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    EnvironmentReference:
-      properties:
-        id:
+        name:
           type: string
-          title: Id
-        version_id:
+          title: Name
+          description: Name of the evaluation
+        team_id:
           anyOf:
           - type: string
           - type: 'null'
-          title: Version Id
+          title: Team Id
+          description: Team ID if creating evaluation for a team
+        environments:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/EnvironmentReference'
+            type: array
+          - type: 'null'
+          title: Environments
+          description: List of environment references with optional version IDs
+        suite_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Suite Id
+          description: Suite ID if this evaluation is part of a suite
+        run_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Id
+          description: Run ID for Prime RL runs (optional)
+        is_hosted:
+          type: boolean
+          title: Is Hosted
+          description: Whether this is a hosted evaluation
+          default: false
+        inference_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Model
+          description: Prime Inference model ID
+        eval_config:
+          anyOf:
+          - $ref: '#/components/schemas/HostedEvalConfig'
+          - type: 'null'
+          description: Hosted evaluation configuration
+        model_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Name
+          description: Model name
+        dataset:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dataset
+          description: Dataset name
+        framework:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Framework
+          description: Framework used (e.g., 'prime-rl', 'openai/evals')
+        task_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Task Type
+          description: Type of task (e.g., 'classification', 'generation')
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the evaluation
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+          description: Tags for categorization
+          default: []
+        metadata:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Metadata
+          description: Additional metadata
+        metrics:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Metrics
+          description: High-level metrics summary
+        is_public:
+          type: boolean
+          title: Is Public
+          description: Whether this evaluation is publicly shareable by link
+          default: false
+        show_on_leaderboard:
+          type: boolean
+          title: Show On Leaderboard
+          description: Whether this public evaluation appears on environment leaderboards
+          default: false
       type: object
       required:
-      - id
-      title: EnvironmentReference
-      description: Environment reference with optional version
+      - name
+      title: CreateEvaluationRequest
+      description: Request to create a new evaluation
+    UpdateEvaluationResponse:
+      properties:
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+        name:
+          type: string
+          title: Name
+        status:
+          $ref: '#/components/schemas/EvaluationStatus'
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - evaluation_id
+      - name
+      - status
+      - updated_at
+      title: UpdateEvaluationResponse
+      description: Response after updating an evaluation
+    FinalizeEvaluationRequest:
+      properties:
+        metrics:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Metrics
+          description: Final metrics to attach to the evaluation
+      type: object
+      title: FinalizeEvaluationRequest
+      description: Request to finalize an evaluation (optional, can include final metrics)
     UpdateEvaluationRequest:
       properties:
         name:
@@ -1107,163 +1264,6 @@ components:
       type: object
       title: UpdateEvaluationRequest
       description: Request to update an existing evaluation
-    PushSamplesRequest:
-      properties:
-        samples:
-          items:
-            type: object
-          type: array
-          title: Samples
-          description: List of evaluation samples
-      type: object
-      required:
-      - samples
-      title: PushSamplesRequest
-      description: Request to push evaluation samples (replaces traces)
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
-    EvaluationType:
-      type: string
-      enum:
-      - suite
-      - training
-      - environment
-      title: EvaluationType
-      description: Evaluation type enum
-    BulkDeleteEvaluationsResponse:
-      properties:
-        success_count:
-          type: integer
-          title: Success Count
-          description: Number of evaluations successfully deleted
-        failure_count:
-          type: integer
-          title: Failure Count
-          description: Number of evaluations that failed to delete
-        successful_ids:
-          items:
-            type: string
-          type: array
-          title: Successful Ids
-          description: IDs of successfully deleted evaluations
-        failed_ids:
-          items:
-            type: string
-          type: array
-          title: Failed Ids
-          description: IDs of evaluations that failed to delete
-      type: object
-      required:
-      - success_count
-      - failure_count
-      - successful_ids
-      - failed_ids
-      title: BulkDeleteEvaluationsResponse
-    EvaluationStatus:
-      type: string
-      enum:
-      - PENDING
-      - RUNNING
-      - PROCESSING
-      - COMPLETED
-      - FAILED
-      - TIMEOUT
-      - CANCELLED
-      title: EvaluationStatus
-      description: Evaluation status enum
-    FinalizeEvaluationRequest:
-      properties:
-        metrics:
-          anyOf:
-          - type: object
-          - type: 'null'
-          title: Metrics
-          description: Final metrics to attach to the evaluation
-      type: object
-      title: FinalizeEvaluationRequest
-      description: Request to finalize an evaluation (optional, can include final metrics)
-    UpdateEvaluationResponse:
-      properties:
-        evaluation_id:
-          type: string
-          title: Evaluation Id
-        name:
-          type: string
-          title: Name
-        status:
-          $ref: '#/components/schemas/EvaluationStatus'
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - evaluation_id
-      - name
-      - status
-      - updated_at
-      title: UpdateEvaluationResponse
-      description: Response after updating an evaluation
-    GetSamplesResponse:
-      properties:
-        evaluation_id:
-          type: string
-          title: Evaluation Id
-        samples:
-          items:
-            type: object
-          type: array
-          title: Samples
-        total:
-          type: integer
-          title: Total
-        page:
-          type: integer
-          title: Page
-        limit:
-          type: integer
-          title: Limit
-        total_pages:
-          type: integer
-          title: Total Pages
-      type: object
-      required:
-      - evaluation_id
-      - samples
-      - total
-      - page
-      - limit
-      - total_pages
-      title: GetSamplesResponse
-      description: Response for getting evaluation samples
-    PushSamplesResponse:
-      properties:
-        evaluation_id:
-          type: string
-          title: Evaluation Id
-        samples_pushed:
-          type: integer
-          title: Samples Pushed
-        status:
-          $ref: '#/components/schemas/EvaluationStatus'
-      type: object
-      required:
-      - evaluation_id
-      - samples_pushed
-      - status
-      title: PushSamplesResponse
-      description: Response after pushing samples
   securitySchemes:
     HTTPBearer:
       type: http

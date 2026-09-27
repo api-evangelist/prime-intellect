@@ -49,6 +49,56 @@ paths:
                 $ref: '#/components/schemas/ChatCompletionResponse'
 components:
   schemas:
+    ChatMessage:
+      type: object
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
+          type: string
+    ChatCompletionRequest:
+      type: object
+      required:
+      - model
+      - messages
+      properties:
+        model:
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        stream:
+          type: boolean
+          default: false
+        temperature:
+          type: number
+        top_p:
+          type: number
+        max_tokens:
+          type: integer
+        logprobs:
+          type: boolean
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: model
+        created:
+          type: integer
+        owned_by:
+          type: string
     Usage:
       type: object
       properties:
@@ -78,38 +128,6 @@ components:
             $ref: '#/components/schemas/ChatCompletionChoice'
         usage:
           $ref: '#/components/schemas/Usage'
-    ChatCompletionChoice:
-      type: object
-      properties:
-        index:
-          type: integer
-        message:
-          $ref: '#/components/schemas/ChatMessage'
-        finish_reason:
-          type: string
-    ChatCompletionRequest:
-      type: object
-      required:
-      - model
-      - messages
-      properties:
-        model:
-          type: string
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatMessage'
-        stream:
-          type: boolean
-          default: false
-        temperature:
-          type: number
-        top_p:
-          type: number
-        max_tokens:
-          type: integer
-        logprobs:
-          type: boolean
     ModelList:
       type: object
       properties:
@@ -120,32 +138,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Model'
-    Model:
+    ChatCompletionChoice:
       type: object
       properties:
-        id:
-          type: string
-        object:
-          type: string
-          example: model
-        created:
+        index:
           type: integer
-        owned_by:
-          type: string
-    ChatMessage:
-      type: object
-      required:
-      - role
-      - content
-      properties:
-        role:
-          type: string
-          enum:
-          - system
-          - user
-          - assistant
-          - tool
-        content:
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+        finish_reason:
           type: string
   securitySchemes:
     HTTPBearer:

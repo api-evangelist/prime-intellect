@@ -85,61 +85,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    DeleteRunResponse:
-      properties:
-        runId:
-          type: string
-          title: Runid
-        deleted:
-          type: boolean
-          title: Deleted
-      type: object
-      required:
-      - runId
-      - deleted
-      title: DeleteRunResponse
-    CreateDedicatedRunResponse:
-      properties:
-        runId:
-          type: string
-          title: Runid
-        jobId:
-          type: string
-          title: Jobid
-        tokenValue:
-          type: string
-          title: Tokenvalue
-          description: PRIME_API_KEY for this run. Returned once — the platform stores only the token id.
-      type: object
-      required:
-      - runId
-      - jobId
-      - tokenValue
-      title: CreateDedicatedRunResponse
     CreateDedicatedRunRequest:
       properties:
         config:
@@ -179,6 +124,61 @@ components:
       required:
       - config
       title: CreateDedicatedRunRequest
+    CreateDedicatedRunResponse:
+      properties:
+        runId:
+          type: string
+          title: Runid
+        jobId:
+          type: string
+          title: Jobid
+        tokenValue:
+          type: string
+          title: Tokenvalue
+          description: PRIME_API_KEY for this run. Returned once — the platform stores only the token id.
+      type: object
+      required:
+      - runId
+      - jobId
+      - tokenValue
+      title: CreateDedicatedRunResponse
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    DeleteRunResponse:
+      properties:
+        runId:
+          type: string
+          title: Runid
+        deleted:
+          type: boolean
+          title: Deleted
+      type: object
+      required:
+      - runId
+      - deleted
+      title: DeleteRunResponse
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http

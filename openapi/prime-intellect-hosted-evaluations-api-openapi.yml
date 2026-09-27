@@ -131,75 +131,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
-    CancelHostedEvaluationResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-        message:
-          type: string
-          title: Message
-        evaluation_id:
-          type: string
-          title: Evaluation Id
-        status:
-          type: string
-          title: Status
-      type: object
-      required:
-      - success
-      - message
-      - evaluation_id
-      - status
-      title: CancelHostedEvaluationResponse
-    CreateHostedEvaluationRequest:
-      properties:
-        environment_ids:
-          items:
-            type: string
-          type: array
-          minItems: 1
-          title: Environment Ids
-          description: List of environment IDs to evaluate
-        inference_model:
-          type: string
-          title: Inference Model
-          description: Model ID for inference
-        eval_config:
-          $ref: '#/components/schemas/HostedEvalConfig'
-          description: Evaluation configuration
-        team_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Team Id
-          description: Optional team ID to own the hosted evaluation
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-          description: Optional custom evaluation name
-      type: object
-      required:
-      - environment_ids
-      - inference_model
-      - eval_config
-      title: CreateHostedEvaluationRequest
-      description: Request to create and start a hosted evaluation
     CreateHostedEvaluationResponse:
       properties:
         evaluation_id:
@@ -236,38 +167,41 @@ components:
       - status
       title: CreateHostedEvaluationResponse
       description: Response after creating a hosted evaluation
-    ErrorResponse:
+    CreateHostedEvaluationRequest:
       properties:
-        errors:
+        environment_ids:
           items:
-            $ref: '#/components/schemas/ErrorDetail'
+            type: string
           type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    GetHostedEvaluationLogsResponse:
-      properties:
-        logs:
+          minItems: 1
+          title: Environment Ids
+          description: List of environment IDs to evaluate
+        inference_model:
           type: string
-          title: Logs
-          description: Sandbox logs
-        sandbox_id:
+          title: Inference Model
+          description: Model ID for inference
+        eval_config:
+          $ref: '#/components/schemas/HostedEvalConfig'
+          description: Evaluation configuration
+        team_id:
           anyOf:
           - type: string
           - type: 'null'
-          title: Sandbox Id
-          description: Sandbox ID
-        evaluation_id:
-          type: string
-          title: Evaluation Id
-          description: Evaluation ID
+          title: Team Id
+          description: Optional team ID to own the hosted evaluation
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Optional custom evaluation name
       type: object
       required:
-      - logs
-      - evaluation_id
-      title: GetHostedEvaluationLogsResponse
+      - environment_ids
+      - inference_model
+      - eval_config
+      title: CreateHostedEvaluationRequest
+      description: Request to create and start a hosted evaluation
     ListInferenceModelsResponse:
       properties:
         models:
@@ -420,6 +354,72 @@ components:
       - rollouts_per_example
       title: HostedEvalConfig
       description: Hosted evaluation configuration
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    CancelHostedEvaluationResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        message:
+          type: string
+          title: Message
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - success
+      - message
+      - evaluation_id
+      - status
+      title: CancelHostedEvaluationResponse
+    GetHostedEvaluationLogsResponse:
+      properties:
+        logs:
+          type: string
+          title: Logs
+          description: Sandbox logs
+        sandbox_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sandbox Id
+          description: Sandbox ID
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+          description: Evaluation ID
+      type: object
+      required:
+      - logs
+      - evaluation_id
+      title: GetHostedEvaluationLogsResponse
   securitySchemes:
     HTTPBearer:
       type: http

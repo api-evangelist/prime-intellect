@@ -245,19 +245,140 @@ paths:
           description: Insufficient permissions
 components:
   schemas:
-    ErrorDetail:
+    ClusterNodeLogEntry:
       properties:
-        param:
+        id:
           type: string
-          title: Param
-        details:
+          title: Id
+        eventType:
           type: string
-          title: Details
+          title: Eventtype
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        podId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Podid
+        podName:
+          type: string
+          title: Podname
+        podStatus:
+          type: string
+          title: Podstatus
+        gpuName:
+          type: string
+          title: Gpuname
+        gpuCount:
+          type: integer
+          title: Gpucount
+        host:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Host
+        role:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Role
+        changeSummary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Changesummary
       type: object
       required:
-      - param
-      - details
-      title: ErrorDetail
+      - id
+      - eventType
+      - createdAt
+      - podName
+      - podStatus
+      - gpuName
+      - gpuCount
+      title: ClusterNodeLogEntry
+      description: One ClusterNodeLog row (matches the frontend Node History dialog).
+    GenericResponse_CertificateResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/CertificateResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[CertificateResponse]
+    AdminClusterSummary:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        providerType:
+          type: string
+          title: Providertype
+        status:
+          type: string
+          title: Status
+        vaultEnabled:
+          type: boolean
+          title: Vaultenabled
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        controller:
+          anyOf:
+          - $ref: '#/components/schemas/ClusterNodeConnection'
+          - type: 'null'
+          description: Control-node connection details (always populated when a control node exists).
+        nodes:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ClusterNodeConnection'
+            type: array
+          - type: 'null'
+          title: Nodes
+          description: All node connection details. Only populated when ?detailed=true.
+      type: object
+      required:
+      - id
+      - name
+      - providerType
+      - status
+      - vaultEnabled
+      - createdAt
+      title: AdminClusterSummary
+      description: Lightweight cluster summary returned by the admin list endpoint.
+    ClusterNodeLogEventTypeEnum:
+      type: string
+      enum:
+      - ATTACHED
+      - UPDATED
+      - DETACHED
+      - CLUSTER_UPDATED
+      - CLUSTER_TERMINATED
+      - AUTHORIZATION
+      title: ClusterNodeLogEventTypeEnum
     CertificateRequest:
       properties:
         publicKey:
@@ -279,31 +400,6 @@ components:
         If ``public_key`` is provided the backend will sign it directly; otherwise
 
         it falls back to the admin''s DB-stored SSH public key.'
-    CertificateResponse:
-      properties:
-        signedKey:
-          type: string
-          title: Signedkey
-        validPrincipals:
-          items:
-            type: string
-          type: array
-          title: Validprincipals
-        ttl:
-          type: string
-          title: Ttl
-        nodes:
-          items:
-            $ref: '#/components/schemas/ClusterNodeConnection'
-          type: array
-          title: Nodes
-          description: All connectable SSH endpoints for the cluster.
-      type: object
-      required:
-      - signedKey
-      - validPrincipals
-      - ttl
-      title: CertificateResponse
     ClusterSSHKeyDetail:
       properties:
         id:
@@ -333,146 +429,46 @@ components:
       - role
       title: ClusterSSHKeyDetail
       description: Authorized SSH key entry for a cluster.
-    ClusterDetailResponse:
+    CertificateResponse:
       properties:
-        id:
+        signedKey:
           type: string
-          title: Id
-        remoteId:
+          title: Signedkey
+        validPrincipals:
+          items:
+            type: string
+          type: array
+          title: Validprincipals
+        ttl:
           type: string
-          title: Remoteid
-        name:
-          type: string
-          title: Name
-        providerType:
-          type: string
-          title: Providertype
-        status:
-          type: string
-          title: Status
-        vaultEnabled:
-          type: boolean
-          title: Vaultenabled
-        gpuName:
-          type: string
-          title: Gpuname
-        gpuCount:
-          type: integer
-          title: Gpucount
-        socket:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Socket
-        priceHr:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Pricehr
-        stoppedPriceHr:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Stoppedpricehr
-        provisioningPriceHr:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Provisioningpricehr
-        basePriceHr:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Basepricehr
-        baseCurrency:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Basecurrency
-        userId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Userid
-        teamId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Teamid
-        walletId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Walletid
-        orchestratorType:
-          type: string
-          title: Orchestratortype
-        orchestratorVersion:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Orchestratorversion
-        orchestratorEndpoint:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Orchestratorendpoint
-        orchestratorConfig:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Orchestratorconfig
-        orchestratorDeploymentJobId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Orchestratordeploymentjobid
-        orchestratorDeploymentStatus:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Orchestratordeploymentstatus
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        updatedAt:
-          type: string
-          format: date-time
-          title: Updatedat
-        terminatedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Terminatedat
-        info:
-          title: Info
+          title: Ttl
         nodes:
           items:
-            $ref: '#/components/schemas/ClusterNodeDetail'
+            $ref: '#/components/schemas/ClusterNodeConnection'
           type: array
           title: Nodes
-        sshKeys:
-          items:
-            $ref: '#/components/schemas/ClusterSSHKeyDetail'
-          type: array
-          title: Sshkeys
+          description: All connectable SSH endpoints for the cluster.
       type: object
       required:
-      - id
-      - remoteId
-      - name
-      - providerType
-      - status
-      - vaultEnabled
-      - gpuName
-      - gpuCount
-      - orchestratorType
-      - createdAt
-      - updatedAt
-      title: ClusterDetailResponse
-      description: All DB details for a single cluster (columns + nodes + SSH keys).
+      - signedKey
+      - validPrincipals
+      - ttl
+      title: CertificateResponse
+    GenericResponse_ClusterDetailResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClusterDetailResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[ClusterDetailResponse]
     GenericPaginationResponse_list_ClusterNodeLogEntry__:
       properties:
         total_count:
@@ -507,68 +503,6 @@ components:
       required:
       - data
       title: GenericPaginationResponse[list[ClusterNodeLogEntry]]
-    ClusterNodeConnection:
-      properties:
-        podId:
-          type: string
-          title: Podid
-        podName:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Podname
-        host:
-          type: string
-          title: Host
-        port:
-          type: integer
-          title: Port
-          default: 22
-        user:
-          type: string
-          title: User
-        role:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Role
-        isControlNode:
-          type: boolean
-          title: Iscontrolnode
-          default: false
-      type: object
-      required:
-      - podId
-      - host
-      - user
-      title: ClusterNodeConnection
-      description: Connection details for a single cluster pod/node.
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    GenericResponse_ClusterDetailResponse_:
-      properties:
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/ClusterDetailResponse'
-          - type: 'null'
-          description: Response data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      title: GenericResponse[ClusterDetailResponse]
     ClusterNodeDetail:
       properties:
         id:
@@ -722,21 +656,206 @@ components:
       - updatedAt
       title: ClusterNodeDetail
       description: Full DB details for a single cluster pod/node.
-    GenericResponse_CertificateResponse_:
+    ErrorResponse:
       properties:
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/CertificateResponse'
-          - type: 'null'
-          description: Response data
-        status:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    ClusterNodeConnection:
+      properties:
+        podId:
+          type: string
+          title: Podid
+        podName:
           anyOf:
           - type: string
           - type: 'null'
-          title: Status
-          description: Response status
+          title: Podname
+        host:
+          type: string
+          title: Host
+        port:
+          type: integer
+          title: Port
+          default: 22
+        user:
+          type: string
+          title: User
+        role:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Role
+        isControlNode:
+          type: boolean
+          title: Iscontrolnode
+          default: false
       type: object
-      title: GenericResponse[CertificateResponse]
+      required:
+      - podId
+      - host
+      - user
+      title: ClusterNodeConnection
+      description: Connection details for a single cluster pod/node.
+    ClusterDetailResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        remoteId:
+          type: string
+          title: Remoteid
+        name:
+          type: string
+          title: Name
+        providerType:
+          type: string
+          title: Providertype
+        status:
+          type: string
+          title: Status
+        vaultEnabled:
+          type: boolean
+          title: Vaultenabled
+        gpuName:
+          type: string
+          title: Gpuname
+        gpuCount:
+          type: integer
+          title: Gpucount
+        socket:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Socket
+        priceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Pricehr
+        stoppedPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Stoppedpricehr
+        provisioningPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Provisioningpricehr
+        basePriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Basepricehr
+        baseCurrency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Basecurrency
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+        walletId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Walletid
+        orchestratorType:
+          type: string
+          title: Orchestratortype
+        orchestratorVersion:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratorversion
+        orchestratorEndpoint:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratorendpoint
+        orchestratorConfig:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Orchestratorconfig
+        orchestratorDeploymentJobId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratordeploymentjobid
+        orchestratorDeploymentStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratordeploymentstatus
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        terminatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Terminatedat
+        info:
+          title: Info
+        nodes:
+          items:
+            $ref: '#/components/schemas/ClusterNodeDetail'
+          type: array
+          title: Nodes
+        sshKeys:
+          items:
+            $ref: '#/components/schemas/ClusterSSHKeyDetail'
+          type: array
+          title: Sshkeys
+      type: object
+      required:
+      - id
+      - remoteId
+      - name
+      - providerType
+      - status
+      - vaultEnabled
+      - gpuName
+      - gpuCount
+      - orchestratorType
+      - createdAt
+      - updatedAt
+      title: ClusterDetailResponse
+      description: All DB details for a single cluster (columns + nodes + SSH keys).
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
     GenericPaginationResponse_list_AdminClusterSummary__:
       properties:
         total_count:
@@ -771,125 +890,6 @@ components:
       required:
       - data
       title: GenericPaginationResponse[list[AdminClusterSummary]]
-    ClusterNodeLogEventTypeEnum:
-      type: string
-      enum:
-      - ATTACHED
-      - UPDATED
-      - DETACHED
-      - CLUSTER_UPDATED
-      - CLUSTER_TERMINATED
-      - AUTHORIZATION
-      title: ClusterNodeLogEventTypeEnum
-    AdminClusterSummary:
-      properties:
-        id:
-          type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        providerType:
-          type: string
-          title: Providertype
-        status:
-          type: string
-          title: Status
-        vaultEnabled:
-          type: boolean
-          title: Vaultenabled
-        teamId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Teamid
-        userId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Userid
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        controller:
-          anyOf:
-          - $ref: '#/components/schemas/ClusterNodeConnection'
-          - type: 'null'
-          description: Control-node connection details (always populated when a control node exists).
-        nodes:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/ClusterNodeConnection'
-            type: array
-          - type: 'null'
-          title: Nodes
-          description: All node connection details. Only populated when ?detailed=true.
-      type: object
-      required:
-      - id
-      - name
-      - providerType
-      - status
-      - vaultEnabled
-      - createdAt
-      title: AdminClusterSummary
-      description: Lightweight cluster summary returned by the admin list endpoint.
-    ClusterNodeLogEntry:
-      properties:
-        id:
-          type: string
-          title: Id
-        eventType:
-          type: string
-          title: Eventtype
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        podId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Podid
-        podName:
-          type: string
-          title: Podname
-        podStatus:
-          type: string
-          title: Podstatus
-        gpuName:
-          type: string
-          title: Gpuname
-        gpuCount:
-          type: integer
-          title: Gpucount
-        host:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Host
-        role:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Role
-        changeSummary:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Changesummary
-      type: object
-      required:
-      - id
-      - eventType
-      - createdAt
-      - podName
-      - podStatus
-      - gpuName
-      - gpuCount
-      title: ClusterNodeLogEntry
-      description: One ClusterNodeLog row (matches the frontend Node History dialog).
   securitySchemes:
     HTTPBearer:
       type: http
