@@ -105,6 +105,90 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
+    UserRoleEnum:
+      type: string
+      enum:
+      - ADMIN
+      - MANAGER
+      - USER
+      title: UserRoleEnum
+    GenericResponse_WhoamiResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/WhoamiResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[WhoamiResponse]
+    User:
+      properties:
+        id:
+          type: string
+          title: Id
+        role:
+          $ref: '#/components/schemas/UserRoleEnum'
+          default: USER
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        name:
+          type: string
+          title: Name
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        email:
+          type: string
+          title: Email
+        image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image
+        emailVerified:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Emailverified
+        hasBetaAccess:
+          type: boolean
+          title: Hasbetaaccess
+          default: false
+        isBanned:
+          type: boolean
+          title: Isbanned
+          default: false
+        skipPrepay:
+          type: boolean
+          title: Skipprepay
+          default: false
+        blacklist:
+          items:
+            type: string
+          type: array
+          title: Blacklist
+          default: []
+      type: object
+      required:
+      - name
+      - email
+      title: User
+    TeamRoleEnum:
+      type: string
+      enum:
+      - ADMIN
+      - MEMBER
+      title: TeamRoleEnum
     GenericResponse_User_:
       properties:
         data:
@@ -154,6 +238,82 @@ components:
       required:
       - data
       title: GenericPaginationResponse[List[TeamSummary]]
+    PermissionType:
+      properties:
+        read:
+          type: boolean
+          title: Read
+        write:
+          type: boolean
+          title: Write
+      type: object
+      required:
+      - read
+      - write
+      title: PermissionType
+    UserSlugUpdateRequest:
+      properties:
+        slug:
+          type: string
+          maxLength: 30
+          minLength: 3
+          pattern: ^[a-z0-9-]+$
+          title: Slug
+          description: Desired unique username/slug (lowercase, 3-30 chars, a-z, 0-9, -)
+      type: object
+      required:
+      - slug
+      title: UserSlugUpdateRequest
+    TeamSummary:
+      properties:
+        teamId:
+          type: string
+          title: Teamid
+        name:
+          type: string
+          title: Name
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        role:
+          $ref: '#/components/schemas/TeamRoleEnum'
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+      type: object
+      required:
+      - teamId
+      - name
+      - role
+      - createdAt
+      title: TeamSummary
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
     WhoamiResponse:
       properties:
         id:
@@ -219,166 +379,6 @@ components:
       - email
       title: WhoamiResponse
       description: Extended User response that includes token scope permissions.
-    UserSlugUpdateRequest:
-      properties:
-        slug:
-          type: string
-          maxLength: 30
-          minLength: 3
-          pattern: ^[a-z0-9-]+$
-          title: Slug
-          description: Desired unique username/slug (lowercase, 3-30 chars, a-z, 0-9, -)
-      type: object
-      required:
-      - slug
-      title: UserSlugUpdateRequest
-    UserRoleEnum:
-      type: string
-      enum:
-      - ADMIN
-      - MANAGER
-      - USER
-      title: UserRoleEnum
-    TeamSummary:
-      properties:
-        teamId:
-          type: string
-          title: Teamid
-        name:
-          type: string
-          title: Name
-        slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Slug
-        role:
-          $ref: '#/components/schemas/TeamRoleEnum'
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-      type: object
-      required:
-      - teamId
-      - name
-      - role
-      - createdAt
-      title: TeamSummary
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    User:
-      properties:
-        id:
-          type: string
-          title: Id
-        role:
-          $ref: '#/components/schemas/UserRoleEnum'
-          default: USER
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        name:
-          type: string
-          title: Name
-        slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Slug
-        email:
-          type: string
-          title: Email
-        image:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Image
-        emailVerified:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Emailverified
-        hasBetaAccess:
-          type: boolean
-          title: Hasbetaaccess
-          default: false
-        isBanned:
-          type: boolean
-          title: Isbanned
-          default: false
-        skipPrepay:
-          type: boolean
-          title: Skipprepay
-          default: false
-        blacklist:
-          items:
-            type: string
-          type: array
-          title: Blacklist
-          default: []
-      type: object
-      required:
-      - name
-      - email
-      title: User
-    PermissionType:
-      properties:
-        read:
-          type: boolean
-          title: Read
-        write:
-          type: boolean
-          title: Write
-      type: object
-      required:
-      - read
-      - write
-      title: PermissionType
-    TeamRoleEnum:
-      type: string
-      enum:
-      - ADMIN
-      - MEMBER
-      title: TeamRoleEnum
-    GenericResponse_WhoamiResponse_:
-      properties:
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/WhoamiResponse'
-          - type: 'null'
-          description: Response data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      title: GenericResponse[WhoamiResponse]
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http

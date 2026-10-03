@@ -222,6 +222,30 @@ components:
       - pricing
       title: RunUsageResponse
       description: Per-run usage totals — drives `prime train usage <run_id>`.
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
     RunUsageBreakdown:
       properties:
         tokens:
@@ -301,30 +325,6 @@ components:
         `resource_id` is the matching FK value, so callers can drill back into
 
         the run / pod / disk / etc. that produced the charge.'
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http

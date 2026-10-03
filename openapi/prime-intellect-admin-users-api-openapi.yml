@@ -50,6 +50,13 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
+    UserRoleEnum:
+      type: string
+      enum:
+      - ADMIN
+      - MANAGER
+      - USER
+      title: UserRoleEnum
     AdminWhoamiResponse:
       properties:
         id:
@@ -119,13 +126,30 @@ components:
       - admin_role
       title: AdminWhoamiResponse
       description: Extended User response that includes admin permissions.
-    UserRoleEnum:
-      type: string
-      enum:
-      - ADMIN
-      - MANAGER
-      - USER
-      title: UserRoleEnum
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
     GenericResponse_AdminWhoamiResponse_:
       properties:
         data:
@@ -141,30 +165,6 @@ components:
           description: Response status
       type: object
       title: GenericResponse[AdminWhoamiResponse]
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http

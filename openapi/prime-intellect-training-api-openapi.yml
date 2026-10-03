@@ -85,6 +85,19 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    DeleteRunResponse:
+      properties:
+        runId:
+          type: string
+          title: Runid
+        deleted:
+          type: boolean
+          title: Deleted
+      type: object
+      required:
+      - runId
+      - deleted
+      title: DeleteRunResponse
     CreateDedicatedRunRequest:
       properties:
         config:
@@ -124,6 +137,30 @@ components:
       required:
       - config
       title: CreateDedicatedRunRequest
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
     CreateDedicatedRunResponse:
       properties:
         runId:
@@ -142,43 +179,6 @@ components:
       - jobId
       - tokenValue
       title: CreateDedicatedRunResponse
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    DeleteRunResponse:
-      properties:
-        runId:
-          type: string
-          title: Runid
-        deleted:
-          type: boolean
-          title: Deleted
-      type: object
-      required:
-      - runId
-      - deleted
-      title: DeleteRunResponse
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http

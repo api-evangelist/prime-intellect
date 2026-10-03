@@ -57,17 +57,33 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
+    FrpPluginResponse:
       properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
+        reject:
+          type: boolean
+          title: Reject
+          description: Whether to reject the operation
+          default: false
+        reject_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reject Reason
+          description: Reason for rejection if rejected
+        unchange:
+          type: boolean
+          title: Unchange
+          description: Whether to leave request unchanged
+          default: true
+        content:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Content
+          description: Modified content if unchange=False
       type: object
-      required:
-      - errors
-      title: ErrorResponse
+      title: FrpPluginResponse
+      description: Response to frps server plugin.
     FrpPluginRequest:
       properties:
         version:
@@ -102,33 +118,17 @@ components:
       - param
       - details
       title: ErrorDetail
-    FrpPluginResponse:
+    ErrorResponse:
       properties:
-        reject:
-          type: boolean
-          title: Reject
-          description: Whether to reject the operation
-          default: false
-        reject_reason:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reject Reason
-          description: Reason for rejection if rejected
-        unchange:
-          type: boolean
-          title: Unchange
-          description: Whether to leave request unchanged
-          default: true
-        content:
-          anyOf:
-          - type: object
-          - type: 'null'
-          title: Content
-          description: Modified content if unchange=False
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
       type: object
-      title: FrpPluginResponse
-      description: Response to frps server plugin.
+      required:
+      - errors
+      title: ErrorResponse
   securitySchemes:
     HTTPBearer:
       type: http

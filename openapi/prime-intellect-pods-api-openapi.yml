@@ -276,57 +276,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ProtocolEnum:
-      type: string
-      enum:
-      - TCP
-      - UDP
-      title: ProtocolEnum
-    ProviderTypeEnum:
-      type: string
-      enum:
-      - runpod
-      - fluidstack
-      - lambdalabs
-      - hyperstack
-      - oblivus
-      - cudocompute
-      - scaleway
-      - tensordock
-      - datacrunch
-      - latitude
-      - crusoecloud
-      - massedcompute
-      - akash
-      - primeintellect
-      - primecompute
-      - dc_impala
-      - dc_kudu
-      - dc_roan
-      - nebius
-      - dc_eland
-      - dc_wildebeest
-      - vultr
-      - dc_gnu
-      - denvr
-      title: ProviderTypeEnum
-    AttachableResourceStatus:
-      type: string
-      enum:
-      - UNATTACHED
-      - ATTACHED
-      - MOUNTED
-      title: AttachableResourceStatus
-    GPUSocket:
-      type: string
-      enum:
-      - PCIe
-      - SXM2
-      - SXM3
-      - SXM4
-      - SXM5
-      - SXM6
-      title: GPUSocket
     GPUType:
       type: string
       enum:
@@ -381,6 +330,27 @@ components:
       - P40_24GB
       - RTX_PRO_6000B_96GB
       title: GPUType
+    TeamConfig:
+      properties:
+        teamId:
+          type: string
+          title: Teamid
+      type: object
+      required:
+      - teamId
+      title: TeamConfig
+    PodStatusEnum:
+      type: string
+      enum:
+      - PROVISIONING
+      - PENDING
+      - ACTIVE
+      - STOPPED
+      - ERROR
+      - DELETING
+      - UNKNOWN
+      - TERMINATED
+      title: PodStatusEnum
     InstanceResources:
       properties:
         memory:
@@ -417,144 +387,6 @@ components:
           - '32'
       type: object
       title: InstanceResources
-    UsedByEnum:
-      type: string
-      enum:
-      - SSH
-      - JUPYTER_NOTEBOOK
-      - WEB_SERVER
-      title: UsedByEnum
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    PortMapping:
-      properties:
-        internal:
-          type: string
-          title: Internal
-          examples:
-          - '8080'
-        external:
-          type: string
-          title: External
-          examples:
-          - '1234'
-        protocol:
-          $ref: '#/components/schemas/ProtocolEnum'
-        usedBy:
-          anyOf:
-          - $ref: '#/components/schemas/UsedByEnum'
-          - type: 'null'
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-      type: object
-      required:
-      - internal
-      - external
-      - protocol
-      title: PortMapping
-    GenericPaginationResponse_List_HistoryObj__:
-      properties:
-        total_count:
-          type: integer
-          title: Total Count
-          description: Total number of items available in the dataset
-          default: 0
-        offset:
-          type: integer
-          minimum: 0.0
-          title: Offset
-          description: Number of items to skip before starting to collect the result set
-          default: 0
-        limit:
-          type: integer
-          minimum: 0.0
-          title: Limit
-          description: Maximum number of items to return
-          default: 100
-        data:
-          items:
-            $ref: '#/components/schemas/HistoryObj'
-          type: array
-          title: Data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      required:
-      - data
-      title: GenericPaginationResponse[List[HistoryObj]]
-    GenericPaginationResponse_List_APIPodConfig__:
-      properties:
-        total_count:
-          type: integer
-          title: Total Count
-          description: Total number of items available in the dataset
-          default: 0
-        offset:
-          type: integer
-          minimum: 0.0
-          title: Offset
-          description: Number of items to skip before starting to collect the result set
-          default: 0
-        limit:
-          type: integer
-          minimum: 0.0
-          title: Limit
-          description: Maximum number of items to return
-          default: 100
-        data:
-          items:
-            $ref: '#/components/schemas/APIPodConfig'
-          type: array
-          title: Data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      required:
-      - data
-      title: GenericPaginationResponse[List[APIPodConfig]]
-    PodTypeEnum:
-      type: string
-      enum:
-      - HOSTED
-      - EXTERNAL
-      title: PodTypeEnum
-    TeamConfig:
-      properties:
-        teamId:
-          type: string
-          title: Teamid
-      type: object
-      required:
-      - teamId
-      title: TeamConfig
-    ProviderConfig:
-      properties:
-        type:
-          $ref: '#/components/schemas/ProviderTypeEnum'
-      type: object
-      required:
-      - type
-      title: ProviderConfig
     EnvVar:
       properties:
         key:
@@ -570,112 +402,14 @@ components:
       - key
       - value
       title: EnvVar
-    APIDeletePodResponse:
+    ProviderConfig:
       properties:
-        status:
-          $ref: '#/components/schemas/PodStatusEnum'
-          examples:
-          - TERMINATED
-      type: object
-      required:
-      - status
-      title: APIDeletePodResponse
-    HistoryObj:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: Unique identifier for the record.
-        name:
-          type: string
-          title: Name
-          description: Name assigned to the resource.
-        providerType:
-          $ref: '#/components/schemas/ProviderTypeEnum'
-          description: ID of the provider.
-        provisionedBy:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provisionedby
-          description: Name of the user who provisioned the resource.
         type:
-          $ref: '#/components/schemas/ResourceType'
-          description: Type of the resource.
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-          description: Timestamp when the resource was created.
-        terminatedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Terminatedat
-          description: Timestamp when the resource was terminated.
-        gpuName:
-          type: string
-          title: Gpuname
-          description: Model of the GPU used in the resource.
-        gpuCount:
-          type: integer
-          title: Gpucount
-          description: Number of GPUs allocated to the resource.
-          examples:
-          - 1
-        socket:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Socket
-          description: Type of socket used by the GPU, if applicable.
-        priceHr:
-          type: number
-          title: Pricehr
-          description: Price per hour for using the resource (average).
-          examples:
-          - 1.23
-        userId:
-          type: string
-          title: Userid
-          description: ID of the user who owns the resource.
-        teamId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Teamid
-          description: ID of the team to which the resource is assigned, if applicable.
-        totalBilledPrice:
-          type: number
-          title: Totalbilledprice
-          description: Total amount billed for this resource.
-          examples:
-          - 123.45
+          $ref: '#/components/schemas/ProviderTypeEnum'
       type: object
       required:
-      - id
-      - name
-      - providerType
       - type
-      - createdAt
-      - gpuName
-      - gpuCount
-      - priceHr
-      - userId
-      - totalBilledPrice
-      title: HistoryObj
-    ResourceType:
-      type: string
-      enum:
-      - Instance
-      - Cluster
-      - Disk
-      - Sandbox
-      - Inference
-      - Image
-      - Training
-      title: ResourceType
+      title: ProviderConfig
     PodRequestConfig:
       properties:
         name:
@@ -777,27 +511,120 @@ components:
       - socket
       - gpuCount
       title: PodRequestConfig
-    PodStatusEnum:
+    GenericPaginationResponse_List_HistoryObj__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/HistoryObj'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[HistoryObj]]
+    PortMapping:
+      properties:
+        internal:
+          type: string
+          title: Internal
+          examples:
+          - '8080'
+        external:
+          type: string
+          title: External
+          examples:
+          - '1234'
+        protocol:
+          $ref: '#/components/schemas/ProtocolEnum'
+        usedBy:
+          anyOf:
+          - $ref: '#/components/schemas/UsedByEnum'
+          - type: 'null'
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+      type: object
+      required:
+      - internal
+      - external
+      - protocol
+      title: PortMapping
+    GenericPaginationResponse_List_APIPodConfig__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/APIPodConfig'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[APIPodConfig]]
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    ProtocolEnum:
       type: string
       enum:
-      - PROVISIONING
-      - PENDING
-      - ACTIVE
-      - STOPPED
-      - ERROR
-      - DELETING
-      - UNKNOWN
-      - TERMINATED
-      title: PodStatusEnum
-    InstallationStatusEnum:
-      type: string
-      enum:
-      - PENDING
-      - ACTIVE
-      - FINISHED
-      - ERROR
-      - TERMINATED
-      title: InstallationStatusEnum
+      - TCP
+      - UDP
+      title: ProtocolEnum
     EnvironmentTypeEnum:
       type: string
       enum:
@@ -822,101 +649,6 @@ components:
       - flux
       - prime_rl
       title: EnvironmentTypeEnum
-    GenericResponse_List_APIPodStatusResponse__:
-      properties:
-        data:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/APIPodStatusResponse'
-            type: array
-          - type: 'null'
-          title: Data
-          description: Response data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      title: GenericResponse[List[APIPodStatusResponse]]
-    SecurityType:
-      type: string
-      enum:
-      - secure_cloud
-      - community_cloud
-      title: SecurityType
-    AttachableResourceType:
-      type: string
-      enum:
-      - DISK
-      const: DISK
-      title: AttachableResourceType
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
-    AttachedResources:
-      properties:
-        resourceType:
-          $ref: '#/components/schemas/AttachableResourceType'
-          description: Type of resource.
-          examples:
-          - DISK
-        id:
-          anyOf:
-          - type: string
-          - type: integer
-          title: Id
-          description: Unique identifier for the resource.
-        status:
-          $ref: '#/components/schemas/AttachableResourceStatus'
-          description: Resource status.
-          default: UNATTACHED
-        isDetachable:
-          type: boolean
-          title: Isdetachable
-          description: Whether the resource is detachable.
-          default: true
-        mountPath:
-          type: string
-          title: Mountpath
-          description: Path to the mount point.
-          default: /workspace
-        resourcePath:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Resourcepath
-          description: Path to the resource.
-        size:
-          anyOf:
-          - type: string
-          - type: integer
-          - type: 'null'
-          title: Size
-          description: Size of the resource.
-        isShared:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Isshared
-          description: Whether the resource is shared.
-          default: false
-      type: object
-      required:
-      - resourceType
-      - id
-      title: AttachedResources
     APIPodConfig:
       properties:
         id:
@@ -1104,6 +836,126 @@ components:
       - socket
       - priceHr
       title: APIPodConfig
+    HistoryObj:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier for the record.
+        name:
+          type: string
+          title: Name
+          description: Name assigned to the resource.
+        providerType:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+          description: ID of the provider.
+        provisionedBy:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provisionedby
+          description: Name of the user who provisioned the resource.
+        type:
+          $ref: '#/components/schemas/ResourceType'
+          description: Type of the resource.
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the resource was created.
+        terminatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Terminatedat
+          description: Timestamp when the resource was terminated.
+        gpuName:
+          type: string
+          title: Gpuname
+          description: Model of the GPU used in the resource.
+        gpuCount:
+          type: integer
+          title: Gpucount
+          description: Number of GPUs allocated to the resource.
+          examples:
+          - 1
+        socket:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Socket
+          description: Type of socket used by the GPU, if applicable.
+        priceHr:
+          type: number
+          title: Pricehr
+          description: Price per hour for using the resource (average).
+          examples:
+          - 1.23
+        userId:
+          type: string
+          title: Userid
+          description: ID of the user who owns the resource.
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: ID of the team to which the resource is assigned, if applicable.
+        totalBilledPrice:
+          type: number
+          title: Totalbilledprice
+          description: Total amount billed for this resource.
+          examples:
+          - 123.45
+      type: object
+      required:
+      - id
+      - name
+      - providerType
+      - type
+      - createdAt
+      - gpuName
+      - gpuCount
+      - priceHr
+      - userId
+      - totalBilledPrice
+      title: HistoryObj
+    SecurityType:
+      type: string
+      enum:
+      - secure_cloud
+      - community_cloud
+      title: SecurityType
+    APIDeletePodResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/PodStatusEnum'
+          examples:
+          - TERMINATED
+      type: object
+      required:
+      - status
+      title: APIDeletePodResponse
+    AttachableResourceType:
+      type: string
+      enum:
+      - DISK
+      const: DISK
+      title: AttachableResourceType
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
     APIPodStatusResponse:
       properties:
         podId:
@@ -1165,6 +1017,76 @@ components:
       - providerType
       - status
       title: APIPodStatusResponse
+    AttachableResourceStatus:
+      type: string
+      enum:
+      - UNATTACHED
+      - ATTACHED
+      - MOUNTED
+      title: AttachableResourceStatus
+    PodTypeEnum:
+      type: string
+      enum:
+      - HOSTED
+      - EXTERNAL
+      title: PodTypeEnum
+    ResourceType:
+      type: string
+      enum:
+      - Instance
+      - Cluster
+      - Disk
+      - Sandbox
+      - Inference
+      - Image
+      - Training
+      title: ResourceType
+    GenericResponse_List_APIPodStatusResponse__:
+      properties:
+        data:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/APIPodStatusResponse'
+            type: array
+          - type: 'null'
+          title: Data
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[List[APIPodStatusResponse]]
+    ProviderTypeEnum:
+      type: string
+      enum:
+      - runpod
+      - fluidstack
+      - lambdalabs
+      - hyperstack
+      - oblivus
+      - cudocompute
+      - scaleway
+      - tensordock
+      - datacrunch
+      - latitude
+      - crusoecloud
+      - massedcompute
+      - akash
+      - primeintellect
+      - primecompute
+      - dc_impala
+      - dc_kudu
+      - dc_roan
+      - nebius
+      - dc_eland
+      - dc_wildebeest
+      - vultr
+      - dc_gnu
+      - denvr
+      title: ProviderTypeEnum
     Body_create_pod_api_v1_pods__post:
       properties:
         pod:
@@ -1198,6 +1120,84 @@ components:
       - pod
       - provider
       title: Body_create_pod_api_v1_pods__post
+    GPUSocket:
+      type: string
+      enum:
+      - PCIe
+      - SXM2
+      - SXM3
+      - SXM4
+      - SXM5
+      - SXM6
+      title: GPUSocket
+    InstallationStatusEnum:
+      type: string
+      enum:
+      - PENDING
+      - ACTIVE
+      - FINISHED
+      - ERROR
+      - TERMINATED
+      title: InstallationStatusEnum
+    UsedByEnum:
+      type: string
+      enum:
+      - SSH
+      - JUPYTER_NOTEBOOK
+      - WEB_SERVER
+      title: UsedByEnum
+    AttachedResources:
+      properties:
+        resourceType:
+          $ref: '#/components/schemas/AttachableResourceType'
+          description: Type of resource.
+          examples:
+          - DISK
+        id:
+          anyOf:
+          - type: string
+          - type: integer
+          title: Id
+          description: Unique identifier for the resource.
+        status:
+          $ref: '#/components/schemas/AttachableResourceStatus'
+          description: Resource status.
+          default: UNATTACHED
+        isDetachable:
+          type: boolean
+          title: Isdetachable
+          description: Whether the resource is detachable.
+          default: true
+        mountPath:
+          type: string
+          title: Mountpath
+          description: Path to the mount point.
+          default: /workspace
+        resourcePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Resourcepath
+          description: Path to the resource.
+        size:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: 'null'
+          title: Size
+          description: Size of the resource.
+        isShared:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Isshared
+          description: Whether the resource is shared.
+          default: false
+      type: object
+      required:
+      - resourceType
+      - id
+      title: AttachedResources
   securitySchemes:
     HTTPBearer:
       type: http

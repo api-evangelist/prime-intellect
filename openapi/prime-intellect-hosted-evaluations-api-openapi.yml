@@ -131,42 +131,27 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CreateHostedEvaluationResponse:
+    GetHostedEvaluationLogsResponse:
       properties:
-        evaluation_id:
+        logs:
           type: string
-          title: Evaluation Id
-          description: ID of the created evaluation
+          title: Logs
+          description: Sandbox logs
         sandbox_id:
           anyOf:
           - type: string
           - type: 'null'
           title: Sandbox Id
-          description: ID of the sandbox running the evaluation
-        status:
+          description: Sandbox ID
+        evaluation_id:
           type: string
-          title: Status
-          description: Current status of the evaluation
-        evaluation_ids:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Evaluation Ids
-          description: List of evaluation IDs if multiple environments were provided
-        error:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error
-          description: Error message if creation failed
+          title: Evaluation Id
+          description: Evaluation ID
       type: object
       required:
+      - logs
       - evaluation_id
-      - status
-      title: CreateHostedEvaluationResponse
-      description: Response after creating a hosted evaluation
+      title: GetHostedEvaluationLogsResponse
     CreateHostedEvaluationRequest:
       properties:
         environment_ids:
@@ -202,19 +187,6 @@ components:
       - eval_config
       title: CreateHostedEvaluationRequest
       description: Request to create and start a hosted evaluation
-    ListInferenceModelsResponse:
-      properties:
-        models:
-          items:
-            type: object
-          type: array
-          title: Models
-          description: List of available models
-      type: object
-      required:
-      - models
-      title: ListInferenceModelsResponse
-      description: Response for listing available inference models
     HostedEvalConfig:
       properties:
         num_examples:
@@ -354,17 +326,55 @@ components:
       - rollouts_per_example
       title: HostedEvalConfig
       description: Hosted evaluation configuration
-    ErrorResponse:
+    CreateHostedEvaluationResponse:
       properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
+        evaluation_id:
+          type: string
+          title: Evaluation Id
+          description: ID of the created evaluation
+        sandbox_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sandbox Id
+          description: ID of the sandbox running the evaluation
+        status:
+          type: string
+          title: Status
+          description: Current status of the evaluation
+        evaluation_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Evaluation Ids
+          description: List of evaluation IDs if multiple environments were provided
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+          description: Error message if creation failed
       type: object
       required:
-      - errors
-      title: ErrorResponse
+      - evaluation_id
+      - status
+      title: CreateHostedEvaluationResponse
+      description: Response after creating a hosted evaluation
+    ListInferenceModelsResponse:
+      properties:
+        models:
+          items:
+            type: object
+          type: array
+          title: Models
+          description: List of available models
+      type: object
+      required:
+      - models
+      title: ListInferenceModelsResponse
+      description: Response for listing available inference models
     ErrorDetail:
       properties:
         param:
@@ -378,6 +388,17 @@ components:
       - param
       - details
       title: ErrorDetail
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
     CancelHostedEvaluationResponse:
       properties:
         success:
@@ -399,27 +420,6 @@ components:
       - evaluation_id
       - status
       title: CancelHostedEvaluationResponse
-    GetHostedEvaluationLogsResponse:
-      properties:
-        logs:
-          type: string
-          title: Logs
-          description: Sandbox logs
-        sandbox_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sandbox Id
-          description: Sandbox ID
-        evaluation_id:
-          type: string
-          title: Evaluation Id
-          description: Evaluation ID
-      type: object
-      required:
-      - logs
-      - evaluation_id
-      title: GetHostedEvaluationLogsResponse
   securitySchemes:
     HTTPBearer:
       type: http

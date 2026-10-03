@@ -181,6 +181,49 @@ components:
       required:
       - type
       title: ProviderConfig
+    GenericPaginationResponse_List_APIDiskConfig__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/APIDiskConfig'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[APIDiskConfig]]
+    TeamConfig:
+      properties:
+        teamId:
+          type: string
+          title: Teamid
+      type: object
+      required:
+      - teamId
+      title: TeamConfig
     ProviderTypeEnum:
       type: string
       enum:
@@ -221,6 +264,56 @@ components:
       - UNKNOWN
       - TERMINATED
       title: DiskStatusEnum
+    APIDiskCreateRequest:
+      properties:
+        size:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Size
+          description: Size of the disk in GB.
+        name:
+          type: string
+          maxLength: 255
+          title: Name
+          description: Optional name for the disk.
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+          description: Location country.
+        cloudId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cloudid
+          description: Cloud ID.
+        dataCenterId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Datacenterid
+          description: Data center ID.
+      additionalProperties: false
+      type: object
+      required:
+      - size
+      title: APIDiskCreateRequest
+    Body_create_disk_api_v1_disks__post:
+      properties:
+        disk:
+          $ref: '#/components/schemas/APIDiskCreateRequest'
+        provider:
+          $ref: '#/components/schemas/ProviderConfig'
+        team:
+          anyOf:
+          - $ref: '#/components/schemas/TeamConfig'
+          - type: 'null'
+      type: object
+      required:
+      - disk
+      - provider
+      title: Body_create_disk_api_v1_disks__post
     APIDiskConfig:
       properties:
         id:
@@ -324,56 +417,19 @@ components:
       - providerType
       - userId
       title: APIDiskConfig
-    Body_create_disk_api_v1_disks__post:
+    ErrorDetail:
       properties:
-        disk:
-          $ref: '#/components/schemas/APIDiskCreateRequest'
-        provider:
-          $ref: '#/components/schemas/ProviderConfig'
-        team:
-          anyOf:
-          - $ref: '#/components/schemas/TeamConfig'
-          - type: 'null'
-      type: object
-      required:
-      - disk
-      - provider
-      title: Body_create_disk_api_v1_disks__post
-    APIDiskCreateRequest:
-      properties:
-        size:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: Size
-          description: Size of the disk in GB.
-        name:
+        param:
           type: string
-          maxLength: 255
-          title: Name
-          description: Optional name for the disk.
-        country:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Country
-          description: Location country.
-        cloudId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Cloudid
-          description: Cloud ID.
-        dataCenterId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Datacenterid
-          description: Data center ID.
-      additionalProperties: false
+          title: Param
+        details:
+          type: string
+          title: Details
       type: object
       required:
-      - size
-      title: APIDiskCreateRequest
+      - param
+      - details
+      title: ErrorDetail
     ErrorResponse:
       properties:
         errors:
@@ -395,62 +451,6 @@ components:
       required:
       - name
       title: APIDiskUpdateRequest
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
-    GenericPaginationResponse_List_APIDiskConfig__:
-      properties:
-        total_count:
-          type: integer
-          title: Total Count
-          description: Total number of items available in the dataset
-          default: 0
-        offset:
-          type: integer
-          minimum: 0.0
-          title: Offset
-          description: Number of items to skip before starting to collect the result set
-          default: 0
-        limit:
-          type: integer
-          minimum: 0.0
-          title: Limit
-          description: Maximum number of items to return
-          default: 100
-        data:
-          items:
-            $ref: '#/components/schemas/APIDiskConfig'
-          type: array
-          title: Data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      required:
-      - data
-      title: GenericPaginationResponse[List[APIDiskConfig]]
-    TeamConfig:
-      properties:
-        teamId:
-          type: string
-          title: Teamid
-      type: object
-      required:
-      - teamId
-      title: TeamConfig
   securitySchemes:
     HTTPBearer:
       type: http

@@ -49,6 +49,17 @@ paths:
                 $ref: '#/components/schemas/ChatCompletionResponse'
 components:
   schemas:
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+        cost:
+          type: number
     ChatMessage:
       type: object
       required:
@@ -87,47 +98,6 @@ components:
           type: integer
         logprobs:
           type: boolean
-    Model:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-          example: model
-        created:
-          type: integer
-        owned_by:
-          type: string
-    Usage:
-      type: object
-      properties:
-        prompt_tokens:
-          type: integer
-        completion_tokens:
-          type: integer
-        total_tokens:
-          type: integer
-        cost:
-          type: number
-    ChatCompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-          example: chat.completion
-        created:
-          type: integer
-        model:
-          type: string
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatCompletionChoice'
-        usage:
-          $ref: '#/components/schemas/Usage'
     ModelList:
       type: object
       properties:
@@ -146,6 +116,36 @@ components:
         message:
           $ref: '#/components/schemas/ChatMessage'
         finish_reason:
+          type: string
+    ChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: chat.completion
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatCompletionChoice'
+        usage:
+          $ref: '#/components/schemas/Usage'
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: model
+        created:
+          type: integer
+        owned_by:
           type: string
   securitySchemes:
     HTTPBearer:

@@ -192,32 +192,29 @@ paths:
           100 requests per 60 seconds per user.'
 components:
   schemas:
-    CreateTunnelRequest:
+    BulkDeleteTunnelRequest:
       properties:
-        name:
-          anyOf:
-          - type: string
-            maxLength: 64
-            minLength: 1
-          - type: 'null'
-          title: Name
-          description: Optional friendly name for the tunnel
-        local_port:
-          type: integer
-          maximum: 65535.0
-          minimum: 1.0
-          title: Local Port
-          description: Local port the tunnel will forward traffic to
-          default: 8765
-        teamId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Teamid
-          description: Team ID for team tunnels
+        tunnel_ids:
+          items:
+            type: string
+          type: array
+          maxItems: 500
+          minItems: 1
+          title: Tunnel Ids
+          description: List of tunnel IDs to delete
       type: object
-      title: CreateTunnelRequest
-      description: Request to create a new tunnel.
+      required:
+      - tunnel_ids
+      title: BulkDeleteTunnelRequest
+      description: Request to bulk delete tunnels.
+    TunnelStatus:
+      type: string
+      enum:
+      - pending
+      - connected
+      - disconnected
+      - expired
+      title: TunnelStatus
     DeleteTunnelResponse:
       properties:
         success:
@@ -259,6 +256,19 @@ components:
       - message
       title: BulkDeleteTunnelResponse
       description: Response for bulk tunnel deletion.
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
     ErrorResponse:
       properties:
         errors:
@@ -270,68 +280,6 @@ components:
       required:
       - errors
       title: ErrorResponse
-    BulkDeleteTunnelRequest:
-      properties:
-        tunnel_ids:
-          items:
-            type: string
-          type: array
-          maxItems: 500
-          minItems: 1
-          title: Tunnel Ids
-          description: List of tunnel IDs to delete
-      type: object
-      required:
-      - tunnel_ids
-      title: BulkDeleteTunnelRequest
-      description: Request to bulk delete tunnels.
-    TunnelResponse:
-      properties:
-        tunnel_id:
-          type: string
-          title: Tunnel Id
-          description: Unique tunnel identifier
-        hostname:
-          type: string
-          title: Hostname
-          description: Full hostname for the tunnel
-        url:
-          type: string
-          title: Url
-          description: Full HTTPS URL for accessing the tunnel
-        frp_token:
-          type: string
-          title: Frp Token
-          description: Authentication token for frpc client
-        binding_secret:
-          type: string
-          title: Binding Secret
-          description: Per-tunnel secret for additional authentication via frpc metadata
-        server_host:
-          type: string
-          title: Server Host
-          description: frps server hostname
-        server_port:
-          type: integer
-          title: Server Port
-          description: frps server port
-          default: 7000
-        expires_at:
-          type: string
-          format: date-time
-          title: Expires At
-          description: Token expiration timestamp
-      type: object
-      required:
-      - tunnel_id
-      - hostname
-      - url
-      - frp_token
-      - binding_secret
-      - server_host
-      - expires_at
-      title: TunnelResponse
-      description: Response containing tunnel connection details.
     TunnelStatusResponse:
       properties:
         tunnel_id:
@@ -410,27 +358,79 @@ components:
       - total
       title: TunnelListResponse
       description: Response containing list of tunnels.
-    TunnelStatus:
-      type: string
-      enum:
-      - pending
-      - connected
-      - disconnected
-      - expired
-      title: TunnelStatus
-    ErrorDetail:
+    TunnelResponse:
       properties:
-        param:
+        tunnel_id:
           type: string
-          title: Param
-        details:
+          title: Tunnel Id
+          description: Unique tunnel identifier
+        hostname:
           type: string
-          title: Details
+          title: Hostname
+          description: Full hostname for the tunnel
+        url:
+          type: string
+          title: Url
+          description: Full HTTPS URL for accessing the tunnel
+        frp_token:
+          type: string
+          title: Frp Token
+          description: Authentication token for frpc client
+        binding_secret:
+          type: string
+          title: Binding Secret
+          description: Per-tunnel secret for additional authentication via frpc metadata
+        server_host:
+          type: string
+          title: Server Host
+          description: frps server hostname
+        server_port:
+          type: integer
+          title: Server Port
+          description: frps server port
+          default: 7000
+        expires_at:
+          type: string
+          format: date-time
+          title: Expires At
+          description: Token expiration timestamp
       type: object
       required:
-      - param
-      - details
-      title: ErrorDetail
+      - tunnel_id
+      - hostname
+      - url
+      - frp_token
+      - binding_secret
+      - server_host
+      - expires_at
+      title: TunnelResponse
+      description: Response containing tunnel connection details.
+    CreateTunnelRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+            maxLength: 64
+            minLength: 1
+          - type: 'null'
+          title: Name
+          description: Optional friendly name for the tunnel
+        local_port:
+          type: integer
+          maximum: 65535.0
+          minimum: 1.0
+          title: Local Port
+          description: Local port the tunnel will forward traffic to
+          default: 8765
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Team ID for team tunnels
+      type: object
+      title: CreateTunnelRequest
+      description: Request to create a new tunnel.
   securitySchemes:
     HTTPBearer:
       type: http

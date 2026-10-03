@@ -93,17 +93,6 @@ components:
       required:
       - data
       title: GenericPaginationResponse[List[TeamMemberDetail]]
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
     TeamMemberDetail:
       properties:
         userId:
@@ -147,6 +136,17 @@ components:
       - param
       - details
       title: ErrorDetail
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
   securitySchemes:
     HTTPBearer:
       type: http
