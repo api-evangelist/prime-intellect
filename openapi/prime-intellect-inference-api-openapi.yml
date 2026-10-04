@@ -75,6 +75,33 @@ components:
           - tool
         content:
           type: string
+    ChatCompletionChoice:
+      type: object
+      properties:
+        index:
+          type: integer
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+        finish_reason:
+          type: string
+    ChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: chat.completion
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatCompletionChoice'
+        usage:
+          $ref: '#/components/schemas/Usage'
     ChatCompletionRequest:
       type: object
       required:
@@ -108,33 +135,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Model'
-    ChatCompletionChoice:
-      type: object
-      properties:
-        index:
-          type: integer
-        message:
-          $ref: '#/components/schemas/ChatMessage'
-        finish_reason:
-          type: string
-    ChatCompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-          example: chat.completion
-        created:
-          type: integer
-        model:
-          type: string
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatCompletionChoice'
-        usage:
-          $ref: '#/components/schemas/Usage'
     Model:
       type: object
       properties:

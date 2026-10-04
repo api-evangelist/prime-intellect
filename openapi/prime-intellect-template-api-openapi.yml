@@ -68,17 +68,20 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    RegistryCredentialsListResponse:
+    DockerImageCheckRequest:
       properties:
-        credentials:
-          items:
-            $ref: '#/components/schemas/RegistryCredentialsSummary'
-          type: array
-          title: Credentials
+        image:
+          type: string
+          title: Image
+        registry_credentials_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Registry Credentials Id
       type: object
       required:
-      - credentials
-      title: RegistryCredentialsListResponse
+      - image
+      title: DockerImageCheckRequest
     RegistryCredentialsSummary:
       properties:
         id:
@@ -118,6 +121,28 @@ components:
       - userId
       - teamId
       title: RegistryCredentialsSummary
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    RegistryCredentialsListResponse:
+      properties:
+        credentials:
+          items:
+            $ref: '#/components/schemas/RegistryCredentialsSummary'
+          type: array
+          title: Credentials
+      type: object
+      required:
+      - credentials
+      title: RegistryCredentialsListResponse
     ErrorDetail:
       properties:
         param:
@@ -131,31 +156,6 @@ components:
       - param
       - details
       title: ErrorDetail
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    DockerImageCheckRequest:
-      properties:
-        image:
-          type: string
-          title: Image
-        registry_credentials_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Registry Credentials Id
-      type: object
-      required:
-      - image
-      title: DockerImageCheckRequest
   securitySchemes:
     HTTPBearer:
       type: http

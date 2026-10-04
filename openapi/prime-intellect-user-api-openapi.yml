@@ -105,13 +105,6 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    UserRoleEnum:
-      type: string
-      enum:
-      - ADMIN
-      - MANAGER
-      - USER
-      title: UserRoleEnum
     GenericResponse_WhoamiResponse_:
       properties:
         data:
@@ -183,61 +176,6 @@ components:
       - name
       - email
       title: User
-    TeamRoleEnum:
-      type: string
-      enum:
-      - ADMIN
-      - MEMBER
-      title: TeamRoleEnum
-    GenericResponse_User_:
-      properties:
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/User'
-          - type: 'null'
-          description: Response data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      title: GenericResponse[User]
-    GenericPaginationResponse_List_TeamSummary__:
-      properties:
-        total_count:
-          type: integer
-          title: Total Count
-          description: Total number of items available in the dataset
-          default: 0
-        offset:
-          type: integer
-          minimum: 0.0
-          title: Offset
-          description: Number of items to skip before starting to collect the result set
-          default: 0
-        limit:
-          type: integer
-          minimum: 0.0
-          title: Limit
-          description: Maximum number of items to return
-          default: 100
-        data:
-          items:
-            $ref: '#/components/schemas/TeamSummary'
-          type: array
-          title: Data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      required:
-      - data
-      title: GenericPaginationResponse[List[TeamSummary]]
     PermissionType:
       properties:
         read:
@@ -251,69 +189,19 @@ components:
       - read
       - write
       title: PermissionType
-    UserSlugUpdateRequest:
-      properties:
-        slug:
-          type: string
-          maxLength: 30
-          minLength: 3
-          pattern: ^[a-z0-9-]+$
-          title: Slug
-          description: Desired unique username/slug (lowercase, 3-30 chars, a-z, 0-9, -)
-      type: object
-      required:
-      - slug
-      title: UserSlugUpdateRequest
-    TeamSummary:
-      properties:
-        teamId:
-          type: string
-          title: Teamid
-        name:
-          type: string
-          title: Name
-        slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Slug
-        role:
-          $ref: '#/components/schemas/TeamRoleEnum'
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-      type: object
-      required:
-      - teamId
-      - name
-      - role
-      - createdAt
-      title: TeamSummary
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
+    TeamRoleEnum:
+      type: string
+      enum:
+      - ADMIN
+      - MEMBER
+      title: TeamRoleEnum
+    UserRoleEnum:
+      type: string
+      enum:
+      - ADMIN
+      - MANAGER
+      - USER
+      title: UserRoleEnum
     WhoamiResponse:
       properties:
         id:
@@ -379,6 +267,118 @@ components:
       - email
       title: WhoamiResponse
       description: Extended User response that includes token scope permissions.
+    TeamSummary:
+      properties:
+        teamId:
+          type: string
+          title: Teamid
+        name:
+          type: string
+          title: Name
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        role:
+          $ref: '#/components/schemas/TeamRoleEnum'
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+      type: object
+      required:
+      - teamId
+      - name
+      - role
+      - createdAt
+      title: TeamSummary
+    GenericResponse_User_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/User'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[User]
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    UserSlugUpdateRequest:
+      properties:
+        slug:
+          type: string
+          maxLength: 30
+          minLength: 3
+          pattern: ^[a-z0-9-]+$
+          title: Slug
+          description: Desired unique username/slug (lowercase, 3-30 chars, a-z, 0-9, -)
+      type: object
+      required:
+      - slug
+      title: UserSlugUpdateRequest
+    GenericPaginationResponse_List_TeamSummary__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/TeamSummary'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[TeamSummary]]
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http

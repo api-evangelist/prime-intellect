@@ -245,75 +245,6 @@ paths:
           description: Insufficient permissions
 components:
   schemas:
-    AdminClusterSummary:
-      properties:
-        id:
-          type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        providerType:
-          type: string
-          title: Providertype
-        status:
-          type: string
-          title: Status
-        vaultEnabled:
-          type: boolean
-          title: Vaultenabled
-        teamId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Teamid
-        userId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Userid
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        controller:
-          anyOf:
-          - $ref: '#/components/schemas/ClusterNodeConnection'
-          - type: 'null'
-          description: Control-node connection details (always populated when a control node exists).
-        nodes:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/ClusterNodeConnection'
-            type: array
-          - type: 'null'
-          title: Nodes
-          description: All node connection details. Only populated when ?detailed=true.
-      type: object
-      required:
-      - id
-      - name
-      - providerType
-      - status
-      - vaultEnabled
-      - createdAt
-      title: AdminClusterSummary
-      description: Lightweight cluster summary returned by the admin list endpoint.
-    GenericResponse_CertificateResponse_:
-      properties:
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/CertificateResponse'
-          - type: 'null'
-          description: Response data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      title: GenericResponse[CertificateResponse]
     CertificateResponse:
       properties:
         signedKey:
@@ -339,40 +270,6 @@ components:
       - validPrincipals
       - ttl
       title: CertificateResponse
-    GenericPaginationResponse_list_AdminClusterSummary__:
-      properties:
-        total_count:
-          type: integer
-          title: Total Count
-          description: Total number of items available in the dataset
-          default: 0
-        offset:
-          type: integer
-          minimum: 0.0
-          title: Offset
-          description: Number of items to skip before starting to collect the result set
-          default: 0
-        limit:
-          type: integer
-          minimum: 0.0
-          title: Limit
-          description: Maximum number of items to return
-          default: 100
-        data:
-          items:
-            $ref: '#/components/schemas/AdminClusterSummary'
-          type: array
-          title: Data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      required:
-      - data
-      title: GenericPaginationResponse[list[AdminClusterSummary]]
     ClusterNodeConnection:
       properties:
         podId:
@@ -409,161 +306,45 @@ components:
       - user
       title: ClusterNodeConnection
       description: Connection details for a single cluster pod/node.
-    GenericResponse_ClusterDetailResponse_:
-      properties:
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/ClusterDetailResponse'
-          - type: 'null'
-          description: Response data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      title: GenericResponse[ClusterDetailResponse]
-    ClusterDetailResponse:
+    ClusterNodeLogEventTypeEnum:
+      type: string
+      enum:
+      - ATTACHED
+      - UPDATED
+      - DETACHED
+      - CLUSTER_UPDATED
+      - CLUSTER_TERMINATED
+      - AUTHORIZATION
+      title: ClusterNodeLogEventTypeEnum
+    ClusterSSHKeyDetail:
       properties:
         id:
           type: string
           title: Id
-        remoteId:
-          type: string
-          title: Remoteid
-        name:
-          type: string
-          title: Name
-        providerType:
-          type: string
-          title: Providertype
-        status:
-          type: string
-          title: Status
-        vaultEnabled:
-          type: boolean
-          title: Vaultenabled
-        gpuName:
-          type: string
-          title: Gpuname
-        gpuCount:
-          type: integer
-          title: Gpucount
-        socket:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Socket
-        priceHr:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Pricehr
-        stoppedPriceHr:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Stoppedpricehr
-        provisioningPriceHr:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Provisioningpricehr
-        basePriceHr:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Basepricehr
-        baseCurrency:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Basecurrency
         userId:
           anyOf:
           - type: string
           - type: 'null'
           title: Userid
-        teamId:
+        sshKeyId:
           anyOf:
           - type: string
           - type: 'null'
-          title: Teamid
-        walletId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Walletid
-        orchestratorType:
+          title: Sshkeyid
+        role:
           type: string
-          title: Orchestratortype
-        orchestratorVersion:
+          title: Role
+        publicKey:
           anyOf:
           - type: string
           - type: 'null'
-          title: Orchestratorversion
-        orchestratorEndpoint:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Orchestratorendpoint
-        orchestratorConfig:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Orchestratorconfig
-        orchestratorDeploymentJobId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Orchestratordeploymentjobid
-        orchestratorDeploymentStatus:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Orchestratordeploymentstatus
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        updatedAt:
-          type: string
-          format: date-time
-          title: Updatedat
-        terminatedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Terminatedat
-        info:
-          title: Info
-        nodes:
-          items:
-            $ref: '#/components/schemas/ClusterNodeDetail'
-          type: array
-          title: Nodes
-        sshKeys:
-          items:
-            $ref: '#/components/schemas/ClusterSSHKeyDetail'
-          type: array
-          title: Sshkeys
+          title: Publickey
       type: object
       required:
       - id
-      - remoteId
-      - name
-      - providerType
-      - status
-      - vaultEnabled
-      - gpuName
-      - gpuCount
-      - orchestratorType
-      - createdAt
-      - updatedAt
-      title: ClusterDetailResponse
-      description: All DB details for a single cluster (columns + nodes + SSH keys).
+      - role
+      title: ClusterSSHKeyDetail
+      description: Authorized SSH key entry for a cluster.
     ClusterNodeLogEntry:
       properties:
         id:
@@ -619,6 +400,149 @@ components:
       - gpuCount
       title: ClusterNodeLogEntry
       description: One ClusterNodeLog row (matches the frontend Node History dialog).
+    GenericPaginationResponse_list_AdminClusterSummary__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/AdminClusterSummary'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[list[AdminClusterSummary]]
+    CertificateRequest:
+      properties:
+        publicKey:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Publickey
+        ttl:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ttl
+          description: Requested certificate TTL as a Vault-style duration (e.g. '30m', '2h'). Capped at 8h; omit to use the server default.
+      type: object
+      title: CertificateRequest
+      description: 'Optional request body for the admin certificate endpoint.
+
+
+        If ``public_key`` is provided the backend will sign it directly; otherwise
+
+        it falls back to the admin''s DB-stored SSH public key.'
+    GenericPaginationResponse_list_ClusterNodeLogEntry__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/ClusterNodeLogEntry'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[list[ClusterNodeLogEntry]]
+    AdminClusterSummary:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        providerType:
+          type: string
+          title: Providertype
+        status:
+          type: string
+          title: Status
+        vaultEnabled:
+          type: boolean
+          title: Vaultenabled
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        controller:
+          anyOf:
+          - $ref: '#/components/schemas/ClusterNodeConnection'
+          - type: 'null'
+          description: Control-node connection details (always populated when a control node exists).
+        nodes:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ClusterNodeConnection'
+            type: array
+          - type: 'null'
+          title: Nodes
+          description: All node connection details. Only populated when ?detailed=true.
+      type: object
+      required:
+      - id
+      - name
+      - providerType
+      - status
+      - vaultEnabled
+      - createdAt
+      title: AdminClusterSummary
+      description: Lightweight cluster summary returned by the admin list endpoint.
     ClusterNodeDetail:
       properties:
         id:
@@ -772,6 +696,187 @@ components:
       - updatedAt
       title: ClusterNodeDetail
       description: Full DB details for a single cluster pod/node.
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    GenericResponse_CertificateResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/CertificateResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[CertificateResponse]
+    ClusterDetailResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        remoteId:
+          type: string
+          title: Remoteid
+        name:
+          type: string
+          title: Name
+        providerType:
+          type: string
+          title: Providertype
+        status:
+          type: string
+          title: Status
+        vaultEnabled:
+          type: boolean
+          title: Vaultenabled
+        gpuName:
+          type: string
+          title: Gpuname
+        gpuCount:
+          type: integer
+          title: Gpucount
+        socket:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Socket
+        priceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Pricehr
+        stoppedPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Stoppedpricehr
+        provisioningPriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Provisioningpricehr
+        basePriceHr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Basepricehr
+        baseCurrency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Basecurrency
+        userId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Userid
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+        walletId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Walletid
+        orchestratorType:
+          type: string
+          title: Orchestratortype
+        orchestratorVersion:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratorversion
+        orchestratorEndpoint:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratorendpoint
+        orchestratorConfig:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Orchestratorconfig
+        orchestratorDeploymentJobId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratordeploymentjobid
+        orchestratorDeploymentStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Orchestratordeploymentstatus
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        terminatedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Terminatedat
+        info:
+          title: Info
+        nodes:
+          items:
+            $ref: '#/components/schemas/ClusterNodeDetail'
+          type: array
+          title: Nodes
+        sshKeys:
+          items:
+            $ref: '#/components/schemas/ClusterSSHKeyDetail'
+          type: array
+          title: Sshkeys
+      type: object
+      required:
+      - id
+      - remoteId
+      - name
+      - providerType
+      - status
+      - vaultEnabled
+      - gpuName
+      - gpuCount
+      - orchestratorType
+      - createdAt
+      - updatedAt
+      title: ClusterDetailResponse
+      description: All DB details for a single cluster (columns + nodes + SSH keys).
+    GenericResponse_ClusterDetailResponse_:
+      properties:
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClusterDetailResponse'
+          - type: 'null'
+          description: Response data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      title: GenericResponse[ClusterDetailResponse]
     ErrorDetail:
       properties:
         param:
@@ -785,111 +890,6 @@ components:
       - param
       - details
       title: ErrorDetail
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
-    ClusterSSHKeyDetail:
-      properties:
-        id:
-          type: string
-          title: Id
-        userId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Userid
-        sshKeyId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sshkeyid
-        role:
-          type: string
-          title: Role
-        publicKey:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Publickey
-      type: object
-      required:
-      - id
-      - role
-      title: ClusterSSHKeyDetail
-      description: Authorized SSH key entry for a cluster.
-    CertificateRequest:
-      properties:
-        publicKey:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Publickey
-        ttl:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Ttl
-          description: Requested certificate TTL as a Vault-style duration (e.g. '30m', '2h'). Capped at 8h; omit to use the server default.
-      type: object
-      title: CertificateRequest
-      description: 'Optional request body for the admin certificate endpoint.
-
-
-        If ``public_key`` is provided the backend will sign it directly; otherwise
-
-        it falls back to the admin''s DB-stored SSH public key.'
-    ClusterNodeLogEventTypeEnum:
-      type: string
-      enum:
-      - ATTACHED
-      - UPDATED
-      - DETACHED
-      - CLUSTER_UPDATED
-      - CLUSTER_TERMINATED
-      - AUTHORIZATION
-      title: ClusterNodeLogEventTypeEnum
-    GenericPaginationResponse_list_ClusterNodeLogEntry__:
-      properties:
-        total_count:
-          type: integer
-          title: Total Count
-          description: Total number of items available in the dataset
-          default: 0
-        offset:
-          type: integer
-          minimum: 0.0
-          title: Offset
-          description: Number of items to skip before starting to collect the result set
-          default: 0
-        limit:
-          type: integer
-          minimum: 0.0
-          title: Limit
-          description: Maximum number of items to return
-          default: 100
-        data:
-          items:
-            $ref: '#/components/schemas/ClusterNodeLogEntry'
-          type: array
-          title: Data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      required:
-      - data
-      title: GenericPaginationResponse[list[ClusterNodeLogEntry]]
   securitySchemes:
     HTTPBearer:
       type: http

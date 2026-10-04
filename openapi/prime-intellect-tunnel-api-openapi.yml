@@ -192,21 +192,6 @@ paths:
           100 requests per 60 seconds per user.'
 components:
   schemas:
-    BulkDeleteTunnelRequest:
-      properties:
-        tunnel_ids:
-          items:
-            type: string
-          type: array
-          maxItems: 500
-          minItems: 1
-          title: Tunnel Ids
-          description: List of tunnel IDs to delete
-      type: object
-      required:
-      - tunnel_ids
-      title: BulkDeleteTunnelRequest
-      description: Request to bulk delete tunnels.
     TunnelStatus:
       type: string
       enum:
@@ -231,55 +216,6 @@ components:
       - message
       title: DeleteTunnelResponse
       description: Response for tunnel deletion.
-    BulkDeleteTunnelResponse:
-      properties:
-        succeeded:
-          items:
-            type: string
-          type: array
-          title: Succeeded
-          description: Successfully deleted tunnel IDs
-        failed:
-          items:
-            additionalProperties:
-              type: string
-            type: object
-          type: array
-          title: Failed
-          description: Failed deletions with error messages
-        message:
-          type: string
-          title: Message
-          description: Summary message
-      type: object
-      required:
-      - message
-      title: BulkDeleteTunnelResponse
-      description: Response for bulk tunnel deletion.
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
     TunnelStatusResponse:
       properties:
         tunnel_id:
@@ -341,23 +277,47 @@ components:
       - user_id
       title: TunnelStatusResponse
       description: Response containing tunnel status information.
-    TunnelListResponse:
+    CreateTunnelRequest:
       properties:
-        tunnels:
-          items:
-            $ref: '#/components/schemas/TunnelStatusResponse'
-          type: array
-          title: Tunnels
-          description: List of active tunnels
-        total:
+        name:
+          anyOf:
+          - type: string
+            maxLength: 64
+            minLength: 1
+          - type: 'null'
+          title: Name
+          description: Optional friendly name for the tunnel
+        local_port:
           type: integer
-          title: Total
-          description: Total number of tunnels
+          maximum: 65535.0
+          minimum: 1.0
+          title: Local Port
+          description: Local port the tunnel will forward traffic to
+          default: 8765
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Team ID for team tunnels
+      type: object
+      title: CreateTunnelRequest
+      description: Request to create a new tunnel.
+    BulkDeleteTunnelRequest:
+      properties:
+        tunnel_ids:
+          items:
+            type: string
+          type: array
+          maxItems: 500
+          minItems: 1
+          title: Tunnel Ids
+          description: List of tunnel IDs to delete
       type: object
       required:
-      - total
-      title: TunnelListResponse
-      description: Response containing list of tunnels.
+      - tunnel_ids
+      title: BulkDeleteTunnelRequest
+      description: Request to bulk delete tunnels.
     TunnelResponse:
       properties:
         tunnel_id:
@@ -405,32 +365,72 @@ components:
       - expires_at
       title: TunnelResponse
       description: Response containing tunnel connection details.
-    CreateTunnelRequest:
+    TunnelListResponse:
       properties:
-        name:
-          anyOf:
-          - type: string
-            maxLength: 64
-            minLength: 1
-          - type: 'null'
-          title: Name
-          description: Optional friendly name for the tunnel
-        local_port:
+        tunnels:
+          items:
+            $ref: '#/components/schemas/TunnelStatusResponse'
+          type: array
+          title: Tunnels
+          description: List of active tunnels
+        total:
           type: integer
-          maximum: 65535.0
-          minimum: 1.0
-          title: Local Port
-          description: Local port the tunnel will forward traffic to
-          default: 8765
-        teamId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Teamid
-          description: Team ID for team tunnels
+          title: Total
+          description: Total number of tunnels
       type: object
-      title: CreateTunnelRequest
-      description: Request to create a new tunnel.
+      required:
+      - total
+      title: TunnelListResponse
+      description: Response containing list of tunnels.
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    BulkDeleteTunnelResponse:
+      properties:
+        succeeded:
+          items:
+            type: string
+          type: array
+          title: Succeeded
+          description: Successfully deleted tunnel IDs
+        failed:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          type: array
+          title: Failed
+          description: Failed deletions with error messages
+        message:
+          type: string
+          title: Message
+          description: Summary message
+      type: object
+      required:
+      - message
+      title: BulkDeleteTunnelResponse
+      description: Response for bulk tunnel deletion.
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http

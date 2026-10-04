@@ -116,26 +116,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    RunPricing:
-      properties:
-        training_per_mtok:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Training Per Mtok
-        inference_input_per_mtok:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Inference Input Per Mtok
-        inference_output_per_mtok:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Inference Output Per Mtok
-      type: object
-      title: RunPricing
-      description: Snapshotted per-million-token pricing used to bill the run.
     WalletResponse:
       properties:
         wallet_id:
@@ -176,76 +156,6 @@ components:
         Drives `prime wallet`. One call returns everything an agent needs to
 
         audit the billing flow against a known training run.'
-    RunUsageResponse:
-      properties:
-        run_id:
-          type: string
-          title: Run Id
-        run_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Run Name
-        base_model:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Base Model
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-        training:
-          $ref: '#/components/schemas/RunUsageBreakdown'
-        inference:
-          $ref: '#/components/schemas/RunUsageBreakdown'
-        total_tokens:
-          type: integer
-          title: Total Tokens
-        total_cost_usd:
-          type: number
-          title: Total Cost Usd
-        pricing:
-          $ref: '#/components/schemas/RunPricing'
-        record_count:
-          type: integer
-          title: Record Count
-          default: 0
-      type: object
-      required:
-      - run_id
-      - training
-      - inference
-      - total_tokens
-      - total_cost_usd
-      - pricing
-      title: RunUsageResponse
-      description: Per-run usage totals — drives `prime train usage <run_id>`.
-    ErrorDetail:
-      properties:
-        param:
-          type: string
-          title: Param
-        details:
-          type: string
-          title: Details
-      type: object
-      required:
-      - param
-      - details
-      title: ErrorDetail
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
     RunUsageBreakdown:
       properties:
         tokens:
@@ -325,6 +235,96 @@ components:
         `resource_id` is the matching FK value, so callers can drill back into
 
         the run / pod / disk / etc. that produced the charge.'
+    RunPricing:
+      properties:
+        training_per_mtok:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Training Per Mtok
+        inference_input_per_mtok:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Inference Input Per Mtok
+        inference_output_per_mtok:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Inference Output Per Mtok
+      type: object
+      title: RunPricing
+      description: Snapshotted per-million-token pricing used to bill the run.
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
+    RunUsageResponse:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        run_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Name
+        base_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Base Model
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+        training:
+          $ref: '#/components/schemas/RunUsageBreakdown'
+        inference:
+          $ref: '#/components/schemas/RunUsageBreakdown'
+        total_tokens:
+          type: integer
+          title: Total Tokens
+        total_cost_usd:
+          type: number
+          title: Total Cost Usd
+        pricing:
+          $ref: '#/components/schemas/RunPricing'
+        record_count:
+          type: integer
+          title: Record Count
+          default: 0
+      type: object
+      required:
+      - run_id
+      - training
+      - inference
+      - total_tokens
+      - total_cost_usd
+      - pricing
+      title: RunUsageResponse
+      description: Per-run usage totals — drives `prime train usage <run_id>`.
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http

@@ -44,13 +44,6 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    FeedbackCategory:
-      type: string
-      enum:
-      - bug
-      - feature
-      - general
-      title: FeedbackCategory
     FeedbackResponse:
       properties:
         message:
@@ -86,6 +79,24 @@ components:
       - category
       - cli_version
       title: FeedbackRequest
+    FeedbackCategory:
+      type: string
+      enum:
+      - bug
+      - feature
+      - general
+      title: FeedbackCategory
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
     ErrorDetail:
       properties:
         param:
@@ -99,17 +110,6 @@ components:
       - param
       - details
       title: ErrorDetail
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
   securitySchemes:
     HTTPBearer:
       type: http

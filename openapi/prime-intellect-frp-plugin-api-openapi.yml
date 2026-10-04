@@ -84,6 +84,17 @@ components:
       type: object
       title: FrpPluginResponse
       description: Response to frps server plugin.
+    ErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          title: Errors
+      type: object
+      required:
+      - errors
+      title: ErrorResponse
     FrpPluginRequest:
       properties:
         version:
@@ -118,17 +129,6 @@ components:
       - param
       - details
       title: ErrorDetail
-    ErrorResponse:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-          type: array
-          title: Errors
-      type: object
-      required:
-      - errors
-      title: ErrorResponse
   securitySchemes:
     HTTPBearer:
       type: http

@@ -331,61 +331,6 @@ paths:
           100 requests per 60 seconds per IP and token.'
 components:
   schemas:
-    ImageBuildArtifactTypeEnum:
-      type: string
-      enum:
-      - CONTAINER_IMAGE
-      - VM_SANDBOX
-      title: ImageBuildArtifactTypeEnum
-    ImageVisibilityOverrideEnum:
-      type: string
-      enum:
-      - INHERIT
-      - PRIVATE
-      - PUBLIC
-      title: ImageVisibilityOverrideEnum
-    ImageVisibilityEnum:
-      type: string
-      enum:
-      - PRIVATE
-      - PUBLIC
-      title: ImageVisibilityEnum
-    StartBuildRequest:
-      properties:
-        context_uploaded:
-          type: boolean
-          title: Context Uploaded
-          description: Confirmation that context was uploaded
-          default: true
-      type: object
-      title: StartBuildRequest
-      description: Request model to start the build after upload.
-    ImageBuildStatusEnum:
-      type: string
-      enum:
-      - PENDING
-      - UPLOADING
-      - BUILDING
-      - COMPLETED
-      - FAILED
-      - CANCELLED
-      title: ImageBuildStatusEnum
-    DeleteImageResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-          description: Whether the deletion was successful
-        message:
-          type: string
-          title: Message
-          description: Status message describing the result
-      type: object
-      required:
-      - success
-      - message
-      title: DeleteImageResponse
-      description: Response model for deleting an image.
     BuildImageResponse:
       properties:
         build_id:
@@ -416,66 +361,6 @@ components:
       - fullImagePath
       title: BuildImageResponse
       description: Response model for initiating image build.
-    GenericPaginationResponse_List_BuildStatusResponse__:
-      properties:
-        total_count:
-          type: integer
-          title: Total Count
-          description: Total number of items available in the dataset
-          default: 0
-        offset:
-          type: integer
-          minimum: 0.0
-          title: Offset
-          description: Number of items to skip before starting to collect the result set
-          default: 0
-        limit:
-          type: integer
-          minimum: 0.0
-          title: Limit
-          description: Maximum number of items to return
-          default: 100
-        data:
-          items:
-            $ref: '#/components/schemas/BuildStatusResponse'
-          type: array
-          title: Data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      required:
-      - data
-      title: GenericPaginationResponse[List[BuildStatusResponse]]
-    UpdateImageVisibilityResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-          description: Whether the update succeeded
-        message:
-          type: string
-          title: Message
-          description: Status message describing the result
-        visibility:
-          $ref: '#/components/schemas/ImageVisibilityEnum'
-          description: Updated visibility
-        images:
-          items:
-            $ref: '#/components/schemas/ImageResponse'
-          type: array
-          title: Images
-          description: Updated artifact rows for the logical image
-      type: object
-      required:
-      - success
-      - message
-      - visibility
-      title: UpdateImageVisibilityResponse
-      description: Response model for an image visibility update.
     GenericPaginationResponse_List_ImageResponse__:
       properties:
         total_count:
@@ -510,45 +395,54 @@ components:
       required:
       - data
       title: GenericPaginationResponse[List[ImageResponse]]
-    BuildImageRequest:
+    ImageBuildArtifactTypeEnum:
+      type: string
+      enum:
+      - CONTAINER_IMAGE
+      - VM_SANDBOX
+      title: ImageBuildArtifactTypeEnum
+    UpdateImageVisibilityResponse:
       properties:
-        image_name:
+        success:
+          type: boolean
+          title: Success
+          description: Whether the update succeeded
+        message:
           type: string
-          title: Image Name
-          description: Image name (e.g., 'myapp')
-        image_tag:
-          type: string
-          title: Image Tag
-          description: Image tag (e.g., 'v1.0.0')
-        dockerfile_path:
-          type: string
-          title: Dockerfile Path
-          description: Path to Dockerfile within build context
-          default: Dockerfile
-        platform:
-          type: string
-          enum:
-          - linux/amd64
-          - linux/arm64
-          title: Platform
-          description: Target platform (linux/amd64 or linux/arm64)
-          default: linux/amd64
-        teamId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Teamid
-          description: Team ID if building image in team context
+          title: Message
+          description: Status message describing the result
         visibility:
-          $ref: '#/components/schemas/ImageVisibilityOverrideEnum'
-          description: Visibility override to apply when the build completes. INHERIT preserves existing tag visibility or defaults new tags to PRIVATE.
-          default: INHERIT
+          $ref: '#/components/schemas/ImageVisibilityEnum'
+          description: Updated visibility
+        images:
+          items:
+            $ref: '#/components/schemas/ImageResponse'
+          type: array
+          title: Images
+          description: Updated artifact rows for the logical image
       type: object
       required:
-      - image_name
-      - image_tag
-      title: BuildImageRequest
-      description: Request model for building an image.
+      - success
+      - message
+      - visibility
+      title: UpdateImageVisibilityResponse
+      description: Response model for an image visibility update.
+    StartBuildRequest:
+      properties:
+        context_uploaded:
+          type: boolean
+          title: Context Uploaded
+          description: Confirmation that context was uploaded
+          default: true
+      type: object
+      title: StartBuildRequest
+      description: Request model to start the build after upload.
+    ImageVisibilityEnum:
+      type: string
+      enum:
+      - PRIVATE
+      - PUBLIC
+      title: ImageVisibilityEnum
     ImageResponse:
       properties:
         id:
@@ -647,30 +541,122 @@ components:
       - createdAt
       title: ImageResponse
       description: Response model for an image or build with status.
-    ErrorDetail:
+    ImageBuildStatusEnum:
+      type: string
+      enum:
+      - PENDING
+      - UPLOADING
+      - BUILDING
+      - COMPLETED
+      - FAILED
+      - CANCELLED
+      title: ImageBuildStatusEnum
+    BuildImageRequest:
       properties:
-        param:
+        image_name:
           type: string
-          title: Param
-        details:
+          title: Image Name
+          description: Image name (e.g., 'myapp')
+        image_tag:
           type: string
-          title: Details
+          title: Image Tag
+          description: Image tag (e.g., 'v1.0.0')
+        dockerfile_path:
+          type: string
+          title: Dockerfile Path
+          description: Path to Dockerfile within build context
+          default: Dockerfile
+        platform:
+          type: string
+          enum:
+          - linux/amd64
+          - linux/arm64
+          title: Platform
+          description: Target platform (linux/amd64 or linux/arm64)
+          default: linux/amd64
+        teamId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Teamid
+          description: Team ID if building image in team context
+        visibility:
+          $ref: '#/components/schemas/ImageVisibilityOverrideEnum'
+          description: Visibility override to apply when the build completes. INHERIT preserves existing tag visibility or defaults new tags to PRIVATE.
+          default: INHERIT
       type: object
       required:
-      - param
-      - details
-      title: ErrorDetail
-    ErrorResponse:
+      - image_name
+      - image_tag
+      title: BuildImageRequest
+      description: Request model for building an image.
+    DeleteImageResponse:
       properties:
-        errors:
+        success:
+          type: boolean
+          title: Success
+          description: Whether the deletion was successful
+        message:
+          type: string
+          title: Message
+          description: Status message describing the result
+      type: object
+      required:
+      - success
+      - message
+      title: DeleteImageResponse
+      description: Response model for deleting an image.
+    BuildStatusResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Public identifier for the logical build group
+        imageName:
+          type: string
+          title: Imagename
+          description: Name of the image being built
+        imageTag:
+          type: string
+          title: Imagetag
+          description: Tag of the image being built
+        status:
+          $ref: '#/components/schemas/ImageBuildStatusEnum'
+          description: Aggregated build-group status
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+          description: Timestamp when the build was created
+        startedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Startedat
+          description: Timestamp when the build started
+        completedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Completedat
+          description: Timestamp when the build completed
+        artifacts:
           items:
-            $ref: '#/components/schemas/ErrorDetail'
+            $ref: '#/components/schemas/BuildArtifactStatusResponse'
           type: array
-          title: Errors
+          title: Artifacts
+          description: Artifact rows associated with this build group
       type: object
       required:
-      - errors
-      title: ErrorResponse
+      - id
+      - imageName
+      - imageTag
+      - status
+      - createdAt
+      title: BuildStatusResponse
+      description: Response model for a logical build group.
     UpdateImageVisibilityRequest:
       properties:
         visibility:
@@ -738,57 +724,71 @@ components:
       - createdAt
       title: BuildArtifactStatusResponse
       description: Status for one artifact row within a build group.
-    BuildStatusResponse:
+    ErrorResponse:
       properties:
-        id:
-          type: string
-          title: Id
-          description: Public identifier for the logical build group
-        imageName:
-          type: string
-          title: Imagename
-          description: Name of the image being built
-        imageTag:
-          type: string
-          title: Imagetag
-          description: Tag of the image being built
-        status:
-          $ref: '#/components/schemas/ImageBuildStatusEnum'
-          description: Aggregated build-group status
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-          description: Timestamp when the build was created
-        startedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Startedat
-          description: Timestamp when the build started
-        completedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Completedat
-          description: Timestamp when the build completed
-        artifacts:
+        errors:
           items:
-            $ref: '#/components/schemas/BuildArtifactStatusResponse'
+            $ref: '#/components/schemas/ErrorDetail'
           type: array
-          title: Artifacts
-          description: Artifact rows associated with this build group
+          title: Errors
       type: object
       required:
-      - id
-      - imageName
-      - imageTag
-      - status
-      - createdAt
-      title: BuildStatusResponse
-      description: Response model for a logical build group.
+      - errors
+      title: ErrorResponse
+    GenericPaginationResponse_List_BuildStatusResponse__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/BuildStatusResponse'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[BuildStatusResponse]]
+    ImageVisibilityOverrideEnum:
+      type: string
+      enum:
+      - INHERIT
+      - PRIVATE
+      - PUBLIC
+      title: ImageVisibilityOverrideEnum
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http

@@ -173,147 +173,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ProviderConfig:
-      properties:
-        type:
-          $ref: '#/components/schemas/ProviderTypeEnum'
-      type: object
-      required:
-      - type
-      title: ProviderConfig
-    GenericPaginationResponse_List_APIDiskConfig__:
-      properties:
-        total_count:
-          type: integer
-          title: Total Count
-          description: Total number of items available in the dataset
-          default: 0
-        offset:
-          type: integer
-          minimum: 0.0
-          title: Offset
-          description: Number of items to skip before starting to collect the result set
-          default: 0
-        limit:
-          type: integer
-          minimum: 0.0
-          title: Limit
-          description: Maximum number of items to return
-          default: 100
-        data:
-          items:
-            $ref: '#/components/schemas/APIDiskConfig'
-          type: array
-          title: Data
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
-          description: Response status
-      type: object
-      required:
-      - data
-      title: GenericPaginationResponse[List[APIDiskConfig]]
-    TeamConfig:
-      properties:
-        teamId:
-          type: string
-          title: Teamid
-      type: object
-      required:
-      - teamId
-      title: TeamConfig
-    ProviderTypeEnum:
-      type: string
-      enum:
-      - runpod
-      - fluidstack
-      - lambdalabs
-      - hyperstack
-      - oblivus
-      - cudocompute
-      - scaleway
-      - tensordock
-      - datacrunch
-      - latitude
-      - crusoecloud
-      - massedcompute
-      - akash
-      - primeintellect
-      - primecompute
-      - dc_impala
-      - dc_kudu
-      - dc_roan
-      - nebius
-      - dc_eland
-      - dc_wildebeest
-      - vultr
-      - dc_gnu
-      - denvr
-      title: ProviderTypeEnum
-    DiskStatusEnum:
-      type: string
-      enum:
-      - PROVISIONING
-      - PENDING
-      - ACTIVE
-      - STOPPED
-      - ERROR
-      - DELETING
-      - UNKNOWN
-      - TERMINATED
-      title: DiskStatusEnum
-    APIDiskCreateRequest:
-      properties:
-        size:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: Size
-          description: Size of the disk in GB.
-        name:
-          type: string
-          maxLength: 255
-          title: Name
-          description: Optional name for the disk.
-        country:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Country
-          description: Location country.
-        cloudId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Cloudid
-          description: Cloud ID.
-        dataCenterId:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Datacenterid
-          description: Data center ID.
-      additionalProperties: false
-      type: object
-      required:
-      - size
-      title: APIDiskCreateRequest
-    Body_create_disk_api_v1_disks__post:
-      properties:
-        disk:
-          $ref: '#/components/schemas/APIDiskCreateRequest'
-        provider:
-          $ref: '#/components/schemas/ProviderConfig'
-        team:
-          anyOf:
-          - $ref: '#/components/schemas/TeamConfig'
-          - type: 'null'
-      type: object
-      required:
-      - disk
-      - provider
-      title: Body_create_disk_api_v1_disks__post
     APIDiskConfig:
       properties:
         id:
@@ -417,6 +276,115 @@ components:
       - providerType
       - userId
       title: APIDiskConfig
+    APIDiskUpdateRequest:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: New human-friendly name for the disk.
+      type: object
+      required:
+      - name
+      title: APIDiskUpdateRequest
+    Body_create_disk_api_v1_disks__post:
+      properties:
+        disk:
+          $ref: '#/components/schemas/APIDiskCreateRequest'
+        provider:
+          $ref: '#/components/schemas/ProviderConfig'
+        team:
+          anyOf:
+          - $ref: '#/components/schemas/TeamConfig'
+          - type: 'null'
+      type: object
+      required:
+      - disk
+      - provider
+      title: Body_create_disk_api_v1_disks__post
+    ProviderTypeEnum:
+      type: string
+      enum:
+      - runpod
+      - fluidstack
+      - lambdalabs
+      - hyperstack
+      - oblivus
+      - cudocompute
+      - scaleway
+      - tensordock
+      - datacrunch
+      - latitude
+      - crusoecloud
+      - massedcompute
+      - akash
+      - primeintellect
+      - primecompute
+      - dc_impala
+      - dc_kudu
+      - dc_roan
+      - nebius
+      - dc_eland
+      - dc_wildebeest
+      - vultr
+      - dc_gnu
+      - denvr
+      title: ProviderTypeEnum
+    TeamConfig:
+      properties:
+        teamId:
+          type: string
+          title: Teamid
+      type: object
+      required:
+      - teamId
+      title: TeamConfig
+    APIDiskCreateRequest:
+      properties:
+        size:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Size
+          description: Size of the disk in GB.
+        name:
+          type: string
+          maxLength: 255
+          title: Name
+          description: Optional name for the disk.
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+          description: Location country.
+        cloudId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cloudid
+          description: Cloud ID.
+        dataCenterId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Datacenterid
+          description: Data center ID.
+      additionalProperties: false
+      type: object
+      required:
+      - size
+      title: APIDiskCreateRequest
+    DiskStatusEnum:
+      type: string
+      enum:
+      - PROVISIONING
+      - PENDING
+      - ACTIVE
+      - STOPPED
+      - ERROR
+      - DELETING
+      - UNKNOWN
+      - TERMINATED
+      title: DiskStatusEnum
     ErrorDetail:
       properties:
         param:
@@ -441,16 +409,48 @@ components:
       required:
       - errors
       title: ErrorResponse
-    APIDiskUpdateRequest:
+    ProviderConfig:
       properties:
-        name:
-          type: string
-          title: Name
-          description: New human-friendly name for the disk.
+        type:
+          $ref: '#/components/schemas/ProviderTypeEnum'
       type: object
       required:
-      - name
-      title: APIDiskUpdateRequest
+      - type
+      title: ProviderConfig
+    GenericPaginationResponse_List_APIDiskConfig__:
+      properties:
+        total_count:
+          type: integer
+          title: Total Count
+          description: Total number of items available in the dataset
+          default: 0
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of items to skip before starting to collect the result set
+          default: 0
+        limit:
+          type: integer
+          minimum: 0.0
+          title: Limit
+          description: Maximum number of items to return
+          default: 100
+        data:
+          items:
+            $ref: '#/components/schemas/APIDiskConfig'
+          type: array
+          title: Data
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+          description: Response status
+      type: object
+      required:
+      - data
+      title: GenericPaginationResponse[List[APIDiskConfig]]
   securitySchemes:
     HTTPBearer:
       type: http

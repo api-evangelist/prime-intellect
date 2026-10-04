@@ -85,19 +85,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    DeleteRunResponse:
-      properties:
-        runId:
-          type: string
-          title: Runid
-        deleted:
-          type: boolean
-          title: Deleted
-      type: object
-      required:
-      - runId
-      - deleted
-      title: DeleteRunResponse
     CreateDedicatedRunRequest:
       properties:
         config:
@@ -137,19 +124,19 @@ components:
       required:
       - config
       title: CreateDedicatedRunRequest
-    ErrorDetail:
+    DeleteRunResponse:
       properties:
-        param:
+        runId:
           type: string
-          title: Param
-        details:
-          type: string
-          title: Details
+          title: Runid
+        deleted:
+          type: boolean
+          title: Deleted
       type: object
       required:
-      - param
-      - details
-      title: ErrorDetail
+      - runId
+      - deleted
+      title: DeleteRunResponse
     ErrorResponse:
       properties:
         errors:
@@ -179,6 +166,19 @@ components:
       - jobId
       - tokenValue
       title: CreateDedicatedRunResponse
+    ErrorDetail:
+      properties:
+        param:
+          type: string
+          title: Param
+        details:
+          type: string
+          title: Details
+      type: object
+      required:
+      - param
+      - details
+      title: ErrorDetail
   securitySchemes:
     HTTPBearer:
       type: http
