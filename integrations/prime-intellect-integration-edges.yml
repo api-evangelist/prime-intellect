@@ -1,0 +1,44 @@
+edges:
+- partner_name: OpenRouter
+  partner: openrouter
+  partner_match: router
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://openrouter.ai/api/v1/models
+  coverage_role:
+  - inference-host
+  router_signals:
+    inference-host:
+      models: 1
+      router_ids:
+      - PrimeIntellect
+      tools_share: 1.0
+      structured_output_share: 1.0
+  matched_by: verified-token-table
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+- partner_name: OpenAI
+  partner: openai
+  partner_match: domain
+  type: contract
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  evidence: https://github.com/api-evangelist/prime-intellect/blob/main/openapi/prime-intellect-inference-api-openapi.yml#L35
+  contract_reference:
+    repo: prime-intellect
+    spec_file: prime-intellect-inference-api-openapi.yml
+    property: description
+    value: OpenAI-compatible
+    note: 'prime-intellect declares OpenAI compatibility: ''description: OpenAI-compatible chat completions endpoint.
+      Supports streaming, temperature, token limits, and logprobs. Responses include a usage object with inp'''
+    detected_by: sweep-model-routing.py
+    detected: '2026-10-13'
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+generated: '2026-10-13'
+method: searched
+checked:
+- https://openrouter.ai/api/v1/models
