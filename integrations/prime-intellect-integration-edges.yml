@@ -11,11 +11,11 @@ edges:
   - inference-host
   router_signals:
     inference-host:
-      models: 2
+      models: 6
       router_ids:
       - PrimeIntellect
-      tools_share: 1.0
-      structured_output_share: 1.0
+      tools_share: 0.67
+      structured_output_share: 0.67
   matched_by: verified-token-table
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
@@ -35,7 +35,7 @@ edges:
     note: 'prime-intellect declares OpenAI compatibility: ''description: OpenAI-compatible chat completions endpoint.
       Supports streaming, temperature, token limits, and logprobs. Responses include a usage object with inp'''
     detected_by: sweep-model-routing.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
 generated: '2026-10-13'
